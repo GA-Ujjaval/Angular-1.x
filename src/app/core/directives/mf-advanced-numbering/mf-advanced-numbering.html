@@ -1,0 +1,135 @@
+<div class="advanced-numbering">
+
+  <div ng-if="OBJECT_TYPE === legalObjectTypes.products || OBJECT_TYPE === legalObjectTypes.documents"
+       class="use-existing-scheme-container">
+    <div class="use-existing-scheme-wrapper">
+      <md-radio-group ng-model="vm.currentSchemeInUse"
+                      ng-change="vm.changeSchemeInUse(vm, currentSchemeInUse, vm.actualDefaultScheme)"
+                      ng-disabled="!vm.isModeEdit()">
+        <md-radio-button class="use-existing-radio" ng-repeat="scheme in schemesOptions" ng-value="scheme.value">
+          {{scheme.text}}
+          <md-tooltip ng-if="!vm.isModeEdit()" class="md-tooltip">Click "Edit" to make changes</md-tooltip>
+        </md-radio-button>
+      </md-radio-group>
+    </div>
+  </div>
+
+  <div class="advanced-numbering-container">
+    <div class="default-scheme">
+      Default scheme:
+    </div>
+
+    <div class="content-wrapper">
+      <div class="top-input-section">
+        <div class="new-block-container" ng-class="{'non-editable': !vm.isStateEditable}">
+          <div class="new-block-title">
+            Prefix: <span ng-if="vm.OBJECT_TYPE !== vm.legalObjectTypes.parts" class="required-mark">*</span>
+          </div>
+          <div ng-switch="vm.isStateEditable">
+            <div ng-switch-when="true"
+                 class="new-block-content empty-input"
+                 ng-class="{'invalid': vm.OBJECT_TYPE !== vm.legalObjectTypes.parts && (!defaultScheme.prefix || defaultScheme.prefix.length === 0)}"
+                 editable-text="defaultScheme.prefix"
+                 onaftersave="vm.updateScheme(vm)"
+                 onbeforesave="vm.validatePrefix(vm, $data)">
+              {{defaultScheme.prefix || 'Click to edit'}}
+            </div>
+            <md-tooltip ng-if="vm.isStateEditable && defaultScheme.prefix" class="md-tooltip">
+              {{defaultScheme.prefix}}
+            </md-tooltip>
+            <div ng-switch-when="false"
+                 class="new-block-content">
+              {{defaultScheme.prefix}}
+            </div>
+          </div>
+          <md-tooltip ng-if="!vm.isStateEditable" class="md-tooltip">{{vm.getTooltipText()}}</md-tooltip>
+        </div>
+
+        <div class="new-block-container" ng-class="{'non-editable': !vm.isStateEditable}">
+          <div class="new-block-title">
+            Starting number: <span class="required-mark">*</span>
+          </div>
+          <div ng-switch="vm.isStateEditable">
+            <div ng-switch-when="true"
+                 class="new-block-content empty-input"
+                 ng-class="{'invalid': !defaultScheme.startingNumber  || defaultScheme.startingNumber.length === 0}"
+                 editable-text="defaultScheme.startingNumber"
+                 onaftersave="vm.updateScheme(vm)"
+                 onbeforesave="vm.fullValidation($data)">
+              {{defaultScheme.startingNumber || 'Click to edit'}}
+            </div>
+            <md-tooltip ng-if="vm.isStateEditable" class="md-tooltip">{{defaultScheme.startingNumber}}</md-tooltip>
+            <div ng-switch-when="false"
+                 class="new-block-content">
+              {{defaultScheme.startingNumber}}
+            </div>
+          </div>
+          <md-tooltip ng-if="!vm.isStateEditable" class="md-tooltip">{{vm.getTooltipText()}}</md-tooltip>
+        </div>
+
+        <div class="new-block-container" ng-class="{'non-editable': !vm.isStateEditable}">
+          <div class="new-block-title">
+            Suffix (Optional):
+          </div>
+          <div ng-switch="vm.isStateEditable">
+            <div ng-switch-when="true"
+                 class="new-block-content empty-input"
+                 editable-text="defaultScheme.suffix"
+                 onaftersave="vm.updateScheme(vm)"
+                 onbeforesave="vm.validateSuffix($data)">
+              {{defaultScheme.suffix || 'Click to edit'}}
+            </div>
+            <md-tooltip ng-if="vm.isStateEditable && defaultScheme.suffix" class="md-tooltip">{{defaultScheme.suffix}}</md-tooltip>
+            <div ng-switch-when="false"
+                 class="new-block-content">
+              {{defaultScheme.suffix}}
+            </div>
+          </div>
+          <md-tooltip ng-if="!vm.isStateEditable" class="md-tooltip">{{vm.getTooltipText()}}</md-tooltip>
+        </div>
+
+        <div class="new-block-container" ng-class="{'non-editable': !vm.isStateEditable}">
+          <div class="new-block-title">
+            Increment By: <span class="required-mark">*</span>
+          </div>
+          <div ng-switch="vm.isStateEditable">
+            <div ng-switch-when="true"
+                 class="new-block-content empty-input"
+                 editable-text="defaultScheme.increment"
+                 onaftersave="vm.updateScheme(vm)"
+                 onbeforesave="vm.fullValidation($data)">
+              {{defaultScheme.increment || 'Click to edit'}}
+            </div>
+            <md-tooltip ng-if="vm.isStateEditable" class="md-tooltip">{{defaultScheme.increment}}</md-tooltip>
+            <div ng-switch-when="false"
+                 class="new-block-content">
+              {{defaultScheme.increment}}
+            </div>
+          </div>
+          <md-tooltip ng-if="!vm.isStateEditable" class="md-tooltip">{{vm.getTooltipText()}}</md-tooltip>
+        </div>
+
+        <div class="new-block-container non-editable">
+          <div class="new-block-title">
+            Running Number:
+          </div>
+          <div>
+            <div class="new-block-content"
+                 editable-text="defaultScheme.runningNumber"
+                 edit-disabled="true">
+              {{defaultScheme.runningNumber || 'Not available'}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="apply-button-block">
+        <div class="test-next">
+          <md-button ng-click="getNextNumber(vm, OBJECT_TYPE, CALL_FROM_DEFAULT)" class="test-next-button">
+            Test Next Numbers
+          </md-button>
+        </div>
+      </div>
+    </div>
+    <!--</form>-->
+  </div>
+</div>

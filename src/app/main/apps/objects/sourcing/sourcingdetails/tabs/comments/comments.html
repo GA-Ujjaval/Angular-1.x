@@ -1,0 +1,62 @@
+<div layout="row" layout-align="center center">
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-md="100" flex-lg="100" flex-gt-lg="100" lex-sm="70">
+
+        <!-- COMMENTS SECTION -->
+        <div class="section">
+            <div class="comments">
+                <div class="section-header" layout="row" layout-align="start center">
+                    <i class="icon-comment s18"></i>
+                    <span class="section-title">Comments</span>
+                </div>
+                <br/>
+                <div class="section-content">
+                    <form name="cardCommentForm"
+                          ng-submit="vm.addNewComment(vm.newCommentText); vm.newCommentText =''"
+                          class="comment new-comment" layout="column" layout-align="start" no-validate>
+
+                        <div layout="row">
+                            <img class="comment-member-avatar" src="assets/images/avatars/profile.jpg">
+                            <md-input-container flex="100" md-no-float>
+                                <textarea ms-scroll placeholder="Write a comment.."
+                                          ng-model="vm.newCommentText" required ng-disabled="vm.readonly"></textarea>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="row"  layout-align="end center">
+                            <md-button  type="submit" ng-class="vm.sourceObjectData.sourceType === 'supplier' ? 'md-raised md-accent md-accent-custom-bg-btn-for-sup' : 'md-raised md-accent md-accent-custom-bg-btn'" class="md-raised md-accent md-accent-custom-bg-btn"
+                                       ng-disabled="cardCommentForm.$invalid || cardCommentForm.$pristine"
+                                       aria-label="Add" ng-disabled="vm.readonly">
+                                <span translate="SB.ADD">Add</span>
+                            </md-button>
+                        </div>
+                    </form>
+
+                    <div class="comment" layout="row"
+                         ng-repeat="comment in vm.sourceObjectData.commentsList | orderBy : '-time'">
+
+                        <md-chip-template class="member-chip">
+                            <img ng-show="vm.isAvatarAvailable(comment.avatar)"
+                                 class="comment-member-avatar"
+                                 ng-src="{{comment.avatar}}">
+                            <div ng-hide="vm.isAvatarAvailable(comment.avatar)"
+                                 class="comment-member-avatar-circle">
+                                <span class="initials">{{vm.defaultAvatar(comment.memberName)}}</span>
+                            </div>
+                        </md-chip-template>
+
+                        <div layout="column">
+                            <div class="comment-member-name">
+                                {{comment.memberName}}
+                            </div>
+                            <div class="comment-bubble">{{comment.message}}</div>
+                            <div class="comment-time secondary-text">{{comment.time | date:'medium'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / COMMENTS SECTION -->
+
+    </div>
+</div>

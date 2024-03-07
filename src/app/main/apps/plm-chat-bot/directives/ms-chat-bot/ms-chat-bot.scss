@@ -1,0 +1,113 @@
+$chat-bot-panel-width: percentage(9/12);
+$chat-bot-panel-button-width: 70px;
+$chat-bot-panel-height : percentage(10/12);
+$chat-bot-panel-open-button-width: 48px;
+.ms-chat-bot-options-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 49;
+}
+
+
+
+
+.opened{
+  width: $chat-bot-panel-width ;
+  min-width: $chat-bot-panel-width;
+  max-width: $chat-bot-panel-width;
+  height: $chat-bot-panel-height;
+}
+
+.ms-chat-bot-options {
+  position: absolute;
+  bottom: 5%;
+  right: 0;
+  z-index: 80;
+
+  &.open {
+    .ms-chat-bot-options-panel {
+      transform: translate(0);
+      width: 100%;
+      height: 100%;
+
+      .ms-chat-bot-options-panel-button {
+        opacity: 1;
+        box-shadow: $whiteframe-shadow-8dp;
+        width: $chat-bot-panel-open-button-width;
+        height: $chat-bot-panel-open-button-width;
+        line-height: $chat-bot-panel-open-button-width;
+      }
+    }
+
+    .ms-chat-bot-options-list {
+      box-shadow: $whiteframe-shadow-8dp;
+      height: inherit;
+      width: inherit;
+      display: block !important;
+    }
+  }
+
+  .ms-chat-bot-options-panel {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(0);
+    transition: transform 0.225s ease-in-out;
+    pointer-events: none;
+
+    .ms-chat-bot-options-panel-button {
+      /*
+       These line comment out based on client request :
+       for more info see in github issues section : #59 - PLM Bot - new icon for the right bottom
+      box-shadow: $whiteframe-shadow-4dp;
+      width: $chat-bot-panel-button-width;
+      height: $chat-bot-panel-button-width;
+      line-height: $chat-bot-panel-button-width;*/
+
+      button{
+        /*box-shadow: $whiteframe-shadow-4dp;*/
+        padding: 0;
+        min-width: $chat-bot-panel-button-width;
+        margin: 0;
+        width: $chat-bot-panel-button-width;
+        height: $chat-bot-panel-button-width;
+        line-height: $chat-bot-panel-button-width;
+      }
+
+      text-align: center;
+      cursor: pointer;
+      border-radius: 0;
+      margin: 0;
+      pointer-events: auto;
+      opacity: 0.75;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .ms-chat-bot-options-list {
+      display: none;
+      background: #FFFFFF;
+      z-index: 12;
+      pointer-events: auto;
+    }
+  }
+}
+.introjs-button{
+  display: none ;
+}
+
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen
+and (max-width: 768px) {
+  .ms-chat-bot-options {
+    width: 100% ;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}

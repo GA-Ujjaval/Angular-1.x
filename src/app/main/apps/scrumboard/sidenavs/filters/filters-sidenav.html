@@ -1,0 +1,118 @@
+<!-- SIDENAV HEADER -->
+<md-toolbar class="md-accent" ng-class="'md-'+vm.board.settings.color+'-bg'">
+  <div class="md-toolbar-tools">
+    <span flex class="menu-title" translate="SB.FILTER_CARDS">Filter Cards</span>
+    <md-button ng-if="vm.filteringIsOn() || $root.flagIdCardsFilterOn" ng-click="vm.clearFilters()"
+               class="md-icon-button"
+               aria-label="clear filters">
+      <md-icon md-font-icon="icon-filter-remove"></md-icon>
+      <md-tooltip class="md-tooltip">
+        <span translate="SB.CLEAR_FILTER">Clear Filters</span>
+      </md-tooltip>
+    </md-button>
+  </div>
+</md-toolbar>
+<!-- / SIDENAV HEADER -->
+
+<!-- CONTENT -->
+<md-content class="" ms-scroll>
+  <md-list class="list-of-options">
+
+    <!-- FILTER BY NAME -->
+    <md-subheader class="md-no-sticky" translate="" style="background:transparent">Filter by Card Name</md-subheader>
+
+    <md-list-item>
+      <md-input-container class="filter-input-container" md-no-float>
+        <input flex placeholder="Type Card Name" type="text" ng-model="vm.cardFilters.name"
+               translate translate-attr-placeholder="SB.TYPE_CARD_NAME" style="background:transparent">
+      </md-input-container>
+    </md-list-item>
+
+    <md-subheader class="md-no-sticky" translate="" style="background:transparent">Filter by Card Number</md-subheader>
+
+    <md-list-item>
+      <md-input-container class="filter-input-container" md-no-float>
+        <input flex placeholder="Type Card Number" type="text" ng-model="vm.cardFilters.companySeqId"
+               translate style="background:transparent">
+      </md-input-container>
+    </md-list-item>
+    <!-- / FILTER BY NAME -->
+
+
+    <!-- / FILTER BY PART -->
+    <md-subheader class="md-no-sticky" translate="" style="background:transparent">Filter by Part Name</md-subheader>
+
+    <md-list-item>
+      <md-input-container class="filter-input-container" md-no-float>
+        <input flex placeholder="Type and Hit Search or 'Enter'" type="text" ng-keyup="$event.keyCode == 13 ? vm.doFilterOnBoard(vm.partName, vm.partNumber) : null"
+               translate style="background:transparent" ng-model="vm.partName" ng-click="$event.stopPropagation()">
+        <md-icon ng-if="vm.partName" md-font-icon="icon-close" class="icon s24 close-icon-filter-sidenav" ng-class="vm.board.settings.color+'-fg'" ng-click="vm.partName = ''; vm.doFilterOnBoard(vm.partName, vm.partNumber);">
+        </md-icon>
+        <md-icon md-font-icon="icon-magnify" class="icon s24 icon-filter-sidenav" ng-class="vm.board.settings.color+'-fg'" ng-click="vm.doFilterOnBoard(vm.partName, vm.partNumber)"></md-icon>
+      </md-input-container>
+    </md-list-item>
+
+    <md-subheader class="md-no-sticky" translate="" style="background:transparent">Filter by Part Number</md-subheader>
+
+    <md-list-item>
+      <md-input-container class="filter-input-container" md-no-float>
+        <input flex placeholder="Type and Hit Search or 'Enter'" type="text" ng-model="vm.partNumber" ng-keyup="$event.keyCode == 13 ? vm.doFilterOnBoard(vm.partName, vm.partNumber) : null"
+               translate style="background:transparent">
+        <md-icon ng-if="vm.partNumber" md-font-icon="icon-close" class="icon s24 close-icon-filter-sidenav" ng-class="vm.board.settings.color+'-fg'" ng-click="vm.partNumber = ''; vm.doFilterOnBoard(vm.partName, vm.partNumber);">
+        </md-icon>
+        <md-icon md-font-icon="icon-magnify" class="icon s24 icon-filter-sidenav" ng-class="vm.board.settings.color+'-fg'" ng-click="vm.doFilterOnBoard(vm.partName, vm.partNumber)"></md-icon>
+      </md-input-container>
+    </md-list-item>
+    <!-- / FILTER BY PART -->
+
+    <!-- FILTER BY Date -->
+    <md-subheader class="md-no-sticky" style="background:transparent">Filter by Date</md-subheader>
+
+    <md-select class="select-card-date simplified" ng-model="$root.selectedFilter.dueDate" placeholder="Due Date">
+      <md-option value="ALL" translate="All Cards" ng-click="$root.filterCardDate('ALL');">All Cards</md-option>
+      <md-option value="TD" translate="Today" ng-click="$root.filterCardDate('TD');">Today</md-option>
+      <md-option value="OD" translate="Overdue" ng-click="$root.filterCardDate('OD');">Overdue</md-option>
+      <md-option value="N3D" translate="Next 3 days" ng-click="$root.filterCardDate('N3D');">Next 3 days</md-option>
+      <md-option value="N7D" translate="Next 7 days" ng-click="$root.filterCardDate('N7D');">Next 7 days</md-option>
+      <md-option value="N2W" translate="Next 2 weeks" ng-click="$root.filterCardDate('N2W');">Next 2 weeks</md-option>
+    </md-select>
+    <!-- / FILTER BY Date -->
+    <md-divider></md-divider>
+    <!-- FILTER BY LABELS -->
+    <md-subheader class="md-no-sticky" style="background:transparent">Filter by Priority</md-subheader>
+
+    <md-list-item class="label" ng-repeat="label in vm.board.labels"
+                  ng-click="vm.toggleInArray(label.id, vm.cardFilters.labels)">
+      <md-icon md-font-icon="icon-label" ng-class="label.color+'-fg'" class="label-icon"></md-icon>
+      <p>{{label.name}}</p>
+      <i class="icon-check s16" ng-if="vm.exists(label.id, vm.cardFilters.labels)"></i>
+    </md-list-item>
+    <!-- / FILTER BY LABELS -->
+
+    <md-divider></md-divider>
+
+    <!-- FILTER BY MEMBERS -->
+    <md-subheader class="md-no-sticky" translate="SB.FILTER_BY_MEMBERS" style="background:transparent">Filter by
+      Coordinators
+    </md-subheader>
+
+    <md-list-item class="member" ng-repeat="member in vm.members"
+                  ng-click="vm.toggleInArray(member.id, vm.cardFilters.members)"
+                  aria-label="Toggle Member">
+
+      <md-chip-template class="member-chip">
+        <img ng-show="vm.isAvatarAvailable(member.avatar)" class="md-avatar member-avatar" ng-src="{{member.avatar}}">
+        <div ng-hide="vm.isAvatarAvailable(member.avatar)" class="member-avatar-circle">
+          <span class="initials">{{vm.defaultAvatar(member.name)}}</span>
+        </div>
+      </md-chip-template>
+
+      <!--<img alt="{{ member.name }}" ng-src="{{ member.avatar }}" class="md-avatar"/>-->
+      <p class="member-name">{{ member.name }}</p>
+      <i class="icon-check s16" ng-if="vm.exists(member.id, vm.cardFilters.members)"></i>
+    </md-list-item>
+    <!-- / FILTER BY MEMBERS -->
+
+  </md-list>
+</md-content>
+<!-- / CONTENT -->

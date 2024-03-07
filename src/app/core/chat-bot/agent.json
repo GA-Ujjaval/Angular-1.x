@@ -1,0 +1,730 @@
+{
+  "data": [
+    {
+      "id": "149b710b-5646-4185-8519-40c37f1d9a6a",
+      "timestamp": "2016-10-15T03:40:38.891Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "show my tasks",
+        "action": "searchTasks",
+        "actionIncomplete": false,
+        "parameters": {},
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "search tasks"
+        },
+        "fulfillment": {
+          "speech": "Here are your pending tasks"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "create a new task",
+        "action": "newTask",
+        "actionIncomplete": true,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "create_task_dialog_params_tasktitle",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "create_task_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "create task"
+        },
+        "fulfillment": {
+          "speech": "create a new task"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "~~Task Title~~",
+        "action": "newTaskTitle",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "create_task_dialog_params_tasktitle",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "create_task_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task title"
+        },
+        "fulfillment": {
+          "speech": "task title"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Show ECR cards that are pending my approval",
+        "action": "searchCards",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "create_task_dialog_params_tasktitle",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "create_task_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "search cards"
+        },
+        "fulfillment": {
+          "speech": "these 3 cards waiting for ur approvals"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "create a new card",
+        "action": "newCard",
+        "actionIncomplete": true,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "new_card_dialog_params_cardtitle",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "new_card_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "create card"
+        },
+        "fulfillment": {
+          "speech": "create a new card"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "",
+        "action": "newCardTitle",
+        "actionIncomplete": true,
+        "parameters": {
+          "cardTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "create_card_title_dialog_params",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "create_card_title_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "card title"
+        },
+        "fulfillment": {
+          "speech": "~~Card Title~~"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Got it. I’ll create a card in ~~Board Name~~ Board",
+        "action": "newCardCreated",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "create_task_dialog_params_tasktitle",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "create_task_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "card title"
+        },
+        "fulfillment": {
+          "speech": "card title"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Task ~~Task Title~~ has been marked as complete",
+        "action": "taskComplete",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_complete",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task complete"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Task ~~Task Title~~ has been marked as incomplete",
+        "action": "taskInComplete",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_incomplete",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task incomplete"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Task ~~Task Title~~ has been marked as important",
+        "action": "taskImportant",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_important",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task important"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Task ~~Task Title~~ has been removed important",
+        "action": "taskRemoveImportant",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_remove_important",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task remove important"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Task ~~Task Title~~ has been marked as Starred",
+        "action": "taskStarred",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_starred",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task starred"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Task ~~Task Title~~ has been removed star",
+        "action": "taskRemoveStarred",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_remove_starred",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task remove starred"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Yes",
+        "action": "promoteYes",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [
+          {
+            "name": "promte_yes",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "promote yes"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "No",
+        "action": "promoteNo",
+        "actionIncomplete": false,
+        "parameters": {},
+        "contexts": [
+          {
+            "name": "promote_no",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "promote no"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "Yes",
+        "action": "promoteConfirmYes",
+        "actionIncomplete": false,
+        "parameters": {},
+        "contexts": [
+          {
+            "name": "promote_confirm_yes",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "promote confirm yes"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "agent",
+        "resolvedQuery": "No",
+        "action": "promoteConfirmNo",
+        "actionIncomplete": false,
+        "parameters": {},
+        "contexts": [
+          {
+            "name": "promote_confirm_no",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "promote confirm no"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    }
+
+  ]
+}

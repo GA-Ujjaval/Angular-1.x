@@ -1,0 +1,55 @@
+#bulk-popup{
+  min-width: 70%;
+
+  .bulk-progress{
+    float: right;
+    margin-left: 20px;
+  }
+
+  .progress-container{
+    width: fit-content;
+  }
+
+  .progress-delete{
+    height: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+    color: #ffffff;
+    text-align: center;
+    .success{
+      padding-top: 5px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      background-color: #5cb85c;
+    }
+    .error{
+      padding-top: 5px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      background-color: #d9534f;
+    }
+
+    .progress-radius-left {
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+    .progress-radius-right {
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  }
+
+  .counter{
+    text-align: right;
+  }
+
+  #grid-bulk{
+    height: 300px;
+    font-size: 13px;
+
+    .ui-grid-icon-cancel {
+      margin-top: -19px;
+    }
+  }
+}

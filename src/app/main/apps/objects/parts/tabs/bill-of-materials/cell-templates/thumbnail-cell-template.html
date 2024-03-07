@@ -1,0 +1,19 @@
+<div
+  class="ui-grid-cell-contents thumbnail-template"
+  title="TOOLTIP">
+  <div class="thumbnail-container" ng-mouseover="grid.appScope.vm.setHeightImg(event); changeLogo = true" ng-mouseleave="changeLogo = false">
+  <!--<div class="thumbnail-container" ng-mouseover="changeLogo = true" ng-mouseleave="changeLogo = false">-->
+    <img class="thumbnail-bom" ng-if="row.entity.thumbnailPath != ''" ng-src="{{row.entity.thumbnailPath}}"/>
+    <img class="thumbnail-bom" ng-if="row.entity.thumbnailPath == '' && row.entity.objectType == 'parts'"
+         ng-src="assets/images/ecommerce/part-square.png"/>
+    <img class="thumbnail-bom" ng-if="row.entity.thumbnailPath == '' && row.entity.objectType == 'products'"
+         ng-src="assets/images/ecommerce/product-sqaure.png"/>
+
+    <img class="thumbnail-bom-tooltip" ng-show="row.entity.thumbnailPath != '' && changeLogo"
+         ng-src="{{row.entity.thumbnailPath}}"/>
+    <img class="thumbnail-bom-tooltip" ng-show="row.entity.thumbnailPath == '' && row.entity.objectType == 'parts' && changeLogo"
+         ng-src="assets/images/ecommerce/part-square.png"/>
+    <img class="thumbnail-bom-tooltip" ng-show="row.entity.thumbnailPath == '' && row.entity.objectType == 'products' && changeLogo"
+         ng-src="assets/images/ecommerce/product-sqaure.png"/>
+  </div>
+</div>

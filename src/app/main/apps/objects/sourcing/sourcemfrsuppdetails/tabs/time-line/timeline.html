@@ -1,0 +1,47 @@
+<div layout="row" layout-align="center center">
+    
+      <div id="timeline" class="timeline-left" ms-timeline="vm.timelineOptions" ms-timeline-load-more="vm.loadNextPage()">
+    
+        <!-- TIMELINE ITEM -->
+        <div ms-timeline-item layout="column" layout-align="center center" layout-gt-md="row" layout-align-gt-md="center start" ng-repeat="timelineItem in vm.timeLineList | orderBy : '-time'">
+    
+          <div class="timeline-point md-accent-bg md-whiteframe-2dp">
+            <md-icon md-font-icon="{{timelineItem.icon}}"></md-icon>
+          </div>
+    
+          <div class="timeline-detail" flex="50">
+            <div class="time">
+              {{timelineItem.time | date:'medium'}}
+            </div>
+            <div class="event" ng-if="timelineItem.name != 'IMPORT' || timelineItem.name != 'IMPORT UPDATE'">
+              {{timelineItem.event}} by {{timelineItem.member}}
+              <p ng-if="timelineItem.name == 'ADD' || timelineItem.name == 'REMOVE'">{{timelineItem.action}} {{timelineItem.member}}</p>
+              <p ng-if="timelineItem.name == 'remove Attachment'">{{timelineItem.action}}</p>
+              <p ng-if="timelineItem.event === 'created contact.'">{{timelineItem.action}}</p>
+              <p ng-if="timelineItem.event === 'updated contact.'">{{timelineItem.action}}</p>
+              <p ng-if="timelineItem.event === 'deleted contact.'">{{timelineItem.action}}</p>
+            </div>
+            
+            <div class="event" ng-if="timelineItem.name === 'IMPORT'">
+              <p>{{timelineItem.action[0]}} {{timelineItem.member}}</p>
+              <p>{{timelineItem.action[1]}}</p>
+              <p>{{timelineItem.action[2]}}</p>
+              <p>{{timelineItem.action[3]}}</p>
+            </div>
+            
+            <div class="event" ng-if="timelineItem.name === 'IMPORT UPDATE' || timelineItem.name === 'MANUAL UPDATE' || timelineItem.name === 'Add Attachment'">
+              <p ng-repeat="act in timelineItem.action track by $index">{{act}}</P>
+            </div>
+          </div>
+    
+          <div class="timeline-card" layout="row" flex="50">
+            <!-- MS-CARD -->
+            <ms-card template="timelineItem.card.template" ng-model="timelineItem.card"></ms-card>
+            <!-- / MS-CARD -->
+          </div>
+        </div>
+        <!-- / TIMELINE ITEM -->
+    
+      </div>
+    </div>
+    

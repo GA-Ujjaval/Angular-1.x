@@ -1,0 +1,94 @@
+<div layout="row" layout-align="center center" ng-if="vm.additionalInfoListCopy.length">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+    <!-- CONTENT -->
+    <form name="additionalinfoForm" novalidate>
+      <div layout-gt-sm="row" layout-align="start center" ng-repeat="additionalInfoList in vm.additionalInfoListCopy track by additionalInfoList.attributeId">
+        <md-input-container class="md-block" flex-gt-sm="100" ng-show="additionalInfoList.attributeType == 'Link'">
+          <!-- Start Link-->
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <input type="text" class="md-input-height" ng-model="additionalInfoList.attributeValue"
+            ng-disabled="(vm.readonly || vm.SaveDisabled) && !additionalInfoList.isEdit">
+          <div class="change-icons link-att-edit-icon" ng-style="!additionalInfoList.isEdit ? {'left' : ((additionalInfoList.attributeValue ? additionalInfoList.attributeValue.toString().length  : additionalInfoList.attributeKey.length) + 8)*7 + 'px'} : false">
+            <md-icon ng-if="vm.SaveDisabled && !additionalInfoList.isEdit && vm.releaseAdditionalInfoSettings"
+              ng-click="vm.confirmChangeReleasedObsolete($event, 'AdditionalInfo', true, additionalInfoList.attributeValue, false, '', additionalInfoList, false, true, $index)"
+              md-font-icon="icon icon-pencil icon-cursor"></md-icon>
+            <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, false, '', additionalInfoList, true, false, $index);vm.SaveObjects(true);"
+              md-font-icon="icon icon-check-circle" class="tick-icon icon-cursor"></md-icon>
+            <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, true, '', additionalInfoList, false, false, $index);"
+              md-font-icon="icon icon-close-circle" class="close-icon icon-cursor"></md-icon>
+          </div>
+          <!-- End Link-->
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Link'">
+          <md-button class="grey-fg" ng-click="vm.OpenLinkFunction(additionalInfoList.attributeValue)" ng-disabled="vm.readonly" flex>OpenLink</md-button>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Text'">
+          <!-- Start Text-->
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <input type="text" class="md-input-height" ng-model="additionalInfoList.attributeValue"
+            ng-disabled="(vm.readonly || vm.SaveDisabled) && !additionalInfoList.isEdit">
+          <div class="change-icons" ng-style="!additionalInfoList.isEdit ? {'left' : ((additionalInfoList.attributeValue ? additionalInfoList.attributeValue.toString().length  : additionalInfoList.attributeKey.length) + 8)*7 + 'px'} : false">
+            <md-icon ng-if="vm.SaveDisabled && !additionalInfoList.isEdit && vm.releaseAdditionalInfoSettings"
+              ng-click="vm.confirmChangeReleasedObsolete($event, 'AdditionalInfo', true, additionalInfoList.attributeValue, false, '', additionalInfoList, false, true, $index)"
+              md-font-icon="icon icon-pencil icon-cursor"></md-icon>
+            <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, false, '', additionalInfoList, true, false, $index);vm.SaveObjects(true);"
+              md-font-icon="icon icon-check-circle" class="tick-icon icon-cursor"></md-icon>
+            <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, true, '', additionalInfoList, false, false, $index);"
+              md-font-icon="icon icon-close-circle" class="close-icon icon-cursor"></md-icon>
+          </div>
+          <!-- End Text-->
+        </md-input-container>
+
+        <div class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'richText'">
+          <!-- Start richText-->
+          <label class="fs-form-label">{{additionalInfoList.attributeKey}}</label>
+          <div ng-class="additionalInfoList.isEdit ? 'change-icons set-pencil-icon close-accept-icons' : 'change-icons set-pencil-icon'"
+            ng-style="!additionalInfoList.isEdit ? {'left' : ((additionalInfoList.attributeValue ? additionalInfoList.attributeValue.toString().length  : additionalInfoList.attributeKey.length) + 8)*7 + 'px'} : false">
+              <md-icon ng-if="vm.SaveDisabled && !additionalInfoList.isEdit && vm.releaseAdditionalInfoSettings"
+                ng-click="vm.confirmChangeReleasedObsolete($event, 'AdditionalInfo', true, additionalInfoList.attributeValue, false, '', additionalInfoList, false, true, $index)"
+                md-font-icon="icon icon-pencil icon-cursor"></md-icon>
+                <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, false, '', additionalInfoList, true, false, $index);vm.SaveObjects(true);"
+                md-font-icon="icon icon-check-circle" class="tick-icon icon-cursor"></md-icon>
+              <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, true, '', additionalInfoList, false, false, $index);"
+                md-font-icon="icon icon-close-circle" class="close-icon icon-cursor"></md-icon>
+          </div>
+          <text-angular class="set-textarea-height" ng-model="additionalInfoList.attributeValue" ta-disabled="(vm.readonly || vm.SaveDisabled) && !additionalInfoList.isEdit"></text-angular>
+          <!-- End richText-->
+        </div>
+
+        <md-input-container class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Number/Integer'">
+          <!-- Start Number/Integer-->
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <input type="text" name="numberinteger" class="md-input-height" ng-model="additionalInfoList.attributeValue" ng-pattern="/^[0-9]*$/"
+            ng-disabled="(vm.readonly || vm.SaveDisabled) && !additionalInfoList.isEdit">
+          <div class="change-icons" ng-style="!additionalInfoList.isEdit ? {'left' : ((additionalInfoList.attributeValue ? additionalInfoList.attributeValue.toString().length  : additionalInfoList.attributeKey.length) + 8)*7 + 'px'} : false">
+            <md-icon ng-if="vm.SaveDisabled && !additionalInfoList.isEdit && vm.releaseAdditionalInfoSettings"
+              ng-click="vm.confirmChangeReleasedObsolete($event, 'AdditionalInfo', true, additionalInfoList.attributeValue, false, '', additionalInfoList, false, true, $index)"
+              md-font-icon="icon icon-pencil icon-cursor"></md-icon>
+            <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, false, '', additionalInfoList, true, false, $index);vm.SaveObjects(true);"
+              md-font-icon="icon icon-check-circle" class="tick-icon icon-cursor"></md-icon>
+            <md-icon ng-if="additionalInfoList.isEdit" ng-click="vm.changeReleasedObsolete('AdditionalInfo', false, vm.additionInfoBeforeChange, true, '', additionalInfoList, false, false, $index);"
+              md-font-icon="icon icon-close-circle" class="close-icon icon-cursor"></md-icon>
+          </div>
+          <!-- End Number/Integer-->
+          <span class="help-block" style="color:red" ng-if="additionalInfoList.attributeValue == abcdefgjijklmnopqrstuvwxyz">
+            only Number/Integer allow.
+          </span>
+        </md-input-container>
+
+        <md-input-container class="md-block bdr-input" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Dropdown'">
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <md-select class=" bdr-input " ng-model="additionalInfoList.attributeValue" ng-disabled="vm.readonly;vm.SaveDisabled">
+            <md-option ng-repeat="dropdownlist in additionalInfoList.dropDownList" value="{{dropdownlist}}">
+              {{dropdownlist}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </form>
+  </div>
+</div>
+<div ng-if="!vm.additionalInfoList.length" class="md-tab additional-info-list-empty">
+  <p>No custom attribute exists in "Settings" for this object type</p>
+</div>

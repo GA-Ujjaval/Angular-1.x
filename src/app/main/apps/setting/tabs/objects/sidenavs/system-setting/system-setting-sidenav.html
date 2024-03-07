@@ -1,0 +1,74 @@
+<!-- SIDENAV HEADER -->
+<div class="" layout="row" layout-align="start center">
+
+  <!-- USER -->
+  <!-- <img ng-src="assets/angular-material-assets/img/icons/file-tree.png" class="margin-8" /> -->
+  <!-- / USER -->
+  <p class="pl-20 text-bold">Objects</p>
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<!-- SIDENAV CONTENT -->
+<div ms-scroll class="content">
+
+  <md-list>
+
+    <md-list-item ng-click="vm.objectNumberingFunction('objectNumbering')">
+      <p ng-class="{'text-bold' : vm.systemSetting === 'objectNumbering'}" class="pl-20">
+        Revision Scheme
+      </p>
+    </md-list-item>
+
+    <md-list-item ng-click="vm.objectNumberingFunction('advancedNumbering')">
+      <p ng-class="{'text-bold' : vm.systemSetting === 'advancedNumbering'}" class="pl-20">
+        Number Scheme
+      </p>
+    </md-list-item>
+
+    <md-list-item ng-click="vm.objectNumberingFunction('releaseSetting')">
+      <p ng-class="{'text-bold' : vm.systemSetting === 'releaseSetting'}" class="pl-20">
+        Release Setting
+      </p>
+    </md-list-item>
+
+    <md-list-item ng-click="vm.objectNumberingFunction('referenceDesignators')">
+      <p ng-class="{'text-bold' : vm.systemSetting === 'referenceDesignators'}" class="pl-20">
+        Objects in BOM
+      </p>
+    </md-list-item>
+
+  </md-list>
+</div>
+<!-- SIDENAV CONTENT -->
+<div class="" layout="row" layout-align="start center">
+
+  <p class="pl-20 text-bold">Cost</p>
+
+</div>
+
+<div ms-scroll class="content">
+
+  <md-list>
+
+    <md-list-item ng-click="vm.objectNumberingFunction('currencySetting')">
+      <p ng-class="{'text-bold' : vm.systemSetting === 'currencySetting'}" class="pl-20">
+        Currency Setting
+      </p>
+    </md-list-item>
+
+    <md-list-item ng-click="vm.objectNumberingFunction('priceBreak')">
+      <p ng-class="{'text-bold' : vm.systemSetting === 'priceBreak'}" class="pl-20">
+        Price break
+      </p>
+    </md-list-item>
+
+    <md-list-item ng-click="vm.objectNumberingFunction('currencyDecimals')">
+      <p ng-class="{'text-bold' : vm.systemSetting === 'currencyDecimals'}" class="pl-20">
+        Currency Decimals
+      </p>
+    </md-list-item>
+
+
+  </md-list>
+</div>

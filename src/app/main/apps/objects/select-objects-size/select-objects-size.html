@@ -1,0 +1,80 @@
+<md-dialog>
+  <form ng-cloak>
+
+    <md-toolbar class="md-accent">
+
+      <div layout="row" layout-align="space-between">
+        <span class="title margin-top-17 margin-left-15">Item Count setting</span>
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+
+    </md-toolbar>
+
+    <md-dialog-content class="padding-10">
+      <div class="md-dialog-content">
+        <p class="margin-top-0">
+          An item is any line displayed in the object tables. Items include object revisions. For eg: Part 123 RevA and
+          Part 123 RevB are 2 different items.
+        </p>
+
+        <p class="margin-bottom-40">
+          Users can now choose the default number of items that are loaded in the objects tables from the database
+          (parts/products/documents). This setting helps optimize the data-loading performance.
+        </p>
+
+        <div class="margin-bottom-40" layout="row">
+          <span class="margin-right-10 margin-top-5">
+            Set # of items to be loaded from database:
+          </span>
+          <md-select class="margin-0" ng-model="vm.objectsDefaultSize">
+            <md-option value="0"><b>0</b></md-option>
+            <md-option value="15"><b>15</b></md-option>
+            <md-option value="25"><b>25</b></md-option>
+            <md-option value="50"><b>50</b></md-option>
+            <md-option value="100"><b>100</b></md-option>
+            <md-option value="500"><b>500</b></md-option>
+            <md-option value="1000"><b>1000</b></md-option>
+            <md-option value="1500"><b>1500</b></md-option>
+            <md-option value="2000"><b>2000</b></md-option>
+            <md-option value="All"><b>All</b></md-option>
+          </md-select>
+        </div>
+
+        <p>
+          <b>NOTE:</b> NOTE: You can change this setting at any time in the object table (in the header bar, under the
+          total ‘Object count’ > “Items Loaded from database: 100”).
+        </p>
+
+        <p>
+          <b>How this impacts Search and Filter:</b>
+        </p>
+
+
+        <p>
+          If there are 1000 items in the database and the default number of items to load, is set to 100; Only the 100
+          most recently modified items will be displayed in the table.
+        </p>
+
+        <p>
+          ‘Search’ parses through the entire database of 1000 items to display the results in the table.
+        </p>
+
+        <p>
+          However, the column ‘filters’ in the table, only filter results for data displayed in the table. In the above
+          example, the column ‘filter’ will filter data from the 100 most recently modified objects.
+        </p>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions class="object-size">
+
+      <md-button ng-click="vm.saveDialog(vm.objectsDefaultSize)">
+        Ok
+      </md-button>
+
+    </md-dialog-actions>
+
+  </form>
+</md-dialog>

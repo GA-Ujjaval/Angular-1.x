@@ -1,0 +1,248 @@
+<!-- SPLASH SCREEN -->
+<ms-splash-screen id="splash-screen">
+    <div class="center">
+        <div class="logo">
+            <!--<span>F</span>-->
+            <img src="assets/images/logos/fuse.png" >
+        </div>
+        <!-- Material Design Spinner -->
+        <div class="spinner-wrapper">
+            <div class="spinner">
+                <div class="inner">
+                    <div class="gap"></div>
+                    <div class="left">
+                        <div class="half-circle"></div>
+                    </div>
+                    <div class="right">
+                        <div class="half-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Material Design Spinner -->
+    </div>
+</ms-splash-screen>
+<!-- / SPLASH SCREEN -->
+<div id="dashboard-admin" class="page-layout simple right-sidenav" layout="row"
+     ng-intro-options="IntroOptionsBoardDashboard" ng-intro-method="CallMe"
+     ng-intro-onbeforechange="BeforeChangeEvent"
+     ng-intro-onexit="Exit"
+     ng-intro-oncomplete="Complete"
+     ng-intro-exit-method="ExitMe"
+     ng-intro-autostart="false">
+    <!-- CENTER -->
+    <div class="center" flex ms-scroll>
+        <!-- HEADER -->
+        <div class="header md-accent-bg" layout="row" layout-align="space-between">
+            <div layout="row" layout-align="space-between">
+                <div>
+                    <span class="md-display-1 font-weight-300">Welcome, {{vm.customerProfileForm.firstName}} {{vm.customerProfileForm.lastName}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content" >
+            <!-- WIDGET GROUP -->
+            <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+                <!-- WIDGET 1 -->
+                <ms-widget flippable="true" layout="column" style="height: 40%">
+
+                    <!-- Front -->
+                    <ms-widget-front class="white-bg">
+                        <div class="ph-5 pv-9 h-45 reduced-size" layout="row" layout-align="space-between center">
+                            <md-select class="simplified font-size-16" ng-model="vm.widget1.currentRange"
+                                       aria-label="Change range">
+                                <md-option ng-repeat="(key, range) in vm.widget1.ranges"
+                                           value="{{key}}">
+                                    {{range}}
+                                </md-option>
+                            </md-select>
+                            <div class="question-icon" ng-if="$root.introGlobalHelp" ng-click="CallMe()" id="step1">
+                                <div class="introjs-hint-dot-dashboard"></div>?</div>
+                            <md-menu>
+                                <md-button class="md-icon-button" ng-click="$mdOpenMenu()"
+                                           aria-label="more">
+                                    <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                                </md-button>
+
+                                <md-menu-content width="2">
+                                    <md-menu-item>
+                                        <md-button ng-click="flipWidget()" aria-label="Flip widget">
+                                            Details
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="refreshWidget()" aria-label="Refresh widget">
+                                            Refresh
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>
+
+                        <div class="pt-3 pb-13 task-widget" layout="column" layout-align="center center" ui-sref="app.customer.to-do({date:vm.widget1.currentRange})">
+                            <div class="light-blue-fg font-size-36 line-height-29">
+                                {{vm.widget1.dueTasks[vm.widget1.currentRange].tasks.length}}
+                            </div>
+                            <div class="h3 secondary-text font-weight-500">DUE TASKS</div>
+                        </div>
+
+                        <div class="p-6 grey-50-bg border-top" layout="row" layout-align="start center">
+                            <span class="h4 secondary-text text-truncate">Completed:</span>
+                            <span class="h4 ml-8">{{vm.widget1.dueTasks[vm.widget1.currentRange].completed}}</span>
+                        </div>
+                    </ms-widget-front>
+                    <!-- / Front -->
+
+                    <!-- Back -->
+                    <ms-widget-back class="p-16 white-bg">
+                        <div class="flip-to-front">
+                            <md-button class="md-icon-button" ng-click="flipWidget()"
+                                       aria-label="Flip widget">
+                                <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                            </md-button>
+                        </div>
+
+                        <div>
+                            {{vm.widget1.detail}}
+                        </div>
+                    </ms-widget-back>
+                    <!-- / Back -->
+
+                </ms-widget>
+                <!-- / WIDGET 1 -->
+
+                <!-- WIDGET 2 -->
+                <ms-widget flippable="true" layout="column" style="width: 175px">
+
+                    <!-- Front -->
+                    <ms-widget-front class="white-bg">
+                        <div class="pl-9 pr-5 pv-9 h-45 reduced-size" layout="row" layout-align="space-between center">
+                            <div class="h3" style="margin-left: 12px;">{{vm.widget2.title}}</div>
+
+                            <md-menu>
+                                <md-button class="md-icon-button" ng-click="$mdOpenMenu()"
+                                           aria-label="more">
+                                    <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                                </md-button>
+
+                                <md-menu-content width="2">
+                                    <md-menu-item>
+                                        <md-button ng-click="flipWidget()" aria-label="Flip widget">
+                                            Details
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="refreshWidget()" aria-label="Refresh widget">
+                                            Refresh
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>
+
+                        <div class="pt-3 pb-13 task-widget" layout="column" layout-align="center center" ui-sref="app.customer.to-do({date:'OD'})">
+                            <div class="red-fg font-size-36 line-height-29">
+                                {{vm.widget2.overdueTasks.tasks.length}}
+                            </div>
+                            <div class="h3 secondary-text font-weight-500">{{vm.widget2.data.label}}</div>
+                        </div>
+
+                      <!--  <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
+                            <span class="h4 secondary-text text-truncate">{{vm.widget2.data.extra.label}}:</span>
+                            <span class="h4 ml-8">{{vm.widget2.overdueTasks.yesterdaysOverdue}}</span>
+                        </div>-->
+                    </ms-widget-front>
+                    <!-- / Front -->
+
+                    <!-- Back -->
+                    <ms-widget-back class="p-16 white-bg">
+                        <div class="flip-to-front">
+                            <md-button class="md-icon-button" ng-click="flipWidget()"
+                                       aria-label="Flip widget">
+                                <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                            </md-button>
+                        </div>
+
+                        <div>
+                            {{vm.widget2.detail}}
+                        </div>
+                    </ms-widget-back>
+                    <!-- / Back -->
+
+                </ms-widget>
+                <!-- / WIDGET 2 -->
+
+            </div>
+            <!-- / WIDGET GROUP -->
+
+            <!-- WIDGET GROUP -->
+            <div class="widget-group" layout="row" flex="100" layout-wrap
+                 ng-intro-options="IntroOptionsBoardDashboardSecond" ng-intro-method="CallMeSecond"
+                 ng-intro-onbeforechange="BeforeChangeEventSecond"
+                 ng-intro-onexit="ExitSecond"
+                 ng-intro-oncomplete="CompleteSecond"
+                 ng-intro-exit-method="ExitMeSecond"
+                 ng-intro-autostart="false">
+
+                <!-- WIDGET 3 -->
+                <ms-widget layout="row" flex="100">
+
+                    <!-- Front -->
+                    <ms-widget-front class="white-bg">
+                        <div class="ph-16 pv-8" layout="row" layout-align="space-between center"
+                             layout-wrap>
+                            <div class="pv-8 h3">{{vm.widget3.title}}</div>
+
+                            <div class="pv-8" layout="row" layout-align="start center" layout-align-sm="end"
+                                 flex-sm="100">
+                                <md-button class="ph-16"
+                                           ng-repeat="(key, range) in vm.widget3.ranges"
+                                           ng-click="vm.widget3.changeRange(key)"
+                                           ng-disabled="vm.widget3.currentRange == key">
+                                    {{range}}
+                                </md-button>
+                            </div>
+                        </div>
+                        <div class="ph-16 pv-4 border-bottom" layout="row"
+                             layout-wrap>
+                            <div class="pv-8">Assigned to me<span class="dashboard-tab-badge">{{vm.widget3.cardsAssignedToMe}}</span></div>
+                            <div class="question-icon question-icon-second" ng-if="$root.introGlobalHelp" ng-click="CallMeSecond()" id="step2">
+                                <div class="introjs-hint-dot-dashboard"></div>?</div>
+                            </div>
+                        </div>
+                        <div layout="row" layout-align="start center" layout-wrap>
+                            <div flex="100" flex-gt-xs="100" flex-gt-md="100">
+                             <!--   <div class="h3 m-16 pb-16 border-bottom">Boards with {{vm.widget3.cardsCount}} of open cards</div>-->
+                                <div class="h3 m-16 pb-16 border-bottom">Boards with number of open cards</div>
+                            </div>
+                        </div>
+                        <div layout="row" layout-align="start center" layout-wrap ng-repeat="board in vm.widget3.boards track by $index">
+                            <div flex="100" flex-gt-xs="100" flex-gt-md="100">
+                                <div class="h3 mh-16 mt-16 mb-8">{{board.boardName + " (" + board.cards.length + ")"}}</div>
+                                <div class="mh-16 mb-16" ng-if="board.cards.length > 0">
+                                    <div ng-repeat="cards in board.cards track by $index" class="dashboard-chart-item" ng-style="{'width': 100*cards.width/board.cardsCount+'%'}">
+                                        <div class="priority-item" ui-sref="app.customer.scrumboard.boards.board({id: board.id, priority: cards.id, date: cards.date})"
+                                             ng-class="cards.color+'-bg'"><span>{{cards.width}}</span><span>{{cards.name}}</span></div>
+                                    </div>
+                                </div>
+                                <div ng-if="board.cards.length == 0" class="mh-16 mb-16">No cards assigned to you in this board</div>
+                            </div>
+                        </div>
+                    </ms-widget-front>
+                    <!-- / Front -->
+
+                </ms-widget>
+                <!-- / WIDGET 3 -->
+
+            </div>
+            <!-- / WIDGET GROUP -->
+        </div>
+        <!-- / CONTENT -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

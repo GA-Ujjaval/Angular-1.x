@@ -1,0 +1,20 @@
+<div class="ui-grid-cell-contents" title="TOOLTIP">
+  <md-radio-group ng-model="grid.appScope.vm.costSetting" ng-init="grid.appScope.vm.checkRadioButtonColor()"
+                  ng-click="grid.appScope.vm.flipcostFunciton()"
+                  ng-disabled="(grid.appScope.vm.readonly || grid.appScope.vm.SaveDisabled) && grid.appScope.vm.changeReleasedCost">
+    <md-radio-button flex value="{{row.entity.id}}" aria-label="Cost"></md-radio-button>
+  </md-radio-group>
+  <md-tooltip class="md-tooltip"
+              ng-if="grid.appScope.vm.products.status === 'InDevelopment' && row.entity.id.indexOf('mfr') === -1 && row.entity.id.indexOf('supp') === -1"
+              md-direction="bottom">
+    <span>Note: When set to 'Rollup', the calculated rolled-up cost will be displayed here, and, it cannot be edited here.</span>
+  </md-tooltip>
+  <md-tooltip class="md-tooltip" ng-if="row.entity.id.indexOf('mfr') !== -1">
+    Note: When set to “Manufacturer Part Cost” the Manufacturer Part cost value will be used in BOM calculation. This
+    value can be edited by going to the Manufacturer Part
+  </md-tooltip>
+  <md-tooltip class="md-tooltip" ng-if="row.entity.id.indexOf('supp') !== -1">
+    Note: When set to “Supplier Part Cost” the Supplier Part cost value will be used in BOM calculation. This value can
+    be edited by going to the Supplier Part
+  </md-tooltip>
+</div>

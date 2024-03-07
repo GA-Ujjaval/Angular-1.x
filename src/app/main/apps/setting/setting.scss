@@ -1,0 +1,211 @@
+// Object Numbering
+.toggle-text-inside {
+  margin-top: 15px;
+  margin-left: 22px;
+}
+
+#objects {
+  .outer-wrapper-adv-number {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    min-width: unset !important;
+    width: 85% !important;
+  }
+}
+
+//
+.d-block {
+  display: block;
+}
+
+#setting {
+
+  #advanced-numbering-header {
+    display: flex;
+    justify-content: space-between;
+
+    mf-advanced-numbering-description {
+      display: flex;
+      position: relative;
+      bottom: 1px;
+      left: 10px;
+    }
+
+    .adv-number-header-tooltip {
+      display: flex;
+      font-size: 16px;
+      flex-direction: column;
+      color: #ff3900;
+    }
+
+    .title {
+      display: flex;
+    }
+  }
+
+  .header {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    padding: 24px !important;
+
+    .question-icon {
+      cursor: pointer;
+      font-size: 13px;
+      color: rgb(0, 0, 0);
+      font-weight: bold;
+      border: 1px solid rgb(100, 255, 63);
+      background: rgb(100, 255, 63);
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      border-radius: 50%;
+      position: relative;
+      top: -15px;
+      margin-left: 15px;
+    }
+
+    .search {
+      position: relative;
+      max-width: 780px;
+
+      .search-icon {
+        margin: 0 -24px 0 0;
+      }
+
+      .search-text {
+        font-size: 24px;
+      }
+
+      .search-input {
+        padding: 0 0 0 48px;
+        background: none;
+        font-size: 24px;
+        line-height: 48px;
+        height: 48px;
+        color: #FFFFFF;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        transition: border-color 300ms ease;
+
+        &:focus {
+          border-color: rgba(255, 255, 255, 1);
+        }
+
+        &::-webkit-input-placeholder {
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+
+  .content {
+    .form-wrapper {
+      background: #FFFFFF !important;
+      padding: 16px;
+      min-width: 98%;
+    }
+    .content-full-width {
+      padding: 0;
+    }
+
+    md-tabs {
+
+      md-tabs-content-wrapper {
+
+        md-tab-content {
+          padding: 0;
+        }
+      }
+
+      md-content {
+        padding: 24px 24px 0 24px;
+        background-color: transparent;
+      }
+    }
+    md-list {
+      display: block;
+      padding: 0px 0px 0px 4px;
+    }
+    .result-info {
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+      .md-title {
+        padding-right: 8px;
+      }
+
+      .pager {
+
+        .page-info {
+          font-weight: 500;
+          margin: 0 8px 0 0;
+        }
+      }
+    }
+
+    .simple-pagination {
+      margin: 32px 0;
+    }
+  }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-xs) {
+
+  #search {
+
+    .header {
+      padding: 16px;
+    }
+
+    .content {
+
+      .result-info {
+
+        .pager {
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+
+}
+
+.introjs-hint-dot-setting {
+  border: 10px solid rgb(100, 255, 63) !important;
+  background: rgb(100, 255, 63) !important;
+}
+
+.ui-grid-cell-focus {
+  background-color: inherit;
+}
+
+#cost-sourcing-container {
+  width: 100%;
+  .cost-sourcing-container {
+    .button-container {
+      text-transform: uppercase;
+    }
+
+    .rates-table-container {
+      width: 450px;
+    }
+
+    .delete-icon {
+      cursor: pointer;
+    }
+
+    .align-center {
+      text-align: center;
+    }
+
+    .exchange-rate-input {
+      padding-left: 5px;
+    }
+  }
+}
+
+.advanced-numbering-tabs{
+  width: 100%;
+}

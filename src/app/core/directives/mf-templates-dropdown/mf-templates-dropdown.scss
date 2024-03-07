@@ -1,0 +1,114 @@
+.mf-templates-dropdown {
+  display: inline-block;
+
+  .template-icon {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+}
+
+.templates-menu {
+  .ng-hide.ng-hide-animate {
+    display: none !important;
+  }
+  .no-templates-found {
+    font-weight: 500;
+  }
+}
+
+.multiline-tooltip-templates {
+  overflow: unset;
+  height: fit-content;
+}
+
+.filter-label {
+  margin-left: 15px;
+  max-width: 90% !important;
+}
+
+.default-template-button {
+  float: left;
+  position: absolute;
+}
+
+.default-mark {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.create-new {
+  font-style: italic !important;
+  color: #0398e2;
+}
+
+.template-item-text {
+  margin-left: 35px !important;
+  display: inline-block !important;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.fix-offset {
+  margin: 0 !important;
+  height: 100% !important;
+  width: 100%;
+  text-transform: unset !important;
+  font-weight: unset;
+}
+
+.create-template-container {
+  max-height: 90%;
+  width: 500px !important;
+
+  .importance-mark {
+    color: #ff1403;
+  }
+
+  .template-name-input-container {
+    width: 80%;
+    margin-top: 25px;
+  }
+
+  .template-note {
+    margin-top: -25px;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+
+  .radio-group-container {
+    margin-bottom: 30px;
+  }
+
+  .radio-group-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .radio-group-header {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .radio-buttons {
+    padding-left: 15px;
+    margin-top: 0;
+  }
+
+  .template-progress {
+    display: inline-block;
+  }
+
+  .hint {
+    font-style: italic;
+    padding-left: 30px;
+    cursor: pointer;
+  }
+
+  .layout-radio {
+    margin-right: 30px;
+  }
+}
+

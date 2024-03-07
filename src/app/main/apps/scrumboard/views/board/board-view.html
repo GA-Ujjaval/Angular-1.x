@@ -1,0 +1,359 @@
+<!-- BOARD -->
+<div id="board" ng-class="vm.board.settings.color+'-100-bg'" ui-sortable="vm.sortableListOptions"
+     ng-model="vm.board.lists"
+     layout="row" ng-click="vm.hidePopup();">
+  <!--<md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progressEmail">
+    </md-progress-circular>-->
+  <!-- LIST -->
+  <div class="list-wrapper" ng-repeat="list in vm.board.lists track by list.id">
+
+    <div class="list md-whiteframe-1dp" id="{{list.id}}" layout="column">
+      <!-- LIST HEADER -->
+      <div class="list-header step5" layout="row" layout-align="space-between center">
+        <div ng-if="vm.sessionData.userRoleSet[0] == 'customer_admin'"
+             class="list-id list-id-width hidden">{{list.id}}</div>
+        <div ng-if="vm.sessionData.userRoleSet[0] == 'customer_admin'"
+             class="list-index list-id-width hidden">{{$index}}</div>
+
+        <div class="list-header-name">
+
+          <span editable-text="list.name" onbeforesave="vm.checkBoardName($data, list)"
+                onaftersave="vm.updateBoardList(list)" id="step2">{{list.name}}</span>
+          <!--<span editable-text="list.name" e-form="listname" ng-click="vm.notChangelist(listname)" ng-class="{disabled: vm.allDisabled}" ng-model="vm.listName" onaftersave="vm.updateBoardList(list)">{{list.name}}</span>-->
+          <div>
+            <span class="lock">
+              <md-tooltip class="md-tooltip" ng-if="list.frozenList == 'true'">
+                When a list is locked, user cannot promote/demote cards from that list to
+                another list
+              </md-tooltip>
+              <md-icon ng-if="list.frozenList == 'true'" md-font-icon="icon-lock-outline" class="s18"></md-icon>
+            </span>
+            <span class="lock">
+              <md-tooltip class="md-tooltip" ng-if="list.objectStatus">
+                When checked: if a card is dropped into this list,all of its ‘affected objects’
+                will have their ‘status’ automatically set to '{{list.objectStatus}}'
+              </md-tooltip>
+              <md-icon ng-if="list.objectStatus" md-font-icon="icon-thumb-up"
+                       class="s18"></md-icon>
+            </span>
+            <span class="lock">
+              <md-tooltip class="md-tooltip" ng-if="list.approveMandatory == 'true'">
+                When this option is checked, user can only promote/demote card TO this
+                list, if all the approvals in the checklist are marked as complete
+              </md-tooltip>
+              <!--<md-icon ng-if="list.approveMandatory == 'true'"  md-font-icon="icon-clipboard-text" class="s18"></md-icon>-->
+              <img ng-if="list.approveMandatory == 'true'"
+                   src="../../../../../../assets/images/scrumboard/approvals-mandatory.png"
+                   alt="approvals-mandatory" class="approvals-mandatory"/>
+            </span>
+            <span class="header-badge">{{vm.tasksCoutner(list)}}</span>
+          </div>
+        </div>
+        <md-menu md-offset="0 48px" class="options list-header-option-button" ng-if="vm.sessionData.userAuth == true">
+
+          <md-button class="md-icon-button" ng-click="$mdOpenMenu($event); vm.addClassForSelect()" aria-label="Options" translate
+                     translate-attr-aria-label="SB.OPTIONS">
+            <md-icon md-menu-origin md-font-icon="icon-dots-vertical" id="step3"></md-icon>
+          </md-button>
+
+          <md-menu-content class="options-menu-content">
+            <md-menu-item class="item">
+              <md-button ng-click="vm.removeList($event,$index)" aria-label="Remove List" translate
+                         translate-attr-aria-label="SB.REMOVE_LIST" width="4">
+                <md-icon ng-if="list.frozenList == 'false'" md-font-icon="icon-check" class="hidden-icon"
+                         md-menu-align-target></md-icon>
+                <md-icon ng-if="list.frozenList == 'true'" md-font-icon="icon-check" class="hidden-icon"
+                         md-menu-align-target></md-icon>
+                <md-icon md-font-icon="icon-delete" md-menu-align-target></md-icon>
+                <p class="title" translate="SB.REMOVE_LIST">Remove List</p>
+              </md-button>
+            </md-menu-item>
+
+            <md-menu-item class="item">
+              <md-button ng-click="vm.ListSetting(list,$event,$index);" aria-label="Lock List" translate
+                         translate-attr-aria-label="" width="4">
+                <md-icon ng-if="list.frozenList == 'true'" md-font-icon="icon-check"></md-icon>
+                <md-icon ng-if="list.frozenList == 'false'" md-font-icon="icon-check" class="hidden-icon"></md-icon>
+                <md-icon ng-if="list.frozenList == 'false'" md-font-icon="icon-lock-unlocked-outline"></md-icon>
+                <md-icon ng-if="list.frozenList == 'true'" md-font-icon="icon-lock-outline"></md-icon>
+                <p flex class="title" translate="">Lock List</p>
+                <p class="description">When a list is locked, user cannot promote/<br/>demote cards from that list to
+                  another list</p>
+              </md-button>
+            </md-menu-item>
+
+            <md-menu-item class="item" style="height: 130px; display: flex; flex-direction: column;">
+              <md-button aria-label="" width="4" class="status-text" ng-click="list.objectStatus && vm.ListReleaseObject(list,event,true)" ng-disabled="!list.objectStatus">
+                <md-icon
+                  ng-if="!list.objectStatus"
+                  md-font-icon="icon-check" class="hidden-icon" md-menu-align-target></md-icon>
+                <md-icon
+                  ng-if="list.objectStatus"
+                  md-font-icon="icon-check" md-menu-align-target></md-icon>
+                <md-icon md-font-icon="icon-thumb-up" class="status-icon"></md-icon>
+                <p flex class="title" translate="">Change Status</p>
+                <p class="description">When checked: if a card is dropped into this<br/> list,all of its ‘affected
+                  objects’ will have their<br/> ‘status’ automatically set to selected status</p>
+              </md-button>
+              <md-select width="3" md-offset="0 48" ng-model="list.objectStatus" placeholder="Select a status" ng-change="!vm.progress && vm.ListReleaseObject(list,event, false)" style="margin: 0 0 10px; padding-left: 70px;" md-container-class="dropDown">
+                <md-option ng-value="opt" ng-click="vm.changeProgress()" ng-repeat="(index, opt) in ['InDevelopment','Released','Obsolete']">{{ opt }}</md-option>
+              </md-select>
+            </md-menu-item>
+
+            <md-menu-item class="item">
+              <md-button ng-click="vm.Listapprove(list,$event,$index)" aria-label="" translate
+                         translate-attr-aria-label="" width="4">
+                <md-icon ng-if="list.approveMandatory == 'false'" md-menu-align-target class="hidden-icon"></md-icon>
+                <md-icon ng-if="list.approveMandatory == 'true' " md-font-icon="icon-check"
+                         md-menu-align-target></md-icon>
+                <!--<md-icon  md-font-icon="icon-clipboard-text"></md-icon>-->
+                <img src="../../../../../../assets/images/scrumboard/approvals-mandatory.png"
+                     title="approvals-mandatory"
+                     alt="approvals-mandatory" class="approvals-mandatory-item"/>
+                <p flex class="title" translate="">
+                  ApprovalsMandatory</p>
+                <p class="description">When this option is checked, user can only<br/>promote/demote card TO this
+                  list, if all the<br/>approvals
+                  in the checklist are marked as complete</p>
+              </md-button>
+            </md-menu-item>
+
+          </md-menu-content>
+
+        </md-menu>
+
+      </div>
+      <!-- / LIST HEADER -->
+
+      <!-- LIST CONTENT -->
+      <div class="list-content list1Scroll" layout="column" ms-scroll>
+
+        <div class="list-cards" ng-class="{'list-card-height': list.idCards.length < 5}" id="{{'lists' + $index}}" ui-sortable="vm.sortableCardOptions" ng-model="list.idCards">
+          <!-- CARD -->
+
+          <div ng-if="cardId" class="list-card md-whiteframe-2dp" id="{{'card' + $index}}"
+               ng-repeat="cardId in list.idCards | filter: vm.cardFilter track by $index"
+               ng-click="vm.openCardDialog($event, cardId, vm.changePath, vm.tasks, '');"
+               ng-class="{'completed': vm.board.cards.getById(cardId).checkItemsChecked === vm.board.cards.getById(cardId).checkItems}"
+               ui-sref="app.customer.scrumboard.boards.board({cardId:cardId})"
+               ui-sref-opts="{reload: false, notify: false}">
+
+            <!-- CARD COVER -->
+            <div ng-if="vm.board.settings.cardCoverImages && vm.board.cards.getById(cardId).idAttachmentCover"
+                 class="list-card-cover">
+              <img ng-src="{{vm.board.cards.getById
+                (cardId).attachments.getById(vm.board.cards.getById(cardId).idAttachmentCover).src}}">
+            </div>
+            <!-- / CARD COVER -->
+
+            <!-- CARD DETAILS -->
+            <div class="list-card-details">
+
+              <!-- CARD SORT HANDLE -->
+              <div class="list-card-sort-handle">
+                <md-icon md-font-icon="icon-cursor-move" class="icon s16"></md-icon>
+              </div>
+              <!-- /CARD SORT HANDLE -->
+
+              <!-- CARD LABELS -->
+              <div ng-if="vm.board.cards.getById(cardId).idLabels.length > 0" class="list-card-labels" layout="row"
+                   layout-wrap>
+                <span class="list-card-label" ng-class="'md-'+vm.board.labels.getById(labelId).color+'-bg'"
+                      ng-repeat="labelId in vm.board.cards.getById(cardId).idLabels">
+                  <md-tooltip>
+                    {{vm.board.labels.getById(labelId).name}}
+                  </md-tooltip>
+                </span>
+              </div>
+              <!-- / CARD LABELS -->
+
+              <!-- CARD NAME -->
+              <div class="list-card-name">{{vm.board.cards.getById(cardId).name}}</div>
+              <div class="list-card-id hidden">{{vm.board.cards.getById(cardId).id}}</div>
+              <div class="list-list-id hidden">{{list.id}}</div>
+              <!-- / CARD NAME -->
+
+              <div class="list-card-badges" layout="row" layout-align="start center">
+
+                <!-- CARD DUE -->
+                <span class="badge due-date" ng-class="{'overdue': vm.isOverdue(vm.board.cards.getById(cardId).due)}"
+                      ng-if="vm.board.cards.getById(cardId).due" layout="row" layout-align="start center">
+                  <i class="icon-clock s16"></i>
+                  <span>{{vm.formatDate(vm.board.cards.getById(cardId).due)||''}}</span>
+                </span>
+                <!-- / CARD DUE -->
+
+                <!-- CARD CHECK ITEMS STATUS -->
+                <span class="badge check-items" ng-if="vm.board.cards.getById(cardId).noOfTotalTasks && vm.board.cards.getById(cardId).noOfTotalTasks != 0"
+                      ng-class="{'completed': vm.board.cards.getById(cardId).noOfCompletedTasks === vm.board.cards.getById(cardId).noOfTotalTasks && vm.board.cards.getById(cardId).noOfTotalTasks != 0}"
+                      layout="row" layout-align="start center">
+                  <i class="icon-checkbox-marked-circle s16"></i>
+                  <span>{{vm.board.cards.getById(cardId).noOfCompletedTasks}}</span>
+                  <span>/</span>
+                  <span>{{vm.board.cards.getById(cardId).noOfTotalTasks}}</span>
+                </span>
+                <!-- / CARD CHECK ITEMS STATUS -->
+
+              </div>
+
+            </div>
+            <!-- / CARD DETAILS -->
+
+            <!-- CARD FOOTER -->
+            <div class="list-card-footer" layout="row" layout-align="space-between center">
+
+              <div layout="row" layout-align="start center">
+                <!-- CARD MEMBERS -->
+                <div ng-if="vm.board.cards.getById(cardId).idMembers.length > 0" class="list-card-members" layout="row">
+
+                  <div class="list-card-member" ng-class="{'member-excess': $index > 2}"
+                       ng-repeat="memberId in vm.board.cards.getById(cardId).idMembers">
+
+                    <md-chip-template class="member-chip">
+                      <img ng-show="vm.isAvatarAvailable(vm.board.members.getById(memberId).avatar)"
+                           class="list-card-avatar-circle"
+                           ng-src="{{vm.board.members.getById(memberId).avatar}}">
+                      <div ng-hide="vm.board.members.getById(memberId).avatar" class="list-card-avatar-circle">
+                        <span class="initials">{{vm.defaultAvatar(vm.board.members.getById(memberId).name)}}</span>
+                      </div>
+                    </md-chip-template>
+
+                    <!--<img class="list-card-member-avatar"
+                                             ng-src="{{vm.board.members.getById(memberId).avatar}}">-->
+
+                    <md-tooltip>
+                      <div class="name">{{ vm.board.members.getById(memberId).name}}</div>
+                    </md-tooltip>
+                  </div>
+                  <div ng-show="vm.board.cards.getById(cardId).idMembers.length > 3">
+                    <span class="member-chip member-dot">...</span>
+                    <md-tooltip>
+                      <span ng-repeat="memberId in vm.board.cards.getById(cardId).idMembers"
+                            ng-show="$index > 2">{{vm.board.members.getById(memberId).name}}
+                        <span ng-if="!$last">, </span>
+                      </span>
+                    </md-tooltip>
+                  </div>
+
+                </div>
+                <!-- / CARD MEMBERS -->
+              </div>
+
+              <div layout="row" layout-align="end center">
+
+                <!-- CARD SUBSCRIBE -->
+                <span ng-if="vm.board.cards.getById(cardId).subscribed" class="list-card-footer-item" layout="row"
+                      layout-align="start center">
+                  <i class="icon-eye s18"></i>
+                </span>
+                <!-- / CARD SUBSCRIBE -->
+
+                <!-- CARD DETAILS -->
+                <span ng-if="vm.board.cards.getById(cardId).description !== ''" class="list-card-footer-item"
+                      layout="row"
+                      layout-align="start center">
+                  <i class="icon-document s18"></i>
+                  <md-tooltip>Description</md-tooltip>
+                </span>
+                <!-- / CARD DETAILS -->
+
+                <!-- CARD ATTACHMENT -->
+                <span class="list-card-footer-item" ng-if="vm.board.cards.getById(cardId).attachments" layout="row"
+                      layout-align="start center">
+                  <i class="icon-attachment s18"></i>
+                  <span class="value">{{vm.board.cards.getById(cardId).attachments.length}}</span>
+                </span>
+                <!-- / CARD ATTACHMENT -->
+
+                <!-- CARD COMMENTS -->
+                <span class="list-card-footer-item" layout="row"
+                      layout-align="start center">
+                  <i class="icon-comment s18"></i>
+                  <span class="value">{{vm.board.cards.getById(cardId).commentsCount}}</span>
+                </span>
+                <!-- / CARD COMMENTS -->
+
+              </div>
+            </div>
+            <!-- CARD FOOTER -->
+          </div>
+          <!-- / CARD -->
+        </div>
+      </div>
+      <!-- / LIST CONTENT -->
+
+      <!-- NEW CARD BUTTON-->
+      <div class="list-footer" ng-class="($index != 0)?'list-footer-hide':''">
+        <div class="main-f-list-dropdown" ng-if="vm.toggleFormCreateTemplateCard"
+             ng-hide="!vm.allowChoosingTemplates ? (vm.templateCardsList.length ? true : false) : false">
+          <label class="create-card-lbl">Create Card</label>
+          <div class="f-list-dropdown">
+            <form ng-submit="vm.changesDefaultTemplate(vm.templateCardId, vm.newCardName);vm.closeCardTemplateTitle()"
+                  class="ms-sb-add-card-form"
+                  layout="column" name="defaultCard" novalidate>
+              <span class="template-name">Template Name</span>
+              <md-select name="listofTemplate" class="f-list-select" placeholder="Select card template"
+                         ng-model="vm.defaultcardId"
+                         md-on-open="loadUsers()" required>
+                <md-option ng-value="templateCard.id"
+                           ng-click="vm.openCardTemplateTitle(templateCard.id, templateCard.name)"
+                           ng-repeat="templateCard in vm.templateCardsList">{{templateCard.name}}</md-option>
+              </md-select>
+              <div class="ms-sb-add-card-form-wrapper">
+                <md-input-container class="w-100-per">
+                  <input placeholder="Card title" name="cardTitle" type="text" autocomplete="off"
+                         ng-model="vm.newCardName" translate-attr-placeholder="SB.CARD_TITLE" required>
+                </md-input-container>
+                <div layout="row" class="add-btn-center" layout-align="space-between center">
+                  <md-button type="submit" class="add-button md-accent md-raised" aria-label="add"
+                             translate-attr-aria-label="SB.ADD"
+                             ng-disabled="defaultCard.$invalid || defaultCard.$pristine">
+                    <span translate="SB.ADD">Add</span>
+                  </md-button>
+                  <md-button ng-click="vm.closeCardTemplateTitle()" class="cancel-button md-icon-button"
+                             aria-label="cancel"
+                             translate-attr-aria-label="SB.CANCEL">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                  </md-button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Start pretended design for ADD CARD -->
+        <div class="ms-sb-add-card-button" ng-click="vm.showFormCreateTemplateCard()"
+             ng-if="vm.allowChoosingTemplates ? (vm.templateCardsList.length ? true : false) : false"
+             layout="row" ng-hide="vm.toggleFormCreateTemplateCard" layout-align="start center">
+          <div>
+            <i class="icon-plus s20 plus-icon-custom"></i>
+          </div>
+          <span translate="SB.ADD_A_CARD">Add a card</span>
+        </div>
+        <!-- End pretended design for ADD CARD -->
+        <div ng-if="vm.allowChoosingTemplates ? (vm.templateCardsList.length ? false : true) : true">
+          <ms-sb-add-card ms-list-id="list.id"></ms-sb-add-card>
+        </div>
+      </div>
+      <!-- / NEW CARD BUTTON-->
+
+    </div>
+  </div>
+  <!-- / LIST -->
+
+  <!-- NEW LIST BUTTON-->
+  <div class="new-list-wrapper" ng-if="vm.sessionData.userAuth == true">
+    <div class="list new-list md-whiteframe-1dp">
+      <!--<span editable-text="vm.newListName" e-form="newListForm" onaftersave="vm.addNewList()"></span>-->
+      <span editable-text="vm.newListName" e-form="newListForm" onaftersave="vm.updateBoardList()"></span>
+      <md-button class="new-list-form-button" ng-click="newListForm.$show()" ng-hide="newListForm.$visible" id="step26">
+        <div layout="row" layout-align="start center">
+          <i class="icon-plus md-red-bg"></i>
+          <span translate="SB.ADD_A_LIST">Add a list</span>
+        </div>
+      </md-button>
+    </div>
+  </div>
+  <!-- / NEW LIST BUTTON-->
+
+</div>
+<!-- / BOARD -->

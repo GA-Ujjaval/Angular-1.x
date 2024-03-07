@@ -1,0 +1,6 @@
+<div class="ui-grid-cell-contents">
+  <a class="attachment-compare-link" ng-class="{'change' : row.entity[col.field + grid.appScope.vm.COMPARE_SUFFIX] === 'CHANGE',
+                'new' : row.entity[col.field + grid.appScope.vm.COMPARE_SUFFIX] === 'NEW',
+                'discard' : row.entity[col.field + grid.appScope.vm.COMPARE_SUFFIX] === 'DISCARD'}"
+     ng-click="grid.appScope.vm.openAttachment(row.entity)">{{row.entity[col.field]}}</a>
+</div>

@@ -1,0 +1,115 @@
+<div class="where-wrapper">
+  <div class="where-used-container" id="set-data-list-custom">
+
+    <!-- CONTENT -->
+    <div class="buttons-edit-download-add">
+      <div layout-align="space-between center" class="save-changes-bom">
+        <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progressConfigurations">
+        </md-progress-circular>
+      </div>
+      <div class="contr" layout-align="column" flex="30">
+
+        <md-switch class="first" ng-true-value="true"
+                   ng-false-value="false" ng-model="vm.isLatestConfiguration"
+                   ng-change="vm.onChangeLatestConfiguration()"
+                   aria-label="latest switch">
+        </md-switch>
+
+        <div class="second">Show only latest revision</div>
+
+      </div>
+
+      <md-button class="button-table-edit"
+                 ng-click="vm.editConfigurationsTable($event, vm.objectPageEnum.configurationPage)">
+        <md-icon class="icon-table-edit"></md-icon>
+        <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+      </md-button>
+      <md-menu>
+        <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+          <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+          <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.configurationsTableUiGrid)">CSV</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button
+              ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.configurationsTableUiGrid.grid, vm.configurationsGridOptions)">
+              PDF
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <md-button class="button-print"
+                 ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.configurationsTableUiGrid.grid, vm.configurationsGridOptions)">
+        <md-icon class="icon-printer"></md-icon>
+        <md-tooltip class="md-tooltip">Print table</md-tooltip>
+      </md-button>
+      <md-menu>
+        <md-button class="md-icon-button btn-hvr" ng-click="$mdOpenMenu()"
+                   ng-disabled="vm.SaveDisabled && !vm.releaseBomSettings">
+          <md-icon class="icon-dots-horizontal dots-icon"></md-icon>
+          <md-tooltip class="md-tooltip">More Actions</md-tooltip>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item style="pointer-events: auto" ng-if="vm.isNotDocument">
+            <md-tooltip class="md-tooltip">{{vm.setTooltip()}}</md-tooltip>
+            <md-button class="configuration-matrix-container" ng-class="{'disabled-button': !vm.isCompareEnable()}"
+                       aria-label="connected objects" translate ng-click="vm.compareConfigurations()"
+                       ng-if="vm.partproduct !== 'documents'">
+              BOM Matrix
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button translate ng-click="vm.compareObjects()" ng-class="{'disabled-button': !vm.isCompareEnable()}">
+              Compare Selected Objects
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <md-button class="md-accent md-raised" aria-label="connected objects" translate
+                 ng-click="vm.createConfiguration($event, vm.products)">
+        CREATE CONFIGURATION
+      </md-button>
+    </div>
+    <div>
+      <div class="content form-wrapper fullpage-datatable">
+
+        <div layout-align="space-between center" class="save-changes-bom">
+          <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+          </md-progress-circular>
+        </div>
+
+        <div class="progress-bar" layout="row" layout-sm="column" layout-align="space-around"
+             ng-if="vm.hierarchicalViewProgressBar || vm.recalculatingFlag">
+          <md-progress-circular md-mode="indeterminate" class="md-accent md-raised"></md-progress-circular>
+        </div>
+
+        <div id="grid-configurations"
+             ui-grid="vm.configurationsGridOptions"
+             ui-grid-move-columns
+             ui-grid-save-state
+             ui-grid-tree-view
+             ui-grid-pinning
+             ui-grid-resize-columns
+             ui-grid-exporter
+             ui-grid-pagination
+             ui-grid-selection
+             ui-grid-auto-resize
+             ui-grid-edit
+             class="grid">
+
+          <div class="watermark" ng-show="!vm.configurationsGridOptions.data.length">No data available</div>
+          <no-results-found grid-api="vm.configurationsTableUiGrid"
+                            grid-options="vm.configurationsGridOptions"></no-results-found>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

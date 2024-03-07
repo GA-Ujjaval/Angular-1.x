@@ -1,0 +1,43 @@
+<md-menu>
+  <md-button class="button-print"
+             ng-click="getTemplates(); $mdMenu.open()">
+    <md-icon class="icon-printer"></md-icon>
+    <md-tooltip class="md-tooltip">Print Table. NOTE: Disable any ad-blocker in the browser</md-tooltip>
+  </md-button>
+  <md-menu-content class="print-table-template">
+    <md-menu-item>
+      <md-button class="create-new fix-offset download-as-is"
+                 ng-click="downloadTable('pdf', 'print', gridApi.grid, gridOptions, downloadDescription)">
+        Print As-Is
+      </md-button>
+    </md-menu-item>
+    <md-menu-item ng-if="templates && templates.length">
+      <md-input-container>
+        <label class="filter-label">Search table templates</label>
+        <input type="text" ng-model="$parent.templateSearchText" ng-change="checkFilteredTemplates(templateSearchText)">
+      </md-input-container>
+    </md-menu-item>
+    <md-menu-item ng-repeat="template in templates"
+                  ng-show="(template.visibility === 'VDP') && ((templateSearchText.length === 0) || (template.fullName.toLowerCase().indexOf(templateSearchText.toLowerCase()) !== -1))">
+      <md-button class="template-print-item" aria-label="template-print-item"
+                 ng-click="downloadReport(template.templateId)">
+        <md-checkbox disabled class="default-template-button" aria-label="default" ng-if="template.applied"
+                     ng-checked="true"></md-checkbox>
+        <div ng-if="!template.sharedWithUsers" class="template-item-text">{{template.templateName}} <span
+          ng-if="template.isDefault" class="default-mark">(default)</span></div>
+        <div ng-if="template.sharedWithUsers" class="template-item-text italic">{{template.templateName}} <span
+          ng-if="template.isDefault" class="default-mark">(default)</span></div>
+      </md-button>
+    </md-menu-item>
+    <md-menu-item class="progress-templates" ng-show="progress">
+      <md-button aria-label="mf-templates-dropdown">
+        <md-progress-circular md-diameter="20" class="md-accent" md-mode="indeterminate"></md-progress-circular>
+      </md-button>
+    </md-menu-item>
+    <md-menu-item class="no-templates-filter" ng-show="isNothingMatched">
+      <md-button class="no-templates-found">
+        No templates found
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

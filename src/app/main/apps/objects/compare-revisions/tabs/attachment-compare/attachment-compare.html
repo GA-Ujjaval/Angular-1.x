@@ -1,0 +1,36 @@
+<div id="exporting-attachment-compare-table"
+     ui-grid="vm.exportingTable"
+     ui-grid-exporter
+     ng-show="false"></div>
+
+<div id="attachment-compare">
+  <div ng-style="{'width': 100 / vm.tables.length + '%'}"
+       ng-repeat="table in vm.tables"
+       id="table-{{table.id}}"
+       class="table">
+    <div class="table-name">{{table.name}}</div>
+    <div class="grid-itself"
+         ui-grid="table.options"
+         ui-grid-move-columns
+         ui-grid-save-state
+         ui-grid-exporter
+         ui-grid-tree-view
+         ui-grid-resize-columns
+         ui-grid-auto-resize
+         ui-grid-pagination
+         class="grid">
+      <!--<div class="watermark" ng-show="!vm.partTableOptions.data.length && !vm.progress">No data available</div>-->
+      <!--<div class="progress-bar loader-circle-text" layout="row" layout-sm="column" layout-align="space-around" ng-if="vm.progress">-->
+      <!--<md-progress-circular md-mode="indeterminate" class="md-accent md-raised  "></md-progress-circular>-->
+      <!--<span class="loading-products">Loading Parts...</span>-->
+      <!--</div>-->
+      <!--<no-results-found grid-api="vm.partTableUiGrid" grid-options="vm.partTableOptions"></no-results-found>-->
+    </div>
+    <div class="sidebar-resizer"
+         resizer="vertical"
+         resizer-width="3"
+         resizer-left="table-{{$index - 1}}"
+         resizer-right="table-{{$index}}">
+    </div>
+  </div>
+</div>

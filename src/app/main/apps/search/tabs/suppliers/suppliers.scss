@@ -1,0 +1,65 @@
+#e-commerce-suppliers {
+  .center.content.bottom-value {
+    overflow-x: hidden;
+    .tools {
+      width: 95% !important;
+      .clear-filter-button {
+        min-width: 0 !important;
+        width: 33px;
+        margin: 0 4px 0 3px !important;
+        padding-right: 20px !important;
+      }
+      .clear-filter{
+        position: absolute;
+        width: 280px;
+        margin: 5px 0 0 230px;
+        text-align: left;
+        .clear-filter-button{
+          padding-right: 8px !important;
+          margin: 0 0 4px 0;
+        }
+        .clear-filter-icon{
+          background-color: #737b86;
+          color: #e9ebec !important;
+          border-radius: 20%;
+          font-size: 17px !important;
+          min-width: 18px !important;
+          min-height: 18px !important;
+        }
+        .clear-filter-text {
+          position: absolute;
+          width: inherit;
+          text-align: left;
+          min-width: fit-content;
+          font-size:15px;
+          font-weight: bold;
+          color: #737b86;
+          padding-top: 8px;
+        }
+      }
+    }
+    .grid {
+      margin-top: 40px;
+      width: 100%;
+      .ui-grid-filter-container .ui-grid-filter-button [class^="ui-grid-icon"] {
+        margin-top: -20px;
+      }
+    }
+  }
+  .ui-grid-filter-container {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .cell-height-70 {
+    height: 70px !important;
+  }
+
+  .cell-height-50 {
+    height: 50px !important;
+  }
+
+  .content-wrapper{
+    padding: 5px;
+  }
+}

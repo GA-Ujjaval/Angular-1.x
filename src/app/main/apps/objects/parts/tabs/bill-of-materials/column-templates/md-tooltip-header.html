@@ -1,0 +1,65 @@
+<div
+        class="ui-grid-cell-contents"
+        role="columnheader"
+        ng-class="{ 'sortable': sortable }"
+        ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+        aria-sort="{{col.sort.direction == asc ? 'ascending' : ( col.sort.direction == desc ? 'descending' : (!col.sort.direction ? 'none' : 'other'))}}">
+
+    <span
+      style="float:right;"
+      role="button"
+      tabindex="0"
+      ui-grid-one-bind-id-grid="col.uid + '-menu-button'"
+      class="ui-grid-column-menu-button"
+      ng-if="grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false"
+      ng-click="toggleMenu($event)"
+      ng-class="{'ui-grid-column-menu-button-last-col': isLastCol}"
+      ui-grid-one-bind-aria-label="i18n.headerCell.aria.columnMenuButtonLabel"
+      aria-haspopup="true">
+      <i
+        class="ui-grid-icon-angle-down"
+        aria-hidden="true">
+        &nbsp;
+      </i>
+    </span>
+
+  <div ui-grid-filter=""><!----><div class="ui-grid-filter-container" ng-style="col.extraStyle" ng-repeat="colFilter in col.filters" ng-class="{'ui-grid-filter-cancel-button-hidden' : colFilter.disableCancelFilterButton === true }"><!----><div ng-if="colFilter.type !== 'select'"><input type="text" class="ui-grid-filter-input ui-grid-filter-input-0" ng-model="colFilter.term" ng-attr-placeholder="{{colFilter.placeholder || ''}}" aria-label="Filter for column" placeholder="" aria-invalid="false"><!----><div role="button" class="ui-grid-filter-button ng-hide" ng-click="removeFilter(colFilter, $index)" ng-if="!colFilter.disableCancelFilterButton" ng-disabled="colFilter.term === undefined || colFilter.term === null || colFilter.term === ''" ng-show="colFilter.term !== undefined &amp;&amp; colFilter.term !== null &amp;&amp; colFilter.term !== ''" aria-hidden="true" aria-disabled="true" disabled="disabled"><i class="ui-grid-icon-cancel" ui-grid-one-bind-aria-label="aria.removeFilter" aria-label="Remove Filter">&nbsp;</i></div><!----></div><!----><!----></div><!----></div>
+
+    <md-tooltip class="md-tooltip"  ng-if="col.colDef.tooltipText&&(col.colDef.tooltipText||'').length>0" md-direction="{{col.colDef.tooltipDirection}}">
+      {{col.colDef.tooltipText}}
+    </md-tooltip>
+
+    <div
+        role="button"
+        tabindex="0"
+        class="custom-ui-grid-header ui-grid-header-cell-primary-focus"
+        col-index="renderIndex"
+        title="TOOLTIP">
+
+      <span
+        style="position: absolute; right: 15px"
+        ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'"
+        ui-grid-visible="col.sort.direction"
+        aria-label="{{getSortDirectionAriaLabel()}}">
+              <i
+                ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                title="{{isSortPriorityVisible() ? i18n.headerCell.priority + ' ' + ( col.sort.priority + 1 )  : null}}"
+                aria-hidden="true">
+             </i>
+             <sub
+               ui-grid-visible="isSortPriorityVisible()"
+               class="ui-grid-sort-priority-number">
+               {{col.sort.priority + 1}}
+             </sub>
+        </span>
+
+      <span
+                class="ui-grid-header-cell-label"
+                ui-grid-one-bind-id-grid="col.uid + '-header-text'">
+          {{ col.displayName CUSTOM_FILTERS }}
+        </span>
+
+
+    </div>
+
+</div>

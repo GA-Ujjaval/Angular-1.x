@@ -1,0 +1,12 @@
+<div class="cost-sourcing-container">
+  <div class="button-container">
+    <md-button ng-disabled="!vm.exchangeRates.canAddCurrency" ng-click="vm.addNewCurrency()" class="md-button md-accent md-raised">
+      Add exchange rate
+    </md-button>
+  </div>
+  <div class="rates-table-container">
+    <div ui-grid="vm.exchangeRates"
+         ui-grid-auto-resize
+         ng-style="{'height': vm.exchangeRates.data.length * 30 + 70 < 500 ? vm.exchangeRates.data.length * 30 + 70 + 'px' : 500 + 'px'}"></div>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+.ps-rel{
+  position: relative;
+  .set-loader{
+    width: 30px!important;
+    height: 30px!important;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    svg{
+      width: 30px !important;
+      height: 30px !important;
+      transform-origin: center !important;
+    }
+  }
+}
+.scrl-y-cardt {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.pl-20 {
+  padding-left: 35px;
+}
+
+.f-temp-group {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0 14px;
+  position: relative;
+
+  &:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+  // .icon-color{
+  //   color: rgb(3,155,229);
+  // }
+
+  .f-temp-radio {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .f-temp-link {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    width: 200px;
+    min-height: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px !important;
+    padding-left: 5px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+  }
+  .delete-template{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 40px;
+    margin: auto;
+    .md-button.md-icon-button {
+      padding: 0;
+      margin: 0;
+      width: auto;
+      height: auto;
+    }
+  }
+}
+
+// New Card Template Design 1
+.select-none {
+  user-select: none;
+  font-size: 15px;
+  padding: 20px 0 !important;
+}
+
+.card-template-note,
+.card-template-descrip {
+  padding: 0 20px 12px 20px;
+  font-size: 13px;
+  line-height: 18px;
+
+  span {
+    font-weight: 500;
+  }
+}
+
+.card-template-descrip {
+  padding: 0 20px 10px 20px;
+}
+
+.template-main-lbl {
+  color: rgba(0, 0, 0, 0.75) !important;
+  font-size: 15px !important;
+  display: block;
+
+  .md-subheader-inner {
+    padding: 16px 0 10px 16px;
+  }
+
+  .h4 {
+    margin-left: 15px !important;
+  }
+}
+
+.create-template-lbl {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px !important;
+  text-transform: capitalize!important;
+  font-weight: 400!important;
+}
+
+#edit-textbox {
+  .editable-wrap {
+    width: 90%;
+    .editable-controls {
+      .editable-input {
+        border: none !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+        color: rgba(0, 0, 0, 0.85);
+        background-color: transparent !important;
+        font-size: 14px;
+        padding-left: 0 !important;
+        margin: 14px 0;
+      }
+    }
+  }
+}
+
+.ml-18 {
+  margin-left: 18px !important;
+  padding: 5px 0;
+}
+.divider-color-25{
+  border-top-color: rgba(0,0,0,0.25)!important;
+}
+.create-temp-span{
+  display: block;
+  width: 84%;
+  .create-temp-btn{
+    display: block;
+    width: 100%;
+  }
+}
+// END New Card Template Design 1
+
+
+// Setting Dialog design
+
+.ts-dialog-heaing{
+  font-size: 18px;
+  font-weight: 500;
+  margin: 15px 0;
+  color: #7d2c49!important;
+}
+.note-ul{
+  margin: 15px 0 0 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  &::before{
+    content: 'NOTE:';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  li{
+    display: block;
+    margin-top: 12px;
+    font-size: 16px;
+    padding-left: 50px;
+  }
+}
+.action-buttons{
+  margin: -20px 0 0 0!important;
+  button{
+    right: 0!important;
+  }
+}

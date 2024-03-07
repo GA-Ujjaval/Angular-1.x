@@ -1,0 +1,203 @@
+md-dialog {
+
+    .md-button {
+        text-transform: none !important;
+    }
+
+    .bdr-botoom{
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+
+    md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-container .md-placeholder{
+        padding-right: 20px !important;
+    }
+
+    .f-gray{
+      color:#9B9B9B
+    }
+
+    .icon-color{
+      color: #70BEFC !important;
+    }
+
+    .f-text{
+      color: #797979;
+    }
+
+    .margin-left-9{
+      margin-left:9px;
+    }
+
+    md-input-container {
+      margin: 10px 0;
+    }
+
+
+    .simple-table-container{
+      .header-box{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+        padding: 16px 8px !important;
+      }
+
+      .table-title {
+        font-size: 15px;
+        padding: 0px;
+      }
+
+      table.simple tbody tr td {
+        padding: 12px 12px !important;
+        border-bottom: 0px solid transparent ;
+      }
+
+      td .w-200{
+        width:200px
+      }
+
+      table.simple tbody{
+        height: 550px;
+        overflow-y: auto;
+      }
+
+      table.simple thead tr th {
+        padding: 16px 8px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.54);
+        border-bottom: 0px solid transparent;
+        white-space: nowrap;
+        min-width: 120px;
+      }
+
+      table.simple1 {
+        width: 100%;
+        border: none;
+        border-spacing: 0;
+        text-align: left;
+      }
+
+      table.simple1 tbody tr td {
+        padding: 16px 8px !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12) ;
+      }
+
+      table.simple1 thead tr th {
+        padding: 16px 8px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.54);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        white-space: nowrap;
+        min-width: 120px;
+      }
+
+    }
+
+    &.form-builder-dialog {
+        max-width: 1500px;
+        width: 1000px;
+
+        md-toolbar {
+            min-height: 64px;
+
+            .md-tall-height {
+                height: 64px !important;
+                min-height: 64px !important;
+                max-height: 64px !important;
+            }
+
+            .md-tall{
+                height: 64px !important;
+            }
+
+            .title {
+                font-size: 17px;
+            }
+
+            .md-toolbar-tools-top {
+                height: 64px ;
+                min-height: 64px;
+
+                md-switch{
+                  margin: 15px 0;
+                }
+            }
+
+            .md-toolbar-tools-middle {
+                height: inherit;
+                max-height: none;
+
+                .contact-avatar {
+                    margin: 0;
+                }
+
+                .contact-name {
+                    font-size: 24px;
+                    margin: 8px 0;
+                }
+
+            }
+
+            .md-toolbar-tools-bottom {
+                md-menu {
+                    margin: 0;
+                }
+            }
+
+        }
+
+
+        md-dialog-content {
+            display: block;
+            position: relative;
+
+            .birthday-input {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                margin: 0;
+                padding: 0 0 32px 0;
+
+                .md-button {
+                    margin: 0 16px 0 0;
+                    padding: 0;
+                    width: 24px;
+                    height: 24px;
+                    text-transform: none !important;
+
+                    md-icon {
+                        color: rgba(0, 0, 0, 0.87);
+                    }
+
+                }
+
+                .md-datepicker-input-container {
+                    display: flex;
+                    flex: 1;
+                }
+
+            }
+
+            .textarea-wrapper {
+
+                md-icon {
+                    color: rgba(0, 0, 0, 0.87);
+                    margin: 0 8px 0 0;
+                }
+
+                textarea {
+                    min-height: 150px;
+                }
+
+            }
+        }
+
+        md-dialog-actions {
+            position: relative;
+            overflow-y: hidden;
+            overflow-x: auto;
+            justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+    }
+}

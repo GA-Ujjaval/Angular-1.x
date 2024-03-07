@@ -1,0 +1,39 @@
+<div id="settings-customer" class="page-layout carded fullwidth single-scroll" layout="row">
+
+  <div class="top-bg md-accent-bg"></div>
+
+  <div class="center" flex>
+
+    <div class="header">
+      <span class="h2 white-fg">My Settings</span>
+    </div>
+
+    <div class="content-card">
+
+      <div class="toolbar" layout="row" layout-align="start center">
+        <span class="toolbar-text">User level settings</span>
+      </div>
+
+      <md-content class="content" ms-scroll>
+
+        <div layout="row" class="link-target">
+
+          <md-switch ng-true-value="true"
+                     ng-false-value="false"
+                     ng-model="vm.linkTarget"
+                     ng-click="vm.changeLinkTarget()"
+                    aria-label="link-target">
+          </md-switch>
+          <span class="link-target-switch-text">Open Links in new browser tab</span>
+
+        </div>
+
+        <span class="note-text">NOTE: If enabled, links will open in a new browser tab. If disabled, links will open in the same browser tab.</span>
+
+      </md-content>
+
+    </div>
+
+  </div>
+
+</div>

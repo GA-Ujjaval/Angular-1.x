@@ -1,0 +1,25 @@
+
+.exchange-rate-cell {
+  .editable-has-buttons {
+    max-width: 90px;
+  }
+
+  .editable-input {
+    height: 25px !important;
+  }
+
+  .editable-wrap {
+    margin-top: -3px;
+  }
+
+  md-icon {
+    margin-top: -10px;
+  }
+
+  .md-button.md-icon-button {
+    margin: 0;
+    padding: 0;
+    width: unset;
+    height: unset;
+  }
+}

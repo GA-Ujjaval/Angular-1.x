@@ -1,0 +1,52 @@
+<div id="setting" class="page-layout simple tabbed md-grey-100-bg"
+     ng-intro-options="IntroOptionsSettings" ng-intro-method="$root.CallMeSettings"
+     ng-intro-oncomplete="Complete" ng-intro-onafterchange="AfterChangeEvent" ng-intro-autostart="false">
+
+  <!-- HEADER -->
+  <div class="header md-accent-bg" layout="row" layout-align="start center">
+
+    <div class="search" flex layout="row" layout-align="start center">
+      <p class="search-text">Settings</p>
+      <div class="question-icon" ng-if="!$root.introSettingFlag && $root.introGlobalHelp"
+           ng-click="$root.CallMeSettings()">
+        <div class="introjs-hint-dot introjs-hint-dot-setting"></div>
+        ?
+      </div>
+    </div>
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content" flex>
+
+    <md-tabs md-dynamic-height md-selected="0">
+      <md-tab label="Members">
+        <md-content ng-include="'app/main/apps/setting/tabs/create-customer/create.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Categories & Attributes">
+        <md-content ng-include="'app/main/apps/setting/tabs/objects/objects.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="System Settings">
+        <md-content ng-include="'app/main/apps/setting/tabs/fuseobject-numbering/fuseobject-numbering-dialog.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Add on">
+        <md-content ng-include="'app/main/apps/setting/tabs/add-on/add-on.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Security">
+        <md-content ng-include="'app/main/apps/setting/tabs/proxy/proxy.html'">
+        </md-content>
+      </md-tab>
+    </md-tabs>
+
+  </div>
+  <!-- / CONTENT -->
+
+</div>

@@ -1,0 +1,57 @@
+<div layout="row" layout-align="space-between">
+              <span class="title margin-top-15 margin-bottom-15 f-text font-size-20">
+                <b>Currency Decimals</b>
+              </span>
+</div>
+
+<div layout-align="center center" class="margin-bottom-25 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-input-container class="currency-setting">
+      <span>Select Currency Decimals</span>
+      <md-select ng-change="vm.changeCurrencyDecimalsSetting($event, 'currencyDecimals', {currencyDecimals: vm.currencyDecimalsSetting}, vm.oldValue)"
+                 ng-focus="vm.oldValue = vm.currencyDecimalsSetting" ng-model="vm.currencyDecimalsSetting" aria-label="Currency">
+        <md-option value="0">
+          <b class="currency-option">0</b>
+        </md-option>
+        <md-option value="1">
+          <b class="currency-option">1</b>
+        </md-option>
+        <md-option value="2">
+          <b class="currency-option">2</b>
+        </md-option>
+        <md-option value="3">
+          <b class="currency-option">3</b>
+        </md-option>
+        <md-option value="4">
+          <b class="currency-option">4</b>
+        </md-option>
+        <md-option value="5">
+          <b class="currency-option">5</b>
+        </md-option>
+        <md-option value="6">
+          <b class="currency-option">6</b>
+        </md-option>
+        <md-option value="7">
+          <b class="currency-option">7</b>
+        </md-option>
+        <md-option value="8">
+          <b class="currency-option">8</b>
+        </md-option>
+        <md-option value="9">
+          <b class="currency-option">9</b>
+        </md-option>
+        <md-option value="10">
+          <b class="currency-option">10</b>
+        </md-option>
+        <md-option value="No Limit">
+          <b class="currency-option">No Limit</b>
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>
+  <div layout="row" class="margin-10" flex>
+    <span class="h3">NOTE: This setting controls the number of decimals that are allowed for any 'cost/currency' attribute. By default, this is set to 'No Limit'
+    </span>
+  </div>
+
+</div>

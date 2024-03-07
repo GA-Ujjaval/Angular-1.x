@@ -1,0 +1,18 @@
+<div class="ms-chat-bot-options-panel" layout="row" layout-align="start start" id="step24">
+
+  <div ng-show="!panelOpen" class="ms-chat-bot-options-panel-button" ng-click="toggleOptionsPanel()">
+    <!--<md-icon md-font-icon="icon-fuseplmapp" class="s50 blue-fg"></md-icon>-->
+    <md-button  aria-label="Fuse Plm Chat">
+      <img src="assets/images/plm-chat/fuse-plm.png" alt="Fuse Plm Chat">
+    </md-button>
+  </div>
+
+  <div ng-show="panelOpen" class="ms-chat-bot-options-panel-button md-primary-bg" ng-click="toggleOptionsPanel()">
+    <md-icon md-font-icon="icon-arrow-bottom-right" class="s30 white-text"></md-icon>
+  </div>
+
+  <div class="ms-chat-bot-options-list" layout="column" ng-include="'app/main/apps/plm-chat-bot/bot-chat.html'" >
+
+  </div>
+
+</div>

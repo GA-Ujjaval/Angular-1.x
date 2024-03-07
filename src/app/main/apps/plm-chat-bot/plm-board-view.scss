@@ -1,0 +1,217 @@
+/* List card is a mixin because we want this to be re-usable */
+@mixin list-card {
+  position: relative;
+  width: 100%;
+  margin: 16px 0;
+  background-color: white;
+  color: #000;
+  border-radius: 2px;
+  transition: box-shadow 150ms ease;
+  cursor: pointer;
+
+  &.ui-sortable-helper {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  .list-card-sort-handle {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .list-card-cover {
+  }
+
+  .list-card-details {
+    padding: 16px 16px 0 16px;
+
+    .list-card-labels {
+      margin-bottom: 6px;
+
+      .list-card-label {
+        width: 32px;
+        height: 6px;
+        border-radius: 6px;
+        margin: 0 6px 6px 0;
+      }
+    }
+
+    .list-card-name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .list-card-badges {
+      margin-bottom: 12px;
+
+      .badge {
+        margin-right: 8px;
+        padding: 4px 8px;
+        border-radius: 2px;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: #FFFFFF;
+
+        i {
+          margin-right: 4px;
+        }
+
+        &.due-date {
+          background-color: material-color('green');
+
+          &.overdue {
+            background-color: material-color('red');
+          }
+        }
+
+        &.check-items {
+
+          &.completed {
+            background-color: material-color('green');
+          }
+        }
+      }
+    }
+  }
+
+  .list-card-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 0 16px;
+
+    .list-card-members {
+      /* margin-bottom: 12px; */
+
+      .list-card-member {
+        margin-right: 8px;
+
+        .list-card-member-avatar {
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+        }
+
+        .list-card-avatar-circle {
+          width: 32px;
+          height: 32px;
+          line-height: 32px;
+          background-color: #0e95e0;
+          text-align: center;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+        }
+
+        .initials {
+          position: relative;
+          color: #fff;
+          font-weight: bold;
+        }
+
+      }
+    }
+
+    .list-card-footer-item {
+      height: 48px;
+      margin-right: 12px;
+      color: rgba(0, 0, 0, 0.66);
+
+      .value {
+        padding-left: 8px;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+    }
+
+    .change-state, .impact-menu {
+      margin: 0 5px;
+      padding: 0 10px 0px 0px;
+      border-radius: 5px;
+
+      div {
+        line-height: 25px;
+        text-transform: none;
+        font-weight: normal;
+        font-size: 12px;
+        padding-left: 5px;
+      }
+
+      button {
+        width: auto !important;
+
+        md-icon {
+          float: left;
+        }
+
+      }
+
+    }
+
+    .align-left {
+      float: left;
+    }
+
+    .align-right {
+      float: right;
+    }
+
+  }
+}
+
+#plm-chat-app {
+
+  .list-card {
+
+    .bread-crumb {
+      top: 5px;
+      padding: 5px 0px;
+      position: absolute;
+      right: 0px;
+
+      .bread-crumb-panel {
+        font-size: 12px;
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+
+      .board-title {
+        float: left;
+        span, i {
+          float: left;
+        }
+
+        i {
+          color: rgba(0, 0, 0, 1);
+        }
+
+      }
+
+      .card-type {
+        float: right;
+
+        div {
+          float: left;
+        }
+
+        md-menu {
+          float: left;
+          margin-top: -10px;
+        }
+
+      }
+
+      .impact-menu {
+
+      }
+
+    }
+
+    @include list-card;
+  }
+
+}

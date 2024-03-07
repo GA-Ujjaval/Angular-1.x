@@ -1,0 +1,17 @@
+<div id="add-part-to-config-bom">
+  <div class="wrapper">
+    <div class="paragraph">
+      SELECT CONFIGURATION(S)
+    </div>
+    <div class="paragraph">
+      Select the configuration(s) to which you want to add a part. Then, click the button below to Search for a part that you want to add to the selected configurations.
+    </div>
+    <div>
+      <md-checkbox ng-model="vm.allColumnsChecked" ng-change="vm.toggleColumnsChosen(vm.allColumnsChecked)">Select All Configurations</md-checkbox>
+    </div>
+    <div ng-repeat="col in vm.configurationsCompareGridOptions.columnDefs" ng-if="col.status">
+      <md-checkbox ng-disabled="col.status !== 'InDevelopment' && !vm.editReleased " ng-change="vm.isAllColumnsChecked();" ng-model="col.chosen">{{::vm.prepareDataToDisplayInDialog(col)}}</md-checkbox>
+    </div>
+  </div>
+  <md-button class="add-to-config-button md-primary md-raised" ng-disabled="vm.isAddingEnabled();" ng-click="vm.addPartToMatrix()">Search Part</md-button>
+</div>

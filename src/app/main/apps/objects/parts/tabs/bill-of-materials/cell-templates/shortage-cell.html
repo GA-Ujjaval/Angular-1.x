@@ -1,0 +1,9 @@
+<div
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+
+  <div ng-class="{'green-fg': (row.entity.shortage > 0) , 'red-fg': (row.entity.shortage < 0), 'orange-fg': (row.entity.shortage == 0), 'text-bold': true }" >
+    {{row.entity.shortage}}
+  </div>
+
+</div>

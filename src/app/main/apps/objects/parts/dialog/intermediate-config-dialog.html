@@ -1,0 +1,106 @@
+<md-dialog class="partform-dialog f-config-modal" aria-label="New Task" id="set-modal-width">
+    <ms-form-wizard flex>
+        <md-toolbar class="md-accent md-tall-height" layout="column">
+            <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+              <span class="title margin-top-20">Create Configuration</span>
+              <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                <md-icon md-font-icon="icon-close"></md-icon>
+              </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-tabs md-dynamic-height md-selected="msWizard.selectedIndex" class="set-two-tab-hrz" md-center-tabs="true">
+            <md-tab>
+                <md-tab-label>
+                    <span class="ms-form-wizard-step-label">
+                        <span class="ms-form-wizard-step-number md-accent-bg"
+                              ng-if="wizardStep1.$invalid">1</span>
+                        <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep1.$valid">
+                            <i class="icon-check s16"></i>
+                        </span>
+                        <span class="ms-form-wizard-step-text">Select Config</span>
+                    </span>
+                </md-tab-label>
+                <md-tab-body>
+                    <form name="wizardStep1" class="dialog-cont-pedding" ms-form-wizard-form novalidate>
+                        <md-dialog-content ms-scroll class="set-pad-confg">
+                            <div layout="row" layout-align="start" flex>
+                                <md-input-container class="md-icon-float md-block" flex="100">
+                                        <div layout="column" class="custom-placeholder">
+                                            <label>Select or type existing config to copy from</label>
+                                            <md-select class="mrg-tb-0" ng-model="vm.configNameWithRevisionDefault" md-on-close="vm.clearSearchTerm()" name="configuration" required>
+                                                <md-select-header class="demo-select-header">
+                                                    <input type="search" class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()" ng-model="vm.searchConfig" placeholder="Search for a configuration">
+                                                </md-select-header>
+                                                <md-optgroup>
+                                                    <md-option ng-value="config.objectId" ng-repeat="config in (vm.configNameWithRevision | filter : { $:vm.searchConfig })">{{ config.configName }}</md-option>
+                                                </md-optgroup>
+                                            </md-select>
+                                            <div ng-messages="wizardStep1.configuration.$error" role="alert">
+                                                <div ng-message="required">
+                                                    <span>Configuration field is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                            </div>
+                        </md-dialog-content>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+
+            <md-tab class="md-tab-cst-width" ng-disabled="wizardStep1.$invalid">
+                <md-tab-label>
+                    <span class="ms-form-wizard-step-label">
+                        <span class="ms-form-wizard-step-number md-accent-bg"
+                              ng-if="wizardStep2.$invalid">2</span>
+                        <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep2.$valid">
+                            <i class="icon-check s16"></i>
+                        </span>
+                        <span class="ms-form-wizard-step-text">Select Info to Copy</span>
+                    </span> 
+                </md-tab-label>
+                <md-tab-body>
+                    <form name="wizardStep2" class="md-inline-form dialog-cont-pedding f-config-wiz" ms-form-wizard-form novalidate>
+                        <md-dialog-content ms-scroll class="copy-all-info-list set-pad-confg1">
+                            Select information that you want to copy :
+                            <div flex="33" class="copy-create-parts" ng-repeat="item in vm.objects" ng-if="vm.object.objectType !== 'documents'">
+                              <md-checkbox ng-change="vm.someFunction($index, item.name)" class="ch-mr" ng-model="vm.itemChecked[$index]" ng-if="item.name === 'Basic Info'" ng-disabled="true">
+                                {{ item.name }}
+                              </md-checkbox>
+                              <md-checkbox ng-change="vm.someFunction($index, item.name)" class="ch-mr" ng-model="vm.itemChecked[$index]" ng-if="item.name !== 'Basic Info'">
+                                {{ item.name }}
+                              </md-checkbox>
+                            </div>
+                            <div flex="33" ng-repeat="item in vm.objectsDocument" ng-if="vm.object.objectType === 'documents'">
+                              <md-checkbox ng-change="vm.someFunction($index, item.name)" class="ch-mr" ng-model="vm.itemChecked[$index]" ng-if="item.name === 'Basic Info'" ng-disabled="true">
+                                {{ item.name }}
+                              </md-checkbox>
+                              <md-checkbox ng-change="vm.someFunction($index, item.name)" class="ch-mr" ng-model="vm.itemChecked[$index]" ng-if="item.name !== 'Basic Info'">
+                                {{ item.name }}
+                              </md-checkbox>
+                            </div>
+                        </md-dialog-content>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+
+        <div class="navigation" flex layout="row" layout-align="center center">
+            <md-button class="md-raised md-accent" ng-click="msWizard.previousStep()" ng-disabled="msWizard.isFirstStep()" aria-label="Previous">
+                Previous
+            </md-button>
+            <div class="steps">
+                <span ng-repeat="form in msWizard.forms" ng-class="{'selected md-accent-bg':msWizard.selectedIndex === $index}"></span>
+            </div>
+            <md-button class="md-raised md-accent" ng-click="msWizard.nextStep()" ng-hide="msWizard.isLastStep()"
+                       ng-disabled="msWizard.currentStepInvalid()" aria-label="Next">
+                Next
+            </md-button>
+            <md-button class="md-raised md-accent" ng-click="vm.submitConfig()" ng-show="msWizard.isLastStep()"
+                       ng-disabled="msWizard.formsIncomplete()" aria-label="Create">
+                Create
+            </md-button>
+        </div>
+    </ms-form-wizard>
+</md-dialog>

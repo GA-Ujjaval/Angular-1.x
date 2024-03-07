@@ -1,0 +1,186 @@
+.set-full-place {
+  .md-chip-input-container {
+    float: none;
+    div {
+      display: flex;
+    }
+  }
+}
+
+md-dialog {
+
+  &.contact-dialog-billofmaterial {
+    max-width: 935px;
+    width: 935px;
+    .f-port-chip {
+      .md-chip-remove-container {
+        line-height: 32px;
+      }
+    }
+
+    md-toolbar {
+      height: 64px !important;
+
+      .title {
+        font-size: 17px;
+      }
+
+      .md-tall-height {
+        height: 64px !important;
+        min-height: 64px;
+        max-height: 64px;
+      }
+
+      .md-toolbar-tools-top {
+        height: 64px;
+        min-height: 64px;
+      }
+
+      .md-toolbar-tools-middle {
+        height: inherit;
+        max-height: none;
+
+        .contact-avatar {
+          margin: 0;
+        }
+
+        .contact-name {
+          font-size: 24px;
+          margin: 8px 0;
+        }
+
+      }
+
+      .md-toolbar-tools-bottom {
+        md-menu {
+          margin: 0;
+        }
+      }
+
+    }
+
+    md-dialog-content {
+      display: block;
+      position: relative;
+      .add-part-to-bom {
+        width: 880px !important;
+      }
+      .latest-version-switch {
+        width: 66px;
+        position: absolute;
+        left: 70%;
+        height: 4px;
+        padding: 5px 10px 10px 40px;
+        margin-top: 7px;
+      }
+      .latest-version-text {
+        position: absolute;
+        left: 77%;
+        padding: 10px;
+        font-size: 1.4rem;
+        color: rgba(0, 0, 0, 0.38);
+        padding: 0 10px 10px 10px;
+      }
+
+      .birthday-input {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 32px 0;
+
+        .md-button {
+          margin: 0 16px 0 0;
+          padding: 0;
+          width: 24px;
+          height: 24px;
+          text-transform: none !important;
+
+          md-icon {
+            color: rgba(0, 0, 0, 0.87);
+          }
+
+        }
+
+        .md-datepicker-input-container {
+          display: flex;
+          flex: 1;
+        }
+
+      }
+
+      .textarea-wrapper {
+
+        md-icon {
+          color: rgba(0, 0, 0, 0.87);
+          margin: 0 8px 0 0;
+        }
+
+        textarea {
+          min-height: 150px;
+        }
+
+      }
+    }
+
+    md-dialog-actions {
+      position: relative;
+      overflow-y: hidden;
+      overflow-x: auto;
+      justify-content: space-between;
+      background-color: rgba(0, 0, 0, 0.03);
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+  }
+  .attributes-list {
+    border: 1px solid white;
+    background-color: white;
+    padding: 4px 6px;
+  }
+  .additional-progress {
+    left: 45%;
+  }
+  .button-edit-apply {
+    background-color: #039be5 !important;
+    color: #ffffff !important;
+  }
+  .button-edit-apply:hover {
+    background-color: #039be5 !important;
+    color: #ffffff !important;
+  }
+  .progress-add-bom {
+    top: 6px;
+  }
+  .part-number-header {
+    position: relative !important;
+  }
+}
+
+.bom-dialog-red-des-field {
+  md-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  input {
+    min-width: 350px;
+  }
+}
+
+.parseChip-span {
+  font-size: 14px;
+  i {
+    font-size: 14px;
+  }
+}
+
+.update-quantity-text {
+  margin-top: -15px;
+  left: 54.5% !important;
+}
+
+.update-quantity-switch {
+  margin-top: -10px !important;
+  left: 47.5% !important;
+}

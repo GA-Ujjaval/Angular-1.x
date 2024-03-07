@@ -1,0 +1,58 @@
+#boards {
+
+  .board-progress {
+    position: absolute;
+    top: 5%;
+  }
+  min-height: 100%;
+
+  #board-selector {
+    margin-top: 88px;
+
+    .board-list {
+      padding: 32px 0;
+
+      .board-list-item {
+        min-width: 210px;
+        width: 210px;
+        padding: 24px 0;
+        margin: 16px;
+        border-radius: 2px;
+        background: rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        min-height: 165px !important;
+        .question-icon-hidden {
+          visibility: hidden;
+        }
+        .question-icon {
+          cursor: pointer;
+          font-size: 13px;
+          color: rgb(0, 0, 0);
+          font-weight: bold;
+          border: 1px solid rgb(100, 255, 63);
+          background: rgb(100, 255, 63);
+          width: 20px;
+          height: 20px;
+          text-align: center;
+          border-radius: 50%;
+          position: relative;
+          top: -20px;
+          left: 41%;
+        }
+        &:hover {
+          box-shadow: $whiteframe-shadow-4dp;
+        }
+
+        .board-name {
+          padding-top: 16px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.introjs-hint-dot-boards {
+  border: 10px solid rgb(100, 255, 63) !important;
+  background: rgb(100, 255, 63) !important;
+}

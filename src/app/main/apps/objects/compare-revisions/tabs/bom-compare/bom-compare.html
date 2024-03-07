@@ -1,0 +1,70 @@
+<div ng-if="vm.selectedTab == 2" ng-controller="BomCompareController as vm" class="bom-compare-content">
+
+      <md-tabs md-dynamic-height>
+
+        <md-tab label="Hierarchical">
+          <md-content ng-include="'app/main/apps/objects/compare-revisions/tabs/bom-compare/tabs/bom-compare-heirarchical.html'">
+          </md-content>
+        </md-tab>
+
+        <!--<md-tab label="Flat View">-->
+          <!--<md-content ng-include="'app/main/apps/objects/compare-revisions/tabs/bom-compare/tabs/bom-compare-flatview.html'">-->
+          <!--</md-content>-->
+        <!--</md-tab>-->
+
+      </md-tabs>
+
+      <div class="clear-filter-text" ng-if="vm.flagClearButton">
+        <md-button class="clear-filter-button" ng-click="vm.clearFilters(vm.hierarchicalTables)">
+          <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+        </md-button>
+        <span class="clear-filter-text">Clear current sorts, filters and pins</span>
+      </div>
+
+      <md-progress-circular id="create-progress" class="sourcing-circular" md-diameter="35" md-mode="indeterminate" ng-if="vm.progress">
+      </md-progress-circular>
+
+      <div flex="70" layout="row" flex-align="space-between" class="button-group-bom-compare">
+
+
+        <div layout="row" layout-align="end center">
+          <md-button class="button-table-edit" ng-click="vm.editTable($event, vm.objectPageEnum.hierarchicalCompare)">
+            <md-icon class="icon-table-edit"></md-icon>
+            <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+          </md-button>
+
+          <!--<md-menu md-position-mode="left bottom">-->
+
+            <!--<md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">-->
+              <!--<md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>-->
+              <!--<md-tooltip class="md-tooltip">Download Results</md-tooltip>-->
+            <!--</md-button>-->
+
+            <!--<md-menu-content>-->
+
+              <!--<md-menu-item>-->
+                <!--<md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.whereUsedMfrPageTableUiGrid)">-->
+                  <!--CSV-->
+                <!--</md-button>-->
+              <!--</md-menu-item>-->
+
+              <!--<md-menu-item>-->
+                <!--<md-button-->
+                        <!--ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.whereUsedMfrPageTableUiGrid.grid, vm.whereUsedMfrPageTableOptions)">-->
+                  <!--PDF-->
+                <!--</md-button>-->
+              <!--</md-menu-item>-->
+
+            <!--</md-menu-content>-->
+
+          <!--</md-menu>-->
+
+          <!--<md-button class="button-print"-->
+                     <!--ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.whereUsedMfrPageTableUiGrid.grid, vm.whereUsedMfrPageTableUiGrid)">-->
+            <!--<md-icon class="icon-printer"></md-icon>-->
+            <!--<md-tooltip class="md-tooltip">Print table</md-tooltip>-->
+          <!--</md-button>-->
+        </div>
+      </div>
+
+</div>

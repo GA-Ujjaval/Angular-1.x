@@ -1,0 +1,168 @@
+<div id="search" class="page-layout simple tabbed md-grey-100-bg" ng-intro-options="IntroOptions"
+     ng-intro-method="CallMe" ng-intro-onbeforechange="BeforeChangeEvent" ng-intro-autostart="false">
+
+  <!-- HEADER -->
+  <div class="header md-accent-bg" layout="row" layout-align="start center">
+
+    <div class="search" flex layout="row" layout-align="start center" id="step1">
+
+      <md-icon md-font-icon="icon-magnify" class="icon search-icon"></md-icon>
+
+      <input class="search-input search-padding" ng-model="vm.keyword" type="text" placeholder="Search Database"
+             translate
+             ng-keypress="vm.changesearchtext($event)" flex>
+
+      <md-icon ng-click="vm.clearSearch();" ng-show="vm.keyword" class="icon-close white-text close-search-icon">
+        <md-tooltip class="md-tooltip">clear search</md-tooltip>
+      </md-icon>
+
+    </div>
+
+    <md-menu class="search-settings" md-position-mode="target-right target">
+
+      <md-button class="md-icon-button" ng-click="$mdOpenMenu()" aria-label="Search settings" translate
+                 translate-attr-aria-label="SEARCH.SEARCH_SETTINGS" id="step2">
+        <md-icon md-menu-origin md-menu-align-target md-font-icon="icon-cog" class="icon s16"></md-icon>
+      </md-button>
+
+      <md-menu-content width="3">
+
+        <md-menu-item>
+          <md-button ng-click="vm.searchOptionValue('all');">
+            <md-icon ng-show="vm.searchTypes.all" md-font-icon="icon-check" class="s18"></md-icon>
+            All
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item ng-if="$root.enableProducts">
+          <md-button ng-click="vm.searchTypes.product=!vm.searchTypes.product; vm.searchOptionValue('Products'); vm.buildProductTable(vm.productTableUiGrid); vm.tabSearch('Products');">
+            <md-icon ng-show="vm.searchTypes.product" md-font-icon="icon-check" class="s18"></md-icon>
+            Products
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+          <md-button ng-click="vm.searchTypes.part=!vm.searchTypes.part; vm.searchOptionValue('Parts'); vm.buildPartTable(vm.partTableUiGrid); vm.tabSearch('Parts');">
+            <md-icon ng-show="vm.searchTypes.part" md-font-icon="icon-check" class="s18"></md-icon>
+            Parts
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+          <md-button ng-click="vm.searchTypes.document=!vm.searchTypes.document; vm.searchOptionValue('Documents'); vm.buildDocumentsTable(vm.documentsTableUiGrid); vm.tabSearch('Documents');">
+            <md-icon ng-show="vm.searchTypes.document" md-font-icon="icon-check" class="s18"></md-icon>
+            Documents
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+          <md-button ng-click="vm.searchTypes.task=!vm.searchTypes.task; vm.searchOptionValue('Tasks'); vm.tabSearch('Tasks');">
+            <md-icon ng-show="vm.searchTypes.task" md-font-icon="icon-check" class="s18"></md-icon>
+            Tasks
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+
+          <md-button ng-click="vm.searchTypes.card=!vm.searchTypes.card; vm.searchOptionValue('Cards'); vm.tabSearch('Cards');">
+            <md-icon ng-show="vm.searchTypes.card" md-font-icon="icon-check" class="s18"></md-icon>
+            Cards
+          </md-button>
+
+        </md-menu-item>
+
+      </md-menu-content>
+
+    </md-menu>
+
+    <md-progress-circular md-mode="indeterminate" ng-if="vm.progress">
+    </md-progress-circular>
+
+    <div class="question-icon" ng-if="$root.introGlobalHelp != false" ng-click="CallMe()">
+      <div class="introjs-hint-dot introjs-hint-dot-search"></div>
+      ?
+    </div>
+
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content" flex>
+
+    <md-tabs md-dynamic-height>
+
+      <md-tab label="Products ({{vm.count.productCount}})"
+              ng-if="$root.enableProducts && (vm.searchTypes.product || vm.searchTypes.all)"
+              ng-click="vm.tabSearch('Products'); vm.buildProductTable(vm.productTableUiGrid);">
+        <md-content class="classic-tab"
+                    ng-include="'app/main/apps/search/tabs/products/products.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Parts ({{vm.count.partCount}})" ng-if="vm.searchTypes.part || vm.searchTypes.all"
+              ng-click="vm.tabSearch('Parts'); vm.buildPartTable(vm.partTableUiGrid);">
+        <md-content class="emails-tab"
+                    ng-include="'app/main/apps/search/tabs/parts/parts.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Documents ({{vm.count.documentCount}})"
+              ng-click="vm.tabSearch('Documents'); vm.buildDocumentsTable(vm.documentsTableUiGrid);"
+              ng-if="vm.searchTypes.document || vm.searchTypes.all">
+        <md-content class="classic-tab"
+                    ng-include="'app/main/apps/search/tabs/documents/documents.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Manufacturers ({{vm.count.manufacturerCount}})"
+              ng-click="vm.tabSearch('Manufacturers'); vm.buildMfrTable(vm.manufaturersTableUiGrid); vm.restoreState(vm.manufaturersTableUiGrid, vm.manufacturerId, vm.objectPageEnum.searchMfrPage);"
+              ng-if="vm.searchTypes.manufacturer || vm.searchTypes.all">
+        <md-content class="classic-tab sourcing-tab"
+                    ng-include="'app/main/apps/search/tabs/manufacturers/manufacturers.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Manufacturer Parts ({{vm.count.manufacturerPartCount}})"
+              ng-click="vm.tabSearch('Manufacturer Parts'); vm.buildMfrPartTable(vm.manufacturerPartsTableUiGrid); vm.restoreState(vm.manufacturerPartsTableUiGrid, vm.manufacturerPartsId, vm.objectPageEnum.searchMfrPartsPage);"
+              ng-if="vm.searchTypes.manufacturerPart || vm.searchTypes.all">
+        <md-content class="emails-tab sourcing-tab"
+                    ng-include="'app/main/apps/search/tabs/manufacturerParts/manufacturer-parts.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Suppliers ({{vm.count.supplierCount}})"
+              ng-click="vm.tabSearch('Suppliers'); vm.buildSuppTable(vm.supplierTableUiGrid); vm.restoreState(vm.supplierTableUiGrid, vm.supplierId, vm.objectPageEnum.searchSuppPage);"
+              ng-if="vm.searchTypes.supplier || vm.searchTypes.all">
+        <md-content class="classic-tab sourcing-tab"
+                    ng-include="'app/main/apps/search/tabs/suppliers/suppliers.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Supplier Parts ({{vm.count.supplierPartCount}})"
+              ng-click="vm.tabSearch('Supplier Parts'); vm.buildSuppPartTable(vm.supplierPartsTableUiGrid); vm.restoreState(vm.supplierPartsTableUiGrid, vm.supplierPartsId, vm.objectPageEnum.searchSuppPartsPage);"
+              ng-if="vm.searchTypes.supplierPart || vm.searchTypes.all">
+        <md-content class="classic-tab sourcing-tab"
+                    ng-include="'app/main/apps/search/tabs/supplierParts/supplier-parts.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Tasks ({{vm.count.taskCount}})" ng-if="vm.searchTypes.task || vm.searchTypes.all"
+              ng-click="vm.tabSearch('Tasks');">
+        <md-content class="users-tab"
+                    ng-include="'app/main/apps/search/tabs/tasks/tasks.html'">
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Cards ({{vm.count.cardCount}})" ng-if="vm.searchTypes.card || vm.searchTypes.all"
+              ng-click="vm.tabSearch('Cards');">
+        <md-content class="contacts-tab"
+                    ng-include="'app/main/apps/search/tabs/cards/cards.html'">
+        </md-content>
+      </md-tab>
+
+    </md-tabs>
+
+  </div>
+  <!-- / CONTENT -->
+
+</div>

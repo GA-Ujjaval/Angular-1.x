@@ -1,0 +1,182 @@
+<!-- SPLASH SCREEN -->
+<div id="splash-screen" ng-if="vm.progressAdd" style="position:fixed; height:100%; width:100%">
+  <div class="center">
+    <div class="logo">
+      <!--<span>F</span>-->
+      <img src="assets/images/logos/fuse.png">
+    </div>
+    <!-- Material Design Spinner -->
+    <div class="spinner-wrapper">
+      <div class="spinner">
+        <div class="inner">
+          <div class="gap"></div>
+          <div class="left">
+            <div class="half-circle"></div>
+          </div>
+          <div class="right">
+            <div class="half-circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / Material Design Spinner -->
+  </div>
+</div>
+<!-- / SPLASH SCREEN -->
+<div id="sourcing-details" class="page-layout simple right-sidenav md-grey-100-bg" layout="row">
+  <!-- CENTER -->
+  <div class="center" flex id="scroll-check" ms-scroll>
+
+    <!-- HEADER -->
+    <div
+      ng-class="vm.sourcingObjectData.sourceType === 'supplier' ? 'header mg-accent-bg-custom-for-sup layout-align-space-between-center layout-row' : 'header mg-accent-bg-custom layout-align-space-between-center layout-row'"
+      layout="row" layout-align="space-between center"
+      flow-init="vm.ngFlowOptionsLogo"
+      flow-name="vm.ngFlowLogo.flow"
+      flow-files-submitted="vm.uploadLogo()"
+      flow-file-success="vm.fileSuccessLogo($file, $message)">
+      <md-button class="goto-products-button md-icon-button" aria-label="Go to products" translate
+                 translate-attr-aria-label="EC.GO_TO_PRODUCTS" ng-click="vm.backFunction()">
+        <md-icon md-font-icon="icon-arrow-left"></md-icon>
+      </md-button>
+      <div class="logo margin-right-10 set-ic-top" layout-align="start center">
+        <md-icon style="font-size: 41px; margin-right: 22px;" ng md-font-icon="icon icon-factory"
+                 ng-if="vm.sourcingObjectData.sourceType === 'manufacturer'"></md-icon>
+        <md-icon style="font-size: 41px; margin-right: 41px; margin-left: 16px;" md-font-icon="icon icon-truck"
+                 ng-if="vm.sourcingObjectData.sourceType === 'supplier'"></md-icon>
+        <!-- <md-menu ng-if="vm.changeLogo && vm.products.status == 'InDevelopment'" class="thumbnail-menu" md-position-mode="left bottom">
+          <md-button class="thumbnail-button" ng-click="$mdOpenMenu()" aria-label="thumbnail-options">
+            <md-icon md-font-icon="icon-camera"></md-icon>
+            <md-tooltip class="md-tooltip">
+              Click to change the thumbnail or Reset to default
+            </md-tooltip>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item flow-name="vm.ngFlowLogo.flow"
+                          flow-btn class="help-item"
+                          flow-attrs="{accept:'image/*'}">
+              <md-button>Change the thumbnail </md-button>
+            </md-menu-item>
+            <md-menu-item class="help-item">
+              <md-button ng-click="vm.removeThumbnail()">Reset to default</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu> -->
+        <p class="set-text-uic" ng-if="vm.sourcingObjectData.sourceType === 'manufacturer'">mfr</p>
+        <p class="set-text-uic" ng-if="vm.sourcingObjectData.sourceType === 'supplier'">supplier</p>
+      </div>
+      <!-- APP TITLE -->
+      <div layout="column" ng-mouseover="vm.changeLogo = false" flex="100">
+
+        <div layout="row" class="min-21">
+          <div class="margin-left-0">
+            <md-button class="edit-button md-icon-button edit-btn margin-right-20"
+                       ng-click="vm.editSourcingDialog($event, '', vm.sourcingObjectData)"
+                       aria-label="Organization details" style="padding: 0;margin-right:7px" ng-disabled="vm.readonly">
+              <md-icon md-font-icon="icon-pencil" class="s18"></md-icon>
+              <md-tooltip class="md-tooltip">Edit {{vm.sourceType}}</md-tooltip>
+            </md-button>
+            <span class="h3">
+             <strong>{{vm.sourcingObjectData.name}}
+               <md-tooltip class="md-tooltip">{{vm.sourceType}} Name : {{vm.sourcingObjectData.name}}</md-tooltip>
+             </strong>
+            </span>
+          </div>
+        </div>
+        <div layout-align="space-between center" class="save-changes-bom">
+        </div>
+        <div layout="row" class="padd-7">
+          <div layout="column" flex="40">
+            <div id="step1" class="step1 descript-text" flex="25">
+              <span class="secondary-text h3 "
+                    ng-if="vm.sourcingObjectData.description == null || vm.sourcingObjectData.description == ''">
+                              <md-tooltip class="md-tooltip">Empty</md-tooltip>
+                            </span>
+              <span class="secondary-text h3 color-fff"
+                    ng-if="vm.sourcingObjectData.description">  {{vm.sourcingObjectData.description | ellipsis:true:50:' ...' }}
+                <md-tooltip class="md-tooltip">Description : {{vm.sourcingObjectData.description}}</md-tooltip>
+                                          </span>
+            </div>
+            <div>
+              <span class="secondary-text padding-left-5 padding-right-5 category-name h3">
+                      {{vm.sourceType}}
+                <md-tooltip class="md-tooltip">Sourcing Type: {{vm.sourceType}}</md-tooltip>
+                  </span>
+              <span
+                class="secondary-text h3 md-tooltip color-fff">&nbsp;&nbsp;&nbsp;&nbsp;{{vm.sourcingObjectData.code | ellipsis:true:30:' ...' }}
+                <md-tooltip class="md-tooltip">
+                <span>{{vm.sourceType}} Code : </span>
+                  {{ vm.sourcingObjectData.code }}
+              </md-tooltip></span>
+            </div>
+          </div>
+          <div layout="row" class="padd-29" flex="60" layout-align="end center" class="margin-bottom-15 line-height-0">
+            <md-button class="md-raised" ng-click="vm.deletesourcingobject($event)" aria-label="Delete"
+                       ng-disabled="vm.readonly">
+              DELETE
+            </md-button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content tabs-grp">
+
+      <md-tabs md-dynamic-height md-selected="vm.selectedTab">
+
+        <md-tab label="Basic Info" ng-click="vm.ObjectSave(true)">
+          <md-content ng-include="'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/basicinfo/basic-info.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Additional Info" ng-click="vm.ObjectSave(true)">
+          <md-content
+            ng-include="'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/additional-info/additionalinfo.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Attachments" ng-click="vm.ObjectSave(false)">
+          <md-content
+            ng-include="'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/attachments/attachments.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Contacts" ng-click="vm.ObjectSave(false)">
+          <md-content ng-include="'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/contacts/contacts.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="{{vm.sourceType}} Parts"
+                ng-click="!vm.mfrSuppFlag ? vm.initManufacturesSuppliers(vm.sourceType) : false; vm.ObjectSave(false); vm.restoreState(vm.manufacturerPartsTableUiGrid, vm.manufacturerPartsId, vm.objectPageEnum.mfrPartsManufacturePage); vm.restoreState(vm.supplierPartsTableUiGrid, vm.supplierPartsId, vm.objectPageEnum.suppPartsSupplierPage);">
+          <md-content ng-include="vm.sourceType == 'Manufacturer' ? 'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/mp/mp.html'
+           : 'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/sp/sp.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Timeline" ng-click="vm.ObjectSave(false)">
+          <md-content ng-include="'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/time-line/timeline.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Comments" ng-click="vm.ObjectSave(false)">
+          <md-content ng-include="'app/main/apps/objects/sourcing/sourcemfrsuppdetails/tabs/comments/comments.html'">
+          </md-content>
+        </md-tab>
+
+      </md-tabs>
+
+      <md-button
+        ng-class="vm.sourcingObjectData.sourceType === 'supplier' ? 'md-accent md-raised save-btn-tabs btn-bg-cust-for-sup' : 'md-accent md-raised save-btn-tabs btn-bg-cust'"
+        ng-click="vm.saveSourcingObjects()" ng-disabled="vm.readonly" ng-if="vm.Save">
+        Save
+      </md-button>
+
+    </div>
+    <!-- / CONTENT -->
+
+  </div>
+  <!-- / CENTER -->
+</div>

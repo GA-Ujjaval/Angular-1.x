@@ -1,0 +1,11 @@
+<div class="ui-grid-cell-contents">
+  <select ng-model="row.entity[col.field]"
+          ng-change="grid.appScope.vm.changeCurrencyForRate('{{row.entity[col.field]}}', row.entity.exchangeRate)"
+          aria-label="Currency">
+    <option ng-repeat="currency in grid.appScope.vm.availableCurrencies"
+            value="{{currency.sign + ' (' + currency.abbreviation + ')'}}"
+            ng-show="grid.appScope.vm.isCurrencyAvailable(currency.abbreviation)">
+      {{currency.sign}} ({{currency.abbreviation}})
+    </option>
+  </select>
+</div>

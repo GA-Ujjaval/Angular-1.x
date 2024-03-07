@@ -1,0 +1,12 @@
+<div class="ui-grid-cell-contents" style="text-align: end"
+     ng-class="{'error' : row.entity.fuseCost === grid.appScope.vm.error.noAvailableCurrency}">
+    {{row.entity[col.field].split(' ')[0] + ' ' + grid.appScope.vm.parseFloatToFixed(row.entity[col.field].split(' ')[1])}}
+  <md-tooltip class="md-tooltip multiline-tooltip-templates" ng-if="row.entity.fuseCost === grid.appScope.vm.error.noAvailableCurrency">
+    <div>
+      {{grid.appScope.vm.sourceCostRowTooltipText[0]}}
+    </div>
+    <div>
+      {{grid.appScope.vm.sourceCostRowTooltipText[1]}}
+    </div>
+  </md-tooltip>
+</div>

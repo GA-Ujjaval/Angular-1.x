@@ -1,0 +1,24 @@
+<md-dialog flex="65">
+  <md-dialog-content class="create-object-description-popup">
+    <md-toolbar class="md-accent md-tall-height  _md layout-column md-default-theme _md-toolbar-transitions"
+                layout="column">
+      <div class="md-toolbar-tools md-toolbar-tools-top layout-align-space-between-stretch layout-row" layout="row"
+           layout-align="space-between">
+        <span class="title margin-top-20">Note</span>
+        <button class="md-icon-button md-button md-ink-ripple md-default-theme" type="button"
+                ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close" class="md-font material-icons icon-close md-default-theme"
+                   aria-hidden="true"></md-icon>
+        </button>
+      </div>
+    </md-toolbar>
+    <div class="popup-text-wrapper">
+      <ul class="unordered-list">
+        <li class="list-item">{{vm.getCapitalized()}} Number is automatically generated, per settings defined by the Admin.</li>
+        <li class="list-item" ng-if="vm.isAdvancedNumberingEnabled">Setting category or changing a {{vm.getLowercase()}}'s category could impact the {{vm.getCapitalized()}} Number, per settings
+          defined by the Admin.</li>
+      </ul>
+    </div>
+  </md-dialog-content>
+</md-dialog>
+

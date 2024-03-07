@@ -1,0 +1,169 @@
+{
+  "data": {
+    "changes": [
+      {
+        "id": "f95846ebed7545ef8993501848fa10c1",
+        "number": "40-0074",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f62",
+        "partName": "Miniature Pushbutton Switch, Right Angle",
+        "revision": 1,
+        "stateId": "bee063c4a226486f84dbc13ad26e9545",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "",
+        "oldRevision": ""
+      },
+      {
+        "id": "f95846ebed7545ef8993501848fa10c2",
+        "number": "20-007",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f63",
+        "partName": "Corrected Mini USB for changes",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9545",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "Mini USB Connector",
+        "oldRevision": 1
+      },
+      {
+        "id": "f95846ebed7545ef8993501848fa10c3",
+        "number": "40-0075",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f64",
+        "partName": "Single Logic Level P-Channel FET modified",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9545",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "Single Logic Level P-Channel FET",
+        "oldRevision": 1
+      },
+      {
+        "id": "f95846ebed7545ef8993501848fa10c4",
+        "number": "40-0076",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f65",
+        "partName": "Red/Green SM LED updated",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9545",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "Red/Green SM LED",
+        "oldRevision": 1
+      },
+      {
+        "id": "f95846ebed7545ef8993501848fa10c5",
+        "number": "20-0100",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f66",
+        "partName": "EveryRoad GPS Car Navigation Unit, Model 500",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9545",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f63",
+          "assembly" : true,
+          "impactIds" : []
+        }],
+        "oldPartName": "EveryRoad GPS Car Navigation Unit, Model 500 old",
+        "oldRevision": 1
+      },
+      {
+        "id": "f95846ebed7545ef8993501848fa10c6",
+        "number": "20-0097",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f66",
+        "partName": "EveryRoad, PCBA, Model 500",
+        "revision": 3,
+        "stateId": "bee063c4a226486f84dbc13ad26e9545",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f63",
+          "assembly" : true,
+          "impactIds" : []
+        }],
+        "oldPartName": "EveryRoad, PCBA, Model 300 old",
+        "oldRevision": 2
+      }
+    ],
+    "visualTypes":[
+      {
+        "id": "fa4c7ee86e994582a6a999fa3c960f62",
+        "name": "Revision change",
+        "color" : "blue"
+      },
+      {
+        "id": "fa4c7ee86e994582a6a999fa3c960f63",
+        "name": "Assembly change",
+        "color" : null
+      }
+    ],
+    "types": [
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f62",
+        "name": "Switch"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f63",
+        "name": "Connector"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f64",
+        "name": "MOSFET"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f65",
+        "name": "LED"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f66",
+        "name": "Assembly"
+      }
+    ],
+    "impactTypes": [
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "Rev Change",
+        "color": "blue"
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5d",
+        "name": "Add",
+        "color": "green"
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5d",
+        "name": "Remove",
+        "color": "red"
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5d",
+        "name": "Changed",
+        "color": "yellow"
+      }
+    ],
+    "stateTypes": [
+      {
+        "id": "bee063c4a226486f84dbc13ad26e9543",
+        "name": "In Design",
+        "color": "red"
+      },
+      {
+        "id": "bee063c4a226486f84dbc13ad26e9544",
+        "name": "Released",
+        "color": "green"
+      },
+      {
+        "id": "bee063c4a226486f84dbc13ad26e9545",
+        "name": "Unreleased",
+        "color": "blue"
+      }
+    ]
+  }
+}

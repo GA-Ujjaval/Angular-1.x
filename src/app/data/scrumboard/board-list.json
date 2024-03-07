@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "name": "ECR",
+            "uri": "acme-ecr-application",
+            "id": "32gfhaf2"
+        },
+        {
+            "name": "ECO",
+            "uri": "acme-eco-application",
+            "id": "27cfcbe1"
+        },
+        {
+            "name": "Standard",
+            "uri": "acme-standard-application",
+            "id": "27cfcbe2"
+        }
+    ]
+}

@@ -1,0 +1,160 @@
+#objects {
+    position: relative;
+    height: 100%;
+
+    .margin-top{
+        padding: 12px !important;
+    }
+
+    .align-15{
+        margin-left: 15px;
+    }
+
+    > .content {
+        /*position: absolute;*/
+        top: 76px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+
+
+
+        > md-sidenav {
+            box-shadow: $whiteframe-shadow-1dp;
+            margin-top: 0px;
+        }
+
+        .main {
+            padding: 0px 0px 0 4px;
+            /* position: absolute;*/
+            top: 0;
+            left: 268px;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+
+            .contacts-list {
+                position: relative;
+                padding-bottom: 0;
+                height: 100%;
+
+                .md-subheader {
+                    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+
+                    .contacts-count {
+                        padding-left: 4px;
+                    }
+
+                    .list-title {
+                        margin-right: 4px;
+                    }
+
+                    .edit-group-form {
+
+                        .editable-controls {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: flex-start;
+
+                            .editable-input {
+                                border: 1px solid rgba(0, 0, 0, 0.2);
+                                padding: 4px 6px;
+                                margin-right: 6px;
+                                font-size: 13px;
+                            }
+
+                            .editable-buttons {
+
+                            }
+                        }
+
+                        .edit-group-button {
+                            margin: 0;
+                        }
+
+                        .md-button {
+                            margin: 0;
+                            margin: 0;
+                            padding: 0;
+                            height: 32px;
+                            min-height: 32px;
+                            line-height: 32px;
+                            width: 32px;
+                        }
+                    }
+                }
+
+                .contact-item {
+                    /*position: absolute;*/
+                    right: 0;
+                    left: 0;
+                    width: 100%;
+                    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+                    background: white;
+                    transition: transform 200ms ease-out;
+                    will-change: transform;
+
+                    &:last-of-type {
+                        margin-bottom: 24px;
+                    }
+
+                    &.ng-leave {
+                        transform: translateY(0);
+                        display: none;
+
+                        &.ng-leave-active {
+                            transform: translateY(-100%);
+                        }
+                    }
+
+                    &.ng-hide {
+                        display: none;
+                    }
+
+                    &.ng-hide-add-active,
+                    &.ng-hide-remove-active {
+                        display: block;
+                        transition-property: all;
+                    }
+
+                }
+            }
+
+            .no-results {
+                box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+            }
+
+        }
+    }
+
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-md) {
+
+    #contacts {
+
+        .align-15{
+            margin-left: 50px;
+        }
+
+        > .content {
+
+            .main {
+                left: 24px;
+            }
+
+            > md-sidenav {
+                padding: 0;
+            }
+
+        }
+    }
+}
+

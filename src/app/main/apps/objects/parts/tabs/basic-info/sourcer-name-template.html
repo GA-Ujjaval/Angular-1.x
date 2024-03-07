@@ -1,0 +1,11 @@
+<div class="ui-grid-cell-contents">
+  <a ui-sref="app.objects.sourcing.sourcingdetails({id:row.entity.sourcerdId})"
+     target="{{grid.appScope.vm.linkTarget}}">
+    {{row.entity.name}}
+  </a>
+  :
+  <a ui-sref="app.objects.sourcing.sourcemfgsuppdetails({id:row.entity.firstSourcerId,sourceType:row.entity.sourceType})"
+     target="{{grid.appScope.vm.linkTarget}}">
+    {{row.entity.sourcerName}}
+  </a>
+</div>

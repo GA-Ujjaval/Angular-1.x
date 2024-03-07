@@ -1,0 +1,35 @@
+<div ng-if='vm.selectedTab == 0' class="content fullpage-datatable attribute-compare-content">
+
+  <div class="progress-bar" layout="row" layout-sm="column" layout-align="space-around" ng-if="vm.progress">
+    <md-progress-circular md-mode="indeterminate" class="md-accent md-raised"></md-progress-circular>
+  </div>
+
+  <div class="clear-filter-text" ng-if="vm.flagClearButton">
+    <md-button class="clear-filter-button" ng-click="vm.clearFilters(vm.attributesTableUiGrid)">
+      <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+    </md-button>
+    <span class="clear-filter-text">Clear current sorts, filters and pins</span>
+  </div>
+
+  <div id="grid-attributes-compare"
+       ui-grid="vm.attributesGridOptions"
+       ui-grid-move-columns
+       ui-grid-save-state
+       ui-grid-tree-view
+       ui-grid-pinning
+       ui-grid-resize-columns
+       ui-grid-exporter
+       ui-grid-pagination
+       ui-grid-cellnav
+       ui-grid-auto-resize
+       ui-grid-edit
+       class="grid"
+       ng-class=" {'grid-height' : ((vm.attributesGridOptions.totalItems * vm.attributesGridOptions.rowHeight) + 155) >= vm.heightMax } "
+       ng-style=" { 'height': ((vm.attributesGridOptions.totalItems * vm.attributesGridOptions.rowHeight) + 155) < vm.heightMax ? (!vm.attributesGridOptions.totalItems ? 300 : ((vm.attributesGridOptions.totalItems * vm.attributesGridOptions.rowHeight) + 80 + vm.heightTopPanelAttributes)) : false }"
+          >
+
+    <div class="watermark" ng-show="!vm.attributesGridOptions.data.length">No data available</div>
+
+  </div>
+
+</div>

@@ -1,0 +1,208 @@
+<div layout="row" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+    <!-- CONTENT -->
+    <div class="content">
+      <div layout="row" layout-align="space-between center" flex>
+        <div class="h4" layout-align="start start">
+          <md-icon md-font-icon="icon icon-factory"></md-icon> &nbsp;
+          <span class="title">Manufacturer Parts</span>
+        </div>
+        <md-button class="md-primary md-raised"
+                   ng-click="vm.openManufactureDialog($event, '', vm.products.objectId, 'add')"
+                   ng-disabled="vm.SaveDisabled && !vm.releaseSourcingSettings">
+          Associate Manufacturer Part
+        </md-button>
+      </div>
+      <table class="simple margin-left-10" ms-responsive-table>
+        <thead>
+        <tr>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title"></span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Manufacturer Name</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Manufacturer Part Number</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Description</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Lead Time</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Available</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Currency</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Cost</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Notes</span>
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="manufature in vm.manufactures">
+          <td>
+            <md-button class="edit-button md-icon-button"
+                       ng-click="vm.openManufactureDialog($event, manufature, vm.products.objectId, 'edit')"
+                       aria-label="Organization details" ng-disabled="vm.SaveDisabled && !vm.releaseSourcingSettings">
+              <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+            </md-button>
+          </td>
+          <td>
+            <a
+              ui-sref="app.objects.sourcing.sourcemfgsuppdetails({id:manufature.sourcingId, sourceType:manufature.sourceType})"
+              target="{{vm.linkTarget}}">
+              {{ manufature.objectName }}
+            </a>
+          </td>
+          <td><a
+            ui-sref="app.objects.sourcing.sourcingdetails({id:manufature.objectId})"
+            target="{{vm.linkTarget}}">{{ manufature.objectNumber }}</a>
+          </td>
+          <td>{{ manufature.description }}</td>
+          <td>{{ manufature.leadTime }}</td>
+          <td>{{ manufature.isAvailable }}</td>
+          <td>{{ manufature.costDetail[0].currency }}</td>
+          <td>{{ manufature.costDetail[0].cost }}</td>
+          <td ng-repeat="notes in manufature.sourceObjectTableList"
+              ng-if="notes.objectKey === vm.products.objectId">{{ notes.notes }}</td>
+        </tr>
+        <tr ng-hide="vm.manufactures.length > 0 ">
+          <td colspan="4">
+            <p layout-align="center">No Data Available</p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- / CONTENT -->
+  </div>
+</div>
+
+<div layout="row" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+    <!-- CONTENT -->
+    <div class="content">
+      <div layout="row" layout-align="space-between center" flex>
+        <div class="h4" layout-align="start start">
+          <md-icon md-font-icon="icon icon-truck"></md-icon> &nbsp;
+          <span class="title">Supplier Parts</span>
+        </div>
+        <md-button class="md-primary md-raised"
+                   ng-click="vm.openSupplierDialog($event, '', vm.products.objectId, 'add')"
+                   ng-disabled="vm.SaveDisabled && !vm.releaseSourcingSettings">
+          Associate Supplier Part
+        </md-button>
+      </div>
+      <table class="simple margin-left-10" ms-responsive-table>
+        <thead>
+        <tr>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title"></span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Supplier Name</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Supplier Part Number</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Description</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Lead Time</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Available</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Currency</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Cost</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Notes</span>
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="supplier in vm.supplier">
+          <td>
+            <md-button class="edit-button md-icon-button"
+                       ng-click="vm.openSupplierDialog($event, supplier, vm.products.objectId, 'edit')"
+                       aria-label="Organization details"
+                       ng-disabled="vm.SaveDisabled && !vm.releaseSourcingSettings">
+              <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+            </md-button>
+          </td>
+          <td>
+            <a ui-sref="app.objects.sourcing.sourcemfgsuppdetails({id:supplier.sourcingId, sourceType:supplier.sourceType})"
+               target="{{vm.linkTarget}}">
+              {{ supplier.objectName }}
+            </a>
+          </td>
+          <td><a ui-sref="app.objects.sourcing.sourcingdetails({id:supplier.objectId})"
+                 target="{{vm.linkTarget}}">{{ supplier.objectNumber }}</a>
+          </td>
+          <td>{{ supplier.description }}</td>
+          <td>{{ supplier.leadTime }}</td>
+          <td>{{ supplier.isAvailable }}</td>
+          <td>{{ supplier.costDetail[0].currency }}</td>
+          <td>{{ supplier.costDetail[0].cost }}</td>
+          <td ng-repeat="notes in supplier.sourceObjectTableList"
+              ng-if="notes.objectKey === vm.products.objectId">{{ notes.notes }}</td>
+        </tr>
+        <tr ng-hide="vm.supplier.length > 0 ">
+          <td colspan="4">
+            <p layout-align="center">No Data Available</p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- / CONTENT -->
+  </div>
+</div>

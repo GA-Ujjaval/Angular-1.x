@@ -1,0 +1,738 @@
+<div id="objects" class="page-layout simple left-sidenav inner-sidenav md-grey-100-bg">
+
+    <!-- Category -->
+    <div class="content margin-top" layout="row" layout-align="start start">
+
+        <!-- SIDENAV -->
+        <md-sidenav class="sidenav main-sidenav md-white-bg" ms-scroll md-is-locked-open="$mdMedia('gt-md')"
+                    md-component-id="sidenav"
+                    ms-sidenav-helper
+                    ng-include="'app/main/apps/setting/tabs/objects/sidenavs/main/objects-main-sidenav.html'">
+        </md-sidenav>
+        <!-- / SIDENAV -->
+
+        <!-- MAIN -->
+        <div class="main" ms-scroll ng-if="vm.parts">
+
+            <!-- CONTACT LIST -->
+            <md-list class="contacts-list">
+
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row" layout-align="space-between center">
+                        <md-button class="md-icon-button sidenav-toggle" hide-gt-md ng-click="vm.toggleSidenav('sidenav')"
+                                   aria-label="Toggle sidenav" translate translate-attr-aria-label="CONTACTS.TOGGLE_SIDENAV">
+                            <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+                        </md-button>
+
+                        <div class="list-title" layout="row" layout-align="start center"
+                             ng-hide="editGroupForm.$visible">
+                            <span ng-if="vm.listType === 'all'">{{vm.alltilte}}</span>
+                            <span ng-if="vm.listType === 'frequent'">Frequnetly
+                                contacted</span>
+                            <span ng-if="vm.listType === 'starred'">Starred
+                                contacts</span>
+                            <span ng-if="vm.listType.name">{{vm.listType.name}}</span>
+
+                            <span ng-if="vm.categoryproduct.length" class="secondary-text contacts-count">
+                                ({{vm.categoryproduct.length}})
+                            </span>
+
+                            <span ng-if="vm.categoryproduct.length == 0" class="secondary-text contacts-count">
+                                (0)
+                            </span>
+                        </div>
+
+                        <div class="edit-group-form" ng-show="vm.listType.name" layout="row"
+                             layout-align="start center">
+                            <span ng-show="editGroupForm.$visible"
+                                  editable-text="vm.listType.name"
+                                  e-form="editGroupForm"
+                                  onaftersave="vm.editGroup()">
+                            </span>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="editGroupForm.$show()"
+                                       ng-hide="editGroupForm.$visible" aria-label="edit group name">
+                                <md-icon md-font-icon="icon-pencil s18"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="vm.deleteGroup($event)"
+                                       ng-hide="editGroupForm.$visible" aria-label="delete group">
+                                <md-icon md-font-icon="icon-delete s18"></md-icon>
+                            </md-button>
+                        </div>
+
+                        <div flex></div>
+
+                        <md-menu>
+
+                            <md-button class="md-icon-button" aria-label="Sort" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-sort-alphabetical"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'categoryName';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'categoryName' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Category</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'categoryName'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'categoryName' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Category</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'parentCategory';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'parentCategory' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Parent Category</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'parentCategory'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'parentCategory' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Parent Category</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                            </md-menu-content>
+
+                        </md-menu>
+
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row">
+
+                        <div flex="30" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span class="margin-left-60">Category</span>
+                        </div>
+
+                        <div flex="35" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span style="margin-left: 10%;">Parent Category</span>
+                        </div>
+
+                        <div flex="30" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span>Bill Of Material</span>
+                        </div>
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+
+                <!-- CONTACT ITEM -->
+
+                <md-list-item class="contact-item md-white-bg" md-ink-ripple
+                              ng-repeat="category in vm.categoryproduct |  orderBy: vm.listOrder :vm.listOrderAsc"
+                              ng-click="vm.openCategoryDialog($event, category, vm.categoryproduct)">
+                    <md-checkbox ng-checked="vm.exists(category, vm.selectedContacts)"
+                                 ng-click="vm.toggleSelectContact(category, $event)" aria-label="checkbox">
+                    </md-checkbox>
+                    <img class="md-avatar height-30 width-30"
+                         ng-src="assets/images/ecommerce/circle-setting.png"/>
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="25">{{category.categoryName}}</div>
+
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="35" layout-align="center center">
+                        {{category.parentCategory}}
+                    </div>
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="30" layout-align="center center"
+                         ng-if="category.isBOMEnable == 'false'">
+                        Disallowed
+                    </div>
+                    <div layout="row" class="text-truncate font-weight-400" flex="30" layout-align="center center" ng-if="category.isBOMEnable == 'true'">
+                        Allowed
+                    </div>
+
+
+                    <div class="actions" layout="row" layout-align="end center">
+
+                        <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="1">
+                                <md-menu-item>
+                                    <md-button ng-click="vm.deleteCategoryConfirm(ev, category)">
+                                        Remove
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+
+                    </div>
+
+                </md-list-item>
+
+            </md-list>
+            <!-- / CONTACT LIST -->
+
+            <!-- NO RESULTS -->
+            <md-list-item ng-show="vm.categoryproduct.length === 0">
+                <p>No results..</p>
+            </md-list-item>
+            <!-- / NO RESULTS -->
+
+        </div>
+        <!-- / MAIN -->
+
+        <!-- MAIN -->
+        <div class="main" ms-scroll ng-if="vm.product">
+
+            <!-- CONTACT LIST -->
+            <md-list class="contacts-list">
+
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row" layout-align="space-between center">
+
+                        <div class="list-title" layout="row" layout-align="start center"
+                             ng-hide="editGroupForm.$visible">
+                            <span ng-if="vm.listType === 'all'">{{vm.alltilte}}</span>
+                            <span ng-if="vm.listType === 'frequent'">Frequnetly
+                                contacted</span>
+                            <span ng-if="vm.listType === 'starred'">Starred
+                                contacts</span>
+                            <span ng-if="vm.listType.name">{{vm.listType.name}}</span>
+
+                            <span ng-if="vm.categoryproduct.length" class="secondary-text contacts-count">
+                                ({{vm.categoryproduct.length}})
+                            </span>
+
+                            <span ng-if="vm.categoryproduct.length == 0" class="secondary-text contacts-count">
+                                (0)
+                            </span>
+                        </div>
+
+                        <div class="edit-group-form" ng-show="vm.listType.name" layout="row"
+                             layout-align="start center">
+                            <span ng-show="editGroupForm.$visible"
+                                  editable-text="vm.listType.name"
+                                  e-form="editGroupForm"
+                                  onaftersave="vm.editGroup()">
+                            </span>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="editGroupForm.$show()"
+                                       ng-hide="editGroupForm.$visible" aria-label="edit group name">
+                                <md-icon md-font-icon="icon-pencil s18"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="vm.deleteGroup($event)"
+                                       ng-hide="editGroupForm.$visible" aria-label="delete group">
+                                <md-icon md-font-icon="icon-delete s18"></md-icon>
+                            </md-button>
+                        </div>
+
+                        <div flex></div>
+
+                        <md-menu>
+
+                            <md-button class="md-icon-button" aria-label="Sort" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-sort-alphabetical"
+                                         ></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'categoryName';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'categoryName' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Category</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'categoryName'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'categoryName' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Category</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'parentCategory';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'parentCategory' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Parent Category</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'parentCategory'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'parentCategory' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Parent Category</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                            </md-menu-content>
+
+                        </md-menu>
+
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row">
+
+                        <div flex="30" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span class="margin-left-60">Category</span>
+                        </div>
+
+                        <div flex="35" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span style="margin-left: 10%;">Parent Category</span>
+                        </div>
+
+                        <div flex="30" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span>Bill Of Material</span>
+                        </div>
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+
+                <!-- CONTACT ITEM -->
+
+                <md-list-item class="contact-item md-white-bg" md-ink-ripple
+                              ng-repeat="product in vm.categoryproduct |  orderBy: vm.listOrder :vm.listOrderAsc"
+                              ng-click="vm.openProductDialog($event, product, vm.categoryproduct)">
+                    <md-checkbox ng-checked="vm.exists(product, vm.selectedContacts)"
+                                 ng-click="vm.toggleSelectContact(product, $event)" aria-label="checkbox">
+                    </md-checkbox>
+
+
+                    <img class="md-avatar height-30 width-30"
+                         ng-src="assets/images/ecommerce/circle-cube.png"/>
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="25">
+                        {{product.categoryName}}
+                    </div>
+
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="35" layout-align="center center">
+                        {{product.parentCategory}}
+                    </div>
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="30" layout-align="center center">
+
+                    </div>
+
+                    <div class="actions" layout="row" layout-align="start center">
+
+                        <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" translate
+                                       translate-attr-aria-label="CONTACTS.MORE" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="1">
+                                <md-menu-item>
+                                    <md-button ng-click="vm.deleteProductConfirm(ev, product)">
+                                        Remove
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+
+                    </div>
+
+                </md-list-item>
+                <!-- CONTACT ITEM -->
+
+            </md-list>
+            <!-- / CONTACT LIST -->
+
+            <!-- NO RESULTS -->
+            <md-list-item ng-show="vm.categoryproduct.length === 0">
+                <p>No results..</p>
+            </md-list-item>
+            <!-- / NO RESULTS -->
+
+        </div>
+        <!-- / MAIN -->
+
+        <!-- MAIN -->
+        <div class="main" ms-scroll ng-if="vm.document">
+
+            <!-- CONTACT LIST -->
+            <md-list class="contacts-list">
+
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row" layout-align="space-between center">
+
+                        <div class="list-title" layout="row" layout-align="start center"
+                             ng-hide="editGroupForm.$visible">
+                            <span ng-if="vm.listType === 'all'">{{vm.alltilte}}</span>
+                            <span ng-if="vm.listType === 'frequent'">Frequnetly
+                                contacted</span>
+                            <span ng-if="vm.listType === 'starred'">Starred
+                                contacts</span>
+                            <span ng-if="vm.listType.name">{{vm.listType.name}}</span>
+
+                            <span ng-if="vm.categoryproduct.length" class="secondary-text contacts-count">
+                                ({{vm.categoryproduct.length}})
+                            </span>
+                            <span ng-if="vm.categoryproduct.length == 0" class="secondary-text contacts-count">
+                                (0)
+                            </span>
+                        </div>
+
+                        <div class="edit-group-form" ng-show="vm.listType.name" layout="row"
+                             layout-align="start center">
+                            <span ng-show="editGroupForm.$visible"
+                                  editable-text="vm.listType.name"
+                                  e-form="editGroupForm"
+                                  onaftersave="vm.editGroup()">
+                            </span>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="editGroupForm.$show()"
+                                       ng-hide="editGroupForm.$visible" aria-label="edit group name">
+                                <md-icon md-font-icon="icon-pencil s18"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="vm.deleteGroup($event)"
+                                       ng-hide="editGroupForm.$visible" aria-label="delete group">
+                                <md-icon md-font-icon="icon-delete s18"></md-icon>
+                            </md-button>
+                        </div>
+
+                        <div flex></div>
+
+                        <md-menu>
+
+                            <md-button class="md-icon-button" aria-label="Sort" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-sort-alphabetical"
+                                         ></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'categoryName';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'categoryName' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Category</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'categoryName'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'categoryName' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Category</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'parentCategory';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'parentCategory' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Parent Category</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'parentCategory'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'parentCategory' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Parent Category</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                            </md-menu-content>
+
+                        </md-menu>
+
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row">
+
+                        <div flex="30" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span class="margin-left-60">Category</span>
+                        </div>
+
+                        <div flex="35" layout="row" class="list-title font-weight-900" layout-align="start center">
+                            <span style="margin-left: 10%;">Parent Category</span>
+                        </div>
+
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+
+                <!-- CONTACT ITEM -->
+
+                <md-list-item class="contact-item md-white-bg" md-ink-ripple
+                              ng-repeat="document in vm.categoryproduct |  orderBy: vm.listOrder :vm.listOrderAsc"
+                              ng-click="vm.openDocumentDialog($event, document, vm.categoryproduct)">
+                    <md-checkbox ng-checked="vm.exists(document, vm.selectedContacts)"
+                                 ng-click="vm.toggleSelectContact(document, $event)" aria-label="checkbox">
+                    </md-checkbox>
+
+
+                    <img class="md-avatar height-30 width-30"
+                         ng-src="assets/images/ecommerce/Folder-2.png"/>
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="25">
+                        {{document.categoryName}}
+                    </div>
+
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="35" layout-align="center center">
+                        {{document.parentCategory}}
+                    </div>
+
+                    <div layout="row" class="text-truncate font-weight-400" flex="30" layout-align="center center">
+
+                    </div>
+
+                    <div class="actions" layout="row" layout-align="start center">
+
+                        <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" translate
+                                       translate-attr-aria-label="CONTACTS.MORE" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="1">
+                                <md-menu-item>
+                                    <md-button ng-click="vm.deleteProductConfirm(ev, document)">
+                                        Remove
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+
+                    </div>
+
+                </md-list-item>
+                <!-- CONTACT ITEM -->
+
+            </md-list>
+            <!-- / CONTACT LIST -->
+
+            <!-- NO RESULTS -->
+            <md-list-item ng-show="vm.categoryproduct.length === 0">
+                <p>No results..</p>
+            </md-list-item>
+            <!-- / NO RESULTS -->
+
+        </div>
+        <!-- MAIN -->
+
+        <div class="main" ms-scroll ng-if="vm.attributes">
+
+            <!-- CONTACT LIST -->
+            <md-list class="contacts-list">
+
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row" layout-align="space-between center">
+
+                        <div class="list-title" layout="row" layout-align="start center"
+                             ng-hide="editGroupForm.$visible">
+                            <span ng-if="vm.listType === 'all'">{{vm.alltilte}}</span>
+                            <span ng-if="vm.listType === 'frequent'">Frequnetly
+                                contacted</span>
+                            <span ng-if="vm.listType === 'starred'">Starred
+                                contacts</span>
+                            <span ng-if="vm.listType.name">{{vm.listType.name}}</span>
+
+                            <span ng-if="vm.contacts.length" class="secondary-text contacts-count">
+                                ({{vm.contacts.length}})
+                            </span>
+                        </div>
+
+                        <div class="edit-group-form" ng-show="vm.listType.name" layout="row"
+                             layout-align="start center">
+                            <span ng-show="editGroupForm.$visible"
+                                  editable-text="vm.listType.name"
+                                  e-form="editGroupForm"
+                                  onaftersave="vm.editGroup()">
+                            </span>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="editGroupForm.$show()"
+                                       ng-hide="editGroupForm.$visible" aria-label="edit group name">
+                                <md-icon md-font-icon="icon-pencil s18"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="vm.deleteGroup($event)"
+                                       ng-hide="editGroupForm.$visible" aria-label="delete group">
+                                <md-icon md-font-icon="icon-delete s18"></md-icon>
+                            </md-button>
+                        </div>
+
+                        <div flex></div>
+
+                        <md-menu>
+
+                            <md-button class="md-icon-button" aria-label="Sort" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-sort-alphabetical"
+                                         ></md-icon>
+                            </md-button>
+
+                            <md-menu-content>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'attribute';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'attribute' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Attribute</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'attribute'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'attribute' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Attribute</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'attributeType';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'attributeType' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span>Attribute Type</span>
+                                        <small>(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'attributeType'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'attributeType' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span>Attribute Type</span>
+                                        <small>(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                            </md-menu-content>
+
+                        </md-menu>
+
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row" layout-align="start center">
+
+                        <div flex="25" class="list-title font-weight-900" layout="row" layout-align="start center">
+                            <span class="margin-left-60">Attribute</span>
+                        </div>
+
+                        <div flex="25" class="list-title font-weight-900" layout="row" layout-align="start center">
+                            <span class="margin-left-30">Attribute Type</span>
+                        </div>
+
+                        <div flex="25" class="list-title font-weight-900" layout="row" layout-align="start center">
+                            <span class="margin-left-30">Object Type</span>
+                        </div>
+
+                        <div flex="25" class="list-title font-weight-900" layout="row" layout-align="start center">
+                            <span class="margin-left-30">Tab Name</span>
+                        </div>
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+
+                <!-- CONTACT ITEM -->
+
+                <md-list-item class="contact-item md-white-bg" md-ink-ripple
+                              ng-repeat="attribute in vm.attribute |  orderBy: vm.listOrder :vm.listOrderAsc"
+                              ng-click="vm.openAttributeDialog($event, attribute, vm.attribute)"
+                              ng-show="vm.attribute.length > 0">
+                    <md-checkbox ng-checked="vm.exists(attribute, vm.selectedContacts)"
+                                 ng-click="vm.toggleSelectContact(attribute, $event)" aria-label="checkbox">
+                    </md-checkbox>
+                    <div flex="25" class="text-truncate font-weight-400">{{attribute.attribute}}</div>
+
+
+                    <div flex="30" class="text-truncate font-weight-400">
+                        {{attribute.attributeType}}
+                    </div>
+
+                    <div flex="25" class="text-truncate font-weight-400">
+                        {{attribute.objectType}}
+                    </div>
+
+                    <div flex="20" class="text-truncate font-weight-400">
+                        {{attribute.tabName}}
+                    </div>
+
+                    <div class="actions" layout="row" layout-align="start center">
+
+                        <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="1">
+                                <md-menu-item>
+                                    <md-button ng-click="vm.deleteAttributeConfirm(ev, attribute)">
+                                        Remove
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+
+                    </div>
+
+                </md-list-item>
+                <md-list-item ng-if="vm.attribute.length == 0 && !vm.progress">
+                    No Attributes Created.
+                </md-list-item>
+                <!-- CONTACT ITEM -->
+
+            </md-list>
+            <!-- / CONTACT LIST -->
+          <div class="content fullpage-datatable">
+          <div class="progress-bar" layout="row" layout-sm="column" layout-align="space-around" ng-if="vm.progress">
+            <md-progress-circular md-mode="indeterminate" class="md-accent md-raised"></md-progress-circular>
+          </div>
+          </div>
+            <!-- NO RESULTS -->
+            <!-- <md-list-item class="no-results md-white-bg" ng-show="filteredContacts.length === 0">
+                <p>No results..</p>
+            </md-list-item> -->
+            <!-- / NO RESULTS -->
+
+        </div>
+
+    </div>
+    <!-- / Category -->
+
+</div>

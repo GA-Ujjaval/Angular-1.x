@@ -1,0 +1,187 @@
+<!-- CONTENT HEADER -->
+<div class="tasks-header" layout="row" layout-align="space-between center">
+    <div flex="70">
+        <div>
+            <md-icon class="tasks-header-icon" md-font-icon="icon-checkbox-marked"></md-icon>
+            <div class="tasks-header-text">Resolution Tasks</div>
+        </div>
+
+        <div>
+
+            <div class="checklist-progress" layout="row" layout-align="start center">
+
+                <md-progress-linear class="md-accent task-progressbar" md-mode="determinate"
+                                    value="{{100 * vm.completedTasks(results) / results.length}}">
+                </md-progress-linear>
+          <span class="checklist-progress-value">
+             {{vm.completedTasks(results)}}/{{results.length}} Tasks
+          </span>
+            </div>
+
+        </div>
+    </div>
+    <div flex="30">
+        <div class="add-task">
+            <md-button class="add-task-button" ng-click="vm.addCheckItem($event,'');" aria-label="ADD TASK"
+                       translate="TODO.ADD_TASK" translate-attr-aria-label="TODO.ADD_TASK">
+                ADD TASK
+            </md-button>
+        </div>
+    </div>
+</div>
+<!-- / CONTENT HEADER -->
+
+<!-- CONTENT -->
+<div class="content" layout="row" flex>
+
+    <!-- Todo list pane -->
+    <div class="todo-list-pane">
+        <!-- TODO LIST ITEMS -->
+        <div class="todo-items" ng-sortable="vm.sortableOptions" ng-model="vm.tasks"
+             ng-class="{'sortable': vm.taskOrder === ''}">
+            <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
+                 ng-click="vm.openTaskDialog($event, task)"
+                 ng-repeat="task in vm.tasks | orderBy:vm.taskOrder:vm.taskOrderDescending | filterByChangeItems: vm.card.idChangeItems | filter:global.search | filter:vm.taskFilters.search | filterByChangeItems: vm.taskFilters.idChangeItems | filter:vm.filterByStartDate | filter:vm.filterByDueDate as results"
+                 ng-class="{'starred': task.starred, 'selected': task.selected, 'completed': task.completed}" ui-sref="app.customer.to-do({cardId:task.taskSeqId})">
+                <!-- TODO MOVE THIS UP "-->
+                <!-- TODO  -->
+
+                <div class="handle" ng-click="vm.preventDefault($event)">
+                    <div class="dotted-icon"></div>
+                </div>
+
+                <md-checkbox class="no-label" ng-checked="task.completed"
+                             ng-click="vm.preventDefault($event);vm.toggleCompleted(task, $event)"
+                             aria-label="{{task.completed ? 'Not completed' : 'Completed'}}">
+                </md-checkbox>
+
+                <div layout="row" layout-align="start center" flex>
+
+                    <div class="info" flex>
+                        <div class="title">
+                            {{task.title}}
+                        </div>
+
+                        <div class="notes" ng-bind-html="task.notes">
+                        </div>
+
+                        <div class="todo-item-footer" layout="row" layout-align="start center" layout-wrap>
+
+                            <!-- CHANGE ITEM SELECT -->
+                            <!--<div class="todo-item-footer-select" ng-if="task.idChangeItems[0]">-->
+                            <a href= "http://www.google.com" ng-click="$event.stopPropagation();" class="todo-item-footer-select" ng-if="task.idChangeItems[0]">
+                                <div class="change-item-icon"
+                                     ng-switch="vm.stateTypes.getById(vm.resolutionTasks.getById(task.idChangeItems[0]).stateId).name">
+                                    <md-icon ng-switch-when="Released" md-font-icon="icon-cog" aria-label="icon-cog"
+                                             class="s16"></md-icon>
+                                    <div ng-switch-when="In Design" class="change-item-icons-wrapper">
+                                        <md-icon md-font-icon="icon-cog" class="change-item-icon-first s12"></md-icon>
+                                        <md-icon md-font-icon="icon-cog" class="change-item-icon-second s6"></md-icon>
+                                    </div>
+                                </div>
+
+
+                                <div class="todo-item-change-item">
+                                    <span ng-repeat="id in task.idChangeItems">{{vm.resolutionTasks.getById(id).number}}</span>
+                                </div>
+
+                            <!--</div>-->
+                                </a>
+                            <!-- / CHANGE ITEM SELECT -->
+
+                            <!-- MEMBER -->
+                            <div ng-if="task.idMembers.length > 0" class="task-list-members"
+                                 layout="row">
+
+                                <div class="task-list-member"
+                                     ng-repeat="memberId in task.idMembers">
+
+                                    <md-chip-template class="member-chip">
+                                        <img ng-show="vm.isAvatarAvailable(vm.members.getById(memberId).avatar)"
+                                             class="task-list-avatar-circle" ng-src="{{vm.members.getById(memberId).avatar}}">
+                                        <div ng-hide="vm.members.getById(memberId).avatar" class="task-list-avatar-circle">
+                                            <span class="initials">{{vm.defaultAvatar(vm.members.getById(memberId).name)}}</span>
+                                        </div>
+
+                                    </md-chip-template>
+
+                                    <!--<img class="list-card-member-avatar"
+                       ng-src="{{vm.board.members.getById(memberId).avatar}}">-->
+
+                                    <md-tooltip>
+                                        <div class="name">{{ vm.members.getById(memberId).name}}</div>
+                                    </md-tooltip>
+                                </div>
+
+                            </div>
+                            <!-- / MEMBERS -->
+
+                            <!-- DUEDATE -->
+                            <div ng-if="task.dueDate.length > 0" class="task-list-dueDate">
+                                <md-icon md-svg-icon="md-calendar" class="task-list-icon-calendar"></md-icon>
+                                <div>{{vm.formatDueDate(task.dueDate)||''}}</div>
+                            </div>
+                            <!-- /DUEDATE -->
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="buttons" layout="row" layout-align="start center">
+                        <div class="button-important">
+                            <md-icon md-font-icon="icon-alert-circle" class="is-important red-600-fg"
+                                     ng-if="task.important"></md-icon>
+                        </div>
+
+
+                        <div ng-switch="task.starred" class="button-subscribe"
+                             ng-click="vm.preventDefault($event);task.starred = !task.starred">
+                            <md-icon ng-switch-when="true" md-font-icon="icon-star" class="is-starred amber-600-fg"></md-icon>
+                            <md-icon ng-switch-when="false" md-font-icon="icon-star-outline" class="is-starred gray-600-fg"></md-icon>
+                        </div>
+
+
+                        <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" translate
+                                       translate-attr-aria-label="TODO.MORE">
+                                <md-icon md-font-icon="icon-dots-vertical"
+                                         ng-click="vm.preventDefault($event);$mdOpenMenu($event)"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+                                <md-menu-item>
+                                    <md-button ng-click="vm.toggleCompleted(task)" aria-label="Toggle done"
+                                               translate-attr-aria-label="TODO.TOGGLE_DONE">
+                                        <md-icon ng-class="task.completed === false ? 'grey-fg' : 'blue-fg'"
+                                                 md-font-icon="icon-checkbox-marked-circle" class="s18"></md-icon>
+                                        <span ng-show="!task.completed" translate="TODO.MARK_AS_DONE">Mark as done</span>
+                                        <span ng-show="task.completed" translate="TODO.MARK_AS_UNDONE">Mark as undone</span>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="task.important = !task.important" aria-label="Toggle important"
+                                               translate-attr-aria-label="TODO.TOGGLE_IMPORTANT">
+                                        <md-icon ng-class="task.important === false ? 'grey-fg' : 'red-600-fg'"
+                                                 md-font-icon="icon-alert-circle" class="s18"></md-icon>
+                                    <span ng-show="!task.important" translate="TODO.MARK_AS_IMPORTANT"> Mark as
+                                        important</span>
+                                    <span ng-show="task.important" translate="TODO.REMOVE_IMPORTANT">Remove
+                                        important</span>
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / TODO LIST ITEMS -->
+    </div>
+    <!-- / Todo list pane -->
+
+</div>
+<!-- / CONTENT -->
+
+

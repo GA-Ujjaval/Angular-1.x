@@ -1,0 +1,110 @@
+.advanced-numbering-grid {
+  .adv-number-header-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 183px;
+  }
+
+  .width-fix {
+    padding-right: 355px;
+  }
+
+  .title {
+    display: flex;
+  }
+
+  #grid-advance-numbering {
+    margin-top: 20px;
+
+    .cell-height-70 {
+      height: 70px !important;
+    }
+
+    .cell-height-50 {
+      height: 50px !important;
+    }
+
+    .editable-buttons {
+      .md-button.md-icon-button {
+        width: unset;
+        height: unset;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .editable-has-buttons.editable-input {
+      font-size: 13px;
+      width: calc(100% - 50px);
+      height: 32px;
+      border: none
+    }
+
+    .editable-wrap {
+      margin-top: -2px;
+      margin-left: -2px;
+    }
+
+    .editable-grid-cell {
+      cursor: pointer;
+    }
+
+    .bluish-grid-cell {
+      box-shadow: 0 0 10px #37a1d5 inset;
+    }
+
+    .reddish-grid-cell {
+      box-shadow: 0 0 10px #f72929 inset;
+    }
+
+    .zero-padding {
+      padding: 0;
+    }
+
+    .scheme-dropdown {
+      margin: 0;
+    }
+
+    .scheme-dropdown .md-select-value {
+      border: none !important;
+    }
+
+    .test-next-number-table {
+      margin: 0;
+      width: 100%;
+      transform: scale(0.8);
+    }
+
+    .inactive {
+      opacity: 0.65;
+    }
+
+    .ui-grid-filter-container {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .required-mark {
+      color: #ff0a00;
+    }
+
+    .test-next {
+      line-height: 1.4;
+      width: fit-content;
+      height: 30px;
+      min-height: unset;
+      margin-top: -3px;
+      display: inline-block;
+      border: 2px solid #a3a3a3;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+
+  .adv-number-header-tooltip {
+    display: flex;
+    font-size: 16px;
+    flex-direction: column;
+    color: #ff3900;
+  }
+}

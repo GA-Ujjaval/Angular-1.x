@@ -1,0 +1,28 @@
+<div
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+  <div style="float:left;" class="ui-grid-tree-base-row-header-buttons"
+       ng-class="{'ui-grid-tree-base-header': row.treeLevel > -1 }"
+       ng-if="!grid.appScope.vm.sourcingUtils.checkLength(row.entity.mfrList, row.entity.mfrPartsList.length)"
+       ng-click="grid.appScope.vm.toggleSourcingGridRow(row, grid.api, row.treeNode.children, row.treeNode.state, null, true)">
+
+    <md-icon class="icon-menu-down show-more" ng-if="((( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) ||
+       ( row.treeNode.children && row.treeNode.children.length > 0 )) && !row.entity.sourcingCollapsed) && row.entity.objectId">
+      <md-tooltip class="md-tooltip">Click to show more Manufacturer Parts</md-tooltip>
+    </md-icon>
+
+    <md-icon class="icon-menu-up show-more" ng-if="((( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) ||
+       ( row.treeNode.children && row.treeNode.children.length > 0 )) && row.entity.sourcingCollapsed) && row.entity.objectId">
+      <md-tooltip class="md-tooltip">Click to show less Manufacturer Parts</md-tooltip>
+    </md-icon>
+  </div>
+
+  <a ui-sref="app.objects.sourcing.sourcingdetails({id:row.entity.mfrList.mfrObjectId})"
+     target="{{grid.appScope.vm.linkTarget}}">
+    <span ng-style="{'padding-left': ((grid.options.treeIndent && !grid.appScope.vm.sourcingUtils.checkLength(row.entity.mfrList, row.entity.mfrPartsList.length)
+     && row.entity.leaf) || (grid.appScope.vm.sourcingUtils.checkPadding(grid.options.data, 'mfr') && grid.appScope.vm.sourcingUtils.checkLength(row.entity.mfrList, row.entity.mfrPartsList.length)) ? 25 : 0) + 'px'}"
+          ng-if="row.entity.mfrList">
+      {{ row.entity.mfrList[col.name] ||'' }}
+    </span>
+  </a>
+</div>

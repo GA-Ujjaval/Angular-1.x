@@ -1,0 +1,75 @@
+<div layout="row" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex>
+    <div class="margin-5">
+
+      <div class="clear-filter-text align-left" ng-if="vm.clearButtonSupplierParts">
+        <md-button class="clear-filter-button" ng-click="vm.fuseUtils.clearFilters(vm.supplierPartsTableUiGrid)">
+          <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+        </md-button>
+        <span>Clear current sorts, filters and pins</span>
+      </div>
+
+      <md-progress-circular id="create-progress" class="sourcing-circular" md-diameter="35" md-mode="indeterminate" ng-if="vm.progress">
+      </md-progress-circular>
+
+      <div layout="row" layout-align="end center">
+        <md-button class="button-table-edit" ng-click="vm.editTable($event, vm.objectPageEnum.suppPartsSupplierPage)">
+          <md-icon class="icon-table-edit"></md-icon>
+          <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+        </md-button>
+
+        <md-menu md-position-mode="left bottom">
+
+          <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+            <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+            <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+          </md-button>
+
+          <md-menu-content>
+
+            <md-menu-item>
+              <md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.supplierPartsTableUiGrid)">
+                CSV
+              </md-button>
+            </md-menu-item>
+
+            <md-menu-item>
+              <md-button
+                ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.supplierPartsTableUiGrid.grid, vm.supplierPartsTableOptions)">
+                PDF
+              </md-button>
+            </md-menu-item>
+
+          </md-menu-content>
+
+        </md-menu>
+
+        <md-button class="button-print"
+                   ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.supplierPartsTableUiGrid.grid, vm.supplierPartsTableUiGrid)">
+          <md-icon class="icon-printer"></md-icon>
+          <md-tooltip class="md-tooltip">Print table</md-tooltip>
+        </md-button>
+      </div>
+
+    </div>
+
+    <div id="grid-supp-parts"
+         ui-grid="vm.supplierPartsTableOptions"
+         ui-grid-move-columns
+         ui-grid-save-state
+         ui-grid-tree-view
+         ui-grid-pinning
+         ui-grid-resize-columns
+         ui-grid-exporter
+         ui-grid-pagination
+         ui-grid-auto-resize
+         class="grid"
+         ng-class=" {'grid-height-sourcing' : ((vm.supplierPartsTableOptions.totalItems * 30) + 440) >= vm.heightMax } "
+         ng-style="{ 'height': ((vm.supplierPartsTableOptions.totalItems * 30) + 440) < vm.heightMax ? (!vm.supplierPartsTableOptions.totalItems ? 300 : ((vm.supplierPartsTableOptions.totalItems * 30) + 120 + vm.heightTopPanelSupplierParts)) : false }">
+
+      <div class="watermark" ng-show="!vm.supplierPartsTableOptions.data.length">No data available</div>
+      <no-results-found grid-api="vm.supplierPartsTableUiGrid" grid-options="vm.supplierPartsTableOptions"></no-results-found>
+
+    </div>
+  </div>
+</div>

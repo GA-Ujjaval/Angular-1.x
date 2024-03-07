@@ -1,0 +1,64 @@
+<div class="margin-5" layout="row">
+
+  <div flex="45">
+    <div class="clear-filter-text align-left" ng-if="vm.clearButtonWhereUsedMfrPage">
+      <md-button class="clear-filter-button" ng-click="vm.fuseUtils.clearFilters(vm.commonUiGrid)">
+        <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+      </md-button>
+      <span>Clear current sorts, filters and pins</span>
+    </div>
+  </div>
+
+</div>
+
+<div layout="row" ng-show="false">
+
+  <div style="width:700px"
+       ui-grid="vm.commonTableGridOptions"
+       ui-grid-move-columns
+       ui-grid-save-state
+       ui-grid-tree-view
+       ui-grid-pinning
+       ui-grid-resize-columns
+       ui-grid-exporter
+       ui-grid-pagination
+       ui-grid-auto-resize
+       ui-grid-edit
+       class="grid">
+
+  </div>
+
+</div>
+
+<div layout="row" id="bom-compare">
+  <div ng-style="{'width': (100/vm.hierarchicalTables.length) + '%'}"
+       id="hierarchical-{{table.id}}" layout="column"
+       ng-repeat="table in vm.hierarchicalTables"
+       class="hierarchical-wrapper">
+
+    <p class="table-header" style="margin-bottom:0; margin-left:20px;"><strong>{{ table.name }}</strong></p>
+    <div id="grid-bom-compare-table-{{table.id}}"
+         ui-grid="table.gridOptions"
+         ui-grid-move-columns
+         ui-grid-save-state
+         ui-grid-tree-view
+         ui-grid-pinning
+         ui-grid-resize-columns
+         ui-grid-exporter
+         ui-grid-pagination
+         ui-grid-auto-resize
+         class="grid">
+
+      <div class="watermark" ng-show="!table.gridOptions.data.length">No data available</div>
+      <no-results-found ng-if="table.gridName" grid-api="table[table.gridName].commonUiGrid" grid-options="table.gridOptions"></no-results-found>
+    </div>
+
+    <div class="sidebar-resizer"
+         resizer="vertical"
+         resizer-width="3"
+         resizer-left="hierarchical-{{$index - 1}}"
+         resizer-right="hierarchical-{{$index}}">
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,63 @@
+<!-- BOARDS -->
+<div id="boards" class="md-accent-bg" layout="column" flex
+     ng-intro-options="IntroOptions" ng-intro-method="CallMe"
+     ng-intro-oncomplete="CompletedEvent" ng-intro-onexit="ExitEvent"
+     ng-intro-onbeforechange="BeforeChangeEvent"
+     ng-intro-autostart="ShouldAutoStart">
+
+  <!-- BOARD SELECTION -->
+  <div id="board-selector" layout="column" layout-align="start center" flex>
+
+    <md-progress-circular ng-if="vm.progress" md-diameter="40" class="board-progress">
+    </md-progress-circular>
+
+    <h1 translate="SB.SCRUMBOARD_APP">Boards</h1>
+
+
+    <!-- BOARD LIST -->
+    <div class="board-list" layout="row" layout-align="center center" layout-wrap>
+
+      <!-- BOARD -->
+      <div class="board-list-item" ng-repeat="board in vm.boardList"
+           ng-click="vm.openBoard(board.id)"
+           layout="column" layout-align="center center">
+        <div class="question-icon question-icon-hidden">
+          <div class="introjs-hint-dot introjs-hint-dot-boards"></div>
+          ?
+        </div>
+        <md-icon md-font-icon="icon-trello" class="icon s64"></md-icon>
+        <div class="board-name">{{board.name}}</div>
+      </div>
+      <!-- / BOARD -->
+
+      <!-- NEW BOARD BUTTON
+       <div ng-if="vm.sessionData.userAuth == true" class="board-list-item add-new-board" layout="column" layout-align="center center"-->
+      <div class="board-list-item add-new-board" layout="column" layout-align="center center"
+           ng-if="!cleanPath && vm.sessionData.userAuth == true" id="step3"
+           ui-sref="app.customer.scrumboard.boards.addBoard">
+        <div class="question-icon" ng-if="$root.introGlobalHelp != false" ng-click="CallMe()">
+          <div class="introjs-hint-dot introjs-hint-dot-boards"></div>
+          ?
+        </div>
+        <md-icon md-font-icon="icon-plus-circle" class="icon s64"></md-icon>
+        <div class="board-name" translate="SB.ADD_NEW_BOARD">Add new board</div>
+      </div>
+      <div class="board-list-item add-new-board" layout="column" layout-align="center center"
+           ng-if="cleanPath && vm.sessionData.userAuth == true" id="step3">
+        <div class="question-icon" ng-click="CallMe()">
+          <div class="introjs-hint-dot introjs-hint-dot-boards"></div>
+          ?
+        </div>
+        <md-icon md-font-icon="icon-plus-circle" class="icon s64"></md-icon>
+        <div class="board-name" translate="SB.ADD_NEW_BOARD">Add new board</div>
+      </div>
+      <!-- / NEW BOARD BUTTON -->
+
+    </div>
+    <!-- / BOARD LIST -->
+
+  </div>
+  <!-- / BOARD SELECTION -->
+
+</div>
+<!-- / BOARDS -->

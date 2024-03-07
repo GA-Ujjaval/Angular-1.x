@@ -1,0 +1,15 @@
+<div ng-if="row.entity.level === 1"
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+      <span ng-repeat="note in row.entity.notes" ng-class="{'change': note.compareCode === 'CHANGE', 'new': note.compareCode === 'NEW', 'discard': note.compareCode === 'DISCARD'}">
+      {{ note.value }}
+        <span ng-if="($index+1) < row.entity.notes.length" style="color:black;">, </span>
+    </span>
+</div>
+<div ng-if="row.entity.level !== 1"
+     class="ui-grid-cell-contents"
+     title="TOOLTIP">
+      <span ng-class="{'change': row.entity.modification === '1', 'new': row.entity.modification === '3', 'discard': row.entity.modification === '2'}">
+      {{ row.entity.notes }}
+    </span>
+</div>

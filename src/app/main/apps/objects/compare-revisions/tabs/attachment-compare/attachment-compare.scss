@@ -1,0 +1,44 @@
+
+#attachment-compare {
+  display: flex;
+  flex-wrap: nowrap;
+
+  .table {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .table-name {
+    padding: 10px 5px 0 5px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .grid-itself {
+    margin: 0;
+    padding: 0;
+    min-height: 400px;
+  }
+
+  .new {
+    color: #008000;
+  }
+
+  .change {
+    color: #ff7405;
+  }
+
+  .discard {
+    color: #ff0000;
+    text-decoration: line-through;
+  }
+
+  .sidebar-resizer {
+    top: 33px;
+  }
+
+  .attachment-compare-link{
+    cursor: pointer;
+  }
+}

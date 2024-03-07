@@ -1,0 +1,44 @@
+<div id="login" class="flex-scrollable" layout="column" ms-scroll>
+    <div id="login-form-wrapper" layout="column" layout-align="center center">
+        <div id="login-form" class="md-whiteframe-8dp">
+            <div class="logo">
+                <!--<span>F</span>-->
+                <img src="assets/images/logos/fuseplm.png" >
+            </div>
+            <div class="title">Log in to your account</div>
+
+            <form name="loginForm" novalidate>
+                <md-input-container class="md-block" md-no-float>
+                    <input type="email" name="userEmail" ng-model="vm.loginForm.userEmail" placeholder="Email" required maxlength="64">
+
+                    <div ng-messages="loginForm.userEmail.$error" role="alert">
+                        <div ng-message="required">
+                            <span>Enter Valid EmailId</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-no-float>
+                    <input type="password" name="userPassword" ng-model="vm.loginForm.userPassword" placeholder="Password" required maxlength="20">
+
+                    <div ng-messages="loginForm.userPassword.$error" role="alert">
+                        <div ng-message="required">
+                            <span>Password field is required</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <a href="" class="forgot-password md-accent-color" ng-click="vm.channelNameFunction('aws')">Forgot Password?</a>
+
+                <md-button type="submit" class="md-raised md-accent submit-button"
+                           ng-disabled="loginForm.$invalid || loginForm.$pristine" ng-click="vm.userAuthFunction()">
+                    LOG IN
+                </md-button>
+                <!--<div class="register" layout="row" layout-sm="column" layout-align="center center">
+                    <span class="text">Want to change Server?</span>
+                    <a class="link" ui-sref="app.landing">Go Back</a>
+                </div>-->
+            </form>
+
+        </div>
+    </div>
+</div>

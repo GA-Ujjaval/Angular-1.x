@@ -1,0 +1,22 @@
+<div ng-if="vm.selectedTab === vm.selectTabsBOM" ng-controller="BomController as vm">
+    <md-tabs md-selected="vm.selectedBomTab" md-dynamic-height>
+
+        <md-tab label="Hierarchical" ng-click="vm.tabSearch('hierarchical')">
+            <md-content ng-include="'app/main/apps/objects/parts/tabs/bill-of-materials/hierarchical/hierarchical.html'">
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Flat View" ng-click="vm.tabSearch('flat')">
+            <md-content ng-if="vm.isFlatVisited" ng-include="'app/main/apps/objects/parts/tabs/bill-of-materials/flat-view/flat-view.html'">
+            </md-content>
+        </md-tab>
+
+
+        <!--<md-tab label="Sourcing" ng-click="vm.tabSearch('sourcing')">-->
+            <!--<md-content ng-include="'app/main/apps/objects/parts/tabs/bill-of-materials/sourcing/sourcing.html'">-->
+            <!--</md-content>-->
+        <!--</md-tab>-->
+
+    </md-tabs>
+
+</div>

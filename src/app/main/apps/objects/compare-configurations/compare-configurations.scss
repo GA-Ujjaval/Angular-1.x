@@ -1,0 +1,59 @@
+#configuration-matrix-checkbox, #configuration-matrix-description{
+  .align-center{
+    text-align:center;
+  }
+  .padding-5{
+    padding: 5px;
+  }
+
+}
+#grid-configurations-compare {
+  .cell-height-50 {
+    height: 50px;
+  }
+
+  .cell-height-70 {
+    height: 70px;
+  }
+
+  .grayed-out-header-cell{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.ui-grid-focuser:focus {
+  box-shadow: none !important;
+}
+
+#parts {
+  .checkbox-circular {
+    display: inline-block;
+    top: 10px;
+    visibility: hidden;
+  }
+
+  .checkbox-circular-visible {
+    visibility: visible;
+  }
+}
+
+.two-line-compare-tooltip{
+  height: fit-content;
+}
+
+.custom-sorting{
+  width: 100%;
+  padding-left: 50px;
+  line-height: 0.5em;
+  text-align: center;
+  position: absolute;
+}
+
+#parts{
+  .button-print-configurations{
+    font-size: 25px;
+    min-width: 48px !important;
+    margin-right: 5px !important;
+  }
+}

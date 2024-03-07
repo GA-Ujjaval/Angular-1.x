@@ -1,0 +1,66 @@
+<md-menu>
+  <div class="preset-menu-initiator" ng-click="$mdMenu.open(); vm.getPresets(vm)" aria-label="preset-init">
+    <span class="preset-menu-initiator-text">Search Preset <span class="dwn-arw"></span></span>
+    <md-tooltip class="md-tooltip multiline-tooltip-templates">
+      <ul>
+        <li>Search Preset - saves the Advanced Search criteria</li>
+        <li>Search Presets created by Admin appear in italicized font</li>
+        <li>Search Presets created by you appear in regular font</li>
+        <li>Check box next to Search Preset indicates that it has been applied to the table</li>
+      </ul>
+    </md-tooltip>
+  </div>
+  <md-menu-content class="mf-search-preset-content">
+    <md-menu-item ng-if="!vm.isRO()">
+      <md-button class="create-new"
+                 ng-click="vm.showPresetDialog(vm, null, 'create')">
+        Create preset
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-input-container>
+        <label class="filter-label">Search search presets</label>
+        <input type="text" ng-model="vm.templateSearchText"
+               ng-change="vm.checkFilteredTemplates(vm.templateSearchText)">
+      </md-input-container>
+    </md-menu-item>
+    <md-menu-item class="preset-item" ng-repeat="preset in vm.presets"
+                  ng-show="vm.templateSearchText.length === 0 || preset.fullName.toLowerCase().indexOf(vm.templateSearchText.toLowerCase()) !== -1">
+      <md-menu md-position-mode="cascade cascade" class="preset-item-menu">
+        <md-button class="preset-button" ng-mouseenter="vm.stopHover($event)" ng-click="vm.showController.debouncedShowElement(preset); $mdMenu.open()">
+          <md-checkbox disabled class="default-template-button" aria-label="default" ng-if="preset.applied"
+                       ng-checked="true"></md-checkbox>
+          <div class="template-name" ng-class="{'italic': preset.sharedWithUsers}">
+            {{preset.templateName}}
+            <span ng-if="preset.isDefault" class="default-mark">
+              (default)
+            </span>
+          </div>
+          <md-icon md-font-icon="icon-chevron-right s30"
+                   class="md-default-theme md-font material-icons icon-chevron-right s30"
+                   aria-hidden="true"></md-icon>
+
+
+        </md-button>
+        <md-menu-content class="item-content">
+          <md-menu-item>
+            <md-button class="action-button" ng-click="vm.applyPreset(vm, preset)">Apply</md-button>
+          </md-menu-item>
+          <md-menu-item ng-if="vm.isUserEmpoweredToDelete(preset.createdBy)"
+                        ng-click="vm.showPresetDialog(vm, preset)">
+            <md-button class="action-button">Edit</md-button>
+          </md-menu-item>
+          <md-menu-item ng-if="vm.isUserEmpoweredToDelete(preset.createdBy)"
+                        ng-click="vm.deletePreset(vm, preset.templateId)">
+            <md-button class="action-button">Delete</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-menu-item>
+    <md-menu-item class="no-templates-filter" ng-show="vm.isNothingMatched">
+      <md-button class="no-templates-found">
+        No templates found
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

@@ -1,0 +1,52 @@
+<div layout="row" class="md-white-bg" layout-align="center center">
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="70" flex-sm="100">
+        <form name="proxyForm" class="md-inline-form" novalidate>
+
+            <div class="form-title">Proxy Selection</div>
+
+            <div layout="column" layout-gt-sm="row">
+                <md-input-container flex>
+                    <label>Company Name</label>
+                    <md-select ng-model="vm.proxyForm.customerAdminId" required name="userName">
+                        <md-option value="">
+                            Select Option
+                        </md-option>
+                        <md-option ng-repeat="cutomer in vm.cutomerData" value="{{cutomer.userId}}">
+                            {{cutomer.userName}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="proxyForm.userName.$error"
+                         role="alert">
+                        <div ng-message="required">
+                            <span>{{vm.error.require}}</span>
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            <br/>
+
+            <div layout="column" layout-gt-xs="row">
+                <md-input-container flex>
+                    <!--<label>Customer User ID</label>-->
+                    <input type="password" name="userPassword" ng-model="vm.proxyForm.fuseAdminPassword"
+                           placeholder="Your Password" required maxlength="20">
+                    <div ng-messages="proxyForm.userPassword.$error" role="alert" multiple>
+                        <div ng-message="required"><span>{{vm.error.require}}</span></div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="column" layout-gt-xs="row">
+                <md-button type="submit" class="md-raised md-accent" aria-label="Proxy Login"
+                           ng-disabled="proxyForm.$invalid || proxyForm.$pristine" ng-click="vm.proxyLoginFunction()">
+                    Proxy Login
+                </md-button>
+                <md-button type="cancel" class="md-raised md-accent" aria-label="Reset" ng-click="vm.proxyForm = {}">
+                    Reset
+                </md-button>
+                <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+                </md-progress-circular>
+            </div>
+        </form>
+
+    </div>
+</div>

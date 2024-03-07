@@ -1,0 +1,14 @@
+<div class="change-mode-popup-container">
+  <h2 class="save-mode-header">Do you want to save changes?</h2>
+  <div class="save-mode-note">
+    Note: These changes will take effect immediately.
+  </div>
+  <div class="mode-option-container">
+    <md-button ng-repeat="option in vm.saveModeOptions"
+               ng-click="vm.changeModeByOption(vm, option.value)"
+               class="md-button md-raised mode-change-button"
+                ng-class="{'md-accent' : option.value === 'yes'}">
+      {{option.buttonText}}
+    </md-button>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div ng-if="vm.manufacturerPartsTableOptions.data" id="e-commerce-manufacturer-parts" class="page-layout simple tabbed right-sidenav md-grey-100-bg" layout="row">
+  <!-- CENTER -->
+  <div class="center content bottom-value" layout="column"  flex>
+    <!-- CONTENT CARD -->
+    <div class="content-card" layout="column" flex>
+      <!-- CONTENT -->
+      <div class="content" layout="column" flex>
+
+        <div class="buttons-edit-download-add buttons-part buttons-search-part tools">
+          <md-switch class="latest-version-switch" ng-true-value="true" ng-false-value="false"
+                     ng-model="vm.isLatest" ng-change="vm.onChangeLatest()" aria-label="Part Search settings">
+          </md-switch>
+          <span class="latest-version-text">Show only latest revision</span>
+          <div class="clear-filter" ng-if="vm.clearSearchButton">
+            <md-button class="clear-filter-button" aria-label="clear-filter-manufacturer-part" ng-click="vm.clearFilters(vm.manufacturerPartsTableUiGrid, vm.manufacturerPartsId, vm.objectPageEnum.searchMfrPartsPage)">
+              <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+            </md-button>
+            <span class="clear-filter-text">Clear current sorts, filters and pins</span>
+          </div>
+          <md-button class="button-table-edit"
+                     ng-click="vm.editTable($event, vm.objectPageEnum.searchMfrPartsPage)">
+            <md-icon class="icon-table-edit"></md-icon>
+            <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+          </md-button>
+          <md-menu md-position-mode="left bottom">
+            <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+              <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+              <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.manufacturerPartsTableUiGrid)">
+                  CSV
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.manufacturerPartsTableUiGrid.grid, vm.manufacturerPartsTableOptions, 'manufacturerParts')">
+                  PDF
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+          <md-button class="button-print" ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.manufacturerPartsTableUiGrid.grid, vm.manufacturerPartsTableOptions, 'manufacturerParts')">
+            <md-icon class="icon-printer"></md-icon>
+            <md-tooltip class="md-tooltip">Print Table. NOTE: Disable any ad-blocker in the browser</md-tooltip>
+          </md-button>
+        </div>
+
+        <div id="grid-manufacturerParts"
+             ui-grid="vm.manufacturerPartsTableOptions"
+             ui-grid-move-columns
+             ui-grid-save-state
+             ui-grid-pinning
+             ui-grid-resize-columns
+             ui-grid-exporter
+             ui-grid-pagination
+             ui-grid-auto-resize
+             ui-grid-edit
+             class="grid">
+        </div>
+
+        <div class="watermark" ng-show="!vm.manufacturerPartsTableOptions.data.length">No data available</div>
+        <no-results-found grid-api="vm.manufacturerPartsTableUiGrid" grid-options="vm.manufacturerPartsTableOptions"></no-results-found>
+
+      </div>
+    </div>
+  </div>
+</div>

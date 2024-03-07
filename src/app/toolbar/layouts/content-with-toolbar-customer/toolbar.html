@@ -1,0 +1,112 @@
+<div ng-mouseenter="vm.changeLogo(false)" layout="row" layout-align="start center">
+    <div layout="row" layout-align="start center" flex>
+        <md-button id="navigation-toggle" class="md-icon-button" ng-click="vm.toggleSidenav('navigation')"
+                   hide-gt-sm aria-label="Toggle navigation" translate
+                   translate-attr-aria-label="TOOLBAR.TOGGLE_NAVIGATION">
+            <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+        </md-button>
+        <div class="toolbar-separator"></div>
+    </div>
+    <div layout="row" layout-align="start center" ng-if="vm.boardLoaded" class="toolbar-notification">Loading contents... Please wait for loading to complete before performing any action.</div>
+    <div layout="row" class="toolbar-items-container" layout-align="start center">
+        <md-progress-circular id="toolbar-progress" ng-if="vm.progress" class="md-accent"
+                              md-mode="indeterminate" md-diameter="64">
+        </md-progress-circular>
+        <div class="toolbar-item">
+          <md-menu-bar id="user-menu">
+            <md-menu md-position-mode="left bottom">
+                <md-button class="user-button" ng-click="$mdOpenMenu()"
+                           aria-label="User settings"
+                           translate translate-attr-aria-label="TOOLBAR.USER_SETTINGS">
+                    <div layout="row" layout-align="space-between center">
+                        <div class="avatar-wrapper">
+                            <img md-menu-align-target class="avatar" ng-src="{{vm.customerProfileForm.avatar || 'assets/images/avatars/profile.jpg'}}">
+                            <md-icon md-font-icon ng-class="vm.userStatus.icon"
+                                     ng-style="{'color': vm.userStatus.color }"
+                                     class="icon status s16">
+                            </md-icon>
+                        </div>
+                    </div>
+                </md-button>
+
+                <md-menu-content width="1">
+                    <md-menu-item class="md-indent" ui-sref="app.customer.dashboard">
+                        <md-icon md-font-icon="icon-home-variant" class="icon"></md-icon>
+                        <md-button>Home</md-button>
+                    </md-menu-item>
+
+                    <md-menu-divider></md-menu-divider>
+
+                    <md-menu-item class="md-indent" ui-sref="app.customer.profile" ng-if="vm.sessionData.proxy == false">
+                        <md-icon md-font-icon="icon-account" class="icon"></md-icon>
+                        <md-button>My Profile</md-button>
+                    </md-menu-item>
+
+                    <md-menu-divider></md-menu-divider>
+
+                    <md-menu-item class="md-indent" ui-sref="app.customer.settings" ng-if="vm.sessionData.proxy == false">
+                      <md-icon md-font-icon="icon-cog" class="icon"></md-icon>
+                      <md-button>My Settings</md-button>
+                    </md-menu-item>
+
+                    <md-menu-divider ng-if="vm.sessionData.proxy == false"></md-menu-divider>
+
+                    <md-menu-item class="md-indent" ui-sref="app.customer.password" ng-if="vm.sessionData.proxy == false">
+                        <md-icon md-font-icon="icon-equal-box" class="icon"></md-icon>
+                        <md-button>Change Password</md-button>
+                    </md-menu-item>
+
+                    <md-menu-divider ng-if="vm.sessionData.proxy == false"></md-menu-divider>
+
+                    <md-menu-item class="md-indent">
+                        <md-icon md-font-icon="icon-logout" class="icon"></md-icon>
+                        <md-button ng-click="vm.logout()">Logout</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-menu-bar>
+        </div>
+      <div class="toolbar-separator"></div>
+
+      <div class="toolbar-item">
+        <mf-create-object-shortcut></mf-create-object-shortcut>
+      </div>
+      <div class="toolbar-separator"></div>
+      <div class="toolbar-item">
+        <md-menu md-position-mode="left bottom">
+          <md-button  ng-click="$mdOpenMenu()" class="toolbar-circle-btn" aria-label="help button">
+            <md-icon md-font-icon="icon-help-circle" class="icon status-toolbar"></md-icon>
+            <!--<md-icon md-font-icon="icon-menu-down"></md-icon>-->
+          </md-button>
+          <md-menu-content width="1">
+            <md-menu-item class="help-item">
+              <a ng-href="https://fuseplmhelp.zendesk.com/" target="_blank" class="help-link">
+                <md-icon md-font-icon="icon-help-circle online-help-text-icon" class="icon"></md-icon>
+                <span class="online-help-text">Online Help</span>
+              </a>
+            </md-menu-item>
+            <md-menu-item class="help-item">
+              <md-switch class="help-switch" ng-if="$root.introGlobalHelp != undefined" ng-true-value="true" ng-false-value="false" ng-model="$root.introGlobalHelp" ng-change="vm.onChange($root.introGlobalHelp, 'help')" aria-label="help switch">
+              </md-switch>
+              <md-switch class="help-switch" ng-if="$root.introGlobalHelp == undefined" ng-true-value="undefined" ng-false-value="false" ng-model="$root.introGlobalHelp" ng-change="vm.onChange($root.introGlobalHelp, 'help')" aria-label="help switch">
+              </md-switch>
+              <span>Enable Help Bubbles</span>
+            </md-menu-item>
+            <md-menu-item class="help-item">
+              <md-switch class="help-switch" ng-if="$root.showBot != undefined" ng-true-value="true" ng-false-value="false" ng-model="$root.showBot" ng-change="vm.onChange($root.showBot, 'bot')" aria-label="Plm Bot">
+              </md-switch>
+              <md-switch class="help-switch" ng-if="$root.showBot == undefined" ng-true-value="undefined" ng-false-value="false" ng-model="$root.showBot" ng-change="vm.onChange($root.showBot, 'bot')" aria-label="Plm Bot">
+              </md-switch>
+              <span>Enable PlmBot</span>
+            </md-menu-item>
+            <md-menu-item class="help-item">
+              <a ng-href="mailto:support@fuseplm.com" target="_blank" class="help-link">
+                <md-icon md-font-icon="icon-email online-help-text-icon" class="icon"></md-icon>
+                <span class="online-help-text">Contact Support</span>
+              </a>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+    </div>
+</div>

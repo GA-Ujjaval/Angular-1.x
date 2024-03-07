@@ -1,0 +1,83 @@
+{
+  "data": {
+    "changeItems": [
+      {
+        "number": "20-007",
+        "id": "20-007",
+        "type": "Connector",
+        "color": "red",
+        "name": "Mini USB Connector",
+        "description": "4 CONTACT(S), FEMALE, RIGHT ANGLE TELECOM AND DATACOM CONNECTOR, SURFACE MOUNT, RECEPTACLE",
+        "revision": 1,
+        "state": "Released",
+        "idTasks": [
+          "task50",
+          "task62",
+          "task63",
+          "task64",
+          "task68"
+        ]
+      },
+      {
+        "number": "50-0089",
+        "id": "50-0089",
+        "type": "Mechanical",
+        "color": "blue",
+        "name": "Screw, M2 x 5, ST, PH, Torx",
+        "description": "Screw M2 x 5 stainless steel self tapping pan head with Torx drive",
+        "revision": 1,
+        "state": "In Design",
+        "idTasks": [
+          "561551bd26e21bb5e85b35cb",
+          "561551bd32f1588c814a0ccd",
+          "561551bd49d800c243264a91"
+        ]
+      },
+      {
+        "number": "30-0078",
+        "id": "30-0078",
+        "type": "Resistor",
+        "color": "yellow",
+        "name": "51k Resistor",
+        "description": "RESISTOR, METAL GLAZE/THICK FILM, 0.1 W, 5 %, 200 ppm, 51000 ohm, SURFACE MOUNT, 0603",
+        "revision": 1,
+        "state": "Released",
+        "idTasks": [
+          "561551bd73d1a627e97005ce",
+          "561551bd917bfec2ddef2d49",
+          "561551bd2047cc709af0f670",
+          "561551bd061990eaf40fb64f",
+          "561551bd719860cf0ad2011a"
+        ]
+      },
+      {
+        "number": "40-0008",
+        "id": "40-0008",
+        "type": "Connector",
+        "color": "orange",
+        "name": "GSM/GPRS/GPS Chip",
+        "description": "GSM/GPRS/GPS clip for dash mount",
+        "revision": 1,
+        "state": "Released",
+        "idTasks": [
+          "561551be3bb43a5bd431c2fc",
+          "561551be05c093a80e0c8d05",
+          "561551be81d05fa94711e7f3"
+        ]
+      },
+      {
+        "number": "20-0097",
+        "id": "20-0097",
+        "type": "Assembly",
+        "color": "green",
+        "name": "EveryRoad, PCBA, Model 500",
+        "description": "EveryRoad PCBA Model 500 BOM",
+        "revision": 2,
+        "state": "In Design",
+        "idTasks": [
+
+        ]
+      }
+    ]
+  }
+}

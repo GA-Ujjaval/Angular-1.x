@@ -1,0 +1,8 @@
+<div class="ui-grid-cell-contents"
+     ng-class="{'inactive' : !grid.appScope.vm.checkEditable(grid.appScope.vm.OBJECT_TYPE)}"
+     style="padding-left: {{(row.entity.$$treeLevel + 1) * 15 + 'px'}}">
+  {{row.entity.categoryName}}
+  <md-tooltip ng-show="!grid.appScope.vm.checkEditable(grid.appScope.vm.OBJECT_TYPE)" class="md-tooltip">
+    {{grid.appScope.vm.getTooltipText()}}
+  </md-tooltip>
+</div>

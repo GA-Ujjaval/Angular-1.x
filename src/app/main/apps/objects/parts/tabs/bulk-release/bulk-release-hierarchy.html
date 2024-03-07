@@ -1,0 +1,61 @@
+<md-dialog id="bulk-popup">
+  <form ng-cloak>
+
+    <md-toolbar class="md-accent">
+
+      <span ng-if="!vm.isBulkRelease" class="title margin-top-17 margin-left-15">Hierarchical {{vm.statusText}}</span>
+      <span ng-if="vm.isBulkRelease" class="title margin-top-17 margin-left-15">Bulk {{vm.statusText}}</span>
+
+    </md-toolbar>
+
+    <md-dialog-content class="padding-10">
+      <div class="md-dialog-content">
+
+        <div layout="row" ng-if="vm.Objects" class="progress-delete mb-10">
+          <div ng-style="{'width' : vm.successCount*100/vm.Objects.length + '%', 'transition': '1s'}" class="success"
+               ng-class="{'progress-radius-left' : vm.successCount, 'progress-radius-right' : !vm.errorCount && !vm.progress }">
+            <span ng-if="vm.successCount">Success ({{vm.successCount}})</span>
+          </div>
+          <div ng-style="{'width' : vm.errorCount*100/vm.Objects.length + '%', 'transition': '1s'}" class="error"
+               ng-class="{'progress-radius-left' : !vm.successCount, 'progress-radius-right' : vm.errorCount && !vm.progress }">
+            <span ng-if="vm.errorCount">Error ({{vm.errorCount}})</span>
+          </div>
+        </div>
+        <div ng-if="vm.Objects" class="counter mb-20">
+          {{vm.errorCount + vm.successCount}} of {{vm.Objects.length}}
+        </div>
+
+        <div id="grid-bulk"
+             ui-grid="vm.bulkReleaseTableOptions"
+             ui-grid-pagination
+             ui-grid-resize-columns
+             ui-grid-auto-resize
+             ui-grid-tree-view
+             class="grid">
+
+          <div class="watermark" ng-show="!vm.bulkReleaseTableOptions.data.length">No data available</div>
+
+        </div>
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="space-between" class="object-size">
+
+      <md-button class="md-accent md-raised" ng-disabled="!vm.progress" ng-click="vm.abortRelease()">
+        Abort Process
+      </md-button>
+
+      <div class="padding-top-5">
+        <md-progress-circular id="create-progress" class="margin-left-25" md-mode="indeterminate" ng-if="vm.progress">
+        </md-progress-circular>
+      </div>
+
+      <md-button class="md-accent md-raised" ng-disabled="vm.progress" ng-click="vm.closeDialog(); vm.broadcastBulkRelease()">
+        Done
+      </md-button>
+
+    </md-dialog-actions>
+
+  </form>
+</md-dialog>

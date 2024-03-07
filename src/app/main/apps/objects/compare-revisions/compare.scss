@@ -1,0 +1,129 @@
+.compare-header p {
+    font-size: 20px;
+}
+.compare-header ul li a {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+ }
+.compare-header ul li {
+    display: inline;
+    font-size: 18px;
+    margin-right: 30px;
+    line-height:42px;
+}
+.same {color: black;}
+.change, .change a {color: #ff8302 !important;}
+.new, .new a {color: green !important;}
+.discard, .discard a {color: red !important; text-decoration-line: line-through;}
+
+
+
+.bom-compare-content{
+    .ui-grid-header-viewport {
+      height: 70px !important;
+    }
+    .ui-grid-header-canvas {
+      height: 70px !important;
+    }
+    .button-group-bom-compare {
+        position: absolute;
+        right: 10px;
+        top: 0;
+    }
+    div.clear-filter-text {
+        width: 200px;
+        position: absolute;
+        top: 10px;
+        left: 180px;
+    }
+    .sourcing-circular {
+        position: absolute;
+        top: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+    }
+    .grid-height{
+        @media only screen and (min-height:300px){
+            height: 31vh !important;
+        }
+        @media only screen and (min-height:400px){
+            height: 48vh !important;
+        }
+        @media only screen and (min-height:500px){
+            height: 58vh !important;
+        }
+        @media only screen and (min-height:600px){
+            height: 64vh !important;
+        }
+        @media only screen and (min-height:700px){
+            height: 70vh !important;
+        }
+        @media only screen and (min-height:850px){
+            height: 75vh !important;
+        }
+        @media only screen and (min-height:900px){
+            height: 77vh !important;
+        }
+        @media only screen and (min-height:1150px){
+            height: 82vh !important;
+        }
+        @media only screen and (min-height:1250px){
+            height: 82vh !important;
+        }
+    }
+}
+.attribute-compare-content {
+    .grid-height{
+        @media only screen and (min-height:300px){
+            height: 60vh !important;
+        }
+        @media only screen and (min-height:400px){
+            height: 69vh !important;
+        }
+        @media only screen and (min-height:500px){
+            height: 75vh !important;
+        }
+        @media only screen and (min-height:600px){
+            height: 79vh !important;
+        }
+        @media only screen and (min-height:700px){
+            height: 82vh !important;
+        }
+        @media only screen and (min-height:850px){
+            height: 85vh !important;
+        }
+        @media only screen and (min-height:900px){
+            height: 86vh !important;
+        }
+        @media only screen and (min-height:1150px){
+            height: 90vh !important;
+        }
+        @media only screen and (min-height:1250px){
+            height: 91vh !important;
+        }
+    }
+}
+.content-compare {
+    .compare-tabs > md-tabs-wrapper {
+        padding: 0 300px 0 50px !important;
+    }
+    .tabs-buttons{
+        position: absolute;
+        z-index: 5;
+        right: 30px;
+        top: 5px;
+    }
+}
+
+.sidebar-resizer {
+  background-color: #666;
+  position: absolute;
+  top: 45px;
+  bottom: 0;
+  width: 3px;
+  cursor: col-resize;
+}

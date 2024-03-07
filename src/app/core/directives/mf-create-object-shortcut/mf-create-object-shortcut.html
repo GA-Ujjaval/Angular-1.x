@@ -1,0 +1,39 @@
+<md-menu md-position-mode="left bottom">
+  <md-button ng-disabled="isRO()" class="add-part-to-bom-button" ng-click="$mdMenu.open()">
+    <span class="icon-circle-custom">+</span>
+    <md-tooltip class="md-tooltip">Create Object</md-tooltip>
+  </md-button>
+  <md-menu-content>
+    <md-menu-item ng-if="vm.rootScope.enableProducts">
+      <md-button ng-click="createObject($event, controllerSet.CREATE_PRODUCT)">Create Product</md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="createObject($event, controllerSet.CREATE_PART)">Create Part</md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="createObject($event, controllerSet.CREATE_DOCUMENT)">Create Document</md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="createObject($event, controllerSet.CREATE_MANUFACTURER, {type: sourcingTypes.MANUFACTURER})">
+        Create Manufacturer
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button
+        ng-click="createObject($event, controllerSet.CREATE_MANUFACTURER_PART, {type: sourcingTypes.MANUFACTURER_PART})">
+        Create Manufacturer Part
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="createObject($event, controllerSet.CREATE_MANUFACTURER, {type: sourcingTypes.SUPPLIER})">
+        Create Supplier
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button
+        ng-click="createObject($event, controllerSet.CREATE_MANUFACTURER_PART, {type: sourcingTypes.SUPPLIER_PART})">
+        Create Supplier Part
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

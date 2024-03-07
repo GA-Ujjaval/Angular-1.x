@@ -1,0 +1,288 @@
+<div id="parts" class="bom-table">
+
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+
+    <!-- CONTENT -->
+    <div class="content fullpage-datatable">
+
+      <div layout="row" layout-align="space-between center" flex>
+
+        <md-progress-circular ng-if="vm.leftSideProgress" class="md-accent" md-diameter="30">
+        </md-progress-circular>
+
+        <div class="clear-filter-text" ng-if="vm.flaghierHierr">
+          <md-button class="clear-filter-button" ng-click="vm.clearFilters(vm.hierarchicalUiGrid)">
+            <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+          </md-button>
+          <span class="clear-filter-text">Clear current sorts, filters and pins</span>
+        </div>
+        <div class="buttons-edit-download-add">
+          <md-progress-circular class="recalculate-wheel" md-mode="indeterminate" ng-if="vm.recalculatingFlag"
+                                md-diameter="25"></md-progress-circular>
+
+          <label class="unit-cost-label">
+            Unit Cost :
+          </label>
+          <span class="currency-icon currency-icon-bom">{{vm.currencySetting}}</span>
+          <md-input-container class="unit-cost-container" flex="20">
+            <input class="cost-value unit-cost-input"
+                   ng-class="{'error-unit-cost': vm.unitCostValue === vm.error.noAvailableCurrency}"
+                   value="{{vm.unitCostValue ? vm.unitCostValue === vm.error.noAvailableCurrency ? vm.unitCostValue : (vm.unitCostValue | number : vm.currencyDecimalSetting === 'No Limit' ? 2 : vm.currencyDecimalSetting) : '0.00'}}"
+                   ng-disabled="true" aria-label="Cost Value">
+            <md-tooltip ng-if="vm.unitCostValue === vm.error.noAvailableCurrency"
+                        class="md-tooltip multiline-tooltip-templates">
+              <div>
+                {{vm.unitCostTooltipText[0]}}
+              </div>
+              <div>
+                {{vm.unitCostTooltipText[1]}}
+              </div>
+            </md-tooltip>
+          </md-input-container>
+          <md-menu>
+            <md-button class="add-part-to-bom-button" ng-click="$mdMenu.open()">
+              <span class="icon-circle-custom">+</span>
+              <md-tooltip class="md-tooltip">Add Part(s) To Bill Of Material</md-tooltip>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button class="md-primary"
+                           ng-click="vm.showTabDialog($event, '', vm.products.objectId, 'add')"
+                           ng-disabled="vm.SaveDisabled && !vm.releaseBomSettings">
+                  Add Part to Bill Of Material
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-disabled="vm.clipboardService.getItemsCount() === 0" ng-click="vm.openClipboardTable()">
+                  Add Parts from Clipboard to Bill Of Material
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+          <md-menu>
+
+            <md-button class="button-briefcase-download" ng-click="vm.openCurrencyMenu($mdOpenMenu, $event)">
+              <md-icon md-font-icon="icon-cash s30"></md-icon>
+              <md-tooltip class="md-tooltip">Switch Cost Type: Change Cost Type to use the corresponding costs for BOM
+                calculations.<br/>
+                Changing Cost Type here will not change the cost-type setting at the part-level.
+              </md-tooltip>
+            </md-button>
+
+            <md-menu-content md-menu-origin>
+              <md-menu-item>
+                <md-menu>
+                  <section layout="row">
+                    <md-button class="cash-button-sub-menu" ng-click="$mdMenu.open()">
+                      <i ng-if="vm.allPartsFlag" class="icon-check s16 margin-right-5"></i>
+                      <span>All Parts</span>
+                      <md-icon md-font-icon="icon-chevron-right s30"></md-icon>
+                    </md-button>
+                  </section>
+                  <md-menu-content class="cost-menu-container">
+                    <md-menu-item>
+                      <md-menu>
+                        <md-button class="cash-button-sub-menu" ng-click="$mdMenu.open()">
+                          Part Costs
+                        </md-button>
+                        <md-menu-content>
+                          <md-menu-item ng-repeat="cost in vm.breakCostArray">
+                            <md-button ng-click="vm.calculateAll(cost.id);">
+                              {{cost.name}}
+                              <i ng-if="vm.allPartsFlag && vm.breakFlag == cost.id"
+                                 class="icon-check s16 margin-left-10"></i>
+                            </md-button>
+                          </md-menu-item>
+                        </md-menu-content>
+                      </md-menu>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-menu>
+                        <md-button class="cash-button-sub-menu" ng-click="$mdMenu.open()">
+                          Manufacturers
+                        </md-button>
+                        <md-menu-content>
+                          <md-menu-item ng-repeat="cost in vm.manufacturersCosts">
+                            <md-button ng-click="vm.calculateAll(cost.id);">
+                              {{cost.name || cost.costType}}
+                              <i ng-if="vm.allPartsFlag && vm.breakFlag == cost.id"
+                                 class="icon-check s16 margin-left-10"></i>
+                            </md-button>
+                          </md-menu-item>
+                        </md-menu-content>
+                      </md-menu>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-menu>
+                        <md-button ng-click="$mdMenu.open()">
+                          Suppliers
+                        </md-button>
+                        <md-menu-content>
+                          <md-menu-item ng-repeat="cost in vm.supplierCosts">
+                            <md-button ng-click="vm.calculateAll(cost.id);">
+                              {{cost.name || cost.costType}}
+                              <i ng-if="vm.allPartsFlag && vm.breakFlag == cost.id"
+                                 class="icon-check s16 margin-left-10"></i>
+                            </md-button>
+                          </md-menu-item>
+                        </md-menu-content>
+                      </md-menu>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+
+              <md-menu-item>
+                <md-menu>
+                  <md-button ng-click="$mdMenu.open()">
+                    <i ng-if="vm.flatPartsFlag" class="icon-check s16 margin-right-5"></i>
+                    <span>Only Flat Parts (Not sub-assemblies)</span>
+                    <md-icon md-font-icon="icon-chevron-right s30"></md-icon>
+                  </md-button>
+                  <md-menu-content class="cost-menu-container">
+                    <md-menu-item>
+                      <md-menu>
+                        <md-button ng-click="$mdMenu.open()"
+                                   class="cash-button-sub-menu">
+                          Part Costs
+                        </md-button>
+                        <md-menu-content>
+                          <md-menu-item ng-repeat="cost in vm.breakCostArray">
+                            <md-button ng-click="vm.calculateFlatRows(cost);">
+                              {{cost.name || cost.costType}}
+                              <i ng-if="vm.flatPartsFlag && vm.breakFlag == cost.id"
+                                 class="icon-check s16 margin-left-10"></i>
+                            </md-button>
+                          </md-menu-item>
+                        </md-menu-content>
+                      </md-menu>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-menu>
+                        <md-button ng-click="$mdMenu.open()"
+                                   class="cash-button-sub-menu">
+                          Manufacturers
+                        </md-button>
+                        <md-menu-content>
+                          <md-menu-item ng-repeat="cost in vm.manufacturersCosts">
+                            <md-button ng-click="vm.calculateFlatRows(cost);">
+                              {{cost.name || cost.costType}}
+                              <i ng-if="vm.flatPartsFlag && vm.breakFlag == cost.id"
+                                 class="icon-check s16 margin-left-10"></i>
+                            </md-button>
+                          </md-menu-item>
+                        </md-menu-content>
+                      </md-menu>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-menu>
+                        <md-button ng-click="$mdMenu.open()"
+                                   class="cash-button-sub-menu">
+                          Suppliers
+                        </md-button>
+                        <md-menu-content>
+                          <md-menu-item ng-repeat="cost in vm.supplierCosts">
+                            <md-button ng-click="vm.calculateFlatRows(cost);">
+                              {{cost.name || cost.costType}}
+                              <i ng-if="vm.flatPartsFlag && vm.breakFlag == cost.id"
+                                 class="icon-check s16 margin-left-10"></i>
+                            </md-button>
+                          </md-menu-item>
+                        </md-menu-content>
+                      </md-menu>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+
+              <md-menu-item>
+                <md-button class="reset-default-btn" ng-click="vm.resetToDefault()">
+                  Reset to default
+                </md-button>
+              </md-menu-item>
+
+            </md-menu-content>
+          </md-menu>
+
+          <md-button class="button-table-edit" ng-click="vm.editTable($event, vm.objectPageEnum.heirarchicalPage)">
+            <md-icon class="icon-table-edit"></md-icon>
+            <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+          </md-button>
+
+          <mf-templates-dropdown grid-api="vm.hierarchicalUiGrid" page-type="vm.objectPageEnum.heirarchicalPage"
+                                 grid-options="vm.hierarchicalGridOptions"
+                                 build-table-columns="vm.buildHierarchicalGridColumns"
+                                 is-config-enabled="vm.configurationSettings"></mf-templates-dropdown>
+
+          <mf-download-table grid-options="vm.hierarchicalGridOptions"
+                             grid-api="vm.hierarchicalUiGrid"
+                             download-description="'hierarchical'"
+                             download-table="vm.downloadTable"
+                             page-type="vm.objectPageEnum.heirarchicalPage"
+                             object-id="vm.id"
+                             user-actions-registry="vm.userActionsRegistry"></mf-download-table>
+
+          <mf-print-table grid-options="vm.hierarchicalGridOptions"
+                          grid-api="vm.hierarchicalUiGrid"
+                          download-description="'hierarchical'"
+                          download-table="vm.downloadTable"
+                          page-type="vm.objectPageEnum.heirarchicalPage"
+                          object-id="vm.id"
+                          user-actions-registry="vm.userActionsRegistry"></mf-print-table>
+
+          <md-menu class="three-dots-menu">
+            <md-button class="md-icon-button btn-hvr" ng-click="$mdMenu.open()"
+                       ng-disabled="vm.SaveDisabled && !vm.releaseBomSettings">
+              <md-icon class="icon-dots-horizontal dots-icon"></md-icon>
+              <md-tooltip class="md-tooltip">More Actions</md-tooltip>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="vm.deleteBOMParts()">
+                  Delete All Parts from Bill Of Material
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-disabled="!vm.getSelectedRows().length" ng-click="vm.deleteItems()">
+                  Delete Selected Items
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </div>
+
+      <div class="content fullpage-datatable">
+
+        <div class="progress-bar" layout="row" layout-sm="column" layout-align="space-around"
+             ng-if="vm.hierarchicalViewProgressBar || vm.recalculatingFlag">
+          <md-progress-circular md-mode="indeterminate"
+                                class="progress-bar-bom md-accent md-raised"></md-progress-circular>
+        </div>
+
+        <div id="grid-hierarchical"
+             ui-grid="vm.hierarchicalGridOptions"
+             ui-grid-move-columns
+             ui-grid-save-state
+             ui-grid-tree-view
+             ui-grid-pinning
+             ui-grid-resize-columns
+             ui-grid-exporter
+             ui-grid-selection
+             ui-grid-pagination
+             ui-grid-auto-resize
+             ui-grid-edit
+             class="grid">
+
+          <div class="watermark" ng-show="!vm.hierarchicalGridOptions.data.length">No data available</div>
+          <no-results-found grid-api="vm.hierarchicalUiGrid"
+                            grid-options="vm.hierarchicalGridOptions"></no-results-found>
+
+        </div>
+
+      </div>
+
+      <!-- / CONTENT -->
+    </div>
+  </div>
+</div>

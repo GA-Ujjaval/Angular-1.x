@@ -1,0 +1,415 @@
+<!-- SPLASH SCREEN -->
+<div id="splash-screen" ng-if="vm.progress" style="position:fixed; height:100%; width:100%">
+  <div class="center">
+    <div class="logo">
+      <!--<span>F</span>-->
+      <img src="assets/images/logos/fuse.png">
+    </div>
+    <!-- Material Design Spinner -->
+    <div class="spinner-wrapper">
+      <div class="spinner">
+        <div class="inner">
+          <div class="gap"></div>
+          <div class="left">
+            <div class="half-circle"></div>
+          </div>
+          <div class="right">
+            <div class="half-circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / Material Design Spinner -->
+  </div>
+</div>
+<!-- / SPLASH SCREEN -->
+<div id="parts" class="page-layout simple right-sidenav md-grey-100-bg" layout="row" ng-intro-options="IntroOptions"
+     ng-intro-method="CallMe"
+     ng-intro-onbeforechange="BeforeChangeEvent" ng-intro-autostart="false">
+  <!-- CENTER -->
+  <div class="center" flex id="scroll-check" ms-scroll>
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between center" flow-init="vm.ngFlowOptionsLogo"
+         flow-name="vm.ngFlowLogo.flow"
+         flow-files-submitted="vm.uploadLogo()" flow-file-success="vm.fileSuccessLogo($file, $message)">
+      <md-button ng-mouseover="vm.changeLogo(false)" class="goto-products-button md-icon-button"
+                 aria-label="Go to products" translate
+                 style="min-width: fit-content; min-width: -moz-fit-content;"
+                 translate-attr-aria-label="EC.GO_TO_PRODUCTS" ng-click="vm.backFunction(vm.products.objectType)">
+        <md-icon md-font-icon="icon-arrow-left"></md-icon>
+      </md-button>
+      <div ng-class="{'mt-50' : vm.fuseUtils.isChangeLogo && vm.products.status == 'InDevelopment' || vm.thumbnailFlag}"
+           class="logo mr-10"
+           ng-mouseover="vm.changeLogo(true)" layout-align="start center" style="z-index:  3; min-width: fit-content; min-width: -moz-fit-content;">
+        <img class="logo-icon" ng-if="vm.partproduct == 'parts'" id="imgPart"
+             ng-src="{{vm.thumbnailSrc ? vm.thumbnailSrc : 'assets/images/ecommerce/part-square.png'}}"
+             alt=""/>
+        <img class="logo-icon" ng-if="vm.partproduct == 'products'" id="imgProduct"
+             ng-src="{{vm.thumbnailSrc ? vm.thumbnailSrc : 'assets/images/ecommerce/product-sqaure.png'}}"
+             alt=""/>
+        <img class="logo-icon" ng-if="vm.partproduct == 'documents'"
+             ng-src="{{vm.thumbnailSrc ? vm.thumbnailSrc : 'assets/images/ecommerce/folder-square.png'}}"
+             alt=""/>
+        <md-progress-circular md-diameter="45" class="thumbnail-loader" md-mode="indeterminate"
+                              ng-if="vm.thumbnailFlag">
+        </md-progress-circular>
+        <md-menu ng-if="vm.fuseUtils.isChangeLogo && vm.products.status == 'InDevelopment'" class="thumbnail-menu"
+                 md-position-mode="left bottom">
+          <md-button class="thumbnail-button" ng-click="$mdOpenMenu()" aria-label="thumbnail-options">
+            <md-icon md-font-icon="icon-camera"></md-icon>
+            <md-tooltip class="md-tooltip">
+              Click to change the thumbnail or Reset to default
+            </md-tooltip>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item flow-name="vm.ngFlowLogo.flow" flow-btn class="help-item" flow-attrs="{accept:'image/*'}">
+              <md-button>Change the thumbnail</md-button>
+            </md-menu-item>
+            <md-menu-item class="help-item">
+              <md-button ng-click="vm.removeThumbnail()">Reset to default</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+        <div ng-if="vm.fuseUtils.isChangeLogo" class="logo-tooltip top-set b">
+          <img ng-if="vm.partproduct == 'parts' && vm.thumbnailSrc" ng-mouseover="vm.changeLogo(true)"
+               ng-src="{{vm.thumbnailSrc ? vm.thumbnailSrc : 'assets/images/ecommerce/part-square.png'}}"
+               alt=""/>
+          <img ng-if="vm.partproduct == 'products' && vm.thumbnailSrc" ng-mouseover="vm.changeLogo(true)"
+               ng-src="{{vm.thumbnailSrc ? vm.thumbnailSrc : 'assets/images/ecommerce/product-sqaure.png'}}"
+               alt=""/>
+          <img ng-if="vm.partproduct == 'documents' && vm.thumbnailSrc" ng-mouseover="vm.changeLogo(true)"
+               ng-src="{{vm.thumbnailSrc ? vm.thumbnailSrc : 'assets/images/ecommerce/folder-square.png'}}"
+               alt=""/>
+          <md-menu ng-if="vm.products.status == 'InDevelopment' && vm.thumbnailSrc" class="logo-tooltip menu-tooltip"
+                   md-position-mode="left bottom">
+            <md-button class="thumbnail-button thumbnail-button-tooltip" ng-click="$mdOpenMenu()"
+                       aria-label="thumbnail-options">
+              <md-icon md-font-icon="icon-camera"></md-icon>
+              <md-tooltip class="md-tooltip">
+                Click to change the thumbnail or Reset to default
+              </md-tooltip>
+            </md-button>
+            <md-menu-content width="3" >
+              <md-menu-item flow-name="vm.ngFlowLogo.flow" flow-btn class="help-item" flow-attrs="{accept:'image/*'}">
+                <md-button>Change the thumbnail</md-button>
+              </md-menu-item>
+              <md-menu-item class="help-item">
+                <md-button ng-click="vm.removeThumbnail()">Reset to default</md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+
+        </div>
+
+      </div>
+
+      <!-- APP TITLE -->
+      <div layout="column" flex="100" ng-mouseover="vm.changeLogo(false)" style="z-index:  1;">
+
+        <div layout="row" class="min-21">
+          <div class="margin-left-0">
+
+            <md-button class="edit-button md-icon-button edit-btn margin-right-20"
+                       ng-click="vm.editPartNumberingDialog($event, vm.configurationSettings, vm.products.isConfig)"
+                       aria-label="Organization details"
+                       style="padding: 0;margin-right:7px" ng-if="vm.products.status=='InDevelopment'">
+              <md-icon md-font-icon="icon-pencil" class="s18"></md-icon>
+              <md-tooltip class="multiline-tooltip-templates md-tooltip">
+                <div>Edit object category, revision notes,</div>
+                <div>part number (if ENABLED by company Admin)</div>
+                <div>and revision (if ENABLED by company Admin)</div>
+              </md-tooltip>
+            </md-button>
+            {{vm.products.fuseObjectNumberSetting.editPart}}
+            <span class="h3">
+              <strong>{{vm.products.objectNumber | ellipsis:true:20:'...'}},&nbsp;&nbsp;
+                <md-tooltip class="md-tooltip">Object Number : {{vm.products.objectNumber}}</md-tooltip>
+              </strong>
+            </span>
+
+            <span class="h3 ml2" ng-if="vm.configurationSettings && vm.products.hasConfig">
+              <span><i class="config-font">Configuration</i>: <strong>{{vm.products.configName | ellipsis:true:20:'...'}}</strong>
+                <md-tooltip class="md-tooltip"><i
+                  class="config-font">Configuration</i>: {{vm.products.configName}}</md-tooltip>
+              </span>
+              <md-menu>
+                <md-icon md-font-icon="icon icon-chevron-double-down revision-space icon-dots-revision"
+                         class="icon-dots-revision s20 padding-right-10"
+                         ng-click="vm.getAllConfigurations();$mdOpenMenu($event)"></md-icon>
+                <md-menu-content class="menu-content-cst" width="1">
+                  <md-progress-circular class="set-loader-rivision mb-43" md-mode="indeterminate"
+                                        ng-if="vm.progressAllConfigurations" md-diameter="20px"></md-progress-circular>
+                  <md-menu-item ng-repeat="configuration in vm.configuration track by $index">
+                    <md-button ng-repeat="(key,value) in configuration" ng-click="vm.loadSelectedRevisionData(key)"
+                               title="{{value.configName}} - Revision-{{value.tooltip}}">
+                      <md-tooltip class="md-tooltip">Configuration</md-tooltip>
+                      Configuration: {{value.configName}}
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </span>
+
+            <span class="h3 ml2">
+              <span ng-if="vm.products.fuseObjectNumberSetting.enableMinorRev == true"><i
+                class="config-font">Revision</i>: <strong>{{vm.products.revision | ellipsis:true:20:'...'}}
+                .{{vm.products.minorRevision | ellipsis:true:20:'...'}}</strong>
+                <md-tooltip class="md-tooltip"><i class="config-font">Revision</i>: {{vm.products.revision}}
+                  .{{vm.products.minorRevision}}</md-tooltip>
+              </span>
+              <span ng-if="vm.products.fuseObjectNumberSetting.enableMinorRev == false"><i
+                class="config-font">Revision</i>: <strong>{{vm.products.revision | ellipsis:true:25:'...'}}</strong>
+                <md-tooltip class="md-tooltip"><i
+                  class="config-font">Revision</i>: {{vm.products.revision}}</md-tooltip>
+              </span>
+              <md-menu>
+                <md-icon md-font-icon="icon icon-chevron-double-down revision-space icon-dots-revision"
+                         class="icon-dots-revision s20 padding-right-10"
+                         ng-click="vm.getAllRevisions();$mdOpenMenu($event)"></md-icon>
+                <md-menu-content width="1">
+                  <md-progress-circular class="set-loader-rivision mb-20" md-mode="indeterminate"
+                                        ng-if="vm.progressAllRevisions" md-diameter="20px"></md-progress-circular>
+                  <md-menu-item ng-repeat="revision in vm.revisions track by $index">
+                    <md-button ng-repeat="(key,value) in revision" ng-click="vm.loadSelectedRevisionData(key)">
+                      <md-tooltip class="md-tooltip">Change Revision</md-tooltip>
+                      Revision {{value}}
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </span>
+            <span class="h3"
+                  ng-class="vm.products.status === 'InDevelopment' ? 'indevelopment' : (vm.products.status === 'Released' ? 'released' : 'obsolete')">
+              <strong class="dsp-inline">&nbsp;{{vm.products.status}}
+                <md-tooltip class="md-tooltip">Status : {{vm.products.status}}</md-tooltip>
+              </strong>
+            </span>
+
+          </div>
+          <div class="question-icon margin-top-25" ng-if="$root.introGlobalHelp != false" ng-click="CallMe()">
+            <div class="introjs-hint-dot introjs-hint-dot-parts"></div>
+            ?
+          </div>
+        </div>
+        <div layout-align="space-between center" class="save-changes-bom">
+          <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+          </md-progress-circular>
+        </div>
+        <div layout="row" class="padd-7">
+          <div layout="column" flex="60" >
+            <div layout="row" flex id="partNameDesc" style="min-height: 22px; max-height: 0;">
+              <div>
+              <span class="config-font h3 name-text" style="white-space: nowrap"
+                    ng-if="vm.products.objectName"> {{vm.products.objectName | ellipsis:false:vm.partNameLength:'...' }}
+              <md-tooltip class="md-tooltip">
+                <span ng-if="vm.partproduct == 'parts'">Part Name : </span>
+                <span ng-if="vm.partproduct == 'products'">Product Name : </span>
+                <span ng-if="vm.partproduct == 'documents'">Document Name : </span>
+                {{vm.products.objectName }}</md-tooltip>
+              </span>
+              </div>
+              <span ng-if="vm.products.objectName && vm.products.description" class="config-font h3 name-text">, </span>
+              <div id="step1" class="step1 descript-text" ng-class="{'descript-height': vm.DeleteDisalbed == true}">
+
+              <span class="secondary-text h3 " ng-if="vm.products.description == null || vm.products.description == ''">
+                <md-tooltip class="md-tooltip">Empty</md-tooltip>
+              </span>
+                <span class="secondary-text h3" style="white-space: nowrap;"
+                      ng-if="vm.products.description"> {{vm.products.description | ellipsis:false:vm.partNameLength:'...' }}
+                <md-tooltip class="md-tooltip">Description : {{vm.products.description}}</md-tooltip>
+              </span>
+              </div>
+            </div>
+            <div ng-class="{'margin-left-zero': vm.DeleteDisalbed == true}">
+              <span class="secondary-text padding-left-5 padding-right-5 category-name h3">
+                {{vm.products.categoryHierarchy }}
+                <md-tooltip class="md-tooltip">Category : {{vm.products.categoryHierarchy}}</md-tooltip>
+              </span>
+            </div>
+          </div>
+          <div layout="row" class="padd-29" style="height: 50px;" ng-mouseover="vm.changeLogo(false)" flex="60" layout-align="end center"
+               class="margin-bottom-15 line-height-0">
+            <md-progress-circular class="report-progress" ng-if="vm.reportProgress" md-diameter="25"></md-progress-circular>
+            <mf-shareable-link-menu is-document="vm.isDocuments"></mf-shareable-link-menu>
+            <md-menu class="search-settings " md-position-mode="target-left target" ng-if="!vm.promoteDemote">
+              <md-button class="white-fg " ng-click="$mdMenu.open()" ng-disabled="vm.readonly;vm.ChangeStatusDisabled"
+                         id="step2">Change Status
+              </md-button>
+              <md-menu-content width="2">
+                <md-menu-item ng-hide="vm.released || !vm.manualRelease">
+                  <md-button ng-click="vm.promoteDemoteStatus('Released')">
+                    Released
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-click="vm.promoteDemoteStatus('Obsolete')">
+                    Obsolete
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+            <md-menu md-offset="30" ng-if="vm.promoteDemote">
+              <md-button class="white-fg " ng-click="$mdMenu.open()" ng-disabled="vm.readonly"
+                         id="step2">Change Status
+              </md-button>
+              <md-menu-content width="2">
+                <md-menu-item>
+                  <md-button ng-click="vm.promoteDemoteStatus('InDevelopment')">
+                    InDevelopment
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item ng-hide="vm.products.status === 'Released' || !vm.manualRelease">
+                  <md-button ng-click="vm.promoteDemoteStatus('Released')">
+                    Released
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-click="vm.promoteDemoteStatus('Obsolete')">
+                    Obsolete
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+            <md-button class="white-fg no-margin" ng-click="vm.incrementRevision(vm.products.isLatest)"
+                       ng-disabled="vm.readonly" ng-if="vm.products.fuseObjectNumberSetting.enableMinorRev == false">
+              Increment Revision
+            </md-button>
+            <md-menu class="search-settings " md-position-mode="target-left target"
+                     ng-if="vm.products.fuseObjectNumberSetting.enableMinorRev != false">
+              <md-button class="white-fg no-margin" ng-click="$mdOpenMenu()" ng-disabled="vm.readonly" id="step3">
+                Increment Revision
+              </md-button>
+              <md-menu-content width="2">
+                <md-menu-item>
+                  <md-button
+                    ng-click="vm.minormajorFunction(false, vm.products.revision, vm.products.minorRevision, vm.products.isLatest)">
+                    Increment Minor Revision
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button
+                    ng-click="vm.minormajorFunction(true, vm.products.revision, vm.products.minorRevision, vm.products.isLatest)">
+                    Increment Major Revision
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+            <md-button class="white-fg" ng-click="vm.importBOMFunction(vm.releaseBomSettings)"
+                       ng-disabled="vm.readonly; vm.SaveDisabled && !vm.releaseBomSettings"
+                       ng-if="vm.isBOM" id="step4">Import Bill-of-Material
+            </md-button>
+            <md-menu>
+              <md-button class="md-icon-button btn-hvr" ng-click="$mdOpenMenu()" ng-disabled="vm.readonly">
+                <md-icon class="icon-dots-horizontal dots-icon"></md-icon>
+                <md-tooltip class="md-tooltip">More Actions</md-tooltip>
+              </md-button>
+              <md-menu-content>
+                <md-menu-item>
+                  <md-button
+                    ng-click="vm.copyPPD($event, vm.products.objectId, vm.configurationSettings, vm.products.isConfig)"
+                    aria-label="CPPD">
+                    Create Copy
+                  </md-button>
+
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-click="vm.deletefuseObjectConfirm($event)" aria-label="Delete"
+                             ng-disabled="vm.DeleteDisalbed">
+                    Delete
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item ng-if="vm.isFuseAdmin">
+                  <md-button ng-click="vm.deleteFuseObjectByAdminConfirm($event)" aria-label="DeleteByAdmin">
+                    Admin Delete
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div ng-mouseover="vm.changeLogo(false)" class="content tabs-grp">
+      <md-tabs md-dynamic-height md-selected="vm.selectedTab">
+
+        <md-tab label="Basic Info" ng-click="vm.ObjectSave(true)" ui-sref="{{vm.states.basicInfo}}"
+                ui-sref-opts="{reload: false, notify: false}">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/basic-info/basicinfo.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Additional Info" ng-click="vm.ObjectSave(true)" ui-sref="{{vm.states.additionalInfo}}"
+                ui-sref-opts="{reload: false, notify: false}">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/additional-info/additionalinfo.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Configurations" ng-click="vm.ObjectSave(false)" ui-sref="{{vm.states.configurations}}"
+                ui-sref-opts="{reload: false, notify: false}" ng-if="vm.configurationSettings">
+          <md-content ng-if="vm.selectedTab === vm.tabs.CONFIGURATION_TAB_INDEX"
+                      ng-include="'app/main/apps/objects/parts/tabs/configuration/configuration.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Revisions" ng-click="vm.ObjectSave(false)" ui-sref="{{vm.states.revisions}}"
+                ui-sref-opts="{reload: false, notify: false}">
+          <md-content ng-if="vm.selectedTab === vm.tabs.REVISION_TAB_INDEX"
+                      ng-include="'app/main/apps/objects/parts/tabs/revisions/revisions.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab md-on-select="vm.checkScroll()" ng-click="vm.ObjectSave(false);"
+                label="Attachments" ui-sref="{{vm.states.attachments}}" ui-sref-opts="{reload: false, notify: false}">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/attachments/attachments.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Sourcing" ng-click="vm.ObjectSave(false)" ng-if="vm.partproduct != 'documents'"
+                ui-sref="{{vm.states.sourcing}}" ui-sref-opts="{reload: false, notify: false}">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/sourcing/sourcing.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Bill of Materials" ng-if=" vm.isBOM || vm.isBOM == undefined" ui-sref="{{vm.states.bom}}"
+                ui-sref-opts="{reload: false, notify: false}" ng-click="vm.calculateFlatView();vm.ObjectSave(false)">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/bill-of-materials/billofmaterials.html'">
+          </md-content>
+        </md-tab>
+
+
+        <md-tab id="Where-used" label="Where-Used" ui-sref="{{vm.states.whereUsed}}" ui-sref-opts="{reload: false, notify: false}"
+                ng-click="vm.whereusedFunction();vm.ObjectSave(false)">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/where-used/whereused.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab id="timeline" label="Timeline" ng-click="vm.ObjectSave(false); vm.showTimeline()" ui-sref="{{vm.states.timeline}}"
+                ui-sref-opts="{reload: false, notify: false}">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/time-line/timeline.html'">
+          </md-content>
+        </md-tab>
+
+        <md-tab label="Comments" ng-click="vm.ObjectSave(false)" ui-sref="{{vm.states.comments}}"
+                ui-sref-opts="{reload: false, notify: false}">
+          <md-content ng-include="'app/main/apps/objects/parts/tabs/comments/comments.html'">
+          </md-content>
+        </md-tab>
+
+      </md-tabs>
+
+      <md-button class="md-accent md-raised save-btn-tabs" ng-click="vm.SaveObjects()" ng-disabled="vm.SaveDisabled"
+                 ng-if="vm.Save">Save
+      </md-button>
+
+    </div>
+    <!-- / CONTENT -->
+
+  </div>
+  <!-- / CENTER -->
+</div>

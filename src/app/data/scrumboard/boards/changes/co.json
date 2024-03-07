@@ -1,0 +1,236 @@
+{
+  "data": {
+    "changes": [
+      {
+        "id": "FOM7000",
+        "number": "40-0074",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f62",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "Miniature Pushbutton Switch, Right Angle",
+        "revision": 1,
+        "stateId": "bee063c4a226486f84dbc13ad26e9544",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "",
+        "oldRevision": "",
+        "idTasks": [
+          "561551bd73d1a627e97005ce",
+          "561551bd917bfec2ddef2d49",
+          "561551bd2047cc709af0f670",
+          "561551bd061990eaf40fb64f",
+          "561551bd719860cf0ad2011a"
+        ]
+      },
+      {
+        "id": "2063",
+        "number": "20-007",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f63",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "Corrected Mini USB for changes",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9544",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "Mini USB Connector",
+        "oldRevision": 1,
+        "idTasks": [
+          "561551bd73d1a627e97005ce",
+          "561551bd917bfec2ddef2d49",
+          "561551bd2047cc709af0f670",
+          "561551bd061990eaf40fb64f",
+          "561551bd719860cf0ad2011a"
+        ]
+      },
+      {
+        "id": "2064",
+        "number": "40-0075",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f64",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "Single Logic Level P-Channel FET modified",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9544",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "Single Logic Level P-Channel FET",
+        "oldRevision": 1,
+        "idTasks": [
+          "561551bd73d1a627e97005ce",
+          "561551bd917bfec2ddef2d49",
+          "561551bd2047cc709af0f670",
+          "561551bd061990eaf40fb64f",
+          "561551bd719860cf0ad2011a"
+        ]
+      },
+      {
+        "id": "2065",
+        "number": "40-0076",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f65",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "Red/Green SM LED updated",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9544",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f62",
+          "assembly" : false,
+          "impactIds" : []
+        }],
+        "oldPartName": "Red/Green SM LED",
+        "oldRevision": 1,
+        "idTasks": [
+          "561551bd73d1a627e97005ce",
+          "561551bd917bfec2ddef2d49",
+          "561551bd2047cc709af0f670",
+          "561551bd061990eaf40fb64f",
+          "561551bd719860cf0ad2011a"
+        ]
+      },
+      {
+        "id": "f95846ebed7545ef8993501848fa10c5",
+        "number": "20-0100",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f66",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "EveryRoad GPS Car Navigation Unit, Model 500",
+        "revision": 2,
+        "stateId": "bee063c4a226486f84dbc13ad26e9543",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f63",
+          "assembly" : true,
+          "impactIds" : []
+        }],
+        "oldPartName": "EveryRoad GPS Car Navigation Unit, Model 500 old",
+        "oldRevision": 1,
+        "idTasks": [
+          "561551bd73d1a627e97005ce",
+          "561551bd917bfec2ddef2d49",
+          "561551bd2047cc709af0f670",
+          "561551bd061990eaf40fb64f",
+          "561551bd719860cf0ad2011a"
+        ]
+      },
+      {
+        "id": "f95846ebed7545ef8993501848fa10c6",
+        "number": "20-0097",
+        "typeId": "da4c7ee86e994582a6a999fa3c960f66",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "EveryRoad, PCBA, Model 500",
+        "revision": 3,
+        "stateId": "bee063c4a226486f84dbc13ad26e9543",
+        "visuals" :[{
+          "typeId" : "fa4c7ee86e994582a6a999fa3c960f63",
+          "assembly" : true,
+          "impactIds" : []
+        }],
+        "oldPartName": "EveryRoad, PCBA, Model 300 old",
+        "oldRevision": 2,
+        "idTasks": [
+          "561551bd73d1a627e97005ce",
+          "561551bd917bfec2ddef2d49",
+          "561551bd2047cc709af0f670",
+          "561551bd061990eaf40fb64f",
+          "561551bd719860cf0ad2011a"
+        ]
+      }
+    ],
+    "assemblyChanges" : [
+      {
+        "id": "00078483883f4af189047cb5217cf456",
+        "referenceId": "f95846ebed7545ef8993501848fa10c6",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5d",
+        "number": "30-078",
+        "type": "Resistor",
+        "partName": "Resistor 5KOhm",
+        "revision": "Rev3",
+        "reference": "R1,R2",
+        "quantity": 2,
+        "oldNumber" : "",
+        "oldPartType": "",
+        "oldPartName": "",
+        "oldRevision": ""
+      },
+      {
+        "id": "00078483883f4af189047cb5217cf457",
+        "referenceId": "f95846ebed7545ef8993501848fa10c6",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5f",
+        "number": "30-870",
+        "type": "Resistor",
+        "partName": "Resistor 12Ohm",
+        "revision": "Rev2",
+        "reference": "R1,R2,R3",
+        "quantity": 3,
+        "oldNumber" : "30-990",
+        "oldPartType": "Resistor",
+        "oldPartName": "Resistor 10Ohm",
+        "oldRevision": "Rev1"
+      },
+      {
+        "id": "00078483883f4af189047cb5217cf458",
+        "referenceId": "f95846ebed7545ef8993501848fa10c6",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5e",
+        "number": "30-989",
+        "type": "Resistor",
+        "partName": "NPN Transistor, Small Signal",
+        "revision": "Rev3",
+        "reference": "Q2,Q3",
+        "quantity": 2,
+        "oldNumber" : "",
+        "oldPartType": "",
+        "oldPartName": "",
+        "oldRevision": ""
+      },
+      {
+        "id": "00078483883f4af189047cb5217cf459",
+        "referenceId": "f95846ebed7545ef8993501848fa10c5",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5d",
+        "number": "30-078",
+        "type": "Resistor",
+        "partName": "Resistor 5KOhm",
+        "revision": "Rev3",
+        "reference": "R1,R2",
+        "quantity": 2,
+        "oldNumber" : "",
+        "oldPartType": "",
+        "oldPartName": "",
+        "oldRevision": ""
+      },
+      {
+        "id": "00078483883f4af189047cb5217cf460",
+        "referenceId": "f95846ebed7545ef8993501848fa10c5",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5f",
+        "number": "30-870",
+        "type": "Resistor",
+        "partName": "Resistor 12Ohm",
+        "revision": "Rev2",
+        "reference": "R1,R2,R3",
+        "quantity": 3,
+        "oldNumber" : "30-990",
+        "oldPartType": "Resistor",
+        "oldPartName": "Resistor 10Ohm",
+        "oldRevision": "Rev1"
+      },
+      {
+        "id": "00078483883f4af189047cb5217cf461",
+        "referenceId": "f95846ebed7545ef8993501848fa10c5",
+        "impactTypeId": "572afa0ab1b64add98604e04f0dc8e5e",
+        "number": "30-989",
+        "type": "Resistor",
+        "partName": "NPN Transistor, Small Signal",
+        "revision": "Rev3",
+        "reference": "Q2,Q3",
+        "quantity": 2,
+        "oldNumber" : "",
+        "oldPartType": "",
+        "oldPartName": "",
+        "oldRevision": ""
+      }
+    ]
+  }
+}

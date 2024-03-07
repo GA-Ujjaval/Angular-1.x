@@ -1,0 +1,124 @@
+<!-- DIALOG -->
+<md-dialog class="contact-dialog" aria-label="New Task">
+
+    <form name="contactForm" class="md-inline-form" novalidate>
+
+        <!-- DIALOG TOOLBAR -->
+        <md-toolbar class="md-accent md-tall" layout="column">
+
+            <!-- TOOLBAR TOP -->
+            <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+                <span class="title margin-top-10">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+            <!-- / TOOLBAR TOP -->
+
+            <!-- TOOLBAR MIDDLE -->
+            <div class="md-toolbar-tools md-toolbar-tools-middle" flex layout="column" layout-align="center center">
+
+                <div layout="column" layout-align="center center">
+                    <img ng-src="assets/images/ecommerce/circle.png" class="md-avatar avatar contact-avatar huge"
+                         alt=""/>
+                    <!--<div class="contact-name">{{vm.contact.name}}</div>-->
+
+                </div>
+
+            </div>
+            <!-- / TOOLBAR MIDDLE -->
+
+            <!--  TOOLBAR BOTTOM -->
+            <div class="md-toolbar-tools md-toolbar-tools-bottom" layout="row" layout-align="center center">
+
+                <div flex layout="row" layout-align="center center">
+
+                </div>
+            </div>
+            <!-- / TOOLBAR BOTTOM -->
+
+        </md-toolbar>
+        <!-- / DIALOG TOOLBAR -->
+
+        <!-- DIALOG CONTENT -->
+        <md-dialog-content ms-scroll>
+
+            <md-input-container class="md-icon-float md-block">
+                <label>Category Name (Required)</label>
+                <md-icon></md-icon>
+                <input ng-model="vm.category.categoryName" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <label>Parent Category</label>
+                <md-icon></md-icon>
+                <md-select ng-model="vm.selectparentcategory" ng-change="vm.parentCategoryFunction(vm.parent)">
+                    <md-option ng-repeat="parent in vm.parent | orderBy:'categoryHierarchy'" value="{{parent.categoryId}}" ng-if="parent.categoryHierarchy != ''">
+                        {{parent.categoryHierarchy}}
+                    </md-option>
+                </md-select>
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Category -->
+                    <md-chips class="ml-20" ng-model="vm.category.categoryHierarchy" flex
+                              md-autocomplete-snap
+                              md-require-match="true" md-transform-chip="$chip">
+                        <md-autocomplete
+                                md-search-text="vm.searchChangeItemText"
+                                md-items="itemId in vm.parentIDQuerySearch(vm.searchChangeItemText)"
+                                md-selected-item-change="vm.searchCategoryFunction(itemId,vm.parent)"
+                                md-item-text="" ng-disabled="vm.searchDisabled">
+                            <span>{{itemId}}</span>
+                        </md-autocomplete>
+                        <button md-chip-remove class="md-primary">
+                            <md-icon md-font-icon="icon-close" class="s18"
+                                     ng-click="vm.closeCategoryChips()"></md-icon>
+                        </button>
+                    </md-chips>
+                    <!-- Category -->
+                </md-input-container>
+            </md-input-container>
+            <div layout="row">
+                <md-switch ng-model="vm.category.isBOMEnable">
+                    <div class="column">
+                        Will any part in this category have a Bill-of-Materials <br> structure?(NOTE: You can change this later, if needed)
+
+                    </div>
+                </md-switch>
+
+            </div>
+
+        </md-dialog-content>
+        <!-- / DIALOG CONTENT -->
+
+        <!-- DIALOG ACTIONS -->
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+                <md-button type="submit" ng-if="!vm.newCategory" ng-click="vm.saveCategory()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="contactForm.$invalid || contactForm.$pristine"
+                           aria-label="SAVE">
+                    SAVE
+                </md-button>
+
+                <md-button type="submit" ng-if="vm.newCategory" ng-click="vm.addNewCategory()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="contactForm.$invalid || contactForm.$pristine"
+                           aria-label="Add Task">
+                    Create Part Category
+                </md-button>
+
+            </div>
+
+            <div layout="row">
+                <md-button class="md-icon-button" ng-click="vm.deleteCategoryConfirm($event)" aria-label="Delete" ng-if="!vm.newCategory">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip class="md-tooltip"><span>DELETE</span></md-tooltip>
+                </md-button>
+            </div>
+        </md-dialog-actions>
+        <!-- / DIALOG ACTIONS -->
+
+    </form>
+
+</md-dialog>
+<!-- / DIALOG -->

@@ -1,0 +1,281 @@
+<div layout="row" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp drop-area" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+    <!-- ATTACHMENTS SECTION -->
+    <div class="section">
+      <div class="attachments">
+        <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+        </md-progress-circular>
+
+        <md-dialog ms-scroll ng-style="{'top': vm.heightMax - 400 - vm.fileUpload.length*64 + 'px'}" class="progress-bar" ng-if="vm.closeUpload && vm.uploadFlag">
+          <md--dialog-content>
+            <div class="upload-popup-header">
+              <span class="upload-text" ng-if="vm.progress">1 file upload</span>
+              <span class="upload-text" ng-if="!vm.progress">{{vm.fileUpload.length}} uploads complete</span>
+              <md-button class="progress-button chevron" ng-click="vm.chevronDown()" ng-if="vm.chevronD">
+                <i class="icon-chevron-down upload-icons"></i>
+              </md-button>
+              <md-button class="progress-button chevron" ng-click="vm.chevronUp()" ng-if="vm.chevronU">
+                <i class="icon-chevron-up upload-icons"></i>
+              </md-button>
+              <md-button class="progress-button" ng-click="vm.closeUploadStatus()">
+                <md-icon md-font-icon="icon-close upload-icons"></md-icon>
+              </md-button>
+            </div>
+          </md--dialog-content>
+          <div ng-repeat="item in vm.fileUpload">
+            <md-dialog-actions class="file-upload" ng-class="vm.uploadProgress == true && $last ? 'opacity-uploading' : 'file-upload'"
+              ng-if="vm.chevronD" ng-click="vm.openAttacFunction(item)">
+              <div class="file-upload-name" ng-if="!item.typeFolder">
+                <md-icon ng-if="item.fileType == 'jpg' || item.fileType == 'png'  || item.fileType == 'ico' || item.fileType == 'gif' || item.fileType == 'jpeg'"
+                  md-font-icon="icon-file-image-box upload-image-icon"></md-icon>
+                <md-icon md-font-icon="icon-document icon-upload-document" ng-if="item.fileType != 'jpg' && item.fileType != 'png'  && item.fileType != 'ico' && item.fileType != 'gif' && item.fileType != 'jpeg'"></md-icon>
+                <span ng-if="!item.typeFolder" class="text-upload">{{item.name}}</span>
+              </div>
+              <div class="file-upload-name" ng-if="item.typeFolder">
+                <md-icon md-font-icon="icon-folder"></md-icon>
+                <span ng-if="item.typeFolder" class="text-upload">Folder</span>
+              </div>
+              <md-progress-circular class="check-circle" md-diameter="20" md-mode="indeterminate" ng-if="vm.progress" ng-show="$last">
+              </md-progress-circular>
+              <md-icon md-font-icon="icon-check-circle check-circle" ng-if="!vm.progress || !$last"></md-icon>
+            </md-dialog-actions>
+          </div>
+        </md-dialog>
+
+        <div class="section-content">
+
+          <div>
+            <div id="product-image-uploader" flow-init="vm.ngFlowOptions" flow-name="vm.ngFlow.flow" flow-file-added="vm.fileAdded($file)"
+              flow-files-submitted="vm.upload()" flow-file-success="vm.fileSuccess($file, $message)" flow-complete="vm.uploadComplete()"
+              flow-drop flow-drag-enter="vm.dropping=true" flow-drag-leave="vm.dropping=false" ng-class="{'dropping':vm.dropping}"
+              ng-style="{'height': $('.drop-area').height + 'px'}" class="attachment-drop-area">
+
+              <div class="drop-text hint-text" ng-style="{'height': $('.drop-area').height + 'px'}" layout="row" layout-align="center center">
+                <div class="upload-anim">
+                  <div class="bounce">
+                    <md-icon md-font-icon="icon-cloud-upload upload-cloud"></md-icon>
+                  </div>
+                  <button type="button" class="upload-button-drag">Drop files to instantly upload them to:
+                    <br>
+
+                    <div style="font-weight: bold; margin-top: 10px;">
+                      <md-icon md-font-icon="icon-folder folder"></md-icon>
+                      <span style="margin:10px;">FusePLM</span>
+                    </div>
+                  </button>
+                </div>
+                <span>Drop to upload</span>
+              </div>
+              <div class="upload-button" layout="column" layout-align="center center">
+                <div layout="row" layout-align="end start" style="width:100%">
+                  <span flex class="h3">Attachments >
+                    <span class="h3" ng-if="vm.partproduct == 'documents'">{{vm.products.objectNumber}}, Revision {{vm.products.revision}}</span>
+                  </span>
+                  <!-- <md-menu class="change-items" md-position-mode="target-right target" md-offset="0 42"
+                           ng-if="vm.partproduct != 'documents'">
+
+                    <span layout="column" layout-align="center center">
+                                    <md-button class="md-accent md-raised" aria-label="connected objects" translate
+                                               ng-click="vm.changeItemTabIndex = 0; $mdOpenMenu($event)"
+                                               ng-disabled="vm.readonly;vm.SaveDisabled">
+                                        Associate Documents
+                                    </md-button>
+                                </span>
+
+                    <md-menu-content class="change-items-menu-content" ms-scroll
+                                     ng-style="{'width': vm.widthOfCardDialog + 'px'}">
+                      <md-tabs md-selected="vm.changeItemTabIndex" md-dynamic-height>
+
+                        <!-- SELECT CHANGE ITEMS
+                        <md-tab>
+                          <md-tab-body>
+                            <md-menu-item>
+                              <md-input-container class="no-errors-spacer" md-no-float>
+                                <input placeholder="Search and Associate Document..." type="text"
+                                       ng-model="vm.changeItemSearchText" autocomplete="off">
+                              </md-input-container>
+                            </md-menu-item>
+
+                            <md-menu-item class="change-item"
+                                          ng-repeat="item in vm.changeItems | filter: vm.filterChangeItem | limitTo : 10 | orderBy : '-modifiedDate'">
+                              <md-button class="change-item-toggle-button" md-prevent-menu-close
+                                         ng-class="'md-'+item.color+'-bg'" ng-click="vm.associatedocumentFuntions(item)"
+                                         aria-label="Toggle Change Item" translate
+                                         translate-attr-aria-label="SB.TOGGLE_CHANGE_ITEM">
+                                <div layout="row">
+                                  <i ng-if="vm.exists(item.displayObjectId, ( vm.changeItems || [] ) )"
+                                     class="icon-check s16" style="padding-top:8px"></i>
+                                  <i ng-if="!vm.exists(item.displayObjectId, ( vm.changeItems || [] ) )"
+                                     class="icon-check s16" style="padding-top:8px; visibility: hidden;"></i>
+                                  <!--<span class="object-content" md-highlight-text="vm.changeItemSearchText" md-highlight-flags="i">{{item.displayObjectId}} </span>
+                                  <span md-highlight-text="vm.searchChangeItemText" md-highlight-flags="i"
+                                        style="margin-left: 10px;">{{vm.parseStrings(item.displayObjectId,item.status)}}</span>
+                                  <span style="display: none;">{{item.modifiedDate}} </span>
+                                </div>
+                              </md-button>
+                            </md-menu-item>
+
+                          </md-tab-body>
+                        </md-tab>
+                        <!-- SELECT CHANGE ITEMS
+
+                      </md-tabs>
+                    </md-menu-content>
+                  </md-menu> -->
+                  <md-menu md-offset="0 48px" class="change-items" md-position-mode="target-right target" md-offset="0 42">
+                    <md-button ng-class="vm.sourcingObjectData.sourceType === 'supplier' ? 'md-accent md-raised btn-bg-cust-for-sup' : 'md-accent md-raised btn-bg-cust'" ng-click="vm.changeItemTabIndex = 0; $mdOpenMenu($event)" ng-disabled="vm.readonly">Upload
+                    </md-button>
+
+                    <md-menu-content class="change-items-menu-content fs-fm-upload" ms-scroll ng-style="{'width': vm.widthOfCardDialog + 'px'}">
+                      <md-tabs md-selected="vm.changeItemTabIndex" md-dynamic-height>
+                        <md-tab>
+                          <md-tab-body>
+                            <form name="uploadForm" class="md-inline-form" novalidate>
+
+                              <div layout="row" layout-align="space-between">
+                                <h3 class="margin-0" layout="row" layout-align="center center" style="width:100%;">
+                                  Upload Form</h3>
+                                <md-icon md-font-icon="icon-close" layout-align="right right" ng-click="vm.closeDialog()"></md-icon>
+                              </div>
+                              <md-divider vertical>
+                              </md-divider>
+                              <!-- DIALOG CONTENT -->
+                              <md-dialog-content ms-scroll>
+                                <md-input-container class="md-icon-float md-block">
+                                  <span flow-name="vm.ngFlow.flow"
+                                  flow-btn flow-drop
+                                  flow-drag-enter="vm.dropping=true"
+                                  flow-drag-leave="vm.dropping=false"
+                                  ng-class="{'dropping':vm.dropping}" layout="row" layout-align="left center">
+
+                                                    <span class="drop-text hint-text" layout="row"
+                                                          layout-align="center center">
+                                                        <span>Drop to upload</span>
+                            </span>
+                            <md-progress-circular md-mode="indeterminate" ng-if="vm.progressCardData" md-diameter="25">
+                            </md-progress-circular>
+                            <span layout="row" layout-align="left center">
+                                                        <md-button ng-disabled="vm.attachlink">
+                                                            Upload File(s)
+                                                        </md-button>
+                                                        <!-- <span class="secondary-text mt-8">You can also drop yours files here to upload.</span> -->
+                            </span>
+                            </span>
+                                </md-input-container>
+
+                                <!-- <md-input-container class="md-icon-float md-block">
+                                                                  <span id="product-folder-uploader" layout="row" layout-align="left center" flow-btn flow-directory flow-init="vm.ngFlowOptions" flow-name="vm.ngFlow.flow" flow-drop flow-files-submitted="vm.uploadFolder()" flow-file-success="vm.fileSuccessUploadFolder($file, $message)"
+                                                                    flow-drag-enter="vm.dropping1=true" flow-drag-leave="vm.dropping1=false" ng-class="{'dropping':vm.dropping1}">
+                                                                                           <span class="drop-text hint-text" layout="row"
+                                                                                                 layout-align="center center">
+                                                                                              <span>Drop to upload</span>
+                                                                  </span>
+                                                                  <span layout="row" layout-align="left center">
+                                                                                          <md-button>
+                                                                                              Upload Folder
+                                                                                          </md-button>
+                                                                                          </span>
+                                                                  </span>
+                                                                </md-input-container> -->
+
+                                <md-input-container class="md-icon-float md-block fs-pl-15">
+
+                                  <label>Attach a link</label>
+                                  <md-icon></md-icon>
+                                  <input type="url" ng-model="vm.attachlink" name="attachLink" required ng-disabled="vm.attachLink">
+                                </md-input-container>
+
+                                <md-input-container class="md-icon-float md-block fs-pl-15" ng-if="vm.attachlink">
+                                  <label>Link name (optional)</label>
+                                  <md-icon></md-icon>
+                                  <input type="text" ng-model="vm.linkname">
+                                </md-input-container>
+
+                              </md-dialog-content>
+                              <!-- / DIALOG CONTENT -->
+
+                              <!-- DIALOG ACTIONS -->
+                              <md-dialog-actions layout="row" layout-align="space-between center">
+                                <div layout="row" layout-align="start center">
+                                  <md-button type="submit" ng-click="vm.uploadForms()" class="send-button md-accent md-raised" ng-disabled="uploadForm.$invalid"
+                                    aria-label="Create">
+                                    Attach
+                                  </md-button>
+                                </div>
+
+                              </md-dialog-actions>
+                              <!-- / DIALOG ACTIONS -->
+
+                            </form>
+
+                          </md-tab-body>
+                        </md-tab>
+                      </md-tabs>
+                    </md-menu-content>
+                  </md-menu>
+
+                </div>
+                <table class="attachments-table">
+                  <tr>
+                    <th class="attachments-th"></th>
+                    <th class="attachments-th attach-header">Name</th>
+                    <th class="attachments-th attach-header">Type</th>
+                    <th class="attachments-th attach-header">Upload By</th>
+                    <th class="attachments-th attach-header">Size</th>
+                    <th class="attachments-th attach-header">Upload Date</th>
+                    <th class="attachments-th">
+                      <span ng-click="vm.getAllAttachments()" class="all-download-hvr">
+                        <md-icon md-font-icon="icon-briefcase-download"></md-icon>
+                      </span>
+                      <md-tooltip class="md-tooltip">Download All Attachments</md-tooltip>
+                    </th>
+                    <th class="attachments-th">
+                      <md-icon md-font-icon="icon-link"></md-icon>
+                    </th>
+                    <th class="attachments-th">
+                      <md-icon md-font-icon="icon-delete"></md-icon>
+                    </th>
+                  </tr>
+                  <tr class="attachments-tr" ng-repeat="item in vm.sourcingObjectData.attachmentsList | orderBy : '-time'" ng-dblclick="vm.openAttacFunction(item)"
+                    class="attachments-table">
+                    <th class="attachments-th">
+                      <md-icon ng-if="item.uploadType === 'Link'" md-font-icon="icon icon-link-variant"></md-icon>
+                      <md-icon ng-if="item.uploadType == 'Image'" md-font-icon="icon-file-image-box"></md-icon>
+                      <md-icon ng-if="item.uploadType == 'Document'" md-font-icon="icon-document icon-upload-document"></md-icon>
+                      <md-icon ng-if="item.uploadType == 'CAD Files'" md-font-icon="icon-folder-multiple cad-files"></md-icon>
+                    </th>
+                    <th class="attachments-th" ng-click="vm.openAttacFunction(item)">
+                      <a class="pointer" ng-if="item.uploadType == 'CAD Files'">
+                        {{vm.parseStrings(item.displayObjectId,item.status)}}</a>
+                      <a class="pointer" ng-if="item.uploadType != 'CAD Files'">{{item.name}}</a></th>
+                    <th class="attachments-th">{{item.uploadType}}</th>
+                    <th class="attachments-th">{{item.uploadUser}}</th>
+                    <th class="attachments-th">{{item.fileSize}}</th>
+                    <th class="attachments-th">{{item.uploadDate}}</th>
+                    <th class="attachments-th">
+                      <!-- <md-icon md-font-icon="icon-download icon-attachment" ng-click="vm.downloadAttacFunction(item)"></md-icon> -->
+                      <a ng-href="{{item.src}}" download="{{item.name}}" target="__blank">
+                        <md-icon md-font-icon="icon-download icon-attachment" ng-disabled="vm.readonly"></md-icon>
+                      </a>
+                      <md-tooltip class="md-tooltip">Download</md-tooltip>
+                    </th>
+                    <th class="attachments-th">
+                      <button ng-click="vm.copyToClipboard(item.src)">
+                        <md-icon md-font-icon="icon-link icon-attachment" ng-disabled="vm.readonly"></md-icon>
+                      </button>
+                      <md-tooltip class="md-tooltip">Get Shareable Link</md-tooltip>
+                    </th>
+                    <th class="attachments-th">
+                      <md-icon md-font-icon="icon-delete icon-attachment" ng-click="vm.removeAttachment(item)" ng-disabled="vm.readonly"></md-icon>
+                      <md-tooltip class="md-tooltip">Remove</md-tooltip>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

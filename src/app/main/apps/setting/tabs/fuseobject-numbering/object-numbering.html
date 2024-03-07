@@ -1,0 +1,83 @@
+<!-- Heading -->
+<div layout="row" layout-align="space-between">
+  <span class="title margin-top-15 margin-bottom-15">
+    <img src="assets/images/avatars/document-icon.png" width="25">
+    <span class="secon f-text font-size-20">
+      <b>&nbsp;Revision Scheme and Number Behavior</b>
+    </span>
+  </span>
+</div>
+<!-- Heading -->
+
+<!-- Content -->
+<div layout-align="center center" class="margin-bottom-10 margin-top-10">
+
+  <!-- Edit object numbers -->
+  <div flex layout="row">
+    <md-switch class="margin-0" ng-model="vm.editObjectId"
+               ng-change="vm.revisionChange();vm.changeObjectSetting($event,'allowEdit')"
+               aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow edits to object numbers, major and minor revisions</span>
+  </div>
+  <div flex layout="row" class="toggle-text-inside" flex ng-if="vm.editObjectId">
+    <md-switch class="margin-0" ng-model="vm.enableEmptyObjectNumberSetting"
+               ng-change="vm.changeObjectSetting($event,'allowEditEmpty')"
+               aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h4">Create FusePLM Part Numbers for line items (in file being imported) that do not have part numbers
+      <br/>
+      <!-- <span class="margin-top-10 h4 d-block">NOTE: When an item in file does not match a part in FusePLM (based on the 'Matching Criteria' defined by the user in the Import Manager),<br /> FusePLM will create a Part Number for it, even if the line item is missing a part number.</span> -->
+      <span class="margin-top-10 h4 d-block">NOTE: (1) When an item in file does not match a part in FusePLM (based on the 'Matching Criteria' defined by the user
+        in the Import Manager),
+        <br/> &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;FusePLM will create a Part Number for it, even if the line item is missing a part number.
+        <br/> &emsp;&emsp;&emsp;(2) This setting is only supported for 'Part Import' and Flat-BOM Import, and NOT for Hierarchical-BOM Import.</span>
+    </span>
+  </div>
+  <!-- Edit object numbers -->
+
+  <!-- Revision Scheme -->
+  <div layout="row" class="margin-left-45 margin-top-30" flex>
+    <span class="h3"> Revision Scheme :</span>
+  </div>
+
+  <div layout="column" layout-align="start start" class="margin-top-10 ml-90">
+    <md-input-container flex>
+      <md-radio-group ng-model="vm.numericmajor" ng-disabled="vm.disableMajor"
+                      ng-change="vm.changeObjectSetting($event, 'major')">
+        <div layout="row" class="h4">
+          <br>
+          <span>Major Revision :&nbsp;</span>
+          <md-radio-button flex value="N"> Numeric</md-radio-button>
+          <md-radio-button flex value="A"> Alphabetical</md-radio-button>
+        </div>
+      </md-radio-group>
+    </md-input-container>
+  </div>
+  <!-- Revision Scheme -->
+
+  <!-- Minor Revision -->
+  <div flex layout="row" class="margin-top-10">
+    <md-switch class="margin-0" ng-model="vm.enableMinorRev"
+               ng-change="vm.revisionChange();vm.changeObjectSetting($event,'editMinor')"
+               aria-label="minor switch"></md-switch>
+    <span class="margin-top-5 h3">Use minor revision</span>
+  </div>
+
+  <div layout="column" layout-align="start start" class="margin-top-10 ml-90">
+
+    <md-input-container flex>
+      <md-radio-group ng-model="vm.numericminor" ng-disabled="vm.disableMinor"
+                      ng-change="vm.changeObjectSetting($event,'minor')">
+        <div layout="row" class="h4">
+
+          <span>Minor Revision :&nbsp;</span>
+
+          <md-radio-button flex value="N"> Numeric</md-radio-button>
+          <md-radio-button flex value="A"> Alphabetical</md-radio-button>
+        </div>
+      </md-radio-group>
+    </md-input-container>
+  </div>
+  <!-- Minor Revision -->
+
+</div>
+<!-- Content -->

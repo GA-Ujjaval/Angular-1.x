@@ -1,0 +1,36 @@
+
+mf-advanced-numbering-description {
+  .custom-help-circle {
+    color: #039be5 !important;
+    cursor: pointer;
+  }
+}
+
+.adv-numb-description-popup {
+  padding: 0;
+  overflow: hidden;
+
+  .popup-text-wrapper {
+    padding: 20px 3%;
+
+    .popup-paragraph {
+      font-size: 18px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .unordered-list {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .note {
+      font-weight: bold;
+      text-transform: uppercase;
+      height: 25px;
+      box-sizing: border-box;
+      border-bottom: 2px solid black;
+      display: inline-block;
+    }
+  }
+}

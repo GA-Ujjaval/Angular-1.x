@@ -1,0 +1,25 @@
+<md-toolbar class="navigation-header md-whiteframe-1dp" layout="row" layout-align="space-between center"
+            ng-intro-options="IntroOptions" ng-intro-method="$root.CallMeNavigation"
+            ng-intro-onbeforechange="BeforeChangeEvent"
+            ng-intro-onafterchange="AfterChangeEvent"
+            ng-intro-onexit = "ExitEvent"
+            ng-intro-oncomplete = "CompleteEvent"
+            ng-intro-autostart="false">
+    <div class="logo" layout="row" layout-align="start center" ui-sref="app.customer.dashboard" style="cursor: pointer">
+        <!--<span class="logo-image">F</span>-->
+        <img class="logo-image" src="assets/images/logos/fuse.png">
+        <span class="logo-text">FusePLM</span>
+    </div>
+
+    <md-icon class="fold-toggle s18" md-font-icon="icon-backburger" hide show-gt-sm
+             ng-click="vm.toggleMsNavigationFolded()"></md-icon>
+</md-toolbar>
+<!--<ms-navigation class="scrollable" folded="vm.folded" ms-scroll="vm.msScrollOptions"></ms-navigation>-->
+<ms-navigation class="scrollable" folded="!vm.folded" ms-scroll="vm.msScrollOptions" root="search" id="search"></ms-navigation>
+<div class="question-icon" ng-if="$root.introNavigationFlag != true" ng-click="$root.CallMeNavigation()">
+    <div class="introjs-hint-dot introjs-hint-dot-nav"></div>?</div>
+<ms-navigation class="scrollable" folded="!vm.folded" ms-scroll="vm.msScrollOptions" root="customer" id="customer"></ms-navigation>
+<ms-navigation class="scrollable" folded="!vm.folded" ms-scroll="vm.msScrollOptions" root="objects" id="object"></ms-navigation>
+<ms-navigation class="scrollable" folded="!vm.folded" ms-scroll="vm.msScrollOptions" root="adminsetting" ng-if="vm.sessionData.userAuth === true" id="adminsetting"></ms-navigation>
+
+

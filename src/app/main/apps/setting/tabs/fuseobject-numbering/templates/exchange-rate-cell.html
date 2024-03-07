@@ -1,0 +1,12 @@
+<div class="ui-grid-cell-contents exchange-rate-cell">
+  <div class="exchange-rate-container"
+       editable-text="row.entity[col.field]"
+       onbeforesave="grid.appScope.vm.validateNumber($data, col.field, row.entity)"
+       onaftersave="grid.appScope.vm.updateExchangeRates()"
+       onhide="grid.appScope.vm.clearErrorMessage(row.entity)">
+    {{row.entity[col.field] || 'Enter rate'}}
+  </div>
+  <md-tooltip md-visible="true" ng-if="row.entity.invalid[col.field]">
+    {{row.entity.invalid[col.field]}}
+  </md-tooltip>
+</div>

@@ -1,0 +1,118 @@
+.md-accent-custom{
+  background-color: rgba(64,96,133,1)!important;
+}
+.create-save-btn{
+  background: #406185!important;
+  color: #fff!important;
+}
+.create-save-btn[disabled]{
+  background: rgba(0,0,0,0.12)!important;
+  color: #fff!important;
+}
+md-dialog {
+
+    &.contact-dialog-contacts {
+        max-width: 500px;
+        width: 500px;
+
+        md-toolbar {
+            min-height: 64px !important;
+
+            .title {
+                font-size: 17px;
+            }
+
+            .md-tall-height {
+                height: 64px !important;
+                min-height: 64px;
+                max-height: 64px;
+            }
+
+
+            .md-toolbar-tools-top {
+                height: 64px;
+                min-height: 64px;
+            }
+
+            .md-toolbar-tools-middle {
+                height: inherit;
+                max-height: none;
+
+                .contact-avatar {
+                    margin: 0;
+                }
+
+                .contact-name {
+                    font-size: 24px;
+                    margin: 8px 0;
+                }
+
+            }
+
+            .md-toolbar-tools-bottom {
+                md-menu {
+                    margin: 0;
+                }
+            }
+
+        }
+
+        md-dialog-content {
+            display: block;
+            position: relative;
+            .add-part-to-bom{
+              width: 440px;
+            }
+
+            .birthday-input {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                margin: 0;
+                padding: 0 0 32px 0;
+
+                .md-button {
+                    margin: 0 16px 0 0;
+                    padding: 0;
+                    width: 24px;
+                    height: 24px;
+                    text-transform: none !important;
+
+                    md-icon {
+                        color: rgba(0, 0, 0, 0.87);
+                    }
+
+                }
+
+                .md-datepicker-input-container {
+                    display: flex;
+                    flex: 1;
+                }
+
+            }
+
+            .textarea-wrapper {
+
+                md-icon {
+                    color: rgba(0, 0, 0, 0.87);
+                    margin: 0 8px 0 0;
+                }
+
+                textarea {
+                    min-height: 150px;
+                }
+
+            }
+        }
+
+        md-dialog-actions {
+            position: relative;
+            overflow-y: hidden;
+            overflow-x: auto;
+            justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+    }
+}

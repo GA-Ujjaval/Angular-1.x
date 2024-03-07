@@ -1,0 +1,131 @@
+<!-- DIALOG -->
+<md-dialog class="form-builder-dialog" aria-label="New Task">
+
+  <form name="WebhookForm" class="md-inline-form" novalidate>
+
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar class="md-grey-A100-bg md-tall-height bdr-botoom" layout="column">
+
+      <!-- DIALOG TOOLBAR -->
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title margin-top-15">
+            <!-- <md-icon md-font-icon="icon-file-document" class="s30 form-builder-icon icon-color margin-bottom-8"></md-icon> -->
+            <img  src="assets/images/avatars/document-icon.png" width="25">
+            <span class="secon f-text font-size-20"> <b>&nbsp;Form Builder</b></span>
+        </span>
+        <!-- <md-switch ng-model="vm.addonservice" class="margin-three" ng-change="vm.addonServiceChange()"></md-switch> -->
+      </div>
+      <!-- / TOOLBAR TOP -->
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+
+    <!-- DIALOG CONTENT -->
+    <md-dialog-content ms-scroll>
+
+      <div layout="column" layout-align="start start" class="margin-bottom-10 bdr-botoom padding-bottom-30">
+        <div flex>Use this section to setup external form to create cards</div>
+      </div>
+
+      <div class="padding-top-10 padding-left-15 padding-right-15">
+        <div layout="row">
+          <md-input-container class="md-icon-float" flex="20">
+            <label class="text-right padding-right-20">Choose the board <span style="color: red">*</span> :</label>
+          </md-input-container>
+          <md-input-container flex="50">
+            <md-select ng-model="vm.selectboard" name="role" ng-change="vm.BoardChangeFunction(vm.selectboard)" required placeholder="Select">
+              <md-option ng-repeat="board in vm.boardList" value="{{board.boardId}}">
+                {{board.boardTitle}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-icon-float" flex="30">
+            <md-button clipboard supported="supported" class="md-accent md-raised margin-bottom-5" text="textToCopy" on-copied="success()" on-error="fail(err)">Copy URL for Form Submission</md-button>
+            <br>
+            <span class="text-right margin-left-9" ng-show="vm.copyUrl">URL copied to clipboard</span>
+          </md-input-container>
+        </div>
+
+
+        <div layout="row" class="margin-top-30 margin-bottom-30">
+          <span class="f-gray text-right padding-right-20" flex="20"> Fuse Attributes &nbsp; </span>
+          <span class="f-gray" flex="20"> Form Attributes &nbsp; </span>
+
+        </div>
+
+        <div layout="row " ng-if="vm.selectboard ">
+
+          <md-input-container class="md-icon-float " flex="20 ">
+            <label class="text-right ">Card title <span style="color: red ">*</span> : </label>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float " flex="80 ">
+            <input type="text " ng-model="vm.cardData.cardTitle " required>
+          </md-input-container>
+        </div>
+        <div layout="row " ng-if="vm.selectboard ">
+
+          <md-input-container class="md-icon-float " flex="20 ">
+            <label class="text-right ">Description : </label>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float " flex="80 ">
+            <input type="text " ng-model="vm.cardData.description ">
+          </md-input-container>
+        </div>
+        <div layout="row " ng-if="vm.selectboard ">
+
+          <md-input-container class="md-icon-float " flex="20 ">
+            <label class="text-right ">Attachments : </label>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float " flex="80 ">
+            <input type="text " ng-model="vm.cardData.attachments ">
+          </md-input-container>
+        </div>
+
+
+        <div layout="row " ng-repeat="(key, value) in vm.additionalInfo ">
+
+          <md-input-container class="md-icon-float " flex="20 ">
+            <label class="text-right ">{{key}} :</label>
+          </md-input-container>
+          <md-input-container class="md-icon-float " flex="80 ">
+            <input type="text " ng-model="vm.additionalInfo[key] ">
+          </md-input-container>
+
+        </div>
+
+      </div>
+    </md-dialog-content>
+    <!-- / DIALOG CONTENT -->
+
+    <!-- DIALOG ACTIONS -->
+    <md-dialog-actions layout="row " layout-align="space-between center " class="md-grey-A100-bg ">
+      <div layout="row " layout-align="start center ">
+        <md-button type="submit " ng-click="vm.closeDialog() " class="send-button md-primary md-hue-1 ">
+          Close
+        </md-button>
+      </div>
+
+      <div layout="row ">
+        <md-button type="submit " class="send-button md-primary md-hue-1 " ng-click="vm.submit() " ng-disabled="WebhookForm.$invalid ">
+          Save & Activate
+        </md-button>
+
+      </div>
+    </md-dialog-actions>
+    <!-- / DIALOG ACTIONS -->
+
+  </form>
+
+</md-dialog>
+<!-- / DIALOG -->
+IONS -->
+
+</form>
+
+</md-dialog>
+<!-- / DIALOG -->

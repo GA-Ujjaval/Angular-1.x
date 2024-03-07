@@ -1,0 +1,53 @@
+<md-dialog flex="45">
+  <md-dialog-content class="update-preset-container">
+    <md-toolbar class="md-accent md-tall-height  _md layout-column md-default-theme _md-toolbar-transitions"
+                layout="column">
+      <div class="md-toolbar-tools md-toolbar-tools-top layout-align-space-between-stretch layout-row" layout="row"
+           layout-align="space-between">
+        <span ng-if="vm.type === 'update'" class="title margin-top-20">Edit Search Preset</span>
+        <span ng-if="vm.type === 'create'" class="title margin-top-20">Create Search Preset</span>
+        <button class="md-icon-button md-button md-ink-ripple md-default-theme" type="button"
+                ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close" class="md-font material-icons icon-close md-default-theme"
+                   aria-hidden="true"></md-icon>
+        </button>
+      </div>
+    </md-toolbar>
+    <div class="update-preset-content">
+      <div>
+        <md-input-container class="preset-name-input-container">
+          <label class="input-label">Search Preset Name</label>
+          <input ng-model="vm.newPresetOptions.name" required>
+        </md-input-container>
+        <div class="preset-note">Note: Search Preset saves the Advanced Search criteria.</div>
+      </div>
+      <div ng-if="vm.isCA()">
+        <div class="radio-group-title">Make this preset visible to:</div>
+        <md-radio-group ng-model="vm.newPresetOptions.isShared">
+          <md-radio-button class="option-item"
+                           ng-repeat="variant in vm.presetScope"
+                           ng-value="variant.value">
+            {{variant.text}}
+          </md-radio-button>
+        </md-radio-group>
+      </div>
+    </div>
+    <md-dialog-actions layout="row" layout-align="space-between center">
+      <div layout="row" layout-align="start center">
+        <md-button class="md-accent md-raised"
+                   ng-if="vm.type === 'update'"
+                   ng-click="vm.updatePreset(vm.newPresetOptions)"
+                   ng-disabled="!vm.newPresetOptions.name || vm.newPresetOptions.name.length === 0">Update
+        </md-button>
+        <md-button class="md-accent md-raised"
+                   ng-if="vm.type === 'create'"
+                   ng-click="vm.createPreset(vm.newPresetOptions, vm.input)"
+                   ng-disabled="!vm.newPresetOptions.name || vm.newPresetOptions.name.length === 0">Create
+        </md-button>
+      </div>
+    </md-dialog-actions>
+
+
+  </md-dialog-content>
+</md-dialog>
+

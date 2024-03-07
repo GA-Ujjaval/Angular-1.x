@@ -1,0 +1,95 @@
+<div layout="row" class="md-white-bg" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="70" flex-sm="100">
+    <!-- CONTENT -->
+    <div class="content">
+
+      <div layout="row" layout-align="space-between center" flex>
+        <div class="display-flex-center">
+          <md-button class="md-primary md-raised h-36-px" ng-click="vm.showTabDialog($event)">
+            Add Company
+          </md-button>
+          <md-switch class="ml-80-px" ng-true-value="true" ng-false-value="false" ng-model="vm.onlyActiveAccounts"
+            ng-change="vm.getAllUsersCall()" aria-label="active accounts">
+            <span>Show Only Active Accounts</span>
+          </md-switch>
+        </div>
+
+        <div class="search">
+          <md-icon md-font-icon="icon-magnify" class="icon s24"></md-icon>
+          <input class="search-input" flex ng-model="vm.userFilter" type="text" placeholder="Filter For User" maxlength="50">
+        </div>
+      </div>
+
+      <table class="simple" ms-responsive-table>
+        <thead>
+          <tr>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Name</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">URL</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Address</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Licenses Allotted</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Licenses Consumed</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Licenses Delta</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="">Logo</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="">Edit</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-show="vm.getUsers.length > 0" ng-repeat="employee in vm.getUsers | filter:vm.userFilter">
+            <td>{{ employee.organizationName}}</td>
+            <td>{{ employee.organizationUrl}}</td>
+            <td>{{ employee.organizationAddress}}</td>
+            <td>{{ employee.systemSettings.companystatusSetting.licensesUser }}</td>
+            <td></td>
+            <td>{{ employee.systemSettings.companystatusSetting.licensesUser }}</td>
+            <td><img src="{{ employee.organizationLogo}}" style="max-width:120px;" /></td>
+            <td>
+              <md-button class="edit-button md-icon-button" ng-click="vm.showTabDialog($event, employee)" aria-label="Organization details">
+                <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+              </md-button>
+            </td>
+          </tr>
+          <tr ng-hide="vm.getUsers.length > 0">
+            <td colspan="4">
+              <p layout-align="center">No Data Available</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+    <!-- / CONTENT -->
+  </div>
+</div>

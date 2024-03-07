@@ -1,0 +1,63 @@
+<div layout="row" layout-align="space-between">
+  <span class="title margin-top-15 margin-bottom-15 secon f-text font-size-20">
+    <b>Release Objects</b>
+  </span>
+</div>
+
+
+<div layout-align="center center" class="margin-bottom-10 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-switch class="margin-0" ng-model="vm.manualRelease" ng-change="vm.changeManualRelease($event, 'releaseSettings', vm.manualRelease)"
+      aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow Manual Release of objects</span>
+  </div>
+  <div layout="row" class="margin-10" flex>
+    <span class="h3">
+      NOTE: When enabled, objects can be released manually by going to the object > Change Status > 'Released', in addition to
+      the workflow-based release process. When disabled, objects cannot be released manually and can be released only through
+      the workflow-based release process.
+    </span>
+  </div>
+
+</div>
+
+<div layout-align="center center" class="margin-bottom-10 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-switch class="margin-0" ng-model="vm.promoteDemote" ng-change="vm.changePromoteDemote($event, 'releaseSettings', vm.promoteDemote)"
+               aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow user to manually change status to 'InDevelopment'</span>
+  </div>
+  <div layout="row" class="margin-10" flex>
+    <span class="h3">
+      NOTE: Only most recent revision of an object can be changed to 'InDevelopment'. When enabled, object's status can be manually changed to 'InDevelopment' by going to the Object page >
+      Change Status > InDevelopment. If Disabled, object's status can be changed to 'InDevelopment', only through the workflow.
+    </span>
+  </div>
+
+</div>
+
+<div layout-align="center center" class="margin-bottom-10 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-switch class="margin-0" ng-model="vm.releaseHierarchy" ng-change="vm.changeReleaseHierarchy($event, 'releaseSettings', vm.releaseHierarchy)"
+      aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow Hierarchical Release of objects</span>
+  </div>
+  <div layout="row" class="margin-10" flex>
+    <span class="h3">NOTE: When enabled; if a user tries to 'release' an object manually or through the workflow, the entire hierarchy of
+      that object (including all its child objects in the 'BOM' tab, and, document objects in the 'Attachments' tab), will
+      be released.When disabled; if a user tries to 'release' an object manually or through the workflow, ONLY that object
+      will be released (no child objects or document objects will be released).
+    </span>
+  </div>
+  <div flex layout="row" class="toggle-text-inside" flex ng-if="vm.releaseHierarchy">
+    <md-switch class="margin-0" ng-model="vm.releaseEditsHierarchy"
+               ng-change="vm.changeEditReleaseHierarchy($event,'releaseSettings', vm.releaseEditsHierarchy)"
+               aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow selection/unselection of objects during Heirarchical Release
+      <br/>
+      <span class="h3">NOTE: When enabled – user can select/unselect objects in the ‘hierarchical release’ dialog box. <br>
+                      When disabled, user cannot select/unselect any objects in the ‘hierarchical release’ dialog box. </span>
+    </span>
+  </div>
+
+</div>

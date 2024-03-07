@@ -1,0 +1,28 @@
+.update-preset-container {
+  padding: 0;
+  .update-preset-content {
+    padding: 20px 30px;
+  }
+  .radio-group-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .option-item {
+    width: fit-content;
+    font-size: 16px;
+  }
+  .input-label {
+    font-size: 16px;
+  }
+  .preset-name-input-container {
+    width: 200px;
+    font-size: 18px;
+  }
+  .preset-note {
+    position: relative;
+    bottom: 30px;
+    font-size: 15px;
+    padding-left: 2px;
+  }
+}

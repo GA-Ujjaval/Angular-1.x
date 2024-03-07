@@ -1,0 +1,7 @@
+  <div class="ui-grid-cell-contents">
+    {{row.entity.modification}}
+    <md-tooltip md-direction="left" ng-if="grid.appScope.$index !== 0 && row.entity.modification">{{grid.appScope.vm.getCompareCodeTooltip(row.entity)}}</md-tooltip>
+    <md-tooltip md-direction="left" ng-if="grid.appScope.$index === 0 && row.entity.modification">Base</md-tooltip>
+  </div>
+
+

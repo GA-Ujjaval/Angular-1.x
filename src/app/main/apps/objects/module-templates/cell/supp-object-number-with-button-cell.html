@@ -1,0 +1,27 @@
+<div
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+
+  <div style="float:left;" class="ui-grid-tree-base-row-header-buttons"
+       ng-class="{'ui-grid-tree-base-header': row.treeLevel > -1 }" ng-if="!grid.appScope.vm.sourcingUtils.checkLength(row.entity.suppList, row.entity.suppPartsList.length)"
+       ng-click="grid.appScope.vm.toggleSourcingGridRow(row)">
+
+    <md-icon class="icon-menu-down show-more" ng-if="(( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) ||
+       ( row.treeNode.children && row.treeNode.children.length > 0 )) && row.treeNode.state === 'collapsed'">
+      <md-tooltip class="md-tooltip">Click to show more Supplier Parts</md-tooltip>
+    </md-icon>
+
+    <md-icon class="icon-menu-up show-more" ng-if="(( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) ||
+       ( row.treeNode.children && row.treeNode.children.length > 0 )) && row.treeNode.state === 'expanded'">
+      <md-tooltip class="md-tooltip">Click to show less Supplier Parts</md-tooltip>
+    </md-icon>
+  </div>
+
+  <a ui-sref="app.objects.sourcing.sourcingdetails({id:row.entity.suppList.suppObjectId})" target="{{grid.appScope.vm.linkTarget}}">
+    <span ng-style="{'padding-left': ((grid.options.treeIndent && !grid.appScope.vm.sourcingUtils.checkLength(row.entity.suppList, row.entity.suppPartsList.length)
+     && row.entity.leaf) || (grid.appScope.vm.sourcingUtils.checkPadding(grid.options.data) && grid.appScope.vm.sourcingUtils.checkLength(row.entity.suppList, row.entity.suppPartsList.length)) ? 25 : 0) + 'px'}"
+          ng-if="row.entity.suppList">
+        {{ row.entity.suppList[col.name] ||'' }}
+      </span></a>
+</div>
+

@@ -1,0 +1,56 @@
+<div id="parts" class="page-layout simple right-sidenav md-grey-100-bg" layout="row" ng-intro-options="IntroOptions"
+     ng-intro-method="CallMe" ng-intro-onbeforechange="BeforeChangeEvent" ng-intro-autostart="false">
+  <div class="center" flex id="scroll-check" ms-scroll>
+    <div class="content content-compare">
+      <md-button ng-mouseover="vm.changeLogo = false" style="position: absolute; top:10px; z-index: 5;"
+                 class="goto-products-button md-icon-button" aria-label="Go to products" translate
+                 translate-attr-aria-label="EC.GO_TO_PRODUCTS" ng-click="vm.backPartFunction()">
+        <md-icon md-font-icon="icon-arrow-left" style="color: black;"></md-icon>
+      </md-button>
+
+      <div class="tabs-buttons">
+        <md-progress-circular class="checkbox-circular" class="checkbox-circular" ng-class="{'checkbox-circular-visible' : vm.progressProcess}" md-diameter="30"></md-progress-circular>
+        <md-button class="add-part-to-bom-button md-primary"
+                   ng-click="vm.openConfigurationList()"
+                   ng-disabled="false">
+          <span class="icon-circle-custom">+</span>
+          <md-tooltip class="md-tooltip">Add Part to Configurations</md-tooltip>
+        </md-button>
+
+        <md-menu>
+          <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+            <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+            <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.configurationsCompareTableUiGrid)">
+                CSV
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.configurationsCompareTableUiGrid.grid, vm.configurationsCompareGridOptions)">
+                PDF
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+        <md-button class="button-print-configurations"
+                   ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.configurationsCompareTableUiGrid.grid, vm.configurationsCompareGridOptions)">
+          <md-icon class="icon-printer"></md-icon>
+          <md-tooltip class="md-tooltip">Print Table. NOTE: Disable any ad-blocker in the browser</md-tooltip>
+        </md-button>
+
+      </div>
+      <md-tabs md-dynamic-height class="compare-tabs">
+
+        <md-tab label="BOM Matrix">
+          <md-content ng-include="'app/main/apps/objects/compare-configurations/tabs/configurations-matrix.html'">
+          </md-content>
+        </md-tab>
+
+      </md-tabs>
+    </div>
+  </div>
+</div>

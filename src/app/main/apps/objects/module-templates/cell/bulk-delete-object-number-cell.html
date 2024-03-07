@@ -1,0 +1,32 @@
+<div class="ui-grid-cell-contents" title="TOOLTIP">
+  <a target="_blank" ui-sref="app.objects.products.details.basicInfo({id:row.entity.objectId, bom:undefined})"
+     ng-if="row.entity.objectType == 'products' && row.entity.deleteStatus !== 'Success'">{{ row.entity.objectNumber }}</a>
+  <a target="_blank" ui-sref="app.objects.part.parts.basicInfo({id:row.entity.objectId, bom:undefined})"
+     ng-if="row.entity.objectType == 'parts' && row.entity.deleteStatus !== 'Success'">{{ row.entity.objectNumber }}</a>
+  <a target="_blank" ui-sref="app.objects.documents.details.basicInfo({id:row.entity.objectId, bom:undefined})"
+     ng-if="row.entity.objectType == 'documents' && row.entity.deleteStatus !== 'Success'">{{ row.entity.objectNumber }}</a>
+  <a target="_blank" ui-sref="app.objects.sourcing.sourcemfgsuppdetails({id:row.entity.objectId, sourceType:'sourcepart'})"
+     ng-if="row.entity.objectType == 'manufacturerPart' && row.entity.deleteStatus !== 'Success'">{{ row.entity.objectNumber }}</a>
+  <a target="_blank" ui-sref="app.objects.sourcing.sourcemfgsuppdetails({id:row.entity.objectId, sourceType:'sourcepart'})"
+     ng-if="row.entity.objectType == 'supplierPart' && row.entity.deleteStatus !== 'Success'">{{ row.entity.objectNumber }}</a>
+  <a target="_blank" ui-sref="app.objects.sourcing.sourcemfgsuppdetails({sourceType: row.entity.sourceType, id:row.entity.objectId})"
+     ng-if="row.entity.objectType == 'manufacturer' && row.entity.deleteStatus !== 'Success'">{{ row.entity.name }}</a>
+  <a target="_blank" ui-sref="app.objects.sourcing.sourcemfgsuppdetails({sourceType: row.entity.sourceType, id:row.entity.objectId})"
+     ng-if="row.entity.objectType == 'supplier' && row.entity.deleteStatus !== 'Success'">{{ row.entity.name }}</a>
+
+
+  <span ng-if="row.entity.objectType == 'products' && row.entity.deleteStatus === 'Success'">
+    {{ row.entity.objectNumber }}</span>
+  <span ng-if="row.entity.objectType == 'parts' && row.entity.deleteStatus === 'Success'">
+    {{ row.entity.objectNumber }}</span>
+  <span ng-if="row.entity.objectType == 'documents' && row.entity.deleteStatus === 'Success'">
+    {{ row.entity.objectNumber }}</span>
+  <span ng-if="row.entity.objectType == 'manufacturerPart' && row.entity.deleteStatus === 'Success'">
+    {{ row.entity.objectNumber }}</span>
+  <span ng-if="row.entity.objectType == 'supplierPart' && row.entity.deleteStatus === 'Success'">
+    {{ row.entity.objectNumber }}</span>
+  <span ng-if="row.entity.objectType == 'manufacturer' && row.entity.deleteStatus === 'Success'">
+    {{ row.entity.name }}</span>
+  <span ng-if="row.entity.objectType == 'supplier' && row.entity.deleteStatus === 'Success'">
+    {{ row.entity.name }}</span>
+</div>

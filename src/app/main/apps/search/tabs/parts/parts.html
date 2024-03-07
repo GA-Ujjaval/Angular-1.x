@@ -1,0 +1,118 @@
+<div ng-if="vm.partTableOptions.data" id="e-commerce-products" class="page-layout simple tabbed right-sidenav md-grey-100-bg" layout="row">
+
+  <!-- CENTER -->
+  <div class="center content bottom-value" layout="column" flex>
+
+    <!-- CONTENT CARD -->
+    <div class="content-card" layout="column" flex>
+
+      <!-- CONTENT -->
+      <div class="content" layout="column" flex>
+
+
+        <!-- TOOLBAR SECTION -->
+        <div class="toolbar toolbar-container">
+
+          <div class="buttons-switch align-left" layout-align="column" flex="30">
+
+            <md-switch class="latest-version-switch latest-version-switch" ng-true-value="true"
+                       ng-false-value="false" ng-model="vm.isLatest" ng-change="vm.onChangeLatest()"
+                       aria-label="latest switch">
+            </md-switch>
+
+            <span class="latest-version-text latest-version-text">Show only latest revision</span>
+
+          </div>
+
+          <div class="toolbar-buttons  align-right" layout-align="column" flex="70">
+
+            <div class="clear-filter-text align-left" ng-if="vm.clearSearchButton">
+              <md-button class="clear-filter-button" aria-label="clear-filter-part" ng-click="vm.clearFilters(vm.partTableUiGrid, vm.partsId, vm.objectPageEnum.partsSearchPage)">
+                <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+              </md-button>
+              <span>Clear current sorts, filters and pins</span>
+            </div>
+
+            <div class="align-left">
+
+              <md-button class="button-table-edit" ng-click="vm.editTable($event, vm.objectPageEnum.partsSearchPage)">
+                <md-icon class="icon-table-edit"></md-icon>
+                <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+              </md-button>
+
+              <md-menu md-position-mode="left bottom">
+
+                <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+                  <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+                  <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+                </md-button>
+                <md-menu-content>
+
+                  <md-menu-item>
+                    <md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.partTableUiGrid)">
+                      CSV
+                    </md-button>
+                  </md-menu-item>
+
+                  <md-menu-item>
+                    <md-button ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.partTableUiGrid.grid, vm.partTableOptions)">
+                      PDF
+                    </md-button>
+                  </md-menu-item>
+
+                </md-menu-content>
+
+              </md-menu>
+
+              <md-button class="button-print" ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.partTableUiGrid.grid, vm.partTableOptions)">
+                <md-icon class="icon-printer"></md-icon>
+                <md-tooltip class="md-tooltip">Print table</md-tooltip>
+              </md-button>
+
+            </div>
+
+          </div>
+
+        </div>
+        <!-- / TOOLBAR SECTION -->
+
+
+        <div class="content fullpage-datatable">
+
+          <div class="progress-bar"
+               layout="row"
+               layout-sm="column"
+               layout-align="space-around" ng-if="vm.partTableUiGridSpooler">
+            <md-progress-circular md-mode="indeterminate" class="md-accent md-raised"></md-progress-circular>
+          </div>
+
+          <div id="grid-parts-search-page"
+               ui-grid="vm.partTableOptions"
+               ui-grid-move-columns
+               ui-grid-save-state
+               ui-grid-tree-view
+               ui-grid-pinning
+               ui-grid-resize-columns
+               ui-grid-exporter
+               ui-grid-pagination
+               ui-grid-auto-resize
+               class="grid">
+
+            <div class="watermark" ng-show="!vm.partTableOptions.data.length">No data available</div>
+            <no-results-found grid-api="vm.partTableUiGrid" grid-options="vm.partTableOptions"></no-results-found>
+
+          </div>
+
+        </div>
+
+
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

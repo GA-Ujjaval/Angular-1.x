@@ -1,0 +1,103 @@
+{
+    "data": [{
+        "_id" : "category1",
+        "categoryName" : "Electronic",
+        "categoryType" : "parts",
+        "isBOMEnable" : "true",
+        "customerId" : "user11",
+        "parentcategory" : "abc",
+        "categoryHierarchy" : "category1",
+        "attribute" : [ ]
+    },
+        {
+            "_id" : "category2",
+            "categoryName" : "Mechanical",
+            "categoryType" : "parts",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "def",
+            "categoryHierarchy" : "category2",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category3",
+            "categoryName" : "Software",
+            "categoryType" : "parts",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "ghi",
+            "categoryHierarchy" : "category3",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category4",
+            "categoryName" : "Packaging",
+            "categoryType" : "parts",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "jkl",
+            "categoryHierarchy" : "category4",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category5",
+            "categoryName" : "Assembly",
+            "categoryType" : "parts",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "mnp",
+            "categoryHierarchy" : "category5",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category6",
+            "categoryName" : "Product",
+            "categoryType" : "parts",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "qrs",
+            "categoryHierarchy" : "category6",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category7",
+            "categoryName" : "Other",
+            "categoryType" : "parts",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "tuv",
+            "categoryHierarchy" : "category7",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category8",
+            "categoryName" : "Product",
+            "categoryType" : "products",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "wxy",
+            "categoryHierarchy" : "category8",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category9",
+            "categoryName" : "EndItem",
+            "categoryType" : "products",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "asd",
+            "categoryHierarchy" : "category9",
+            "attribute" : [ ]
+        },
+        {
+            "_id" : "category10",
+            "categoryName" : "Other",
+            "categoryType" : "products",
+            "isBOMEnable" : "true",
+            "customerId" : "user11",
+            "parentcategory" : "hjk",
+            "categoryHierarchy" : "category10",
+            "attribute" : [ ]
+        }
+    ]
+}

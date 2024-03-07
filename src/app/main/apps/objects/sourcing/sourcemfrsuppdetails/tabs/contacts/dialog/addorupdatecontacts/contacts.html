@@ -1,0 +1,79 @@
+<!-- DIALOG -->
+<md-dialog class="contact-dialog-contacts" aria-label="New Task">
+
+    <form name="contactForm" class="md-inline-form" novalidate>
+
+        <!-- DIALOG TOOLBAR -->
+        <md-toolbar class="md-accent-custom md-tall-height" layout="column">
+
+            <!-- TOOLBAR TOP -->
+            <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+                <span class="title margin-top-20">{{vm.title}}</span>
+                <md-progress-circular class="progress-add-bom" id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+                </md-progress-circular>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+            <!-- / TOOLBAR TOP -->
+
+        </md-toolbar>
+        <!-- / DIALOG TOOLBAR -->
+
+        <!-- DIALOG CONTENT -->
+        <md-dialog-content ms-scroll>
+            <md-input-container class="md-icon-float md-block">
+                <label>Name</label>
+                <input ng-model="vm.contact.name" type="text" required>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Title</label>
+                <input ng-model="vm.contact.title" type="text">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Email</label>
+                <input ng-model="vm.contact.email" type="text">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Contact Number</label>
+                <input ng-model="vm.contact.contactNumber" type="text">
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Address</label>
+                <input ng-model="vm.contact.address" type="text">
+            </md-input-container>
+        </md-dialog-content>
+        <!-- / DIALOG CONTENT -->
+
+        <!-- DIALOG ACTIONS -->
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+                <md-button type="submit" ng-if="!vm.newContact" ng-click="vm.saveContact()"
+                           class="send-button create-save-btn md-accent md-raised"
+                           ng-disabled="contactForm.$invalid || contactForm.$pristine"
+                           aria-label="SAVE">
+                    SAVE
+                </md-button>
+
+                <md-button type="submit" ng-if="vm.newContact" ng-click="vm.addNewContact()"
+                           class="send-button create-save-btn md-accent md-raised"
+                           ng-disabled="contactForm.$invalid || contactForm.$pristine"
+                           aria-label="Add Task">
+                    ADD Contact
+                </md-button>
+
+            </div>
+
+            <div layout="row">
+                <md-button class="md-icon-button" ng-click="vm.deleteContactConfirm($event)" aria-label="Delete" ng-if="!vm.newContact">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip class="md-tooltip"><span>DELETE</span></md-tooltip>
+                </md-button>
+            </div>
+        </md-dialog-actions>
+        <!-- / DIALOG ACTIONS -->
+
+    </form>
+
+</md-dialog>
+<!-- / DIALOG -->

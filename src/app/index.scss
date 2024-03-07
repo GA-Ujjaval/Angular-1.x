@@ -1,0 +1,150 @@
+/**
+ *  Do not remove this comments bellow. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+/**
+ *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector
+md-toast.md-success-toast-theme .md-toast-content {
+  background-color: green;
+
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+  background-color: #f77975;
+}
+
+md-toast.md-multiline-toast-theme .md-toast-content {
+  float: right;
+  padding: 10px;
+}
+
+// Set Loader and Text
+.ps-rel {
+  position: relative;
+  .loader-circle-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    md-progress-circular {
+      margin-bottom: 20px;
+      display: inline-block !important;
+    }
+    .loading-products {
+      position: relative;
+      left: -14%;
+      top: 5px;
+      font-size: 14px !important;
+    }
+  }
+}
+
+// Red Star
+.red-star {
+  .md-select-value {
+    span {
+      &:first-child {
+        &::after {
+          color: #f00 !important;
+        }
+      }
+    }
+  }
+}
+
+// END
+
+// Additional Information
+.assembly-edit-icon {
+  float: right;
+  margin-right: 87px;
+  margin-bottom: 5px;
+  margin-top: -3px;
+}
+
+.link-att-edit-icon {
+  margin-right: -80px;
+}
+
+.set-pencil-icon {
+  display: inline-block;
+}
+
+.close-accept-icons {
+  float: right;
+  margin-top: -2px;
+}
+
+//  Display Flex
+.display-flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.h-36-px {
+  height: 36px;
+}
+
+.ml-80-px {
+  margin-left: 80px !important;
+}
+
+.ml-80-px-w {
+  margin-left: 80px !important;
+  width: 200px;
+}
+
+.ui-grid-menu-item:hover {
+  background-color: white !important;
+  box-shadow: inset 0 0 14px rgba(0,0,0,.2);
+}
+
+.ui-grid-menu-item-active {
+  background-color: white !important;
+}
+
+.ui-grid-menu-item:focus {
+  background-color: white !important;
+}
+
+.ui-grid-icon-cancel {
+  margin-top: -19px !important;
+}
+
+.ui-grid {
+  overflow: hidden;
+}
+
+//
+
+// Add Member
+.note-span {
+  font-size: 14px;
+  padding-top: 8px;
+  display: block;
+}
+
+// End member
+
+// config and revision font size
+.config-font {
+  font-size: 18px;
+}
+
+// IMPORT
+.custom-w-868 {
+  max-width: 868px;
+  display: inline-block;
+  text-align: center;
+  font-size: 15px;
+}
+
+// END

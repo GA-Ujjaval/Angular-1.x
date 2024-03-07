@@ -1,0 +1,16 @@
+<div ng-if="vm.appliedMode" class="mode-container">
+  <md-progress-circular id="create-progress" class="sourcing-circular" md-diameter="35" md-mode="indeterminate" ng-if="vm.progressChange && vm.appliedMode.value !== 'edit'">
+  </md-progress-circular>
+  <div class="mode-select">
+    <md-button ng-if="vm.isDiscardAvailable()"
+               class="discard-button md-button md-raised"
+               ng-click="vm.discardChanges(vm, vm.appliedMode.oppositeValue, vm.modeStates.discard)">
+      Discard changes
+    </md-button>
+    <md-button ng-click="changeMode(vm, vm.appliedMode.oppositeValue)"
+               class="md-button md-raised md-accent"
+               ng-disabled="(!vm.validator.isValid() && vm.appliedMode.value === 'edit') || (vm.progressChange && vm.appliedMode.value !== 'edit')">
+      {{vm.appliedMode.text}}
+    </md-button>
+  </div>
+</div>

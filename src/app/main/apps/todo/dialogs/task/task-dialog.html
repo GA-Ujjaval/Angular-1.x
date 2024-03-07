@@ -1,0 +1,369 @@
+<md-dialog class="task-dialog" id="task-dialog" aria-label="New Task" xmlns="http://www.w3.org/1999/html">
+  <!--<form name="taskForm" class="md-inline-form" novalidate>-->
+  <md-toolbar class="md-accent md-hue-2">
+    <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+
+      <div class="title">
+        <span>{{vm.title}}</span>
+        <div class="task-id" ng-class="vm.task.approvalTask?'clickable':''">
+          <div flex>
+            <!--<div>ECR#{{vm.task.id | ellipsis:true:10:' ...'}}</div>-->
+            <div
+              ng-click="vm.openCardDialog($event, vm.card.id, vm.tasks, vm.tags, '', '', vm.defualtValue)">{{vm.board.name}}
+              <span ng-show="vm.task.approvalTask">#</span> {{vm.card.companySeqId}} </div>
+            <md-tooltip class="md-tooltip" md-direction="top">{{vm.board.name}}
+              <span ng-show="vm.task.approvalTask">#</span> {{vm.card.companySeqId}} </md-tooltip>
+            <i ng-show="vm.task.approvalTask" class="icon icon-menu-right s20"></i>
+            <div ng-show="vm.task.approvalTask">Approval Task</div>
+          </div>
+        </div>
+      </div>
+      <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progressEmail">
+      </md-progress-circular>
+      <div>
+
+        <!-- CHANGE ITEMS -->
+        <md-menu md-offset="0 48" class="labels" ng-if="!vm.isTemplate">
+          <md-button class="md-icon-button" aria-label="Label" translate translate-attr-aria-label="SB.LABEL"
+                     ng-click="vm.labelTabIndex = 0;$mdOpenMenu($event,vm.getallfuseobject())">
+            <md-icon md-menu-origin md-font-icon="icon-connected-objects"></md-icon>
+            <md-tooltip class="md-tooltip">Tag any object(s) that may be affected by this task</md-tooltip>
+          </md-button>
+
+          <md-menu-content class="labels-menu-content" width="4" ms-scroll>
+            <md-tabs md-selected="vm.labelTabIndex" md-dynamic-height>
+
+              <!-- SELECT LABEL -->
+              <md-tab>
+                <md-tab-body ng-show="vm.idChangeItems.length > 0">
+                  <md-menu-item>
+                    <md-input-container class="no-errors-spacer" md-no-float>
+                      <input placeholder="Affected Objects..." type="text" ng-model="vm.changeItemSearchText"
+                             autocomplete="off">
+                    </md-input-container>
+                  </md-menu-item>
+                  <md-menu-item class="label" ng-style="{'width': vm.widthOfCardDialog + 'px'}"
+                                ng-repeat="idChangeItem in vm.idChangeItems | filter: vm.filterChangeItem">
+                    <md-button class="label-toggle-button" md-prevent-menu-close ng-click="vm.toggleInArray(vm.task.id, vm.idChangeItems); vm.changeItemFuntion(idChangeItem.displayObjectId)"
+                               aria-label="Toggle Label" translate translate-attr-aria-label="SB.TOGGLE_LABEL">
+                      <div layout="row">
+                        <i ng-if="vm.existAffectedObject(idChangeItem)"
+                           class="icon-check s16" style="padding-top: 8px;"></i>
+                        <span class="object-content" md-highlight-text="vm.changeItemSearchText"
+                              md-highlight-flags="i">{{vm.parseStrings(idChangeItem)}}</span>
+                      </div>
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-item class="label" ng-hide="vm.idChangeItems.length > 0">
+                    No affected objects available.
+                  </md-menu-item>
+                </md-tab-body>
+              </md-tab>
+              <!-- / SELECT LABEL -->
+            </md-tabs>
+          </md-menu-content>
+        </md-menu>
+        <!-- / CHANGE ITEMS -->
+
+        <!-- MEMBERS -->
+        <md-menu md-offset="0 48" class="members">
+          <md-button class="md-icon-button" aria-label="Members" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin md-font-icon="icon-account-multiple"></md-icon>
+            <md-tooltip class="md-tooltip">Assign owners (they can drag and drop cards)</md-tooltip>
+          </md-button>
+
+          <md-menu-content class="members-menu-content" width="4" ms-scroll>
+            <md-menu-item>
+              <md-input-container class="no-errors-spacer" md-no-float>
+                <input placeholder="Search Owners..." autocomplete="off" type="text" ng-model="vm.memberSearchText"
+                       translate translate-attr-placeholder="Search Owners">
+              </md-input-container>
+            </md-menu-item>
+
+            <md-menu-item class="member" ng-repeat="member in vm.members  | filter: vm.filterMember">
+              <md-button ng-click="vm.toggleInArray(member.id, vm.task.idMembers); vm.addMember()" md-prevent-menu-close
+                         aria-label="toggle member"
+                         translate translate-attr-aria-label="SB.TOGGLE_MEMBER">
+                <div layout="row" layout-align="space-between center">
+                  <div layout="row" layout-align="start center">
+                    <md-chip-template class="member-chip">
+                      <img ng-show="vm.isAvatarAvailable(member.avatar)" class="avatar" ng-src="{{member.avatar}}">
+                      <div ng-hide="vm.isAvatarAvailable(member.avatar)" class="avatar-circle">
+                        <span class="initials">{{vm.defaultAvatar(member.name)}}</span>
+                      </div>
+                    </md-chip-template>
+                    <!--<img alt="{{ member.name }}" ng-src="{{ member.avatar }}" class="avatar"/>-->
+                    <p class="member-name">{{ member.name }}</p>
+                  </div>
+                  <i class="icon-check s16" ng-if="vm.exists(member.id, vm.task.idMembers)"></i>
+                </div>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <!-- / MEMBERS -->
+
+        <!--    ATTACHMENT
+                <md-button class="md-icon-button" ng-click="vm.gotoAttachment()" aria-label="Attachment"
+                           translate translate-attr-aria-label="SB.ATTACHMENT">
+                    <md-icon md-font-icon="icon-attachment"></md-icon>
+                    <md-tooltip class="md-tooltip">Add attachments</md-tooltip>
+                </md-button>
+                 / ATTACHMENT -->
+
+        <!-- CLOSE DIALOG -->
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+          <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+        <!-- / CLOSE DIALOG -->
+      </div>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content ms-scroll>
+
+    <md-input-container class="md-block">
+      <label translate="TODO.TITLE">Title</label>
+      <input name="title" ng-model="vm.task.title" required ng-blur="vm.addNewTask()">
+      <div ng-messages="taskForm.title.$error" ng-show="taskForm.title.$touched" role="alert">
+        <div ng-message="required">
+          <span translate="TODO.ERRORS.TITLE_REQUIRED">Title field is required</span>
+        </div>
+      </div>
+    </md-input-container>
+
+    <div class="tags-and-owners">
+
+      <!-- CHANGE ITEMS SECTION -->
+      <div flex class="tags">
+        <div class="section-header" ng-if="!vm.isTemplate" layout="row" layout-align="start center">
+          <i class="icon-connected-objects s18"></i>
+          <span class="section-title">Affected Objects</span>
+        </div>
+        <div class="section-content" ng-if="!vm.isTemplate">
+          <md-progress-circular md-mode="indeterminate" ng-if="vm.progressCardData" md-diameter="25">
+          </md-progress-circular>
+          <md-chips class="member-chips"
+                    ng-model="vm.changeItemsTask"
+                    md-autocomplete-snap
+                    md-require-match="true"
+                    md-on-remove="vm.toggleInArray(vm.task.id, vm.changeItems); vm.removechangeItem(item.displayObjectId)"
+                    md-on-add="vm.toggleInArray(vm.task.id, vm.changeItems)"
+                    md-transform-chip="$chip">
+            <md-autocomplete ng-style="{'width': vm.widthOfCardDialog + 'px'}" md-selected-item="vm.selectedChangeItem"
+                             md-search-text="vm.searchChangeItemText"
+                             md-items="item in vm.labelSearch(vm.searchChangeItemText)"
+                             md-selected-item-change="vm.changeItemFuntion(item.displayObjectId, vm.changeItems)"
+                             md-item-text="item.displayObjectId"
+                             placeholder="Search and add"
+                             md-no-cache="true"
+                             ng-click="vm.getallfuseobject()">
+              <span>
+                <i ng-if="vm.exists(item.displayObjectId, vm.idChangeItems)" class="icon-check s16"></i>
+              </span>
+              <span md-highlight-text="vm.searchChangeItemText" md-highlight-flags="i">{{vm.parseStrings(item)}}</span>
+            </md-autocomplete>
+
+            <md-chip-template class="change-item-chip">
+              <span>{{vm.parseChip($chip)}}</span>
+            </md-chip-template>
+            <button md-chip-remove class="md-primary">
+              <md-icon md-font-icon="icon-close" ng-click="vm.removechangeItem($chip)" class="s18">
+              </md-icon>
+            </button>
+          </md-chips>
+          <div>
+            <md-switch class="latest-version-switch" ng-true-value="true" ng-false-value="false" ng-model="vm.isLatest"
+                       aria-label="latest switch">
+            </md-switch>
+            <span class="latest-version-text">Show only latest revision</span>
+          </div>
+        </div>
+      </div>
+      <!-- / CHANGE ITEMS SECTION -->
+
+      <!-- OWNER SECTION -->
+      <div flex class="members">
+        <div class="section-header" md-position-mode="target-right target" layout="row" layout-align="start center">
+          <i class="icon-account-multiple s18">
+            <md-tooltip class="md-tooltip">Assign Owners</md-tooltip>
+          </i>
+          <span class="section-title" translate="">Owners</span>
+        </div>
+        <div class="section-content chips-placeholder">
+          <md-chips class="member-chips" ng-model="vm.tasks.idMembers" md-autocomplete-snap md-require-match="true"
+                    md-transform-chip="$chip.id"
+                    md-on-add="vm.addMember()"
+          md-on-remove="vm.removeMember(vm.members.getById($chip).id)">
+            <md-autocomplete md-selected-item="vm.selectedMember" md-search-text="vm.searchText"
+                             md-items="member in vm.memberQuerySearch(vm.searchText)"
+                             md-item-text="member.name" placeholder="Search for Owners">
+              <span md-highlight-text="vm.searchText">{{member.name}}</span>
+            </md-autocomplete>
+            <md-chip-template class="member-chip">
+              <img ng-show="vm.isAvatarAvailable(vm.members.getById($chip).avatar)" class="member-chip-avatar"
+                   ng-src="{{vm.members.getById($chip).avatar}}">
+              <div ng-hide="vm.isAvatarAvailable(vm.members.getById($chip).avatar)" class="avatar-circle">
+                <span class="initials">{{vm.defaultAvatar(vm.members.getById($chip).name)}}</span>
+              </div>
+              <md-tooltip class="md-tooltip">{{vm.members.getById($chip).name}}</md-tooltip>
+            </md-chip-template>
+            <button md-chip-remove class="md-primary">
+              <md-icon md-font-icon="icon-close" ng-click="vm.removeMember(vm.members.getById($chip).id)"
+                       class="s18"></md-icon>
+            </button>
+          </md-chips>
+        </div>
+      </div>
+      <!-- / OWNER SECTION -->
+    </div>
+
+    <div layout-xs="column" layout="row" class="margin-top-20">
+      <div flex class="date-container">
+        <label translate="TODO.START_DATE">Start Date</label>
+        <md-datepicker flex ng-model="vm.task.startDate" md-placeholder="Start Date"
+                       ng-change="vm.handleStartDateChange()"></md-datepicker>
+      </div>
+
+      <div flex class="date-container target-right">
+        <md-datepicker flex ng-model="vm.task.dueDate" md-placeholder="Due Date"
+                       ng-change="vm.handleDueDateChange()"></md-datepicker>
+        <label translate="TODO.DUE_DATE">Due Date</label>
+      </div>
+    </div>
+
+    <div class="notes">
+      <label translate="TODO.NOTES">Notes</label>
+      <text-angular ng-model="vm.task.notes" ng-blur="vm.addTaskNote()"></text-angular>
+    </div>
+
+    <!-- <div class="sections">
+
+            &lt;!&ndash; ATTACHMENT SECTION &ndash;&gt;
+            <div class="attachment-list section">
+                <div class="attachment" layout="row" layout-align="space-between center">
+                    <div>
+                        <span class="filename">attachment-2.doc</span>
+                        <span class="size">(12 Kb)</span>
+                    </div>
+
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-icon="icon-close" aria-label="delete attachment" class="s16"></md-icon>
+                    </md-button>
+                </div>
+
+                <div class="attachment" layout="row" layout-align="space-between center">
+                    <div>
+                        <span class="filename">attachment-1.jpg</span>
+                        <span class="size">(350 Kb)</span>
+                    </div>
+
+                    <md-button class="md-icon-button" aria-label="Delete attachment" translate
+                               translate-attr-aria-label="TODO.DELETE_ATTACHMENT">
+                        <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+            &lt;!&ndash; /ATTACHMENT SECTION &ndash;&gt;
+            <div></div>
+
+        </div>
+-->
+
+    <!-- SECTIONS -->
+    <div class="sections">
+
+      <!-- COMMENTS SECTION -->
+      <div class="section">
+        <div class="comments">
+
+          <div class="section-header" layout="row" layout-align="start center">
+            <i class="icon-comment s18"></i>
+            <span class="section-title" translate="SB.COMMENTS">Comments</span>
+          </div>
+
+          <div class="section-content">
+            <form name="cardCommentForm" ng-submit="vm.addNewComment(vm.newCommentText); vm.newCommentText =''"
+                  class="comment new-comment"
+                  layout="column" layout-align="start" no-validate>
+
+              <div layout="row">
+                <img class="comment-member-avatar" src="assets/images/avatars/profile.jpg">
+                <md-input-container flex md-no-float>
+                  <textarea ms-scroll placeholder="Write a comment.." ng-model="vm.newCommentText" required translate
+                            translate-attr-placeholder="SB.WRITE_A_COMMENT"></textarea>
+                </md-input-container>
+              </div>
+
+              <div layout="row" layout-align="end center">
+                <md-button type="submit" class="md-raised md-accent"
+                           ng-disabled="cardCommentForm.$invalid || cardCommentForm.$pristine"
+                           aria-label="Add">
+                  <span translate="SB.ADD">Add</span>
+                </md-button>
+              </div>
+            </form>
+
+            <div class="comment" layout="row" ng-repeat="comment in vm.task.comments">
+
+              <md-chip-template class="member-chip">
+                <img ng-show="vm.isAvatarAvailable(vm.members.getById(comment.idMember).avatar)"
+                     class="comment-member-avatar" ng-src="{{vm.members.getById(comment.idMember).avatar}}">
+                <div ng-hide="vm.isAvatarAvailable(vm.members.getById(comment.idMember).avatar)"
+                     class="comment-member-avatar-circle">
+                  <span class="initials">{{vm.defaultAvatar(vm.members.getById(comment.idMember).name)}}</span>
+                </div>
+              </md-chip-template>
+
+              <div layout="column">
+                <div class="comment-member-name">
+                  {{vm.board.members.getById(comment.idMember).name}}
+                </div>
+                <div class="comment-bubble">{{comment.message}}</div>
+                <div class="comment-time secondary-text">{{comment.time | date:'medium'}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / COMMENTS SECTION -->
+
+      <!-- ACTIVITIES SECTION -->
+      <div ng-if="vm.task.activities[0]" class="section">
+
+        <div class="activities">
+
+          <div class="section-header" layout="row" layout-align="start center">
+            <i class="icon-format-list-bulleted s18"></i>
+            <span class="section-title" translate="SB.ACTIVITY">Activity</span>
+          </div>
+
+          <div class="section-content">
+            <div class="activity" layout="row" layout-align="start center"
+                 ng-repeat="activity in vm.task.activities | orderBy : '-time'">
+              <md-chip-template class="member-chip">
+                <img ng-show="vm.isAvatarAvailable(vm.members.getById(activity.idMember).avatar)"
+                     class="activity-member-avatar" ng-src="{{vm.members.getById(activity.idMember).avatar}}">
+                <div ng-hide="vm.isAvatarAvailable(vm.members.getById(activity.idMember).avatar)"
+                     class="activity-member-avatar-circle">
+                  <span class="initials">{{vm.defaultAvatar(vm.members.getById(activity.idMember).name)}}</span>
+                </div>
+              </md-chip-template>
+              <div class="activity-member-name">{{vm.members.getById(activity.idMember).name}}</div>
+              <div class="activity-message">{{activity.message}}</div>
+              <div class="activity-time secondary-text">{{activity.time | date:'medium'}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- / ACTIVITIES SECTION -->
+
+    </div>
+    <!-- / SECTIONS -->
+
+
+  </md-dialog-content>
+
+  <!--</form> -->
+</md-dialog>

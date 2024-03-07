@@ -1,0 +1,91 @@
+<!-- DIALOG -->
+<md-dialog class="contact-dialog" aria-label="New Task">
+
+  <form name="contactForm" class="md-inline-form" novalidate>
+
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar class="md-accent md-tall-height" layout="column">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title margin-top-20">Increment {{vm.minormajor}} Revision</span>
+        <!-- <span class="title margin-top-20">Increment Revision</span> -->
+
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <!-- DIALOG CONTENT -->
+    <md-dialog-content ms-scroll class="progresbar-prlt">
+      <md-input-container class="md-icon-float md-block" ng-if="!vm.minorsmajors">
+        <label>{{vm.minormajor}} Revision</label>
+        <md-icon></md-icon>
+        <input ng-model="vm.minormajorValue" type="text" ng-disabled="vm.minormajorIncrement.fuseObjectNumberSetting.editObjectId != true">
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Revision Notes</label>
+        <md-icon></md-icon>
+        <input ng-model="vm.revisionNotes" type="text">
+      </md-input-container>
+      <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress" class="md-progressbar-circular">
+      </md-progress-circular>
+      <h3>WHERE-USED CHECK/UPDATE</h3>
+
+      <h3 class="secondary-text" ng-if="vm.whereUsed.length <= 0">This object is not being referenced in any other object's BOMs.</h3>
+
+      <h3 class="secondary-text" ng-if="vm.whereUsed.length > 0">This object is being used in the following objects' BOMs.Select the BOMs that you'd like to update with the new revision.</h3>
+
+      <h3 class="secondary-text" ng-if="vm.whereUsed.length > 0">NOTE: When the setting 'Allow Edits to Released Bill-of-Materials' is disabled, ONLY 'InDevelopment' BOMs from the list below, can be updated. When this setting is enabled, even 'Released' BOMs can be updated.</h3>
+      <!-- CONTACT LIST -->
+
+      <md-list>
+        <md-list-item class="" ng-if="vm.whereUsed.length > 0">
+          <md-checkbox aria-label="checkbox" ng-model="vm.selectedAll" ng-click="vm.checkAll(vm.whereUsed)">
+          </md-checkbox>
+          <div layout="row" ng-if="!vm.editReleasedBom" class="secondary-text">Select All (In Development Objects)</div>
+          <div layout="row" ng-if="vm.editReleasedBom" class="secondary-text">Select All</div>
+        </md-list-item>
+        <md-list-item class="" ng-repeat="whereused in vm.whereUsed">
+          <!--InDevelopment-->
+          <md-checkbox ng-click="vm.singleSelect(whereused)" aria-label="checkbox" ng-model="whereused.Selected"
+                       ng-disabled="(whereused.status == 'Released' || whereused.status == 'Obsolete') && !vm.editReleasedBom">
+          </md-checkbox>
+          <div layout="row" class="secondary-text">{{vm.parseStrings(whereused.displayObjectId,whereused.status)}}</div>
+          <!--InDevelopment-->
+          <!--Released-->
+          <!-- <md-checkbox ng-click="vm.singleSelect(whereused.objectId)" aria-label="checkbox" ng-model="whereused.Selected">
+                </md-checkbox>
+                <div layout="row">{{whereused.displayObjectId}}</div> -->
+          <!--Released-->
+          <!--Obsolete-->
+          <!-- <md-checkbox ng-click="vm.singleSelect(whereused.objectId)" aria-label="checkbox" ng-model="whereused.Selected">
+                </md-checkbox>
+                <div layout="row">{{whereused.displayObjectId}}</div> -->
+          <!--Obsolete-->
+        </md-list-item>
+      </md-list>
+    </md-dialog-content>
+    <!-- / DIALOG CONTENT -->
+
+
+
+    <!-- DIALOG ACTIONS -->
+    <md-dialog-actions layout="row" layout-align="space-between center">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.createRevisionNotesFunction()" class="send-button md-accent md-raised" aria-label="Create" ng-disabled="vm.whereusedData">
+          Create
+        </md-button>
+      </div>
+
+    </md-dialog-actions>
+    <!-- / DIALOG ACTIONS -->
+
+  </form>
+
+</md-dialog>
+<!-- / DIALOG -->

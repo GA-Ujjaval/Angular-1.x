@@ -1,0 +1,9 @@
+<div
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+  <a ui-sref="app.objects.sourcing.sourcemfgsuppdetails({sourceType: row.entity.mfrList.mfrSourceType, id:row.entity.mfrList.mfrSourcingId})" target="{{grid.appScope.vm.linkTarget}}">
+    <span ng-if="row.entity.mfrList">
+        {{ row.entity.mfrList[col.name] ||'' }}
+      </span></a>
+</div>
+

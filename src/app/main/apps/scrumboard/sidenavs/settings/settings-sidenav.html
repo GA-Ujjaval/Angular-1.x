@@ -1,0 +1,103 @@
+    <!-- SIDENAV HEADER -->
+<md-toolbar class="md-accent" ng-class="'md-'+vm.board.settings.color+'-bg'"
+            ng-intro-options="IntroOptionsBoard" ng-intro-method="$root.CallMeSetting"
+            ng-intro-onbeforechange="BeforeChangeEvent"
+            ng-intro-onafterchange="AfterChangeEvent"
+            ng-intro-oncomplete="CompleteEvent"
+            ng-intro-onexit="Complete"
+            ng-intro-autostart="false">
+    <div class="md-toolbar-tools">
+        <md-button ng-hide="vm.selectedMenu === 'Settings'" class="md-icon-button"
+                   ng-click="vm.selectedMenu = 'Settings'" aria-label="back" translate
+                   translate-attr-aria-label="SB.BACK">
+            <md-icon md-font-icon="icon-arrow-left"></md-icon>
+        </md-button>
+        <div class="question-icon" ng-if="$root.introSettingSidenavFlag != true" ng-click="$root.CallMeSetting();">
+            <div class="introjs-hint-dot-settings"></div>?</div>
+        <div flex class="menu-title">{{vm.selectedMenu}}</div>
+    </div>
+</md-toolbar>
+<!-- / SIDENAV HEADER -->
+
+<!-- SETTINGS -->
+<md-content ng-show="vm.selectedMenu === 'Settings'" class="animate-slide-right settings" ms-scroll ms-sidenav-helper>
+    <md-list>
+        <md-list-item class="item" ng-click="vm.selectedMenu = 'Board Color'" id="step5">
+            <md-icon md-font-icon="icon-format-color-fill" class="s18"></md-icon>
+            <p class="title" translate="SB.BOARD_COLOR">Board Color</p>
+        </md-list-item>
+
+        <md-list-item class="item" ng-click="vm.boardsettingscardCoverImages()" id="step16">
+            <md-icon md-font-icon="icon-image-area" class="s18"></md-icon>
+            <p flex class="title" translate="SB.CARD_COVER_IMAGES">Card Cover Images</p>
+            <md-icon ng-show="vm.board.settings.cardCoverImages" md-font-icon="icon-check" class="s18"></md-icon>
+        </md-list-item>
+
+        <md-list-item class="item" ng-click="vm.selectedMenu = 'Priority'" aria-label="inbox" id="step7">
+            <md-icon md-font-icon="icon-label" class="s18"></md-icon>
+            <p class="title">Priority</p>
+        </md-list-item>
+
+        <md-list-item class="item" ng-click="vm.selectedMenu = 'Assign Roles'" aria-label="inbox" id="step8">
+            <md-icon md-font-icon="icon-account-multiple" class="s18"></md-icon>
+            <p class="title">Assign Roles</p>
+        </md-list-item>
+
+        <md-list-item class="item" ng-click="vm.selectedMenu = 'Impact Visualizer'" aria-label="inbox" id="step9">
+            <md-icon md-font-icon="icon-impact-visualizer" class="s18"></md-icon>
+            <p class="title">Impact Visualizer</p>
+        </md-list-item>
+
+        <md-list-item class="item" ng-click="vm.selectedMenu = 'Card Template'" aria-label="inbox" id="step10">
+            <md-icon md-font-icon="icon-book-multiple-variant" class="s18"></md-icon>
+            <p class="title">Card Template</p>
+        </md-list-item>
+
+    </md-list>
+</md-content>
+<!-- / SETTINGS -->
+
+<!-- COLOR -->
+<md-content ng-show="vm.selectedMenu === 'Board Color'" class="animate-slide-left board-color-selection">
+    <div layout="column" layout-fill
+         ng-include="'app/main/apps/scrumboard/sidenavs/settings/menus/color/color-menu.html'"
+         ng-controller="ColorMenuController as vm">
+    </div>
+</md-content>
+<!-- COLOR -->
+
+<!-- LABELS -->
+<md-content ng-show="vm.selectedMenu === 'Priority'" class="animate-slide-left labels">
+    <div layout="column" layout-fill
+         ng-include="'app/main/apps/scrumboard/sidenavs/settings/menus/labels/labels-menu.html'"
+         ng-controller="PriorityMenuController as vm">
+    </div>
+</md-content>
+<!-- LABELS -->
+
+<!-- MEMBERS -->
+<md-content ng-show="vm.selectedMenu === 'Assign Roles'" class="animate-slide-left members">
+    <div layout="column" layout-fill
+         ng-include="'app/main/apps/scrumboard/sidenavs/settings/menus/members/members-menu.html'"
+         ng-controller="MembersMenuController as vm">
+    </div>
+</md-content>
+<!-- MEMBERS -->
+
+<!-- More Features -->
+<md-content ng-show="vm.selectedMenu === 'Impact Visualizer'" class="animate-slide-left members">
+    <div layout="column" layout-fill
+         ng-include="'app/main/apps/scrumboard/sidenavs/settings/menus/morefeatures/morefeatures-menu.html'"
+         ng-controller="MoreFeaturesMenuController as vm">
+    </div>
+</md-content>
+<!-- More Features -->
+
+<!-- Card Template -->
+<md-content ng-show="vm.selectedMenu === 'Card Template'" class="animate-slide-left members">
+    <div layout="column" layout-fill
+         ng-include="'app/main/apps/scrumboard/sidenavs/settings/menus/card-template/card-template.html'"
+         ng-controller="cardTemplateController as vm">
+    </div>
+</md-content>
+<!-- Card Template -->

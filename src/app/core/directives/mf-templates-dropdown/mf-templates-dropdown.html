@@ -1,0 +1,86 @@
+<div class="mf-templates-dropdown">
+
+  <md-menu md-prevent-menu-close="md-prevent-menu-close">
+    <md-button class="button-briefcase-download" aria-label="templates-dropdown"
+               ng-click="getTemplates(); $mdMenu.open($event);">
+      <md-icon class="template-icon" md-font-icon="icon-content-save-all" class="s18 icon-content-save-all"></md-icon>
+      <md-tooltip class="md-tooltip multiline-tooltip-templates">
+        <ul>
+          <li>Table templates – Save current table view (column order and width) as template for view, download and
+            print
+          </li>
+          <li>Template Names created by Admin appear in italicized font</li>
+          <li>Template Names created by you appear in regular font</li>
+          <li>Checkbox next to Template Name indicates that it has been applied to the table</li>
+        </ul>
+      </md-tooltip>
+    </md-button>
+    <md-menu-content class="templates-menu">
+      <md-menu-item ng-if="!isRO()" ng-click="openSettingsPopup($event, gridApi, 'creation')">
+        <md-button ng-mouseenter="stopHover($event)" class="create-new">Save as Table Template</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="isRO() && !progress && templates && (templates.length === 0)">
+        <md-button class="create-new">No templates available</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="templates && templates.length">
+        <md-input-container>
+          <label class="filter-label">Search table templates</label>
+          <input type="text" ng-model="$parent.templateSearchText"
+                 ng-change="checkFilteredTemplates(templateSearchText)">
+        </md-input-container>
+      </md-menu-item>
+      <!--here I can not just use build in angular-js 'filter' attribute, because there is an angular-material bug with manu.
+          When we filter it, It is getting closed-->
+      <md-menu-item ng-repeat="template in templates"
+                    ng-show="templateSearchText.length === 0 || template.fullName.toLowerCase().indexOf(templateSearchText.toLowerCase()) !== -1">
+        <md-menu class="fix-offset">
+          <md-button aria-label="menu-item" class="fix-offset"
+                     ng-click="$mdMenu.open($event); toggleTemplateOptionChosen(template); closeNotUsedMenuOptions(template);">
+            <md-checkbox disabled class="default-template-button" aria-label="default" ng-if="template.applied"
+                         ng-checked="true"></md-checkbox>
+            <div ng-if="!template.sharedWithUsers" class="template-item-text">
+              {{template.templateName}}
+              <span ng-if="template.isDefault" class="default-mark">(default)</span>
+            </div>
+            <div ng-if="template.sharedWithUsers" class="template-item-text italic">
+              {{template.templateName}}
+              <span ng-if="template.isDefault" class="default-mark">(default)</span>
+            </div>
+            <md-icon md-font-icon="icon-chevron-right s30"
+                     class="md-default-theme md-font material-icons icon-chevron-right s30"
+                     aria-hidden="true"></md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="applyTemplate(template.templateId)">
+                Apply
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-click="openSettingsPopup($event, gridApi, 'updating', template.templateId)"
+                          ng-if="isUserEmpoweredToDelete(template.createdBy)">
+              <md-button>
+                Edit
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-if="isUserEmpoweredToDelete(template.createdBy)">
+              <md-button ng-click="removeTemplate(template.templateId, pageType)">
+                Delete
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-menu-item>
+      <md-menu-item class="progress-templates" ng-show="progress">
+        <md-button aria-label="mf-templates-dropdown">
+          <md-progress-circular md-diameter="20" class="md-accent" md-mode="indeterminate"></md-progress-circular>
+        </md-button>
+      </md-menu-item>
+      <md-menu-item class="no-templates-filter" ng-show="isNothingMatched">
+        <md-button class="no-templates-found">
+          No templates found
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
+</div>

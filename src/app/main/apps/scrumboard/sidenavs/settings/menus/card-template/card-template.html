@@ -1,0 +1,71 @@
+<md-list>
+
+  <md-list-item class="label pl-0">
+    <div layout="row" layout-align="start center">
+      <md-switch class="mt-22" ng-model="vm.allowDefaultTemplate" ng-change="vm.onlyDefaultTemplate()" aria-label="minor switch"></md-switch>
+      <span class="h4 m-0 select-none">Allow user to pick from list of templates</span>
+    </div>
+  </md-list-item>
+  <div class="card-template-note">
+    <span>NOTE:</span> When enabled, user can pick from a list of templates (defined below) to create a new card.
+  </div>
+  <div class="card-template-descrip">
+    When disabled, user will not be presented a list of templates to create the card. The card will AUTOMATICALLY use
+    the template pre-selected by the 'Admin'.
+  </div>
+
+  <md-divider class="divider-color-25"></md-divider>
+
+  <div layout="row" layout-align="start center">
+    <!-- <md-subheader class="md-no-sticky lable-bg template-main-lbl">New Template</md-subheader> -->
+  </div>
+
+  <div layout="row" layout-align="start center" class="pl-20" id="edit-textbox">
+    <span class="create-temp-span" editable-text="vm.cardTemplateName" ng-model="vm.cardTemplateName" onaftersave="vm.createTemplate()">
+      <!-- <p class="create-template-lbl">Create Template</p> -->
+      <md-button class="create-template-lbl create-temp-btn primary md-accent md-raised md-button md-default-theme md-ink-ripple">Create New Template</md-button>
+    </span>
+    <!-- <md-button class="md-accent md-raised ml-30">CREATE TEMPLATE
+    </md-button> -->
+  </div>
+
+  <md-divider class="divider-color-25"></md-divider>
+
+  <div layout="row" layout-align="start center" ng-show="!vm.allowDefaultTemplate">
+    <md-subheader class="md-no-sticky lable-bg template-main-lbl">Select the default template for the board</md-subheader>
+  </div>
+  <div layout="row" layout-align="start center" ng-show="vm.allowDefaultTemplate">
+    <md-subheader class="md-no-sticky lable-bg template-main-lbl">Templates list</md-subheader>
+  </div>
+  <div layout="row" layout-align="start center" class="ps-rel">
+    <md-progress-circular id="create-progress" class="set-loader" md-mode="indeterminate" ng-if="vm.progressGetBoard && vm.templatesCardList.length"></md-progress-circular>
+    <md-input-container flex class="m-0 scrl-y-cardt">
+        <md-radio-group ng-model="vm.defaultcardId">
+          <div layout="column" class="ml-18">
+            <div class="f-temp-group" ng-repeat="cardTemplateObj in vm.cardTemplateObjects track by $index">
+
+              <md-radio-button class="set-radio-all f-temp-radio" ng-show="!vm.allowDefaultTemplate" ng-click="vm.setDefaultCardTemplate(cardTemplateObj.id)" ng-value="cardTemplateObj.id" aria-label="cardTemplateObj.name">
+                <md-tooltip>Select default template</md-tooltip>
+              </md-radio-button>
+
+              <a href="#" class="f-temp-link" ng-click="vm.openCardDialog($event, cardTemplateObj.id, '', vm.tasks, '', '', '', '', true)">
+                {{ cardTemplateObj.name }}
+              </a>
+
+              <span class="delete-template">
+                <md-button class="remove-button md-icon-button" ng-click="vm.removeCardTemplate(cardTemplateObj.id)"
+                  aria-label="remove">
+                  <md-icon md-font-icon="icon-delete"></md-icon>
+                </md-button>
+                <md-tooltip>Delete template</md-tooltip>
+              </span>
+
+            </div>
+            <span class="set-radio-all" style="margin-left: 20px;" ng-if="!vm.templatesCardList.length">No card template.</span>
+          </div>
+        </md-radio-group>
+      </md-input-container>
+  </div>
+  <md-divider class="divider-color-25"></md-divider>
+
+</md-list>

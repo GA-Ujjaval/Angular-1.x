@@ -1,0 +1,104 @@
+<!-- SIDENAV HEADER -->
+<div class="" layout="row" layout-align="start center">
+
+    <!-- USER -->
+    <img ng-src="assets/angular-material-assets/img/icons/file-tree.png" class="margin-8"/>
+    <!--<span class="font-weight-500 font-size-14">{{vm.user.name}}</span>-->
+    <!-- / USER -->
+    <p>Categories</p>
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<!-- SIDENAV CONTENT -->
+<div ms-scroll class="content">
+
+    <md-list>
+
+        <md-list-item ng-class="{'selected':vm.listType ==='starred'}" ng-click="vm.partsFunction()">
+            <p class="pl-20">
+                Parts
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-click="vm.openCategoryDialog($event); vm.partsFunction()">
+            <p class="blue-900-fg pl-20">
+                Create Part Category
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-if="$root.enableProducts" ng-class="{'selected':vm.listType ==='all'}" ng-click="vm.productsFunction()">
+            <p class="pl-20">
+                Products
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-if="$root.enableProducts" ng-click="vm.openProductDialog($event); vm.productsFunction()">
+            <p class="blue-900-fg pl-20">
+                Create Product Category
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-class="{'selected':vm.listType ==='all'}" ng-click="vm.documentsFunction()">
+            <p class="pl-20">
+                Documents
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-click="vm.openDocumentDialog($event); vm.documentsFunction()">
+            <p class="blue-900-fg pl-20">
+                Create Document Category
+            </p>
+        </md-list-item>
+
+        <md-divider></md-divider>
+    </md-list>
+</div>
+
+
+<div class="" layout="row" layout-align="start center">
+
+    <!-- USER -->
+    <img ng-src="assets/angular-material-assets/img/icons/table-large.png" class="margin-8"/>
+    <!--<span class="font-weight-500 font-size-14">{{vm.user.name}}</span>-->
+    <!-- / USER -->
+    <p style="margin-left:2px">Attributes</p>
+
+</div>
+
+<div ms-scroll class="content">
+
+    <md-list class="margin-bottom-10">
+
+
+            <md-list-item ng-click="vm.customAttributeFunction()"
+                          ng-class="{'selected':vm.listType.name === group.name}">
+                <p class="pl-20">
+                    Custom Attributes
+                </p>
+            </md-list-item>
+
+            <md-list-item ng-click="vm.openAttributeDialog($event); vm.customAttributeFunction()">
+                <p class="pl-20 blue-900-fg">
+                    Create New Attribute
+                </p>
+            </md-list-item>
+
+    </md-list>
+</div>
+
+
+
+
+        <!--<md-list-item class="new-group-form" ng-show="newListForm.$visible">
+            <p class="pl-8" editable-text="vm.newGroupName" e-form="newListForm" onaftersave="vm.addNewGroup()"></p>
+        </md-list-item>
+
+        <md-list-item class="" ng-click="newListForm.$show()" ng-hide="newListForm.$visible">
+            <p class="pl-8 md-accent-fg" >New Group</p>
+        </md-list-item>-->
+
+
+
+
+<!-- / SIDENAV CONTENT -->

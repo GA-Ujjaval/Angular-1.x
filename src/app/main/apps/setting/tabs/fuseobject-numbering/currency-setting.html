@@ -1,0 +1,98 @@
+<div layout="row" layout-align="space-between">
+  <span class="title margin-top-15 margin-bottom-15 f-text font-size-20">
+    <b> Currency Setting</b>
+  </span>
+</div>
+
+
+<div layout-align="center center" class="margin-bottom-10 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-input-container class="currency-setting">
+      <span>Select Currency</span>
+      <md-select ng-change="vm.changeCurrencySetting($event, 'currencySettings', {currencyChoice: vm.currencySetting}, vm.oldValue)"
+        ng-focus="vm.oldValue = vm.currencySetting" ng-model="vm.currencySetting" aria-label="Currency">
+        <md-option value="$ (USD)">
+          <b class="currency-option">$ (USD)</b>
+        </md-option>
+        <md-option value="$ (CAD)">
+          <b class="currency-option">$ (CAD)</b>
+        </md-option>
+        <md-option value="&euro; (EUR)">
+          <b class="currency-option">&euro; (EUR)</b>
+        </md-option>
+        <md-option value="&pound; (GBR)">
+          <b class="currency-option">&pound; (GBR)</b>
+        </md-option>
+        <md-option value="&#x20b9; (INR)">
+          <b class="currency-option">&#x20b9; (INR)</b>
+        </md-option>
+        <md-option value="&yen; (RMB)">
+          <b class="currency-option">&yen; (RMB)</b>
+        </md-option>
+        <md-option value="AUD (AUD)">
+          <b class="currency-option">AUD (AUD)</b>
+        </md-option>
+        <md-option value="&yen; (JAP)">
+          <b class="currency-option">&yen; (JAP)</b>
+        </md-option>
+        <md-option value="&#8361; (KRW)">
+          <b class="currency-option">&#8361; (KRW)</b>
+        </md-option>
+        <md-option value="MXN (MXN)">
+          <b class="currency-option">MXN (MXN)</b>
+        </md-option>
+        <md-option value="&#8369; (PHP)">
+          <b class="currency-option">&#8369; (PHP)</b>
+        </md-option>
+        <md-option value="NZD (NZD)">
+          <b class="currency-option">NZD (NZD)</b>
+        </md-option>
+        <md-option value="NT$ (TWD)">
+          <b class="currency-option">NT$ (TWD)</b>
+        </md-option>
+        <md-option value="&#3647; (THB)">
+          <b class="currency-option">&#3647; (THB)</b>
+        </md-option>
+        <md-option value="CHF (CHF)">
+          <b class="currency-option">CHF (CHF)</b>
+        </md-option>
+        <md-option value="SGD (SGD)">
+          <b class="currency-option">SGD (SGD)</b>
+        </md-option>
+        <md-option value="kr (NOK)">
+          <b class="currency-option">kr (NOK)</b>
+        </md-option>
+        <md-option value="EGP (EGP)">
+          <b class="currency-option">EGP (EGP)</b>
+        </md-option>
+        <md-option value="kr (DKK)">
+          <b class="currency-option">kr (DKK)</b>
+        </md-option>
+        <md-option value="R$ (BRL)">
+          <b class="currency-option">R$ (BRL)</b>
+        </md-option>
+        <md-option value="&#x20AB; (VND)">
+          <b class="currency-option">&#x20AB; (VND)</b>
+        </md-option>
+        <md-option value="R (ZAR)">
+          <b class="currency-option">R (ZAR)</b>
+        </md-option>
+        <md-option value="&#8362; (ILS)">
+          <b class="currency-option">&#8362; (ILS)</b>
+        </md-option>
+        <md-option value="kr (SEK)">
+          <b class="currency-option">kr (SEK)</b>
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>
+  <div layout="row" class="margin-10">
+    <ul class="note-list">
+      <li>
+        <span class="ga-fs-no">1)</span> Selected Currency Symbol will be used in Part Cost, Product Cost and BOMs.</li>
+      <li>
+        <span class="ga-fs-no">2)</span> Currency for Manufacturer Parts (MPNs) and Supplier Parts (SPNs) can be set by going to the individual
+        MPN/SPN. The above setting does not impact the currency for MPNs/SPNs.</li>
+    </ul>
+  </div>
+</div>

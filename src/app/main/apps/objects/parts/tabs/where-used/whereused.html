@@ -1,0 +1,157 @@
+<div class="where-wrapper">
+  <div class="where-used-container">
+
+    <!-- CONTENT -->
+    <div class="buttons-edit-download-add">
+      <div layout-align="space-between center" class="save-changes-bom">
+        <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.whereusedProgres">
+        </md-progress-circular>
+      </div>
+      <md-button class="button-table-edit" ng-click="vm.editTable($event, vm.objectPageEnum.whereUsedPage)">
+        <md-icon class="icon-table-edit"></md-icon>
+        <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+      </md-button>
+      <md-menu>
+        <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+          <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+          <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button onClick="$('#whereused').tableExport({type:'excel',escape:'false'});">Excel</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button onClick="$('#whereused').tableExport({type:'csv',escape:'false'});">CSV</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button onClick="$('#whereused').tableExport({type:'txt',escape:'false'});">TXT</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <md-button class="button-print"
+                 ng-click="vm.printTable('whereused', vm.products.objectNumber, vm.products.revision, 'Whereused')">
+        <md-icon class="icon-printer"></md-icon>
+        <md-tooltip class="md-tooltip">Print table</md-tooltip>
+      </md-button>
+    </div>
+    <div>
+
+      <table id="whereused" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+             dt-options="vm.dtOptions">
+        <thead>
+        <tr>
+          <th class="secondary-text table-padding" style="display: none;">
+            <div class="table-header">
+            </div>
+          </th>
+          <th class="secondary-text table-padding">
+            <div class="table-header">
+
+            </div>
+          </th>
+          <th class="secondary-text" ng-if="vm.attrBasic && attr.displayed" ng-repeat="attr in vm.attrBasic">
+            <div ng-if="attr.name !== 'Associated Cards'" class="table-header">
+              {{attr.name}}
+            </div>
+            <div ng-if="attr.name === 'Associated Cards'" class="associated-cards-header-container">
+              <md-tooltip class="md-tooltip">Associated Cards</md-tooltip>
+              <i class="icon s16 icon-trello associated-cards-icon" aria-label="Boards"></i>
+            </div>
+          </th>
+          <th class="secondary-text" ng-if="vm.attrInventory && attr.displayed" ng-repeat="attr in vm.attrInventory">
+            <div class="table-header">
+              {{attr.name}}
+            </div>
+          </th>
+          <th class="secondary-text" ng-if="vm.attrAdditional && attr.displayed"
+              ng-repeat="attr in vm.attrAdditional track by $index">
+            <div class="table-header">
+              {{attr.name}}
+            </div>
+          </th>
+          <th class="secondary-text" ng-if="vm.mfrParts && attr.displayed" ng-repeat="attr in vm.mfrParts">
+            <div class="table-header">
+              {{attr.name}}
+            </div>
+          </th>
+          <th class="secondary-text" ng-if="vm.suppParts && attr.displayed" ng-repeat="attr in vm.suppParts">
+            <div class="table-header">
+              {{attr.name}}
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in vm.whereUsedList">
+          <td style="display: none;"></td>
+          <td ng-if="product.objectType == 'products'">
+            <md-icon md-font-icon="icon-cube-outline" class="s16"></md-icon>
+          </td>
+          <td ng-if="product.objectType == 'parts'">
+            <md-icon md-font-icon="icon-cog" class="s16"></md-icon>
+          </td>
+          <td ng-if="vm.attrBasic && attr.displayed" ng-repeat="attr in vm.attrBasic">
+            <a ng-if="attr.value == 'objectNumber' && product.objectType == 'parts'"
+               ui-sref="app.objects.part.parts.basicInfo({id:product.objectId})"
+               target="{{vm.linkTarget}}">{{product[attr.value]}}</a>
+            <a ng-if="attr.value == 'objectNumber' && product.objectType == 'products'"
+               ui-sref="app.objects.products.details.basicInfo({id:product.objectId})"
+               target="{{vm.linkTarget}}">{{product[attr.value]}}</a>
+            <span ng-if="attr.value === 'isLatest'">
+              {{product[attr.value] === 'true' ? 'Yes' : 'No'}}
+            </span>
+            <span
+              ng-if="attr.value !== 'objectNumber' && attr.value !== 'isLatest' && attr.value !== 'associatedCardsList'">{{product[attr.value]}}</span>
+            <div ng-if="attr.value === 'associatedCardsList'">
+              <md-menu ng-if="product.associatedCardsList.length !== 0" md-position-mode="left bottom">
+                <md-button class="button-briefcase-download associated-cards-menu"
+                           ng-click="$mdOpenMenu(); vm.getBoards(product)">
+                  <i class="icon s16 icon-trello associated-cards-icon" aria-label="Boards"><!----><!----></i>
+                  <md-tooltip class="md-tooltip">Object has card(s) associated with it. Click to see card(s) details
+                  </md-tooltip>
+                </md-button>
+
+                <md-menu-content>
+                  <md-menu-item style="pointer-events: auto" ng-repeat="board in product.cardsInfo">
+                    <md-button ng-click="vm.openCard($event, board.chosenCard.id, '', [], '', '', [])"
+                               ui-sref="app.customer.scrumboard.boards.board({cardId:board.chosenCard.id})"
+                               ui-sref-opts="{reload: false, notify: false}">
+                      {{::board.name}} : {{::board.lists[0].name}} : {{::board.chosenCard.companySeqId}}
+                      : {{::board.chosenCard.name}}
+                    </md-button>
+                    <md-tooltip md-direction="right" md-autohide="true" class="md-tooltip">Board '{{::board.name}}' :
+                      List '{{::board.lists[0].name}}' : Card# '{{::board.chosenCard.companySeqId}}' : Card Title
+                      '{{::board.chosenCard.name}}'
+                    </md-tooltip>
+                  </md-menu-item>
+                  <md-menu-item ng-if="!product.cardsDownloaded">
+                    <md-button aria-label="associated-cards-button">
+                      <md-progress-circular md-diameter="20" class="md-accent"
+                                            md-mode="indeterminate"></md-progress-circular>
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+
+              </md-menu>
+            </div>
+          </td>
+          <td md-cell ng-if="vm.attrInventory && attr.displayed" ng-repeat="attr in vm.attrInventory">
+            <span>{{product[attr.value]}}</span>
+          </td>
+          <td ng-if="vm.attrAdditional && attr.displayed" ng-repeat="attr in vm.attrAdditional track by $index">
+            <a href="//{{product[attr.name]}}" target="_blank"
+               rel="nofollow noreferrer noopener">{{product[attr.name]}}</a>
+          </td>
+          <td ng-if="vm.mfrParts && attr.displayed" ng-repeat="attr in vm.mfrParts">
+            <p>{{product.mfrList[attr.value]}}</p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- / CONTENT -->
+  </div>
+
+</div>

@@ -1,0 +1,22 @@
+<div ng-if="!isCard" class="clipboard-floating-icon-container">
+  <md-tooltip class="md-tooltip" ng-if="itemsCount">Click here to edit the Clipboard</md-tooltip>
+  <md-tooltip class="md-tooltip" ng-if="!itemsCount">Clipboard is empty, select objects and add to Clipboard.</md-tooltip>
+  <md-button  class="clipboard-show-button" aria-label="clipboard-icon" ng-click="openPopup(ev)" ng-disabled="itemsCount === 0">
+    <div ng-if="itemsCount" class="clipboard-count-circle">{{itemsCount}}</div>
+    <img class="clipboard-floating-icon" src="../../../../assets/images/ecommerce/assignment_grey_27x27.png">
+  </md-button>
+</div>
+<md-button ng-if="isCard && !showButton" class="clipboard-card-show-button md-icon-button" ng-click="openPopup(ev)" ng-disabled="itemsCount === 0">
+  <div ng-if="itemsCount" class="clipboard-card-count-circle" ng-style="{'color': color}">{{itemsCount}}</div>
+  <img class="clipboard-card-floating-icon" src="../../../../assets/images/ecommerce/assignment_white_27x27.png"/>
+</md-button>
+
+<md-button ng-if="isCard && showButton" class="md-button grey-fg" ng-style="{'background-color':'rgba(158, 158, 158, 0.1) !important'}" ng-click="openPopup(ev)" ng-show="itemsCount === 0" ng-disabled="itemsCount === 0">
+  <img class="clipboard-card-floating-icon" src="../../../../assets/images/ecommerce/assignment_grey_27x27.png"/>
+  Add from clipboard
+</md-button>
+
+<md-button ng-if="isCard && showButton" class="md-button" ng-style="{'color': 'white', 'background-color': 'rgb(3,155,229)'}" ng-click="openPopup(ev)" ng-show="itemsCount !== 0">
+  <img class="clipboard-card-floating-icon" src="../../../../assets/images/ecommerce/assignment_white_27x27.png"/>
+  Add from clipboard
+</md-button>

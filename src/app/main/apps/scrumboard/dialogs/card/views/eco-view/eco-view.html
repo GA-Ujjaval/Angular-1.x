@@ -1,0 +1,492 @@
+<md-tabs md-dynamic-height md-center-tabs="true">
+
+    <md-tab ng-show="vm.card.whereUsedTab">
+
+        <md-tab-label>
+            Where Used <span class="change-items-count white-fg">{{vm.products.resolutionTasks.length}}</span>
+        </md-tab-label>
+
+        <md-tab-body>
+            <div class="tab-ecr-view">
+
+                <!-- ECR SIDE NAV -->
+                <md-sidenav class="sidenav" md-is-locked-open="$mdMedia('gt-md')" md-component-id="main-sidenav"   layout-gt-sm="row" layout="column"
+                            ms-scroll ms-sidenav-helper>
+
+                    <!-- SIDENAV CONTENT -->
+                    <md-content class="content" flex ms-scroll>
+                        <div class="navigation-simple" layout="column">
+
+                            <div class="item supheader">
+
+                                <md-icon md-font-icon="icon-checkbox-multiple-blank-outline s16"></md-icon>
+                                <span class="sidenav-header" translate="SB.CHANGE_ITEMS">Resolution Tasks</span>
+                                <div class="change-items-count white-fg"><span>{{vm.whereUsed.resolutionTasks.length}}</span></div>
+                            </div>
+
+                            <md-button class="change-item item" ng-repeat="idChangeItem in vm.card.resolutionTasks"
+                                       ng-click="vm.whereUsedToggleResolutionTasksFilter(idChangeItem)"
+                                       ng-class="{'selected':vm.resolutionTaskExistInWhereUsedTab(idChangeItem)}"> <!--TODO HERE-->
+                                <div class="change-item-header" flex="100">
+                                    <div flex="60">
+                                        <div class="change-item-icon" ng-switch="vm.stateTypes.getById(vm.whereUsed.resolutionTasks.getById(idChangeItem).stateId).name">
+                                            <md-icon ng-switch-when="Released" md-font-icon="icon-cog" aria-label="icon-cog" class="s16"></md-icon>
+                                            <div ng-switch-when="In Design" class="change-item-icons-wrapper">
+                                                <md-icon md-font-icon="icon-cog" class="change-item-icon-first s12"></md-icon>
+                                                <md-icon md-font-icon="icon-cog" class="change-item-icon-second s6"></md-icon>
+                                            </div>
+                                        </div>
+                                        <div class="change-item-number">{{vm.whereUsed.resolutionTasks.getById(idChangeItem).number}}</div>
+                                        <div class="change-item-name">
+                                            {{vm.whereUsed.resolutionTasks.getById(idChangeItem).name | ellipsis:true:20:"..."}}
+                                            <md-tooltip>{{vm.whereUsed.resolutionTasks.getById(idChangeItem).name}}</md-tooltip>
+                                        </div>
+                                    </div>
+
+                                    <div  flex="40">
+                                        <div class="change-item-revision">Rev. {{vm.changeItems.getById(idChangeItem).revision}}</div>
+                                        <div class="change-item-state" ng-switch="vm.stateTypes.getById(vm.changeItems.getById(idChangeItem).stateId).name">
+                                            <div ng-switch-when="Released" class="change-item-released">
+                                                {{vm.stateTypes.getById(vm.whereUsed.resolutionTasks.getById(idChangeItem).stateId).name}}
+                                            </div>
+                                            <div ng-switch-when="In Design" class="change-item-in-design">
+                                                {{vm.stateTypes.getById(vm.whereUsed.resolutionTasks.getById(idChangeItem).stateId).name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="change-item-description" ms-card-ellipsis ms-line-count ="2" ng-bind="vm.whereUsed.resolutionTasks.getById(idChangeItem).description"></div>
+
+                            </md-button>
+                        </div>
+
+                    </md-content>
+                    <!-- / SIDENAV CONTENT -->
+
+                </md-sidenav>
+                <!-- / ECR SIDE NAV -->
+                <!-- CONTENT CARD -->
+                <md-content  class="tasks-list" layout="column" flex  ms-scroll="vm.msScrollOptions">
+
+                    <div class="products page-layout carded fullwidth" layout="row">
+
+                        <!-- CENTER -->
+                        <div class="center" layout="column" flex="100" >
+
+
+                            <md-toolbar layout="row" class="md-hue-3">
+
+                                <div class="md-toolbar-tools">
+
+                                    <md-button class="md-icon-button" aria-label="Views"
+                                               translate translate-attr-aria-label="SB.VIEWS">
+                                        <md-icon md-font-icon="icon-view-module s16"></md-icon>
+                                    </md-button>
+
+                                    <div class="title">
+                                        <span class="sidenav-header" translate="SB.WHEREUSED">Where Used</span>
+                                        <div class="change-items-count white-fg"><span>{{vm.products.modifications.length}}</span></div>
+                                    </div>
+
+                                </div>
+
+                            </md-toolbar>
+
+                            <!-- CONTENT CARD -->
+                            <div class="content-card" layout="column" flex>
+
+                                <!-- CONTENT -->
+                                <div class="content fullpage-datatable" layout="column" flex>
+
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                                           dt-options="vm.dtOptions">
+                                        <thead>
+                                        <tr>
+                                            <th class="secondary-text">
+                                                <div class="table-header">
+                                                    <span class="column-title">ID</span>
+                                                </div>
+                                            </th>
+                                            <th class="secondary-text">
+                                                <div class="table-header">
+                                                    <span class="column-title">Image</span>
+                                                </div>
+                                            </th>
+                                            <th class="secondary-text">
+                                                <div class="table-header">
+                                                    <span class="column-title">Name</span>
+                                                </div>
+                                            </th>
+                                            <th class="secondary-text">
+                                                <div class="table-header">
+                                                    <span class="column-title">Category</span>
+                                                </div>
+                                            </th>
+                                            <th class="secondary-text">
+                                                <div class="table-header">
+                                                    <span class="column-title"></span>
+                                                </div>
+                                            </th>
+                                            <th class="secondary-text">
+                                                <div class="table-header">
+                                                    <span class="column-title">Price</span>
+                                                </div>
+                                            </th>
+                                            <th class="secondary-text">
+                                                <div class="table-header">
+                                                    <span class="column-title">Quantity</span>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="product in vm.products.resolutionTasks | filter: vm.whereUsedResolutionTaskFilters.search | filterByWhereUsedResolutionTasks: vm.whereUsedResolutionTaskFilters.idChangeItems">
+                                            <td>{{product.id}}</td>
+                                            <td><img class="product-image" ng-src="{{product.image}}"></td>
+                                            <td>{{product.name}}</td>
+                                            <td>{{product.category}}</td>
+                                            <td>
+                                                <!-- CHANGE ITEM SELECT -->
+                                                <div class="todo-item-footer-select" ng-if="vm.getChangeItemById(product.changeItemId)">
+                                                    <div class="change-item-icon" ng-switch="vm.stateTypes.getById(vm.resolutionTasks.getById(product.changeItemId).stateId).name">
+                                                        <md-icon ng-switch-when="Released" md-font-icon="icon-cog" aria-label="icon-cog" class="s16"></md-icon>
+                                                        <div ng-switch-when="In Design" class="change-item-icons-wrapper">
+                                                            <md-icon md-font-icon="icon-cog" class="change-item-icon-first s12"></md-icon>
+                                                            <md-icon md-font-icon="icon-cog" class="change-item-icon-second s6"></md-icon>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="todo-item-change-item">
+                                                        <span>{{vm.getChangeItemById(product.changeItemId).number||''}}</span>
+                                                    </div>
+
+                                                </div>
+                                                <!-- / CHANGE ITEM SELECT -->
+                                            </td>
+                                            <td>{{product.price}}</td>
+                                            <td>{{product.quantity}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- / CONTENT -->
+
+                            </div>
+                            <!-- / CONTENT CARD -->
+
+                        </div>
+                        <!-- / CENTER -->
+
+                    </div>
+
+
+                </md-content>
+                <!-- / CONTENT CARD -->
+
+            </div>
+        </md-tab-body>
+
+    </md-tab>
+
+    <md-tab ng-show="vm.card.resolutionTasksTab" layout-gt-sm="row" layout="column">
+
+        <md-tab-label>
+            Resolution Tasks (ECR) <div class="change-items-count white-fg"><span>{{vm.card.resolutionTasks.length}}</span></div>
+        </md-tab-label>
+
+        <md-tab-body>
+
+            <div class="tab-ecr-view">
+
+                <!-- ECR SIDE NAV -->
+                <md-sidenav class="sidenav" md-is-locked-open="$mdMedia('gt-md')" md-component-id="main-sidenav"
+                            ms-scroll ms-sidenav-helper>
+
+                    <!-- SIDENAV CONTENT -->
+                    <md-content class="content" flex ms-scroll>
+                        <div class="navigation-simple" layout="column">
+
+                            <div class="item supheader">
+
+                                <md-icon md-font-icon="icon-checkbox-multiple-blank-outline s16"></md-icon>
+                                <span class="sidenav-header" translate="SB.RESOLUTION_TASKS">Resolution Tasks</span>
+                                <div class="change-items-count white-fg"><span>{{vm.card.resolutionTasks.length}}</span></div>
+                            </div>
+
+                            <md-button class="change-item item" ng-repeat="idChangeItem in vm.card.resolutionTasks"
+                                       ng-click="vm.toggleChangeItemFilter(idChangeItem)"
+                                       ng-class="{'selected':vm.isChangeItemExists(idChangeItem)}"> <!--TODO HERE-->
+                                <div class="change-item-header" flex="100">
+                                    <div flex="60">
+                                        <div class="change-item-icon" ng-switch="vm.stateTypes.getById(vm.changeItems.getById(idChangeItem).stateId).name">
+                                            <md-icon ng-switch-when="Released" md-font-icon="icon-cog" aria-label="icon-cog" class="s16"></md-icon>
+                                            <div ng-switch-when="In Design" class="change-item-icons-wrapper">
+                                                <md-icon md-font-icon="icon-cog" class="change-item-icon-first s12"></md-icon>
+                                                <md-icon md-font-icon="icon-cog" class="change-item-icon-second s6"></md-icon>
+                                            </div>
+                                        </div>
+                                        <div class="change-item-number">{{vm.resolutionTasks.getById(idChangeItem).number}}</div>
+                                        <div class="change-item-name">
+                                            {{vm.resolutionTasks.getById(idChangeItem).name | ellipsis:true:20:"..."}}
+                                            <md-tooltip>{{vm.resolutionTasks.getById(idChangeItem).name}}</md-tooltip>
+                                        </div>
+                                    </div>
+
+                                    <div  flex="40">
+                                        <div class="change-item-revision">Rev. {{vm.resolutionTasks.getById(idChangeItem).revision}}</div>
+                                        <div class="change-item-state" ng-switch="vm.stateTypes.getById(vm.changeItems.getById(idChangeItem).stateId).name">
+                                            <div ng-switch-when="Released" class="change-item-released">
+                                                {{vm.stateTypes.getById(vm.resolutionTasks.getById(idChangeItem).stateId).name}}
+                                            </div>
+                                            <div ng-switch-when="In Design" class="change-item-in-design">
+                                                {{vm.stateTypes.getById(vm.resolutionTasks.getById(idChangeItem).stateId).name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="change-item-description" ms-card-ellipsis ms-line-count ="2" ng-bind="vm.resolutionTasks.getById(idChangeItem).description"></div>
+                                <div class="change-item-progress">
+                                    <div class="change-item-task"
+                                         ng-repeat="idTask in vm.resolutionTasks.getById(idChangeItem).idTasks | orderBy: vm.sortIdTasks"
+                                         ng-switch="vm.sortedTasks[idTask].completed"><md-icon md-font-icon="icon-checkbox-marked-circle s20" class="task-done" ng-switch-when="true">
+
+                                    </md-icon><md-icon md-font-icon="icon-checkbox-blank-circle s20" ng-switch-when="false">
+                                    </md-icon></div>
+                                    <span class="change-item-progress-value">{{vm.resolutionTasks.getById(idChangeItem).completed}}/{{vm.resolutionTasks.getById(idChangeItem).idTasks.length}} Tasks</span>
+                                </div>
+                            </md-button>
+                        </div>
+
+                    </md-content>
+                    <!-- / SIDENAV CONTENT -->
+
+                </md-sidenav>
+                <!-- / ECR SIDE NAV -->
+
+                <!-- CONTENT CARD -->
+                <md-content  class="tasks-list" layout="column" flex
+                             ng-include="'app/main/apps/scrumboard/views/list/list-view.html'" ms-scroll="vm.msScrollOptions"></md-content>
+                <!-- / CONTENT CARD -->
+            </div>
+
+        </md-tab-body>
+
+    </md-tab>
+
+    <md-tab ng-show="vm.card.modificationsTab"   layout-gt-sm="row" layout="column">
+
+        <md-tab-label>
+            Modifications (ECO) <div class="change-items-count white-fg"><span>{{vm.modifications.length}}</span></div>
+        </md-tab-label>
+
+        <md-tab-body>
+
+            <div class="tab-eco-view"  flex-gt-sm="100" flex>
+
+                <div flex-gt-sm="40" flex layout="column">
+                    <md-toolbar layout="row" class="md-hue-3">
+                        <div class="md-toolbar-tools">
+                            <md-button class="md-icon-button" aria-label="Views"
+                                       translate translate-attr-aria-label="SB.VIEWS">
+                                <md-icon md-font-icon="icon-checkbox-multiple-blank-outline s16"></md-icon>
+                            </md-button>
+                            <div class="title">
+                                <span class="sidenav-header" translate="SB.CHANGE_ITEMS">Change items</span>
+                                <div class="change-items-count white-fg"><span>{{vm.card.resolutionTasks.length}}</span></div>
+                            </div>
+                        </div>
+                    </md-toolbar>
+                    <md-content>
+
+                        <div class="change-lists" ms-scroll>
+
+                            <md-list>
+                                <md-list-item layout="column" class="change-item md-whiteframe-2dp"
+                                              ng-repeat="itemId in vm.card.modifications"
+                                              ng-class="{'selected':vm.isChangeItemExists(itemId)}">
+
+                                    <div ng-click="vm.toggleECOChangeItemFilter(itemId)">
+                                        <div   ng-cloak layout-gt-sm="row" layout="column">
+                                            <md-toolbar layout="row" class="md-hue-3">
+                                                <div flex-gt-sm="60">
+                                                    <md-icon ng-show="!vm.modifications.getById(itemId).visuals[0].assembly" md-font-icon="icon-cog" aria-label="icon-cog" class="s16"></md-icon>
+                                                    <md-icon  ng-show="vm.modifications.getById(itemId).visuals[0].assembly" md-font-icon="icon-assembly" class="s18 "></md-icon>
+                                                    <div class="blue-fg change-item-number"><a>{{vm.modifications.getById(itemId).number}}</a></div>
+                                                    <!--instead the "type Name" here must be the "changeItem name" I think(look in the psd)-->
+                                                    <div class="change-item-name">{{vm.types.getById(vm.modifications.getById(itemId).typeId).name}}</div>
+                                                </div>
+
+                                                <div flex-gt-sm="40">
+                                                    <div  class="revision">Rev.{{vm.modifications.getById(itemId).revision}}</div>
+                                                    <div ng-class="vm.stateTypes.getById(vm.modifications.getById(itemId).stateId).color+'-fg'" class="status">{{vm.stateTypes.getById(vm.modifications.getById(itemId).stateId).name}}</div>
+                                                </div>
+                                            </md-toolbar>
+
+                                        </div>
+
+                                        <div class="change-item-text" layout="row" layout-align="space-between center">
+                                            <p  ms-card-ellipsis ms-line-count = "2">{{vm.modifications.getById(itemId).name}}</p>
+                                        </div>
+
+                                        <!-- CHANGE ITEM FOOTER -->
+                                        <div class="footer" layout="row" layout-align="space-between center">
+                                            <button ng-show="!vm.modifications.getById(itemId).visuals[0].assembly" class="md-button"
+                                                    ng-class="'md-'+vm.visualTypes.getById(vm.modifications.getById(itemId).visuals[0].typeId).color+'-bg'">
+                                                <span>{{vm.visualTypes.getById(vm.modifications.getById(itemId).visuals[0].typeId).name}}</span>
+                                                <div class="md-ripple-container"></div>
+                                            </button>
+                                            <div flex layout-gt-sm="row" layout="column"
+                                                 ng-show="vm.modifications.getById(itemId).visuals[0].assembly"
+                                                 ng-init="StackedBarLength = vm.findStackedBarLength(itemId);stackedBars = vm.findStackedBarValues(itemId)"
+                                                 ng-click="vm.preventDefault($event);">
+                                                <div flex-gt-sm="80"  flex layout-gt-sm="row" layout="column">
+                                                    <div ng-repeat="stack in stackedBars"
+                                                         flex-gt-sm="{{((stack.length/StackedBarLength)*100)}}"
+                                                         flex layout="column"
+                                                         class="stacked-bar" ng-style="{'background': stack.color }"
+                                                         ng-click="vm.toggleModificationFilter(itemId, stack.id)">
+                                                        {{stack.length}}
+                                                        <div ng-if="vm.isModificationExists(itemId, stack.id)" class="stacked-bar-selected"></div>
+                                                    </div>
+                                                </div>
+                                                <div flex-gt-sm="20"  flex layout-gt-sm="row" layout="column" class="change-count">
+                                                    {{StackedBarLength}} Changes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- / CHANGE ITEM FOOTER -->
+                                    </div>
+
+
+                                </md-list-item>
+                            </md-list>
+
+                        </div>
+
+                    </md-content>
+                </div>
+
+                <div class="tab-eco-view"  flex-gt-sm="60" flex>
+
+                    <div class="box-view" layout="column"  flex-gt-sm="100" flex>
+
+                        <md-toolbar layout="row" class="md-hue-3">
+
+                            <div class="md-toolbar-tools">
+
+                                <md-button class="md-icon-button" aria-label="Views"
+                                           translate translate-attr-aria-label="SB.VIEWS">
+                                    <md-icon md-font-icon="icon-view-module s16"></md-icon>
+                                </md-button>
+
+                                <div class="title">
+                                    <span class="sidenav-header" translate="SB.MODIFICATIONS">Change items</span>
+                                    <div class="change-items-count white-fg"><span>{{results.length}}</span></div>
+                                </div>
+
+                            </div>
+
+                        </md-toolbar>
+
+                        <md-content>
+
+                            <div class="change-lists" ms-scroll>
+
+                                <md-list>
+                                    <md-list-item layout="column" class="change-item md-whiteframe-2dp"
+                                                  ng-repeat="item in vm.modifications | filterChangeItems: vm.taskFilters.idChangeItems as results"
+                                                  ng-init="hasAssembly=vm.modifications.getById(item.id).visuals[0].assembly">
+                                        <div ng-style="{'border-left-color': hasAssembly ? vm.getParentAssemblyItemBorderColor() : vm.impactTypes.getById(vm.modifications.getById(item.id).impactTypeId).color}"
+                                             ng-cloak layout-gt-sm="row" layout="column">
+
+                                            <md-toolbar layout="row" class="md-hue-3">
+                                                <div flex-gt-sm="60">
+                                                    <md-icon ng-show="!hasAssembly" md-font-icon="icon-cog" aria-label="icon-cog" class="s16"></md-icon>
+                                                    <md-icon  ng-show="hasAssembly" md-font-icon="icon-assembly" class="s18 "></md-icon>
+                                                    <div class="blue-fg change-item-number"><a>{{vm.modifications.getById(item.id).number}}</a></div>
+                                                    <div class="change-item-name">{{vm.modifications.getById(item.id).name}}</div>
+                                                    <div class="change-item-name text-strike">{{vm.modifications.getById(item.id).oldPartName}}</div>
+                                                </div>
+
+                                                <div flex-gt-sm="40">
+                                                    <div ng-if="vm.modifications.getById(item.id).revision"  class="revision">Rev.{{vm.modifications.getById(item.id).revision}}</div>
+                                                    <div ng-if="vm.modifications.getById(item.id).oldRevision" class="revision text-strike">Rev.{{vm.modifications.getById(item.id).oldRevision}}</div>
+                                                </div>
+                                            </md-toolbar>
+
+                                        </div>
+
+                                        <md-list ng-if="vm.modifications.getById(item.id).visuals[0].assembly"
+                                                 ng-init="filteredItems = vm.filtersByChangeItemId(item.id)">
+
+                                            <md-list-item  layout="column" class="change-item md-whiteframe-2dp"
+                                                           ng-repeat="filter in filteredItems | filterChangeItems: vm.taskFilters.modifications[item.id]">
+
+                                                <div ng-style="{'border-left-color':vm.impactTypes.getById(filter.impactTypeId).color}"
+                                                     ng-init="isDeleted = (vm.impactTypes.getById(filter.impactTypeId).name === 'Remove');isChangeItem  = (vm.impactTypes.getById(filter.impactTypeId).name === 'Changed')"
+                                                     ng-cloak layout-gt-sm="row" layout="column">
+
+                                                    <md-toolbar layout="row" class="md-hue-3">
+                                                        <div flex-gt-sm="60">
+                                                            <md-icon ng-if="vm.assemblyChanges.getById(filter.id).oldNumber" md-font-icon="icon-cog" aria-label="icon-cog" class="s16"></md-icon>
+                                                            <div ng-if="vm.assemblyChanges.getById(filter.id).oldNumber" ng-class="( isDeleted || isChangeItem ) ?'text-strike':''" class="blue-fg change-item-number"><a>{{vm.assemblyChanges.getById(filter.id).oldNumber}}</a></div>
+                                                            <md-icon md-font-icon="icon-cog" aria-label="icon-cog" class="s16"></md-icon>
+                                                            <div ng-class="isDeleted?'text-strike':''" class="blue-fg change-item-number"><a>{{vm.assemblyChanges.getById(filter.id).number}}</a></div>
+                                                            <div class="change-item-name text-strike">{{vm.assemblyChanges.getById(filter.id).oldPartName}}</div>
+                                                            <div ng-class="isDeleted?'text-strike':''" class="change-item-name">{{vm.assemblyChanges.getById(filter.id).partName}}</div>
+                                                        </div>
+
+                                                        <div flex-gt-sm="40">
+
+                                                            <div class="status-placeholder" layout="row" >
+                                                                <div ng-if="vm.assemblyChanges.getById(filter.id).revision"
+                                                                     ng-class="isDeleted?'text-strike':''"
+                                                                     class="revision">{{vm.assemblyChanges.getById(filter.id).revision}}</div>
+                                                                <div ng-if="vm.assemblyChanges.getById(filter.id).oldRevision"
+                                                                     class="revision text-strike">{{vm.assemblyChanges.getById(filter.id).oldRevision}}</div>
+                                                            </div>
+
+                                                            <div class="status-placeholder" layout="row" >
+                                                                <div ng-if="vm.assemblyChanges.getById(filter.id).revision"
+                                                                     ng-class="isDeleted?'text-strike':''"
+                                                                     class="revision">Qty {{vm.assemblyChanges.getById(filter.id).quantity}}</div>
+                                                            </div>
+
+                                                            <div class="status-placeholder" layout="row" >
+                                                                <div ng-if="vm.assemblyChanges.getById(filter.id).revision"
+                                                                     ng-class="isDeleted?'text-strike':''"
+                                                                     class="revision">{{vm.assemblyChanges.getById(filter.id).reference}}</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </md-toolbar>
+
+                                                </div>
+
+                                            </md-list-item>
+
+                                        </md-list>
+
+                                    </md-list-item>
+                                </md-list>
+
+                            </div>
+
+                        </md-content>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </md-tab-body>
+
+
+    </md-tab>
+
+</md-tabs>

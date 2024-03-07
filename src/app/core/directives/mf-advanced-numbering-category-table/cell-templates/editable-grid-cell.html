@@ -1,0 +1,25 @@
+<div ng-if="row.entity.scheme === 'custom' && grid.appScope.isEditable"
+     ng-class="{'reddish-grid-cell' : !row.entity[col.field] && col.field !== 'suffix' && col.field !== 'increment'}"
+     class="ui-grid-cell-contents editable-grid-cell bluish-grid-cell"
+     editable-text="row.entity[col.field]"
+     onbeforesave="grid.appScope.processInput($data, col.field, row.entity)"
+     onaftersave="grid.appScope.updateSingleCategoryScheme(grid.appScope.vm, row.entity)"
+     onhide="grid.appScope.resetInvalid(row.entity)">
+  {{row.entity[col.field]}}
+</div>
+<div class="ui-grid-cell-contents"
+     ng-class="{'inactive' : !grid.appScope.vm.checkEditable(grid.appScope.vm.OBJECT_TYPE)}"
+     ng-if="row.entity.scheme !== 'custom' || !grid.appScope.isEditable">
+  {{row.entity.scheme === 'custom' ? row.entity[col.field] : null}}
+  <md-tooltip ng-show="!grid.appScope.vm.checkEditable(grid.appScope.vm.OBJECT_TYPE)" class="md-tooltip">
+    {{grid.appScope.vm.getTooltipText()}}
+  </md-tooltip>
+</div>
+<md-tooltip ng-if="row.entity.invalid.startingNumber && col.field === 'startingNumber'" class="md-tooltip"
+            md-visible="true">{{row.entity.invalid.startingNumber}}</md-tooltip>
+<md-tooltip ng-if="row.entity.invalid.increment && col.field === 'increment'" class="md-tooltip"
+            md-visible="true">{{row.entity.invalid.increment}}</md-tooltip>
+<md-tooltip ng-if="row.entity.invalid.prefix && col.field === 'prefix'" class="md-tooltip"
+            md-visible="true">{{row.entity.invalid.prefix}}</md-tooltip>
+<md-tooltip ng-if="row.entity.invalid.suffix && col.field === 'suffix'" class="md-tooltip"
+            md-visible="true">{{row.entity.invalid.suffix}}</md-tooltip>

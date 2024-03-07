@@ -1,0 +1,75 @@
+<div class="download-container">
+  <md-menu>
+    <md-button class="button-briefcase-download" ng-click="$mdMenu.open($event); getTemplates()">
+      <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+      <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+    </md-button>
+    <md-menu-content class="download-menu-content">
+      <md-menu-item>
+        <md-menu class="fix-offset">
+          <md-button ng-mouseenter="stopHover($event)" ng-click="$mdMenu.open($event); downloadAsIsOptionChosen()"
+                     class="create-new fix-offset download-as-is">
+            Download As-Is
+            <md-icon md-font-icon="icon-chevron-right s30"
+                     class="md-default-theme md-font material-icons icon-chevron-right s30"
+                     aria-hidden="true"></md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item ng-click="downloadTable('csv', '', gridApi)">
+              <md-button>CSV</md-button>
+            </md-menu-item>
+            <md-menu-item ng-click="downloadTable('pdf', 'download', gridApi.grid, gridOptions, downloadDescription)">
+              <md-button>PDF</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-menu-item>
+      <md-menu-item ng-if="templates && templates.length">
+        <md-input-container>
+          <label class="filter-label">Search table templates</label>
+          <input type="text" ng-model="$parent.templateSearchText"
+                 ng-change="checkFilteredTemplates(templateSearchText)">
+        </md-input-container>
+      </md-menu-item>
+      <md-menu-item ng-repeat="template in templates"
+                    ng-show="(template.visibility === 'VDP') && ((templateSearchText.length === 0) || (template.fullName.toLowerCase().indexOf(templateSearchText.toLowerCase()) !== -1))">
+        <md-menu class="fix-offset">
+          <md-button aria-label="menu-item" class="fix-offset"
+                     ng-click="$mdMenu.open($event); toggleTemplateOptionChosen(template); closeNotUsedMenuOptions(template);">
+            <md-checkbox disabled class="default-template-button" aria-label="default" ng-if="template.applied"
+                         ng-checked="true"></md-checkbox>
+            <div ng-if="!template.sharedWithUsers" class="template-item-text">{{template.templateName}} <span
+              ng-if="template.isDefault" class="default-mark">(default)</span></div>
+            <div ng-if="template.sharedWithUsers" class="template-item-text italic">{{template.templateName}} <span
+              ng-if="template.isDefault" class="default-mark">(default)</span></div>
+            <md-icon md-font-icon="icon-chevron-right s30"
+                     class="md-default-theme md-font material-icons icon-chevron-right s30"
+                     aria-hidden="true"></md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="downloadReport(template.templateId, 'csv')">
+                CSV
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="downloadReport(template.templateId, 'pdf')">
+                PDF
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-menu-item>
+      <md-menu-item class="progress-templates" ng-show="progress">
+        <md-button aria-label="mf-templates-dropdown">
+          <md-progress-circular md-diameter="20" class="md-accent" md-mode="indeterminate"></md-progress-circular>
+        </md-button>
+      </md-menu-item>
+      <md-menu-item class="no-templates-filter" ng-show="isNothingMatched">
+        <md-button class="no-templates-found">
+          No templates found
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</div>

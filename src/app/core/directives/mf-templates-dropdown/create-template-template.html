@@ -1,0 +1,126 @@
+<!-- DIALOG -->
+<md-dialog class="contact-dialog-billofmaterial create-template-container" aria-label="New Task">
+
+  <form name="contactForm" class="md-inline-form" novalidate>
+
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar class="md-accent md-tall-height" layout="column">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span ng-if="vm.operationType === 'creation'" class="title margin-top-20">Save as Template <md-progress-circular
+          class="template-progress" ng-if="vm.progress" md-diameter="20"></md-progress-circular></span>
+        <span ng-if="vm.operationType === 'updating'" class="title margin-top-20">Edit Template <md-progress-circular
+          class="template-progress" ng-if="vm.progress" md-diameter="20"></md-progress-circular></span>
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+
+      <!--  TOOLBAR BOTTOM -->
+      <div class="md-toolbar-tools md-toolbar-tools-bottom" layout="row" layout-align="center center">
+
+        <div flex layout="row" layout-align="center center">
+
+        </div>
+      </div>
+      <!-- / TOOLBAR BOTTOM -->
+
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <!-- DIALOG CONTENT -->
+    <md-dialog-content ms-scroll>
+
+      <md-input-container class="template-name-input-container" aria-label="templateName">
+        <label>Template Name <span class="importance-mark">*</span></label>
+        <input ng-model="vm.newTemplateSettings.name" type="text">
+      </md-input-container>
+      <div class="template-note">
+        Note: Table Template saves column visibility, order and width
+      </div>
+      <div class="template-scope-data radio-group-container" ng-if="vm.isCA()">
+        <div class="radio-group-header">Make this template visible to</div>
+        <md-radio-group ng-model="vm.newTemplateSettings.isShared">
+          <div class="radio-buttons">
+            <div class="radio-group-item" ng-repeat="variant in vm.parameters.templateScope">
+              <md-radio-button ng-value="variant.value" aria-label="scope-item">
+                {{variant.text}}
+              </md-radio-button>
+              <div class="hint">{{variant.hint}}</div>
+            </div>
+          </div>
+        </md-radio-group>
+      </div>
+
+      <div class="template-visibility-data radio-group-container">
+        <div class="radio-group-header">Use this template for</div>
+
+        <md-radio-group ng-model="vm.newTemplateSettings.visibility">
+          <div class="radio-buttons">
+            <div class="radio-group-item" ng-repeat="variant in vm.parameters.templateVisibility">
+              <md-radio-button ng-value="variant.value" aria-label="visibility-item">
+                {{variant.text}}
+              </md-radio-button>
+            </div>
+          </div>
+        </md-radio-group>
+      </div>
+
+      <div ng-show="vm.newTemplateSettings.visibility === vm.parameters.templateVisibility[1].value"
+           class="template-visibility-data radio-group-container">
+        <div class="radio-group-header">Layout</div>
+
+        <md-radio-group ng-model="vm.newTemplateSettings.designData.layout">
+          <div class="radio-buttons">
+            <md-radio-button class="layout-radio" ng-repeat="variant in vm.parameters.designData.layout"
+                             ng-value="variant.value" aria-label="visibility-item">
+              {{variant.text}}
+            </md-radio-button>
+          </div>
+        </md-radio-group>
+      </div>
+
+      <div ng-show="vm.newTemplateSettings.visibility === vm.parameters.templateVisibility[1].value"
+           class="template-visibility-data radio-group-container">
+        <div class="radio-group-header">Paper Size</div>
+        <md-input-container class="radio-buttons">
+          <md-select ng-model="vm.newTemplateSettings.designData.paperSize" placeholder="Paper Size">
+            <md-option ng-repeat="variant in vm.parameters.designData.paperSize"
+                       ng-value="variant.value">{{ variant.text }}</md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+    </md-dialog-content>
+    <!-- / DIALOG CONTENT -->
+
+    <!-- DIALOG ACTIONS -->
+    <md-dialog-actions layout="row" layout-align="space-between center">
+      <div layout="row" layout-align="start center">
+
+        <md-button class="send-button md-accent md-raised"
+                   aria-label="Create new Template"
+                   ng-if="vm.operationType === 'creation'"
+                   ng-click="vm.createNewTemplate()"
+                   ng-disabled="(vm.newTemplateSettings.visibility === undefined) || (vm.newTemplateSettings.isShared === undefined) || !vm.newTemplateSettings.name">
+          Save
+        </md-button>
+
+        <md-button class="send-button md-accent md-raised"
+                   aria-label="Create new Template"
+                   ng-if="vm.operationType === 'updating'"
+                   ng-click="vm.editTemplate()"
+                   ng-disabled="(vm.newTemplateSettings.visibility === undefined) || (vm.newTemplateSettings.isShared === undefined) || !vm.newTemplateSettings.name">
+          Edit
+        </md-button>
+
+      </div>
+    </md-dialog-actions>
+    <!-- / DIALOG ACTIONS -->
+
+  </form>
+
+</md-dialog>
+<!-- / DIALOG -->

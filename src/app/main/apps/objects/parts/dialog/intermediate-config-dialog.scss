@@ -1,0 +1,131 @@
+// .width-100{
+//     width: 100%!important;
+//     overflow: visible;
+// }
+.mrg-tb-0{margin-bottom: 0;margin-top: 0;}
+.ch-mr{margin: 14px 0 !important;}
+.set-pad-confg{padding: 20px 10px 10px;}
+.set-pad-confg1{padding: 30px 10px 10px;}
+.copy-create-parts:first-child{padding-top: 10px}
+.dialog-cont-pedding{padding: 0 24px !important;}
+.set-two-tab-hrz .md-center-tabs{width: 485px !important;}
+.custom-placeholder md-input-container label:not(.md-no-float):not(.md-container-ignore), .custom-placeholder md-input-container .md-placeholder{
+    overflow: visible!important;
+}
+
+md-input-container.custom-rev-ove label:not(.md-no-float):not(.md-container-ignore), md-input-container.custom-rev-ove .md-placeholder{
+    overflow: visible!important;
+}
+.f00{
+    color: #f00;
+}
+#set-modal-width{width: 500px!important}
+md-dialog {
+    &.partform-dialog {
+        max-width: 1000px;
+        width: 1000px;
+
+        md-toolbar {
+            min-height: 64px !important;
+
+            .md-tall-height {
+                height: 64px !important;
+                min-height: 64px;
+                max-height: 64px;
+            }
+
+            .title {
+                font-size: 17px;
+            }
+
+            .md-toolbar-tools-top {
+                height: 64px;
+                min-height: 64px;
+            }
+
+            .md-toolbar-tools-middle {
+                height: inherit;
+                max-height: none;
+
+                .contact-avatar {
+                    margin: 0;
+                }
+
+                .contact-name {
+                    font-size: 24px;
+                    margin: 8px 0;
+                }
+
+            }
+
+            .md-toolbar-tools-bottom {
+                md-menu {
+                    margin: 0;
+                }
+            }
+
+        }
+
+        md-dialog-content {
+            display: block;
+            position: relative;
+
+            .birthday-input {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                margin: 0;
+                padding: 0 0 32px 0;
+
+                .md-button {
+                    margin: 0 16px 0 0;
+                    padding: 0;
+                    width: 24px;
+                    height: 24px;
+                    text-transform: none !important;
+
+                    md-icon {
+                        color: rgba(0, 0, 0, 0.87);
+                    }
+
+                }
+
+                .md-datepicker-input-container {
+                    display: flex;
+                    flex: 1;
+                }
+
+            }
+
+            .textarea-wrapper {
+
+                md-icon {
+                    color: rgba(0, 0, 0, 0.87);
+                    margin: 0 8px 0 0;
+                }
+
+                textarea {
+                    min-height: 150px;
+                }
+
+            }
+        }
+
+        md-dialog-actions {
+            position: relative;
+            overflow-y: hidden;
+            overflow-x: auto;
+            justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+    }
+}
+.f-config-modal {
+    overflow: hidden;
+    .f-config-wiz{
+        overflow-y: auto;
+        max-height: 45vh;
+    }
+}

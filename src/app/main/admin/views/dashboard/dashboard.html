@@ -1,0 +1,69 @@
+<!-- SPLASH SCREEN -->
+<ms-splash-screen id="splash-screen">
+    <div class="center">
+        <div class="logo">
+            <!--<span>F</span>-->
+            <img src="assets/images/logos/fuse.png" >
+        </div>
+        <!-- Material Design Spinner -->
+        <div class="spinner-wrapper">
+            <div class="spinner">
+                <div class="inner">
+                    <div class="gap"></div>
+                    <div class="left">
+                        <div class="half-circle"></div>
+                    </div>
+                    <div class="right">
+                        <div class="half-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Material Design Spinner -->
+    </div>
+</ms-splash-screen>
+<!-- / SPLASH SCREEN -->
+<div id="dashboard-admin" class="page-layout simple right-sidenav md-grey-100-bg" layout="row">
+    <!-- CENTER -->
+    <div class="center" flex ms-scroll>
+
+        <!-- HEADER -->
+        <div class="header md-accent-bg" layout="row" layout-align="space-between center">
+
+            <!-- APP TITLE -->
+            <div layout="row" layout-align="start center">
+                <div class="logo" layout="row" layout-align="start center">
+                    <md-progress-circular id="toolbar-progress" ng-if="vm.progress" class="md-accent"
+                                          md-mode="indeterminate" md-diameter="64">
+                    </md-progress-circular>
+                    <span class="logo-text">Welcome, {{vm.customerProfileForm.firstName}} {{vm.customerProfileForm.lastName}}</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content" >
+
+
+            <md-tabs md-dynamic-height>
+
+                <md-tab label="Customers">
+                    <md-content ng-include="'app/main/admin/views/dashboard/tabs/create-customer/create.html'">
+                    </md-content>
+                </md-tab>
+
+                <md-tab label="Proxy">
+                    <md-content ng-include="'app/main/admin/views/dashboard/tabs/proxy/proxy.html'">
+                    </md-content>
+                </md-tab>
+
+            </md-tabs>
+
+        </div>
+        <!-- / CONTENT -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

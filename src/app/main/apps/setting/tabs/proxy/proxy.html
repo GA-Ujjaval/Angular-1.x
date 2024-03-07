@@ -1,0 +1,28 @@
+<div layout="row"  layout-align="center center">
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex>
+
+        <form name="proxyForm" class="md-inline-form" novalidate>
+
+            <div layout="row" layout-gt-xs="row">
+
+                <md-switch ng-model="vm.proxyEnable" aria-label="Switch 1" ng-change="vm.proxyChange()">
+                    <span>Enable Proxy Login</span>
+                </md-switch>
+
+            </div>
+             <span class="secondary-text" style="font-size: 13px">
+                    NOTE: Enabling this setting, allows the FusePLM company to access your database. Disabling this setting, prevents the FusePLM company, access to your database. This setting can be changed at any point in time. The only reason for this setting is to allow FusePLM support team access to your database, in case a need arises during troubleshooting.
+             </span>
+            <!--<br/>
+
+            <md-button type="submit" class="md-raised md-accent" aria-label="Proxy Login"
+                       ng-disabled="proxyForm.$invalid || proxyForm.$pristine">
+                Proxy Login
+            </md-button>
+            <md-button type="cancel" class="md-raised md-accent" aria-label="Cancel" ng-click="vm.proxyForm = {}">
+                Cancel
+            </md-button>-->
+        </form>
+
+    </div>
+</div>

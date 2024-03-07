@@ -1,0 +1,21 @@
+<div ng-if="col.name !== 'selectWholeRow' || row.entity.name !== 'checkAllRows'">
+  <div ng-if="col.displayName">
+    <div id="configuration-matrix-checkbox">
+      <div  class="align-center padding-5">
+        <input class="custom-checkbox" ng-disabled="grid.appScope.vm.isColumnDisabled(col.name)" id="{{col.field + '_' + row.entity.id}}" ng-change="grid.appScope.vm.checkMainRowCheckboxes(row.entity); grid.appScope.vm.updateBomSingleCheckbox(row.entity, col.name)"
+               ng-model="row.entity[col.field].exists" type="checkbox">
+        <label class="myCheckbox" ng-class="{'myCheckbox--grey': grid.appScope.vm.isColumnDisabled(col.name)}"  for="{{col.field + '_' + row.entity.id}}"></label>
+      </div>
+    </div>
+  </div>
+  <div ng-if="!col.displayName">
+    <div id="configuration-matrix-checkbox">
+      <div  class="align-center padding-5">
+        <input class="custom-checkbox" id="{{col.field + '_' + row.entity.id}}" ng-change="grid.appScope.vm.toggleRowCheckboxes(row.entity);" ng-model="row.entity.allChecked" type="checkbox">
+        <label class="myCheckbox" for="{{col.field + '_' + row.entity.id}}"></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-if="col.name === 'selectWholeRow' && row.entity.name === 'checkAllRows'"></div>

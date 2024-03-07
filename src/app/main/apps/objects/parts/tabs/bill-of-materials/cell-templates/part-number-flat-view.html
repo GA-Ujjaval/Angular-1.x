@@ -1,0 +1,10 @@
+<div
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+  <a ui-sref="app.objects.products.details.basicInfo({id:row.entity.objectId, bom:undefined})"
+     ng-if="row.entity.objectType == 'products'"
+     target="{{grid.appScope.vm.linkTarget}}">{{ row.entity.objectNumber }}</a>
+  <a ui-sref="app.objects.part.parts.basicInfo({id:row.entity.objectId, bom:undefined})"
+     ng-if="row.entity.objectType == 'parts'"
+     target="{{grid.appScope.vm.linkTarget}}">{{ row.entity.objectNumber }}</a>
+</div>

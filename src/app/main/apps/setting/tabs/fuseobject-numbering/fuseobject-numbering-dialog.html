@@ -1,0 +1,89 @@
+<div id="objects" class="page-layout simple left-sidenav inner-sidenav md-grey-100-bg">
+  <!-- Category -->
+  <div class="content margin-top" layout="row" layout-align="start start">
+
+    <!-- SIDENAV -->
+    <md-sidenav class="sidenav main-sidenav md-white-bg h-440" ms-scroll md-is-locked-open="$mdMedia('gt-md')"
+                md-component-id="sidenavSystem" ms-sidenav-helper
+                ng-include="'app/main/apps/setting/tabs/objects/sidenavs/system-setting/system-setting-sidenav.html'">
+    </md-sidenav>
+    <!-- / SIDENAV -->
+    <div ng-class="{'form-wrapper': vm.systemSetting === 'advancedNumbering', 'md-whiteframe-5dp': vm.systemSetting === 'advancedNumbering'}"
+         class="outer-wrapper-adv-number">
+    <div layout="column" style="width: 100%" layout-align="center center">
+
+      <div class="fuseObjectPart" layout="row" layout-align="center center" style="width:100%" ng-if="vm.systemSetting !== 'configuration'">
+        <div class="form-wrapper m-t-0 margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+          <md-button class="md-icon-button sidenav-toggle" hide-gt-md ng-click="vm.toggleSidenav('sidenavSystem')"
+                     aria-label="Toggle sidenav">
+            <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+          </md-button>
+          <div class="content" layout="row">
+            <div aria-label="New Task"
+                 class="settings-dialog-container"
+                 ng-include="vm.systemSetting === 'releaseSetting' ? 'app/main/apps/setting/tabs/fuseobject-numbering/editing-release-setting.html'
+               : vm.systemSetting === 'currencySetting' ? 'app/main/apps/setting/tabs/fuseobject-numbering/currency-setting.html'
+               : vm.systemSetting === 'priceBreak'? 'app/main/apps/setting/tabs/fuseobject-numbering/price-break-setting.html'
+               : vm.systemSetting === 'currencyDecimals' ? 'app/main/apps/setting/tabs/fuseobject-numbering/currency-decimals.html'
+               : vm.systemSetting === 'referenceDesignators' ? 'app/main/apps/setting/tabs/fuseobject-numbering/reference-esignators.html'
+               : vm.systemSetting === 'advancedNumbering' ? 'app/main/apps/setting/tabs/fuseobject-numbering/advanced-object-numbering.html'
+               : 'app/main/apps/setting/tabs/fuseobject-numbering/object-numbering.html'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fuseObjectPart" layout="row" layout-align="center center" style="width:100%"
+           ng-if="vm.systemSetting === 'referenceDesignators'">
+        <div class="form-wrapper m-t-0 margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+          <md-button class="md-icon-button sidenav-toggle" hide-gt-md ng-click="vm.toggleSidenav('sidenavSystem')"
+                     aria-label="Toggle sidenav">
+            <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+          </md-button>
+          <div class="content" layout="row">
+            <div aria-label="New Task"
+                 ng-include="'app/main/apps/setting/tabs/fuseobject-numbering/edit-sub-level-parts-setting.html'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fuseObjectPart" layout="row" ng-if="vm.systemSetting === 'releaseSetting'"
+           layout-align="center center" style="width:100%">
+        <div class="form-wrapper m-t-0 margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+          <div class="content" layout="row">
+            <div aria-label="New Task"
+                 ng-include="'app/main/apps/setting/tabs/fuseobject-numbering/release-setting.html'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fuseObjectPart" layout="row" ng-if="(vm.systemSetting === 'currencySetting') && vm.sourceCostSetting"
+           layout-align="center center" style="width:100%">
+        <div class="form-wrapper m-t-0 margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+          <div class="content" layout="row">
+            <div aria-label="New Task"
+                 id="cost-sourcing-container"
+                 ng-include="'app/main/apps/setting/tabs/fuseobject-numbering/exchange-rates-table.html'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fuseObjectPart" layout="row"
+           ng-show="(vm.systemSetting === 'advancedNumbering' && vm.isAdvancedNumberingEnabled) && vm.isAdvancedNumberTableShown()"
+           layout-align="center center" style="width:100%">
+        <div class="form-wrapper m-t-0 margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+          <div class="content" layout="row">
+            <div class="advanced-numbering-table-page" aria-label="New Task">
+              <mf-advanced-numbering-category-table object-type="vm.currentAdvancedNumberingTab">
+              </mf-advanced-numbering-category-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

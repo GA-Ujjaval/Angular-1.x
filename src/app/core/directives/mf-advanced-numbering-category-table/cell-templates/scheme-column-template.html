@@ -1,0 +1,18 @@
+<md-select ng-if="grid.appScope.isEditable" aria-label="scheme-dropdown"
+           class="scheme-dropdown ui-grid-cell-contents"
+           ng-model="row.entity[col.field]"
+           ng-change="grid.appScope.handleDropdownChange(grid.appScope.vm, row.entity)">
+  <md-option ng-repeat="scheme in grid.appScope.schemes"
+             ng-if="scheme !== 'parent' || row.entity.$$treeLevel !== 0"
+             ng-value="scheme">{{scheme}}
+  </md-option>
+</md-select>
+
+<div class="ui-grid-cell-contents"
+     ng-class="{'inactive' : !grid.appScope.vm.checkEditable(grid.appScope.vm.OBJECT_TYPE)}"
+     ng-if="!grid.appScope.isEditable">
+  {{row.entity[col.field]}}
+  <md-tooltip ng-show="!grid.appScope.vm.checkEditable(grid.appScope.vm.OBJECT_TYPE)" class="md-tooltip">
+    {{grid.appScope.vm.getTooltipText()}}
+  </md-tooltip>
+</div>

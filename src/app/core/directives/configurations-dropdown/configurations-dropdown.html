@@ -1,0 +1,10 @@
+<div ng-if="hasConfig" class="ui-grid-cell-contents configurations-container">
+  <select class="configurations-select"
+          ng-focus="getConfigurationsList(id, rowEntity)"
+          ng-model="rowEntity.configurationsForDropdown"
+          ng-change="changeConfiguration(vm.getIdOfConfig(rowEntity.configArray, rowEntity.configurationsForDropdown), rowEntity, mainId)">
+    <option ng-repeat="config in rowEntity.configArray"
+            value="{{config.configName}}">{{config.configName}}</option>
+  </select>
+</div>
+<div ng-if="!hasConfig"></div>

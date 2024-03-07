@@ -1,0 +1,127 @@
+<div layout="row"  layout-align="center center">
+
+    <!-- CUSTOMER FORM -->
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-sm="100">
+        <!-- CONTENT -->
+        <div class="content">
+            <div layout="row" layout-align="start center" flex>
+                <md-button class="md-primary md-raised" ng-click="vm.showTabDialog($event)">
+                    Add Member
+                </md-button>
+                <div layout="column" class="ml-80-px-w">
+                    <md-input-container flex>
+                        <label>Filter Members</label>
+                        <md-select ng-model="vm.onlyActiveMembers" name="status" ng-change="vm.getallUsers()">
+                            <md-option ng-repeat="status in vm.statusList" value="{{status.val}}">
+                                {{status.disp}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <table class="simple" ms-responsive-table>
+
+                <thead>
+                <tr>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">First Name</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Last Name</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Email</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Role</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Read-Only <br> can comment</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Read-Only can <br> complete Approval <br> task</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Status</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="">Edit</span>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="vm.getAllUsers.length > 0" ng-repeat="user in vm.getAllUsers | filter:vm.userFilter">
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.userEmail }}</td>
+                    <td>
+                        <div class="chip" ng-repeat="u in user.userRoleSet">
+                                {{u}}
+                        </div>
+                    </td>
+                    <!-- Start Read-Only can comment -->
+                    <td ng-if="user.allowForCommentsCardTask === true">
+                        <md-button class="edit-button md-icon-button" aria-label="Organization details">
+                            <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                        </md-button>
+                    </td>
+                    <td ng-if="user.allowForCommentsCardTask === false || !user.allowForCommentsCardTask">
+                    </td>
+                    <!-- End Read-Only can comment -->
+                    <!-- Start Read-Only can complete Approval task -->
+                    <td ng-if="user.allowForTaskApproval === true">
+                        <md-button class="edit-button md-icon-button" aria-label="Organization details">
+                            <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                        </md-button>
+                    </td>
+                    <td ng-if="user.allowForTaskApproval === false || !user.allowForTaskApproval">
+                    </td>
+                    <!-- End Read-Only can complete Approval task -->
+                    <td ng-if="user.isActive === true && user.status === true">
+                        Active
+                    </td>
+                    <td ng-if="user.isActive === false && user.status === true">
+                        Inactive
+                    </td>
+                    <td ng-if="user.status === false">
+                        Pending
+                        <a href="">
+                          <md-icon md-font-icon="icon-email" class="s20" ng-click="vm.resendEmail(user)"></md-icon>
+                          <md-tooltip class="md-tooltip">Resend activation email</md-tooltip>
+                        </a>
+                    </td>
+                    <td>
+                        <md-button class="edit-button md-icon-button" ng-click="vm.showTabDialog($event, user)" aria-label="Organization details">
+                            <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-hide="vm.getAllUsers.length > 0"><td colspan="4"><p layout-align="center">No Data Available</p></td></tr>
+                </tbody>
+            </table>
+
+
+        </div>
+        <!-- / CONTENT -->
+
+
+    </div>
+    <!-- / Member FORM -->
+
+</div>

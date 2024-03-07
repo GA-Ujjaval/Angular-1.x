@@ -1,0 +1,75 @@
+<!-- DIALOG -->
+<md-dialog class="create-manufacturerparts-dialog" aria-label="New Task">
+        <form name="contactForm" class="md-inline-form" novalidate>
+            <!-- DIALOG TOOLBAR -->
+            <md-toolbar ng-class="(vm.title === 'New Supplier Part' || vm.title === 'Edit Supplier Part') ? 'md-accent-custom-for-sup md-tall-height' : 'md-accent-custom md-tall-height'" layout="column">
+                <!-- TOOLBAR TOP -->
+                <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+                    <span class="title margin-top-20">{{vm.title}}</span>
+                    <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                        <md-icon md-font-icon="icon-close"></md-icon>
+                    </md-button>
+                </div>
+                <!-- / TOOLBAR TOP -->
+            </md-toolbar>
+            <!-- / DIALOG TOOLBAR -->
+            
+            <!-- DIALOG CONTENT -->
+            <md-dialog-content ms-scroll>
+    
+                    <md-input-container class="md-icon-float md-block">
+                        <label>{{vm.name}} Part Number (Required)</label>
+                        <input ng-model="vm.manufacturersupplier.objectNumber" type="text" name="manufacturerNumber" required>
+                        <div ng-messages="manufacturerForm.manufacturerNumber.$error" role="alert">
+                            <div ng-message="required">
+                                <span>{{vm.name}} Part Number field is required.</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    
+                    <br>
+                    <md-input-container class="md-icon-float md-block mt0" flex>
+                        <label>{{vm.name}} Name (Required)</label>
+                        <md-chips class="mt--6 md-chips-label" ng-model="vm.changeitem" md-on-remove="" flex md-autocomplete-snap md-require-match="true" md-transform-chip="$chip">
+                            <md-autocomplete style="width: 35.5em;" class="md-auto-input"
+                            md-search-text="vm.searchName"
+                            md-selected-item-change="vm.searchCategoryFunction(item.name, vm.manufacturerData)"
+                            md-items="item in vm.parentIDQuerySearch(vm.searchName)"
+                            md-item-text="item.name"
+                            placeholder="{{vm.search}}">
+                            <span md-highlight-text="vm.searchName">{{vm.parseString(item)}}</span>
+                            <md-not-found>
+                                    <div class="chip-not-found" ng-click="vm.notFound(vm.searchName)">No such {{vm.sourceTypes}} exists in the system. Please add it first using the 'Sourcing' module</div>
+                            </md-not-found>
+                        </md-autocomplete>
+                        <button md-chip-remove class="md-primary" type="button">
+                            <md-icon md-font-icon="icon-close" class="s18"
+                            ng-click="vm.closeCategoryChips($index)"></md-icon>
+                        </button>
+                    </md-chips>
+                </md-input-container>
+    
+                <br>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Description</label>
+                    <input ng-model="vm.manufacturersupplier.description" type="text">
+                </md-input-container>
+    
+            </md-dialog-content>
+            <!-- / DIALOG CONTENT -->
+            
+            <!-- DIALOG ACTIONS -->
+            <md-dialog-actions layout="row" layout-align="space-between center">
+                <div layout="row" layout-align="start center">
+                    <md-button type="submit" ng-if="!vm.newContact" ng-click="vm.addNewManufacture()" ng-class="(vm.title === 'New Supplier Part' || vm.title === 'Edit Supplier Part') ? 'send-button md-accent md-raised create-manufacture-btn-for-sup' : 'send-button md-accent md-raised create-manufacture-btn'" ng-disabled="contactForm.$invalid || vm.attributes" aria-label="SAVE">
+                        SAVE
+                    </md-button>
+                    <md-button type="submit" ng-if="vm.newContact" ng-click="vm.addNewManufacture()" ng-class="vm.name === 'Supplier' ? 'send-button md-accent md-raised create-manufacture-btn-for-sup' : 'send-button md-accent md-raised create-manufacture-btn'" ng-disabled="contactForm.$invalid || vm.attributes" aria-label="Add Task">
+                        Create {{vm.name}} Part
+                    </md-button>
+                </div>
+            </md-dialog-actions>
+            <!-- / DIALOG ACTIONS -->   
+        </form>
+    </md-dialog>
+    <!-- / DIALOG -->

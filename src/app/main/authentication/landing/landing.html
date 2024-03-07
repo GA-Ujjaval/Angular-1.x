@@ -1,0 +1,45 @@
+<div id="landing" class="flex-scrollable" layout="column" ms-scroll>
+    <div id="login-form-wrapper" layout="column" layout-align="center center">
+        <!-- BOARD SELECTION -->
+        <div id="board-selector" layout="column" layout-align="start center" flex>
+
+            <div class="logo">
+                <img src="assets/images/logos/fuseplm.png" >
+            </div>
+            <!--<div class="title">FUSE</div>-->
+
+            <!-- BOARD LIST -->
+            <div class="board-list" layout="row" layout-align="center center" layout-wrap>
+
+                <!-- NEW BOARD BUTTON -->
+                <div class="board-list-item add-new-board" layout="column" layout-align="center center"
+                     ng-click="vm.channelNameFunction('azure')">
+                    <img src="assets/images/logos/azure.png" class="icon s64">
+                    <div class="board-name">Azure Web Services</div>
+                </div>
+                <!-- / NEW BOARD BUTTON -->
+
+                <!-- NEW BOARD BUTTON -->
+                <div class="board-list-item add-new-board" layout="column" layout-align="center center"
+                     ng-click="vm.channelNameFunction('aws')">
+                    <!--<md-icon md-font-icon="icon-plus-circle" class="icon s64"></md-icon>-->
+                    <img src="assets/images/logos/aws.png" class="icon s64">
+                    <div class="board-name">Amazon Web Services</div>
+                </div>
+                <!-- / NEW BOARD BUTTON -->
+
+                <!-- NEW BOARD BUTTON -->
+                <div class="board-list-item add-new-board" layout="column" layout-align="center center"
+                     ng-click="vm.channelNameFunction('google')">
+                    <img src="assets/images/logos/googleAppEngine.png" class="icon s64">
+                    <div class="board-name">Google App Engine</div>
+                </div>
+                <!-- / NEW BOARD BUTTON -->
+
+            </div>
+            <!-- / BOARD LIST -->
+
+        </div>
+        <!-- / BOARD SELECTION -->
+    </div>
+</div>

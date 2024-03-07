@@ -1,0 +1,10 @@
+<div
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+  <div layout="row" ng-repeat="sourcingRow in (row.entity.sourceList||[]) | orderBy : 'sourcingId' | orderBy : 'type' "
+       ng-if="$first">
+      <span>
+        {{ (sourcingRow[col.name] ||'') }}
+      </span>
+  </div>
+</div>

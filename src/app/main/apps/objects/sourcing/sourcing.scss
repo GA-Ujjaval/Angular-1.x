@@ -1,0 +1,202 @@
+#setting{
+  .mg-accent-bg-custom{
+    background-color: #374d71!important;
+  }
+  .mg-accent-bg-custom-for-sup {
+    background-color: #ad5a5a!important;
+  }
+}
+#e-commerce-sourcing {
+    .dataTables_wrapper .dataTables_filter{
+        width: 100% !important;
+        text-align: right !important;
+    }
+
+    .center {
+
+        .content{
+            background: #F5F5F5;
+        }
+
+        .header {
+            height: 78px !important;
+            min-height: 78px !important;
+            max-height: 78px !important;
+            padding: 5px !important;
+
+            .h1 {
+
+                md-icon {
+                    margin-right: 12px;
+                }
+            }
+
+
+
+            .product-count {
+                margin: 6px 0 0 36px;
+            }
+
+            .search {
+                position: relative;
+                padding-left: 24px;
+                max-width: 480px;
+
+                .search-icon {
+                    margin: 0 -24px 0 0;
+                }
+
+                .search-input {
+                    margin: 0 0 0 32px;
+                    background: none;
+                    font-size: 16px;
+                    line-height: 40px;
+                    height: 40px;
+                    color: #FFFFFF;
+                    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+                    transition: border-color 300ms ease;
+
+                    &:focus {
+                        border-color: rgba(255, 255, 255, 1);
+                    }
+
+                    &::-webkit-input-placeholder {
+                        color: rgba(255, 255, 255, 0.5);
+                    }
+                }
+            }
+        }
+
+        .content-card {
+
+            .toolbar {
+                padding: 8px;
+            }
+
+            .content {
+                padding: 0;
+
+                .dataTables_wrapper {
+
+                    .dataTables_scrollHead {
+                        min-height: 64px;
+
+                        .dataTables_scrollHeadInner{
+                            width: 100% !important;
+                            table.dataTable {
+                                width: 100% !important;
+                            }
+                        }
+
+                        table {
+
+                            th {
+                                padding-top: 20px;
+                                padding-bottom: 20px;
+                            }
+                        }
+                    }
+
+                    .dataTables_scrollBody {
+
+                        .product-image {
+                            width: 52px;
+                            height: 52px;
+                            border: 1px solid rgba(0, 0, 0, 0.12);
+                        }
+
+                        .quantity-indicator {
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 4px;
+                            margin-right: 8px;
+                        }
+
+                        .edit-button {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.close-search-icon{
+    font-size: 24px;
+    opacity: 1 !important;
+    position: relative;
+    right: 6%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.align-left{
+  float: left;
+}
+
+.search-padding{
+    padding-right: 40px !important;
+}
+.search-width{
+    width: 400px !important;
+}
+.table-padding{
+    padding-left: 54px !important;
+}
+.table-padding-status{
+    padding-right: 34px !important;
+    padding-left: 24px !important;
+}
+.table-padding-search-status{
+    padding-right: 34px !important;
+    padding-left: 14px !important;
+}
+
+.grid-height-sourcing{
+  @media only screen and (min-height:400px){
+    height: 44vh !important;
+  }
+  @media only screen and (min-height:500px){
+    height: 46vh !important;
+  }
+  @media only screen and (min-height:550px){
+    height: 50vh !important;
+  }
+  @media only screen and (min-height:600px){
+    height: 54vh !important;
+  }
+  @media only screen and (min-height:700px){
+    height: 60vh !important;
+  }
+  @media only screen and (min-height:775px){
+    height: 65vh !important;
+  }
+  @media only screen and (min-height:850px){
+    height: 67vh !important;
+  }
+  @media only screen and (min-height:900px){
+    height: 69vh !important;
+  }
+  @media only screen and (min-height:1000px){
+    height: 71vh !important;
+  }
+  @media only screen and (min-height:1150px){
+    height: 75vh !important;
+  }
+  @media only screen and (min-height:1250px){
+    height: 77vh !important;
+  }
+}
+
+.sourcing-circular{
+  display: inline;
+}
+
+.show-more{
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.show-all{
+  margin-top: 3px;
+}

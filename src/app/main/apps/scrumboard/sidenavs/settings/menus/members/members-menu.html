@@ -1,0 +1,35 @@
+<md-list>
+
+    <!-- ADD NEW MEMBER -->
+    <md-subheader class="md-no-sticky lable-bg">Add New Roles</md-subheader>
+
+    <md-list-item class="add-new-member">
+        <form ng-submit="vm.newMember()" layout="row" layout-align="start center">
+            <md-input-container flex>
+                <label>Member Roles</label>
+                <md-select ng-model="vm.selectRole" name="role" ng-change="vm.buttonDisableFunction()">
+                    <md-option ng-repeat="role in vm.roleSet" value="{{role.val}}">
+                        {{role.disp}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button ng-disabled="vm.buttonDisable" type="submit"
+                       ng-click="vm.addRoleChipsFunction()" class="md-accent md-raised" aria-label="Add New Member">Add
+            </md-button>
+        </form>
+    </md-list-item>
+    <!-- / ADD NEW MEMBER -->
+
+    <md-divider></md-divider>
+
+    <!-- MEMBERS -->
+    <md-list-item class="member" ng-repeat="member in vm.board.boardRole">
+        <p class="member-name">{{ member }}</p>
+        <md-button ng-click="vm.removeMember($event, $index);"
+                   class="remove-button md-icon-button" aria-label="remove">
+            <md-icon md-font-icon="icon-delete"></md-icon>
+        </md-button>
+    </md-list-item>
+    <!-- / MEMBERS -->
+
+</md-list>

@@ -1,0 +1,763 @@
+<div id="sourceimport" class="page-layout simple doc-page  md-grey-100-bg" layout="column"
+     ng-intro-options="IntroOptions"
+     ng-intro-method="$root.CallMeImport" ng-intro-onafterchange="AfterChangeEvent" ng-intro-oncomplete="Complete"
+     ng-intro-autostart="false">
+
+  <!-- HEADER -->
+  <div
+    ng-class="vm.importHeading === 'Supplier Part' ? 'header md-accent-bg mg-accent-bg-custom-for-sup pr' : 'header md-accent-bg mg-accent-bg-custom pr'"
+    layout="row" layout-align="start center">
+    <div class="h1" flex layout="row" layout-align="start center">
+      <span>Import {{vm.importHeading}}</span>
+    </div>
+    <md-progress-circular id="create-progress" class="light-circular circular-center" md-mode="indeterminate"
+                          ng-if="vm.progress"
+                          flex layout="row" layout-align="center">
+    </md-progress-circular>
+    <span class="pl-5-pr" flex layout="row" layout-align="left" ng-if="vm.progressMesssage">This may take several
+      minutes... Please do not close the browser</span>
+  </div>
+  <!-- / HEADER -->
+
+  <!-- FORM WIZARD -->
+  <div layout="row" ms-scroll>
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+      <ms-form-wizard flex>
+        <!-- <div class="question-icon" ng-if="$root.introImportFlag != true" ng-click="$root.CallMeImport()">
+                  <div class="introjs-hint-dot introjs-hint-dot-import"></div>?</div> -->
+        <md-tabs md-dynamic-height md-selected="msWizard.selectedIndex" md-center-tabs="true">
+          <md-tab id="demo">
+            <md-tab-label>
+              <span class="ms-form-wizard-step-label" id="step1">
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep1.$invalid">1</span>
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep1.$valid">
+                  <i class="icon-check s16"></i>
+                </span>
+                <span class="ms-form-wizard-step-text">Import {{vm.importName}}</span>
+              </span>
+            </md-tab-label>
+
+            <md-tab-body>
+              <form name="wizardStep1" class="md-inline-form" ms-form-wizard-form novalidate>
+                <div layout="row" layout-align="center center" class="padding-7">
+                  <span class="secondary-text font-weight-700 md-grey-100-bg md-cyan-font text-center padding-10"
+                        style="font-size: 17px;width: 100%">Import
+                    {{vm.importName}}</span>
+                </div>
+                <div class="border-bottom margin-top-10"></div>
+                <input type="hidden" ng-model="vm.dataHidden" required>
+
+                <div layout="column" class="margin-top-20" layout-gt-xs="row" flex>
+                  <div layout="row" flex layout-align="center center">
+                    <span class="h3"> Select a File to Upload:</span> &nbsp;&nbsp;
+                    <span class="secondary-text"> Supported Formates: .xls, .xlsx, .csv</span>
+
+                  </div>
+                </div>
+
+                <div layout="row" layout-align="center center">
+                  <div flow-init="vm.ngFlowOptions" flow-name="vm.ngFlow.flow" flow-files-submitted="vm.upload($files)"
+                       flow-file-success="vm.fileSuccess($file, $message)" flow-complete="vm.uploadComplete()">
+
+                    <div class=" margin-top-20" layout="row" layout-align="start center">
+                      <md-button class=" md-raised" flow-btn ng-disabled="vm.fileButtiondisabled">
+                        Choose File
+                      </md-button>
+                      <span class="secondary-text mt-8" ng-if="!vm.fielName">No file chosen</span>
+                      <span class="secondary-text mt-8" ng-if="vm.fielName">{{vm.fielName}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div layout="row" layout-align="center center">
+                  <span class="margin-top-20 h3">
+                    NOTE: 1) The first row of the Excel/csv file is the column title</br>
+                    &emsp;&emsp;&emsp;2) There is only one tab in the Excel spreadsheet</br>
+                    &emsp;&emsp;&emsp;3) {{ vm.message1 }} </br>
+                    &emsp;&emsp;&emsp;4) If any Excel column doesn’t have a title, the Import Manager ignores it and
+                    every column after it.
+                  </span>
+                </div>
+                <div class="border-bottom margin-top-10"></div>
+                <div layout="column" layout-align="center center" class="margin-top-20">
+                  <md-input-container class="md-block margin-iput" flex-gt-sm>
+                    <span class="h4">Select A Mapping Configuration From The List Below : </span>
+                    <md-card-content flex-gt-sm>
+                      <md-select ng-model="vm.MappingData" ng-change="vm.changeMapping()" aria-label="selectoption">
+                        <md-option value="" ng-if="vm.DataMapping.length != 0">Select</md-option>
+                        <md-option ng-repeat="mapping in vm.DataMapping"
+                                   value="{{mapping.ObjectId}}">{{mapping.mappingName}}</md-option>
+                        <md-option ng-if="vm.DataMapping.length == 0" value='No mapping configuration available.'
+                                   ng-selected="vm.notMapping === 'No mapping configuration available.'">{{vm.notMapping}}</md-option>
+                      </md-select>
+                    </md-card-content>
+                  </md-input-container>
+                </div>
+                <div class="input-bdr" ng-if="vm.matchingRecordsNotShow"></div>
+                <div layout="column" layout-align="center center" class="margin-top-15"
+                     ng-if="vm.matchingRecordsNotShow">
+                  <md-input-container flex class="margin-iput">
+                    <md-radio-group ng-model="vm.matchingRecords">
+                      <div layout="row">
+
+                        <span class="margin-top-4">For matching records : &nbsp;</span>
+
+                        <md-radio-button flex value="skip"> Skip</md-radio-button>
+                        <md-radio-button flex value="update"> Update</md-radio-button>
+                      </div>
+                    </md-radio-group>
+                  </md-input-container>
+                </div>
+
+                <div layout="column" class="pad-0-120" layout-align="start start" ng-if="vm.matchingRecordsNotShow">
+                  <div flex="100">
+                    <h3>Import Manager uses '{{vm.partproductbom}} Part Number' and '{{vm.partproductbom}} Name' to
+                      identify if there is a match in FusePLM to prevent
+                      <br>importing duplicate data.</h3>
+                    <h3 class="no-margin text-left">
+                      <strong> Skip :</strong>
+                      </h4>
+                      <ul>
+                        <li>For matched Excel items, Import Manager will NOT UPDATE their attribute values in FusePLM.
+                        </li>
+                        <li>For unmatched Excel items, new objects will be created in FusePLM.</li>
+                      </ul>
+                  </div>
+                  <div flex="100">
+                    <h3 class="no-margin text-left">
+                      <strong> Update :</strong>
+                    </h3>
+
+                    <ul>
+                      <li>For matched Excel items, Import Manager will UPDATE values of FusePLM attributes based on the
+                        'Attribute
+                        Mapping' selected in the next step.
+                      </li>
+                      <li>For Excel parts that are not matched with FusePLM objects, new objects will be created in
+                        FusePLM.
+                      </li>
+                      <li><strong> Note: </strong>{{vm.partproductbom}} Part Number and {{vm.partproductbom}} Name
+                        CANNOT be updated through the Import Process.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="input-bdr margin-top-5" ng-if="vm.matchingRecordsNotShow"></div>
+              </form>
+            </md-tab-body>
+          </md-tab>
+
+          <md-tab ng-disabled="wizardStep1.$invalid" style="max-height: 500px">
+            <md-tab-label>
+              <span class="ms-form-wizard-step-label" id="step2">
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep2.$invalid">2</span>
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep2.$valid">
+                  <i class="icon-check s16"></i>
+                </span>
+                <span class="ms-form-wizard-step-text ">Attribute Mapping</span>
+              </span>
+            </md-tab-label>
+
+            <md-tab-body>
+              <form name="wizardStep2" ms-form-wizard-form novalidate>
+                <div class="content">
+                  <div class="simple-table-container margin-top-5" flex>
+                    <table class="simple" ms-responsive-table>
+                      <thead>
+                      <tr>
+                        <td colspan="5" class="text-center font-size-16 md-grey-100-bg border-bottom padding-8">
+                          <strong class="secondary-text font-weight-700 md-cyan-font" style="font-size: 17px">
+                            Attributes Mapping</strong>
+                          <br>
+                          <span class="secondary-text" style="font-size:15px">NOTE: Map the excel columns to existing
+                              attributes in FusePLM.
+                              Import Manager uses '{{vm.partproductbom}} Part Number' and '{{vm.partproductbom}} Name'
+                              <br> to identify if there is a match in FusePLM to prevent importing duplicate data.
+                            </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="4" class="text-center font-size-16 md-grey-100-bg border-bottom padding-8">
+                          <md-switch class="auto-switch" ng-model="vm.isautoMap" ng-change="vm.onChangeAutoMap()"
+                                     aria-label="Auto map switch">Auto-map attributes
+                          </md-switch>
+                          <br>
+                          <div class="custom-w-868">
+                                <span style="font-size:15px;">NOTE: When enabled, Import Manager will automatically pick
+                                    the column name from the 'Excel column' dropdown list, whose spelling and case matches
+                                    the FusePLM attribute.</span></br>
+                            <span style="font-size:15px;"> When disabled, Import Manager will not automatically pick
+                                    the column name from the 'Excel column'.</span>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="margin-top-10">
+                        <th class="text-right width-14pertg width-20pertg">FusePLM Attributes</th>
+                        <th class="text-left" style="width:24%">Excel Column</th>
+                        <th class="text-right width-39pertg width-30pertg">FusePLM Attributes</th>
+                        <th class="text-left" style="width:22%"> Excel Column</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+
+                      <!-- Basic info -->
+                      <tr ng-click="vm.showhideBasicinfo = vm.showhideBasicinfo ? false : true">
+                        <td colspan="5"
+                            class="text-center td-plus-minus md-grey-100-bg border-bottom padding-8 maintd-brd-bottom"
+                            onload="">
+                          <md-icon class="icon-plus plus-sign" md-ink-ripple="#039be5" aria-label="icon-plus"
+                                   ng-if="!vm.showhideBasicinfo"></md-icon>
+                          <md-icon class="icon-minus plus-sign" md-ink-ripple="#039be5" aria-label="icon-minus"
+                                   ng-if="vm.showhideBasicinfo"></md-icon>
+                          Basic Info
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideBasicinfo">
+                        <td class="text-right">
+                          {{vm.importName}} Number
+                          <span style="color: red">*</span> &nbsp; :
+                        </td>
+                        <td style="width: 25%">
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.objectNumber" required placeholder="Select"
+                                       aria-label="select">
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.objectNumber">{{fileHeader}} </md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                        <td class="text-right">{{vm.partproductbom}} Name
+                          <span style="color: red">*</span> &nbsp;:
+                        </td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.objectName" aria-label="select" required
+                                       placeholder="Select">
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.objectName">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideBasicinfo">
+                        <td class="text-right">{{vm.partproductbom}} Code &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.code" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.code">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+
+                        <td class="text-right">Available &nbsp;:</td>
+                        <td style="width: 25%;">
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.available" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.available">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideBasicinfo">
+                        <td class="text-right">Description &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.description" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.description">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+
+                        <td class="text-right">Packaging &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.packaging" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.packaging">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+
+                      </tr>
+                      <tr ng-show="vm.showhideBasicinfo">
+                        <td class="text-right">Lead Time &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.leadTime" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.leadTime">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+
+                        <td class="text-right">Tags &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.basicInfo.tags" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.tags">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideBasicinfo">
+                        <td></td>
+                      </tr>
+                      <!-- Basic info -->
+
+                      <!--Cost-->
+
+                      <tr ng-click="vm.showhideCost = vm.showhideCost ? false : true">
+                        <td colspan="5"
+                            class="text-center td-plus-minus md-grey-100-bg border-bottom padding-8 maintd-brd-bottom"
+                            onload="">
+                          <md-icon class="icon-plus plus-sign" md-ink-ripple="#039be5" aria-label="icon-plus"
+                                   ng-if="!vm.showhideCost"></md-icon>
+                          <md-icon class="icon-minus plus-sign" md-ink-ripple="#039be5" aria-label="icon-minus"
+                                   ng-if="vm.showhideCost"></md-icon>
+                          Cost
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideCost">
+                        <td class="text-right">MOQ &nbsp;:</td>
+                        <td style="width: 25%;">
+                          <md-card-content>
+                            <md-select ng-model="vm.sourceCost.moq" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.sourceCost.moq">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                        <td class="text-right">Currency &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.sourceCost.currency" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.sourceCost.currency">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideCost">
+                        <td class="text-right">Cost &nbsp;:</td>
+                        <td style="width: 25%;">
+                          <md-card-content>
+                            <md-select ng-model="vm.sourceCost.cost" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.sourceCost.cost">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                      </tr>
+                      <tr ng-if="" ng-show="vm.showhideCost">
+                        <td></td>
+                      </tr>
+                      <!--Cost-->
+
+                      <!-- Inventory -->
+                      <tr ng-click="vm.showhideInventory = vm.showhideInventory ? false : true">
+                        <td colspan="5"
+                            class="text-center td-plus-minus md-grey-100-bg border-bottom padding-8 maintd-brd-bottom">
+                          <md-icon class="icon-plus plus-sign" md-ink-ripple="#039be5" aria-label="icon-plus"
+                                   ng-if="!vm.showhideInventory"></md-icon>
+                          <md-icon class="icon-minus plus-sign" md-ink-ripple="#039be5" aria-label="icon-minus"
+                                   ng-if="vm.showhideInventory"></md-icon>
+                          Inventory
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideInventory">
+                        <td class="text-right">Quantity On Hand &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.sourceInventory.qtyOnHand" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.sourceInventory.qtyOnHand">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+
+                        <td class="text-right">Quantity On Order &nbsp;:</td>
+                        <td>
+                          <md-card-content>
+                            <md-select ng-model="vm.sourceInventory.qtyOnOrder" aria-label="select">
+                              <md-option value="">Select</md-option>
+                              <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                         value="{{fileHeader}}"
+                                         ng-selected="fileHeader === vm.Data.sourceInventory.qtyOnOrder">{{fileHeader}}</md-option>
+                            </md-select>
+                          </md-card-content>
+                        </td>
+                      </tr>
+                      <tr ng-show="vm.showhideInventory">
+                        <td></td>
+                      </tr>
+                      <!-- Inventory -->
+
+                      <!--Additional Info-->
+                      <tr ng-if="vm.additionalInfoFlag"
+                          ng-click="vm.showhideAdditionalinfo = vm.showhideAdditionalinfo ? false : true">
+                        <td colspan="5" class="text-center td-plus-minus md-grey-100-bg  header-box padding-10">
+                          <md-icon class="icon-plus plus-sign" md-ink-ripple="#039be5" aria-label="icon-plus"
+                                   ng-if="!vm.showhideAdditionalinfo"></md-icon>
+                          <md-icon class="icon-minus plus-sign" md-ink-ripple="#039be5" aria-label="icon-minus"
+                                   ng-if="vm.showhideAdditionalinfo"></md-icon>
+                          Additional Info
+                        </td>
+                      </tr>
+                      <tr ng-if="vm.additionalInfoFlag" ng-show="vm.showhideAdditionalinfo">
+                        <td colspan="5">
+                          <div ng-repeat="(key, value) in vm.additionalInfo" style="width:49%; display: inline-block">
+                            <div style="width: 40%; display: inline-block; text-align: right">
+                              {{key}} :
+                            </div>
+                            <div style="width: 50%; display: inline-block">
+                              <md-card-content>
+                                <md-select ng-model="vm.additionalInfo[key]" aria-label="select">
+                                  <md-option value="">Select</md-option>
+                                  <md-option ng-repeat="fileHeader in vm.Data.fileHeader | orderBy:'toString()'"
+                                             value="{{fileHeader}}"
+                                             ng-selected="fileHeader === value">{{fileHeader}}</md-option>
+                                </md-select>
+                              </md-card-content>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr ng-if="vm.additionalInfoFlag" ng-show="vm.showhideAdditionalinfo">
+                        <td></td>
+                      </tr>
+
+                      <!--Additional Info-->
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </form>
+            </md-tab-body>
+          </md-tab>
+          <md-tab ng-disabled="wizardStep2.$invalid">
+            <md-tab-label>
+              <span class="ms-form-wizard-step-label" id="step3">
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep3.$invalid">3</span>
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep3.$valid">
+                  <i class="icon-check s16"></i>
+                </span>
+                <span class="ms-form-wizard-step-text">Pre Import Summary</span>
+              </span>
+            </md-tab-label>
+            <md-tab-body>
+              <form name="wizardStep3" ms-form-wizard-form novalidate>
+
+                <input type="hidden" ng-model="vm.data3" required>
+
+                <div layout="row" layout-align="center center">
+                  <span class="secondary-text font-weight-700 md-grey-100-bg md-cyan-font text-center padding-10"
+                        style="font-size: 17px;width: 100%">
+                    Pre Import Summary {{vm.summeryData.fileName}}</span>
+                </div>
+                <div class="border-bottom margin-top-10"></div>
+
+                <div layout="column" class="padding-top-25" flex>
+                  <div flex layout-align="start center">
+                    <span class="h4"> Total records in data file = </span>
+                    <span class="secondary-text"> {{vm.summeryData.totalFileSize}}</span>
+                  </div>
+                  <div flex layout-align="start center">
+                    <span class="h4"> Records imported = </span>
+                    <span class="secondary-text"> {{vm.summeryData.newRecords}} </span>
+                  </div>
+                  <div flex layout-align="start center">
+                    <span class="h4"> Record failed = </span>
+                    <span class="secondary-text"> {{vm.summeryData.matchedRecords}} </span>
+                  </div>
+                </div>
+                <div class="border-bottom margin-top-15">
+                  <div layout="row" layout-align="start center">
+                    <span class="h4"> Save mapping configuration for future use (optional): </span>
+                  </div>
+                  <div layout="row" class="margin-top-5" layout-align="start center" flex="25">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <input class="md-input-height" type="text" placeholder="Configuration Name"
+                             ng-model="vm.configureName"
+                             ng-blur="vm.checkingMapping()">
+                    </md-input-container>
+                  </div>
+                </div>
+
+                <!--ToDo: -->
+                <div layout="column" layout-align="start end" flex="100">
+                  <div layout="row" flex="35" layout-align="end center" style="bottom: 0">
+                    <lable style="margin-bottom: 25px;margin-right: 5px;">Filter:</lable>
+                    <md-input-container class="md-block" flex-gt-sm>
+
+                      <input class="input-bdr" type="text" ng-model="vm.searchText" ng-change="vm.search()"
+                             aria-label="textbox">
+                    </md-input-container>
+                  </div>
+                </div>
+                <div style="height:650px;overflow:auto">
+                  <table class="simple" id="import-table" ms-responsive-table style="margin-bottom: 10px;">
+                    <thead>
+                    <tr>
+                      <th class="secondary-text" ng-click="vm.sortingOrder='importStatus';vm.reverse=!vm.reverse;">
+                        <div class="table-header">
+                          <span class="column-title">Import Status </span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" ng-click="vm.sortingOrder='importMessage';vm.reverse=!vm.reverse;">
+                        <div class="">
+                          <span class="column-title"> Message </span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" ng-repeat="obj in vm.headersKey" ng-if="vm.headersKey.length > 0"
+                          ng-click="vm.sortingOrder[obj];vm.reverse=!vm.reverse;"
+                          ng-style="{'width':(90*100/vm.headersKey.length)/100}">
+                        <div class="table-header">
+                          <span layout="column" class="column-title">{{obj}}</span>
+                        </div>
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody style="color: black;">
+                    <tr
+                      ng-repeat="Summery in importdata=(vm.summeryData.StatisTics | orderBy: 'importStatus') | orderBy:vm.sortingOrder:vm.reverse  | filter: vm.searchText | startFromPage: currentPage*pageSize | limitTo:pageSize">
+                      <td style="min-width: 140px;">{{Summery.importStatus}}</td>
+                      <td style="min-width: 340px;">{{Summery.importMessage}}</td>
+                      <td ng-repeat="(key,value) in Summery.data">
+                        <span style="font-size: 1.5rem">{{value}}</span>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div layout="column" layout-align="start end" flex="100">
+                  <div class="pager" layout-align="end center">
+                    <span class="secondary-text">
+                      <span translate="SEARCH.RESULTS">Results</span>
+                      <span>:</span>
+                    </span>
+
+                    <span class="page-info" ng-if="importdata.length > 0">
+                      <span>{{startIndex + 1}}</span>
+                      <span>-</span>
+                      <span>{{endIndex}} </span>
+                      <span translate="SEARCH.OF">of</span>
+                      <span>{{importdata.length}}</span>
+                    </span>
+
+                    <md-button class="md-icon-button" aria-label="previous page" translate
+                               translate-attr-aria-label="SEARCH.PREVIOUS_PAGE"
+                               ng-disabled="currentPage == 0" ng-click="vm.countprevous()">
+                      <md-icon md-font-icon="icon-chevron-left"></md-icon>
+                    </md-button>
+
+                    <md-button class="md-icon-button" aria-label="next page" translate
+                               translate-attr-aria-label="SEARCH.NEXT_PAGE"
+                               ng-disabled="currentPage >= (importdata).length/pageSize - 1"
+                               ng-click="vm.countFunction()">
+                      <md-icon md-font-icon="icon-chevron-right"></md-icon>
+                    </md-button>
+                  </div>
+                </div>
+              </form>
+
+            </md-tab-body>
+          </md-tab>
+
+          <md-tab ng-disabled="wizardStep3.$invalid || wizardStep2.$invalid || wizardStep1.$invalid ">
+            <md-tab-label>
+              <span class="ms-form-wizard-step-label" id="step4">
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep4.$invalid">4</span>
+                <span
+                  ng-class="vm.importHeading === 'Supplier Part' ? 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom-for-sup' : 'ms-form-wizard-step-number md-accent-bg mg-accent-bg-custom'"
+                  ng-if="wizardStep4.$valid">
+                  <i class="icon-check s16"></i>
+                </span>
+                <span class="ms-form-wizard-step-text">Import Summary</span>
+              </span>
+            </md-tab-label>
+            <md-tab-body>
+              <form name="wizardStep4" class="md-inline-form" ms-form-wizard-form novalidate>
+                <div layout="row" layout-align="center center">
+                  <span class="secondary-text font-weight-700 md-grey-100-bg md-cyan-font text-center padding-10"
+                        style="font-size: 17px;width: 100%">
+                    Import Summary {{vm.summeryData.fileName}}</span>
+                </div>
+                <div class="border-bottom margin-top-10"></div>
+
+
+                <div layout="column" class="padding-top-25" flex>
+                  <div flex layout-align="start center">
+                    <span class="h4"> Total records in data file = </span>
+                    <span class="secondary-text"> {{vm.summeryData.totalFileSize}} </span>
+                  </div>
+                  <div flex layout-align="start center">
+                    <span class="h4"> Records imported = </span>
+                    <span class="secondary-text"> {{vm.summeryData.newRecords}} </span>
+                  </div>
+                  <div flex layout-align="start center">
+                    <span class="h4"> Record failed = </span>
+                    <span class="secondary-text"> {{vm.summeryData.matchedRecords}} </span>
+                  </div>
+                </div>
+
+
+                <div class="border-bottom margin-top-20"></div>
+                <!--Start -->
+                <div layout="column" layout-align="start end" flex="100">
+                  <div layout="row" flex="35" layout-align="end center" style="bottom: 0">
+                    <lable style="margin-bottom: 25px;margin-right: 5px;">Filter:</lable>
+                    <md-input-container class="md-block" flex-gt-sm>
+
+                      <input class="input-bdr" type="text" ng-model="vm.searchText" ng-change="vm.search()"
+                             aria-label="textbox">
+                    </md-input-container>
+                  </div>
+                </div>
+                <div style="height:650px;overflow:auto">
+                  <table class="simple" id="import-tables" ms-responsive-table style="margin-bottom: 10px;">
+                    <thead>
+                    <tr>
+                      <th class="secondary-text" ng-click="vm.sortingOrder='importStatus';vm.reverse=!vm.reverse;">
+                        <div class="table-header">
+                          <span class="column-title">Import Status </span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" ng-click="vm.sortingOrder='importMessage';vm.reverse=!vm.reverse;">
+                        <div class="table-header">
+                          <span class="column-title"> Message </span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" ng-repeat="obj in vm.headersKey" ng-if="vm.headersKey.length > 0"
+                          ng-click="vm.sortingOrder[obj];vm.reverse=!vm.reverse;"
+                          ng-style="{'width':(90*100/vm.headersKey.length)/100}">
+                        <div class="table-header">
+                          <span layout="column" class="column-title">{{obj}}</span>
+                        </div>
+                      </th>
+                    </tr>
+                    </thead>
+
+                    <tbody style="color: black;">
+                    <tr
+                      ng-repeat="Summery in importdata=(vm.summeryData.StatisTics | orderBy: 'importStatus') | orderBy:vm.sortingOrder:vm.reverse  | filter: vm.searchText | startFromPage: currentPage*pageSize | limitTo:pageSize">
+                      <td style="min-width: 140px;">{{Summery.importStatus}}</td>
+                      <td style="min-width: 340px">{{Summery.importMessage}}</td>
+                      <td ng-repeat="(key,value) in Summery.data">
+                        <span style="font-size: 1.5rem">{{value}}</span>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div layout="column" layout-align="start end" flex="100">
+                  <div class="pager" layout-align="end center">
+                    <span class="secondary-text">
+                      <span translate="SEARCH.RESULTS">Results</span>
+                      <span>:</span>
+                    </span>
+
+                    <span class="page-info" ng-if="importdata.length > 0">
+                      <span>{{startIndex + 1}}</span>
+                      <span>-</span>
+                      <span>{{endIndex}} </span>
+                      <span translate="SEARCH.OF">of</span>
+                      <span>{{importdata.length}}</span>
+                    </span>
+
+                    <md-button class="md-icon-button" aria-label="previous page" translate
+                               translate-attr-aria-label="SEARCH.PREVIOUS_PAGE"
+                               ng-disabled="currentPage == 0" ng-click="vm.countprevous()">
+                      <md-icon md-font-icon="icon-chevron-left"></md-icon>
+                    </md-button>
+
+                    <md-button class="md-icon-button" aria-label="next page" translate
+                               translate-attr-aria-label="SEARCH.NEXT_PAGE"
+                               ng-disabled="currentPage >= (importdata).length/pageSize - 1"
+                               ng-click="vm.countFunction()">
+                      <md-icon md-font-icon="icon-chevron-right"></md-icon>
+                    </md-button>
+                  </div>
+                </div>
+                <!--END -->
+              </form>
+            </md-tab-body>
+          </md-tab>
+        </md-tabs>
+
+        <div class="navigation" flex layout="row" layout-align="center center">
+          <md-button
+            ng-class="vm.importHeading === 'Supplier Part' ? 'md-raised md-accent previous-next-btn-for-sup' : 'md-raised md-accent previous-next-btn'"
+            ng-click="msWizard.previousStep()" ng-disabled="msWizard.isFirstStep() || vm.progress"
+            ng-hide="msWizard.isLastStep()">
+            Previous
+          </md-button>
+          <div class="steps">
+            <span ng-if="vm.importHeading === 'Supplier Part'" ng-repeat="form in msWizard.forms"
+                  ng-class="{'selected md-accent-bg previous-next-btn-for-sup':msWizard.selectedIndex === $index}"></span>
+            <span ng-if="vm.importHeading === 'Manufacturer Part'" ng-repeat="form in msWizard.forms"
+                  ng-class="{'selected md-accent-bg previous-next-btn':msWizard.selectedIndex === $index}"></span>
+          </div>
+          <md-button
+            ng-class="vm.importHeading === 'Supplier Part' ? 'md-raised md-accent previous-next-btn-for-sup' : 'md-raised md-accent previous-next-btn'"
+            ng-click="msWizard.nextStep()" ng-hide="msWizard.isLastStep()"
+            ng-disabled="msWizard.currentStepInvalid() || vm.progress">
+            Next
+          </md-button>
+
+          <md-button
+            ng-class="vm.importHeading === 'Supplier Part' ? 'md-raised md-accent previous-next-btn-for-sup' : 'md-raised md-accent previous-next-btn'"
+            ng-click="vm.DoneFunction(vm.id,vm.type)" ng-show="msWizard.isLastStep()"
+            ng-disabled="msWizard.formsIncomplete() || vm.progress">
+            Done
+          </md-button>
+        </div>
+
+      </ms-form-wizard>
+    </div>
+
+    <!-- / FORM WIZARD -->
+
+
+  </div>

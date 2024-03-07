@@ -1,0 +1,57 @@
+#grid-configurations-compare  {
+  .myCheckbox {
+    height: 16px;
+    width: 16px;
+    border: 2px solid #747474;
+    border-radius: 2px;
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: #fdfdfd;
+    transition: 240ms;
+    transition-property: initial;
+    transition-duration: 240ms;
+    transition-timing-function: initial;
+    transition-delay: initial;
+    position: relative;
+    cursor: pointer;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+
+  .myCheckbox::after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 9px;
+    position: absolute;
+    left: 3px;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+    transform: rotate(45deg);
+  }
+
+  .custom-checkbox:checked + .myCheckbox {
+    background-color: #23a7e7;
+    border-color: #23a7e7;
+  }
+  .custom-checkbox:checked + .myCheckbox--grey {
+    background-color: #c5c5c5;
+    border-color: #c5c5c5;
+  }
+  .custom-checkbox {
+    display: none;
+  }
+
+  .custom-checkbox:checked + .myCheckbox::after {
+    border-bottom-color: #e2f4fc;
+    border-right-color: #e2f4fc;
+  }
+
+  .aligned-checkbox-container{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+  }
+}

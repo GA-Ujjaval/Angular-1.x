@@ -1,0 +1,30 @@
+<div ng-if="row.entity.slNo"
+  class="ui-grid-cell-contents" style="padding: 0 !important;"
+  title="TOOLTIP">
+  <md-menu md-width="0 40">
+    <md-button class="md-icon-button btn-hvr-cell" ng-click="$mdMenu.open()">
+      <md-icon class="icon-dots-horizontal dots-icon"></md-icon>
+      <md-tooltip class="md-tooltip">More Actions</md-tooltip>
+    </md-button>
+    <md-menu-content>
+      <md-menu-item>
+        <md-button ng-if="row.entity.slNo" style="pointer-events: auto"
+                   ng-click="$event.stopPropagation();grid.appScope.vm.showTabDialog($event, row.entity, grid.appScope.vm.getObjectId(row.entity), 'edit')"
+                   aria-label="Organization details"
+                   ng-disabled="grid.appScope.vm.SaveDisabled && !grid.appScope.vm.releaseBomSettings">
+          <md-icon md-font-icon="icon-pencil" class="s16"></md-icon> Edit
+          <md-tooltip ng-if="row.entity.level === 1" class="md-tooltip">Edit or Replace Part in Bill-of-Material</md-tooltip>
+          <md-tooltip ng-if="row.entity.level !== 1 && grid.appScope.vm.editSubLevelPartsSetting" class="md-tooltip">Edit or Replace Part in Bill-of-Material</md-tooltip>
+          <md-tooltip ng-if="row.entity.level !== 1 && !grid.appScope.vm.editSubLevelPartsSetting" class="md-tooltip">Edit BOM Notes in Bill-of-Material</md-tooltip>
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="row.entity.level !== 1">
+        <md-button ng-click="$event.stopPropagation(); grid.appScope.vm.scrollToParent(grid, row.entity)"
+                   aria-label="Refresh widget" style="pointer-events: auto">
+          <md-icon md-font-icon="icon-arrow-up-bold" class="s16"></md-icon> Jump to Parent
+          <md-tooltip  class="md-tooltip">Jump to immediate parent in the BOM hieararchy</md-tooltip>
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</div>

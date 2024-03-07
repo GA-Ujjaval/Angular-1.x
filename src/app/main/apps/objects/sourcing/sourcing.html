@@ -1,0 +1,111 @@
+<div id="setting" class="page-layout simple tabbed md-grey-100-bg" >
+    <!-- CONTENT HEADER -->
+    <div ng-class="(vm.sourcingName === 'Suppliers' || vm.sourcingName === 'Supplier Parts') ? 'header mg-accent-bg-custom-for-sup' : 'header mg-accent-bg-custom'" layout="row" layout-align="space-between center">
+      <div class="white-fg" layout="column" layout-align="start start">
+        <div class="h1" layout="row" layout-align="start center">
+          <md-icon md-font-icon="icon icon-factory" ng-if="vm.manufacturerType"></md-icon>
+          <md-icon md-font-icon="icon icon-truck" ng-if="!vm.manufacturerType"></md-icon>
+          <span>{{vm.sourcingName}}</span>
+        </div>
+        <div class="product-count secondary-text ">
+          <span> <strong> Total {{vm.sourcingName}}: {{vm.sourceCount}} </strong> </span>
+        </div>
+      </div>
+      <!-- <div layout="row" layout-align="start center">
+          <md-progress-circular id="create-progress" class="light-circular circular-center circular-center2" md-mode="indeterminate" ng-if="vm.progress" flex layout="row" layout-align="center">
+            </md-progress-circular> -->
+            <!-- <span ng-if="vm.progress" class="loading-products loading-products1">Loading {{vm.sourcingName}}...</span> -->
+      <!-- </div> -->
+      <div layout="row" layout-align="start start">
+        <div class="search search-width" layout="row" layout-align="start center" flex>
+          <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
+          <input ng-model="vm.keyword" class="search-input search-padding" type="text"
+                 placeholder="Search Database" flex ng-disabled="vm.readonly" ng-keypress="vm.changesearchtext($event, vm.sourcingName)">
+          <md-icon ng-click="vm.clearSearch(vm.sourcingName)" ng-show="vm.keyword" class="icon-close white-text close-search-icon">
+            <md-tooltip class="md-tooltip">clear search</md-tooltip>
+          </md-icon>
+        </div>
+        <div>
+          <md-menu class="search-settings " md-position-mode="target-left target">
+            <md-button class="white-fg " ng-click="$mdOpenMenu()" ng-disabled="vm.readonly">Create New
+            </md-button>
+            <md-menu-content width="2">
+              <md-menu-item>
+                <md-button ng-click="vm.createSourcing('Manufacturers')">
+                  Manufacturer
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="vm.createSourcing('Manufacturer Parts')">
+                  Manufacturer Part
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="vm.createSourcing('Suppliers')">
+                  Supplier
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="vm.createSourcing('Supplier Parts')">
+                  Supplier Part
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+
+          <md-menu class="search-settings " md-position-mode="target-left target">
+              <md-button class="white-fg " ng-click="$mdOpenMenu()" ng-disabled="vm.readonly">Import
+              </md-button>
+              <md-menu-content width="2">
+                <md-menu-item>
+                  <md-button ui-sref="app.objects.sourcing.sourcingimport({id:'manufacturers'})">
+                    Manufacturer
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ui-sref="app.objects.sourcing.sourceimport({id:'manufacturersparts'})">
+                    Manufacturer Part
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ui-sref="app.objects.sourcing.sourcingimport({id:'suppliers'})">
+                    Supplier
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ui-sref="app.objects.sourcing.sourceimport({id:'supplierparts'})">
+                    Supplier Part
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+        </div>
+      </div>
+    </div>
+    <!-- / CONTENT HEADER -->
+      <!-- CONTENT -->
+      <div class="content" flex>
+        <md-tabs md-dynamic-height md-selected="vm.selectedTabs">
+          <md-tab label="Manufacturers" ng-click="vm.tabSourcing('Manufacturers', true);">
+            <md-content class="content-full-width" ng-include="'app/main/apps/objects/sourcing/tabs/manufactures/manufactures.html'">
+            </md-content>
+          </md-tab>
+
+          <md-tab label="Manufacturer Parts" ng-click="vm.tabSourcing('Manufacturer Parts', true); vm.restoreState(vm.manufacturerPartsTableUiGrid, vm.manufacturerPartsId, vm.objectPageEnum.manufacturerPartsPage);">
+            <md-content class="content-full-width" ng-include="'app/main/apps/objects/sourcing/tabs/manufactureparts/manufactureparts.html'">
+            </md-content>
+          </md-tab>
+
+          <md-tab label="Suppliers" ng-click="vm.tabSourcing('Suppliers', true); vm.restoreState(vm.supplierTableUiGrid, vm.supplierId, vm.objectPageEnum.supplierPage);">
+            <md-content class="content-full-width" ng-include="'app/main/apps/objects/sourcing/tabs/suppliers/suppliers.html'">
+            </md-content>
+          </md-tab>
+
+          <md-tab label="Supplier Parts" ng-click="vm.tabSourcing('Supplier Parts', true); vm.restoreState(vm.supplierPartsTableUiGrid, vm.supplierPartsId, vm.objectPageEnum.supplierPartsPage);">
+            <md-content class="content-full-width" ng-include="'app/main/apps/objects/sourcing/tabs/supplierparts/supplierparts.html'">
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </div>
+      <!-- / CONTENT -->
+</div>

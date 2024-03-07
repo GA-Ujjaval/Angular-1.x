@@ -1,0 +1,71 @@
+<!-- DIALOG -->
+<md-dialog class="manufacturerForm-dialog" aria-label="New Task">
+
+  <form name="manufacturerForm" class="md-inline-form" novalidate>
+
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar ng-class="(vm.title === 'Create Supplier' || vm.title === 'Edit Supplier') ? 'md-accent-custom-for-sup md-tall-height' : 'md-accent-custom md-tall-height'" layout="column">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title margin-top-20">{{vm.title}}</span>
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <!-- DIALOG CONTENT -->
+    <md-dialog-content ms-scroll class="pl0 ml--10">
+      <!-- <div layout="row"> -->
+        <md-input-container class="md-icon-float md-block" flex>
+          <label>{{vm.sourcingType}} Name (Required)</label>
+          <md-icon></md-icon>
+          <input ng-model="vm.manufacturer.name" type="text" name="manufacturerName" required>
+          <div ng-messages="manufacturerForm.manufacturerName.$error" role="alert">
+            <div ng-message="required">
+              <span>Manufacturer name field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block" flex>
+          <label>Code</label>
+          <md-icon></md-icon>
+          <input ng-model="vm.manufacturer.code" type="text" name="code">
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block" flex>
+          <label>Description</label>
+          <md-icon></md-icon>
+          <input ng-model="vm.manufacturer.description" type="text" name="description">
+        </md-input-container>
+      <!-- </div> -->
+    </md-dialog-content>
+    <!-- / DIALOG CONTENT -->
+
+    <!-- DIALOG ACTIONS -->
+    <md-dialog-actions layout="row" layout-align="space-between center" ng-if="vm.button !== 'Save'">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.cteateManufacturer()" ng-class="vm.sourcingType === 'Supplier' ? 'send-button md-accent md-raised create-manufacture-btn-for-sup' : 'send-button md-accent md-raised create-manufacture-btn'" ng-disabled="manufacturerForm.$invalid || manufacturerForm.$pristine" aria-label="Create">
+          Create {{vm.sourcingType}}
+        </md-button>
+      </div>
+    </md-dialog-actions>
+
+    <md-dialog-actions layout="row" layout-align="space-between center" ng-if="vm.button === 'Save'">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.saveManufacturer()" ng-class="(vm.title === 'Create Supplier' || vm.title === 'Edit Supplier') ? 'send-button md-accent md-raised create-manufacture-btn-for-sup' : 'send-button md-accent md-raised create-manufacture-btn'" ng-disabled="manufacturerForm.$invalid || manufacturerForm.$pristine" aria-label="Create">
+          {{vm.button}}
+        </md-button>
+      </div>
+    </md-dialog-actions>
+    <!-- / DIALOG ACTIONS -->
+
+  </form>
+
+</md-dialog>
+<!-- / DIALOG -->

@@ -1,0 +1,24 @@
+<md-list>
+
+    <!-- ADD NEW MEMBER -->
+    <md-subheader class="md-no-sticky lable-bg">Impact Visualizer Settings</md-subheader>
+
+    <md-list-item class="item" ng-click="vm.CardWhereUsed()">
+        <!--<md-icon md-font-icon="icon-image-area" class="s18"></md-icon>-->
+        <p flex class="title" >Where Used</p>
+        <md-icon ng-show="vm.board.isWhereused" md-font-icon="icon-check" class="s18"></md-icon>
+    </md-list-item>
+
+   <!-- <md-list-item class="item" ng-click="vm.CardresolutionTasksTab()">
+        &lt;!&ndash;<md-icon md-font-icon="icon-image-area" class="s18"></md-icon>&ndash;&gt;
+        <p flex class="title" >Resolution Tasks</p>
+        <md-icon ng-show="vm.board.isResolutionTask" md-font-icon="icon-check" class="s18"></md-icon>
+    </md-list-item>-->
+
+    <md-list-item class="item" ng-click="vm.CardisRevModification()">
+        <!--<md-icon md-font-icon="icon-image-area" class="s18"></md-icon>-->
+        <p flex class="title" >Track Rev Modifications</p>
+        <md-icon ng-show="vm.board.isRevModification" md-font-icon="icon-check" class="s18"></md-icon>
+    </md-list-item>
+
+</md-list>

@@ -1,0 +1,5 @@
+<div
+  class="ui-grid-cell-contents delete-row"
+  title="TOOLTIP">
+  <md-icon ng-if="row.entity.id != 'R' && row.entity.id != 'M'" md-font-icon="icon-delete delete-row-icon" ng-click="grid.appScope.vm.deleteRow(row.entity.id)"></md-icon>
+</div>

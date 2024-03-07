@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "You can ask me anything! Try it!",
+        "action": "initiateChat",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "initiate_chat",
+            "parameters": {},
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {},
+            "lifespan": 2
+          },
+          {
+            "name": "initiate_chat_context",
+            "parameters": {},
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "Initiate Chat"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb"
+    }
+  ]
+}

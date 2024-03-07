@@ -1,0 +1,133 @@
+<div layout="row" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+    <!-- CONTENT -->
+    <div class="content">
+      <form name="basicinfoForm" novalidate>
+        <div layout-gt-sm="row" layout-align="start center">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>{{vm.sourceType}} Code</label>
+            <input class="md-input-height" type="text" aria-label="textbox" ng-model="vm.sourcingObjectData.code"
+                   ng-disabled="vm.readonly">
+          </md-input-container>
+
+          <md-input-container ng-class="{cstsetinput: vm.readonly}"
+                              class="md-default-theme flex-gt-sm md-icon-float md-block btm-border-color ml15 ml3"
+                              flex-gt-sm>
+            <label>Approved</label>
+            <md-select class="md-default-theme" ng-model="vm.sourcingObjectData.approved" ng-disabled="vm.readonly">
+              <md-option ng-repeat="option in vm.availabilityValues"
+                         value="{{option.value}}">{{option.text}}</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row" layout-align="start center">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Description</label>
+            <input class="md-input-height" type="text" ng-model="vm.sourcingObjectData.description"
+                   ng-disabled="vm.readonly">
+          </md-input-container>
+        </div>
+
+        <!-- <div layout-gt-sm="row" layout-align="start center">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Note</label>
+            <input class="md-input-height" type="text" ng-model="vm.sourcingObjectData.notes">
+          </md-input-container>
+        </div> -->
+
+        <div layout-gt-sm="row" layout-align="start center">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Contact Number</label>
+            <input class="md-input-height" type="text" aria-label="textbox" name="contactNumber"
+                   ng-model="vm.sourcingObjectData.contactNumber" ng-disabled="vm.readonly">
+          </md-input-container>
+
+          <md-input-container class="md-block ml3" flex-gt-sm>
+            <label>Website</label>
+            <input class="md-input-height" type="text" aria-label="textbox" name="website"
+                   ng-model="vm.sourcingObjectData.website" ng-disabled="vm.readonly">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row" layout-align="start center">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Address</label>
+            <input class="md-input-height" type="text" ng-model="vm.sourcingObjectData.address"
+                   ng-disabled="vm.readonly">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row" layout-align="start center" class="f-info-chip">
+          <md-chips ng-model="vm.sourcingObjectData.tags" flex-gt-sm placeholder="Type value for 'Tag' and hit 'Enter'"
+                    style="margin-bottom: 50px;" ng-disabled="vm.readonly">
+          </md-chips>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div layout="row" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+    <div layout="row" layout-align="space-between center" flex>
+      <div class="h4" layout-align="start start">
+        <md-icon md-font-icon="icon icon-history"></md-icon> &nbsp;
+        <span class="title">Object &nbsp;History</span>
+      </div>
+    </div>
+    <table class="simple" ms-responsive-table>
+      <thead>
+      <tr>
+        <th class="secondary-text">
+          <div class="table-header">
+            <span class="column-title">Created By</span>
+          </div>
+        </th>
+
+        <th class="secondary-text">
+          <div class="table-header">
+            <span class="column-title">Created Date</span>
+          </div>
+        </th>
+        <th class="secondary-text">
+          <div class="table-header">
+            <span class="column-title">Modified By</span>
+          </div>
+        </th>
+        <th class="secondary-text">
+          <div class="table-header">
+            <span class="column-title">Modified Date</span>
+          </div>
+        </th>
+        <!-- <th class="secondary-text">
+          <div class="table-header">
+            <span class="column-title">Revision Notes</span>
+          </div>
+        </th> -->
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <p layout-align="center">{{vm.createdBy}}</p>
+        </td>
+        <td>
+          <p layout-align="center">{{vm.createDate | date:'medium'}}</td>
+        <td>
+          <p layout-align="center">{{vm.modifiedBy}}</p>
+        </td>
+        <td>
+          <p layout-align="center">{{vm.modifiedDate | date:'medium'}}</p>
+        </td>
+        <!-- <td>
+            <p layout-align="center">{{vm.fuseObjectHistory.revisionNotes}}</p>
+          </td> -->
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

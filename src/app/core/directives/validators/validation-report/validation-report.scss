@@ -1,0 +1,29 @@
+validation-report {
+
+  .invalidation-message {
+    max-width: 180px;
+    font-size: 13px;
+    color: #ff0000;
+    position: absolute;
+    top: 35px;
+  }
+
+  input {
+    border-style: solid !important;
+    border-width: 0 0 1px 0 !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    padding-bottom: 1px !important;
+
+    &:focus {
+      padding-bottom: 0 !important;
+      border-width: 0 0 2px 0 !important;
+      border-color: rgb(45, 50, 62) !important;
+    }
+  }
+
+  .ng-invalid.ng-dirty {
+    padding-bottom: 0 !important;
+    border-width: 0 0 2px 0 !important;
+    border-color: rgb(213, 0, 0) !important;
+  }
+}

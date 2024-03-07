@@ -1,0 +1,517 @@
+<div id="documents" class="page-layout simple tabbed right-sidenav md-grey-100-bg" layout="row">
+
+  <!-- CENTER -->
+  <div class="center content" layout="column" flex>
+
+    <!-- CONTENT HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between center">
+      <div class="white-fg min-width-for-documents" layout="column" layout-align="start start">
+        <div class="h1" layout="row" layout-align="start center">
+          <md-icon md-font-icon="icon-folder"></md-icon>
+          <span>Documents</span>
+        </div>
+        <div class="margin-left-35 secondary-text" ng-class="{'margin-top-5': vm.searchFlag}">
+          <span> Total documents: </span>
+          <span> {{vm.documentsCount}} </span>
+          <span ng-if="vm.documentsCount === '' ">--</span>
+        </div>
+        <div ng-if="!vm.searchFlag" class="margin-left-35" layout="row">
+          <span class="margin-right-10 margin-top-5 secondary-text"> Items loaded from database: </span>
+          <md-select class="margin-0 object-default-size"
+                     ng-change="vm.getallfuseobject(vm.objectsDefaultSize);vm.defaultObjectsSize(vm.objectsDefaultSize)"
+                     ng-model="vm.objectsDefaultSize" aria-label="Defualt Size">
+            <md-option value="0">0</md-option>
+            <md-option value="15">15</md-option>
+            <md-option value="25">25</md-option>
+            <md-option value="50">50</md-option>
+            <md-option value="100">100</md-option>
+            <md-option value="500">500</md-option>
+            <md-option value="1000">1000</md-option>
+            <md-option value="1500">1500</md-option>
+            <md-option value="2000">2000</md-option>
+            <md-option value="All">All</md-option>
+          </md-select>
+          <md-icon md-font-icon="icon-question-mark-circle icon-cursor" class="s16"
+                   ng-click="vm.openSelectObjectSize()">
+            <md-tooltip class="md-tooltip">Click here for more info</md-tooltip>
+          </md-icon>
+        </div>
+      </div>
+      <!-- Chips -->
+      <div id="chips-content" layout="row" flex="" layout-align="end center">
+        <div class="chips-div">
+          <!-- Firt Row -->
+          <div layout="row" layout-align="end center" class="flex-div-wrap">
+            <div class="flex-div">
+              <div ng-repeat="record in vm.getAllRecords()"
+                   ng-show="record.isShown()">
+                <div ng-if="record.type === 'text'" class="chip-with-box">
+                  <div class="cst-chips" ng-class="{'chip-glow': vm.checkGlow(record)}"
+                       ng-click="vm.toggleChipDetails(null, record)">
+                  <span class="span-part-name span-dotted">{{record.displayName}}:
+                    <span ng-if="!(record.displayName === 'Created Date' ||
+                     record.displayName === 'Modified Date')">{{ record.value }}</span>
+                    <span ng-if="(record.displayName === 'Created Date' ||
+                     record.displayName === 'Modified Date')">{{ record.value.date | date : "MMM dd, y" }}
+                      {{record.value.condition && record.value.date ? (record.value.condition === 'after' ? 'After(including)' :
+                      record.value.condition === 'on' ? 'On' : 'Before(including)') : ''}}</span>
+                  </span>
+                    <span class="dwn-arw"></span>
+                    <md-menu md-offset="0 25" md-position-mode="target-left target">
+                      <md-icon class="chips-close" ng-click="$mdOpenMenu(); $event.stopPropagation()">
+                        &times;
+                      </md-icon>
+                      <md-menu-content width="2">
+                        <md-menu-item>
+                          <md-button ng-click="vm.resetAdvancedSearchChip(record); vm.saveSearchPresetState(); $event.stopPropagation()">
+                            Reset Value
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="vm.handleCriterionRemoval(record); vm.saveSearchPresetState(); $event.stopPropagation(); record.close()">
+                            Remove Search Criteria
+                          </md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                    <md-tooltip class="md-tooltip" ng-if="!(record.displayName === 'Created Date' ||
+                     record.displayName === 'Modified Date')">{{record.displayName}} : {{record.value}}</md-tooltip>
+                    <md-tooltip class="md-tooltip" ng-if="(record.displayName === 'Created Date' ||
+                     record.displayName === 'Modified Date')">{{record.displayName}} : {{record.value.date | date : "MMM dd, y"}}
+                      {{record.value.condition && record.value.date ? (record.value.condition === 'after' ? 'After(including)' :
+                      record.value.condition === 'on' ? 'On' : 'Before(including)') : ''}}</md-tooltip>
+                  </div>
+                  <div class="comment-box" ng-if="record.isOpen()">
+                    <input type="text" class="comment-text"
+                           ng-model="record.value"
+                           required/>
+                    <button class="md-button md-default-theme md-ink-ripple btn-cmt-box active" type="button"
+                            ng-click="vm.saveSearchPresetState(); vm.callAdvancedSearch(false); record.close()"
+                            aria-label="Category Update">update
+                    </button>
+                    <button class="md-button md-default-theme md-ink-ripple btn-cmt-box" type="button"
+                            ng-click="record.close()"
+                            aria-label="Category Close">close
+                    </button>
+                  </div>
+                  <div class="comment-box" ng-if="record.isOpen() && (record.displayName === 'Created Date' || record.displayName === 'Modified Date')">
+                    <md-input-container style="width: 95%;">
+                      <label>Condition</label>
+                      <md-select ng-model="record.value.condition" style="font-style: italic;">
+                        <md-option ng-selected="record.value.condition === 'before' || !record.value.condition" ng-value="'before'">
+                          Before(including)
+                        </md-option>
+                        <md-option ng-selected="record.value.condition === 'after'" ng-value="'after'">
+                          After(including)
+                        </md-option>
+                        <md-option ng-selected="record.value.condition === 'on'" ng-value="'on'">
+                          On
+                        </md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-datepicker flex format="YYYY.MM.DD" min-view="year" max-view="month" start-view="month"
+                                   ng-init="newDate = (record.value.date | toDate); record.value.date = newDate.toISOString();"
+                                   ng-model="newDate" ng-change="record.value.date = newDate.toISOString();">
+                    </md-datepicker>
+                    <button class="md-button md-default-theme md-ink-ripple btn-cmt-box active" type="button"
+                            ng-click="vm.callAdvancedSearch(false); vm.saveSearchPresetState(); record.close()"
+                            aria-label="Category Update">update
+                    </button>
+                    <button class="md-button md-default-theme md-ink-ripple btn-cmt-box" type="button"
+                            ng-click="record.close()"
+                            aria-label="Category Close">close
+                    </button>
+                  </div>
+                </div>
+                <div ng-if="record.type === 'boolean'">
+                  <div class="bom-chip" ng-class="{'chip-glow': record.value !== null}">
+                    <span ng-click="vm.toggleSelectChips(record);" class="chip-name">{{record.displayName}}</span>
+                    <md-select id="{{record.id}}" ng-model="record.value" class="cst-chips"
+                               md-on-close="vm.toggleChipDetails(null, record)"
+                               md-on-open="vm.toggleChipDetails(null, record)"
+                               aria-label="record.displayName"
+                               ng-change="vm.saveSearchPresetState(); vm.callAdvancedSearch(false)">
+                      <md-option ng-repeat="option in record.options"
+                                 ng-value="option.value" >
+                        {{option.text}}
+                      </md-option>
+                    </md-select>
+                    <md-menu md-offset="0 25" md-position-mode="target-left target">
+                      <md-icon class="chips-close" ng-click="$mdOpenMenu(); $event.stopPropagation()">
+                        &times;
+                      </md-icon>
+                      <md-menu-content width="2">
+                        <md-menu-item>
+                          <md-button ng-click="vm.resetAdvancedSearchChip(record); vm.saveSearchPresetState(); $event.stopPropagation()">
+                            Reset Value
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="vm.handleCriterionRemoval(record); vm.saveSearchPresetState(); $event.stopPropagation(); record.close()">
+                            Remove Search Criteria
+                          </md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                    <md-tooltip class="md-tooltip">{{record.displayName}} : {{record.value}}</md-tooltip>
+                  </div>
+                </div>
+
+                <div ng-if="record.type === 'dropDown'">
+                  <div class="bom-chip" ng-class="{'chip-glow': record.value.length}">
+                    <span class="chip-name" ng-click="vm.toggleSelectChips(record);">{{record.displayName}}: </span>
+                    <md-select id="{{record.id}}" ng-model="record.value" class="cst-chips md-no-underline"
+                               md-on-close="vm.toggleChipDetails(null, record)"
+                               multiple aria-label="record.displayName"
+                               md-on-open="record.getOptions(); vm.toggleChipDetails(null, record); vm.setScroll(record.value)">
+                      <md-select-header id="cat-chip" class="demo-select-header sticky-search-document">
+                        <input ng-model="record.searchCondition" type="search" force-auto-focus ng-keydown="$event.stopPropagation()"
+                               placeholder="{{record.searchPlaceholder}}"
+                               class="demo-header-searchbox md-text">
+                      </md-select-header>
+                      <md-progress-circular md-mode="indeterminate" ng-if="record.loadingOptions" md-diameter="20">
+                      </md-progress-circular>
+                      <md-optgroup label="record.value">
+                        <md-option ng-value="option.value"
+                                   ng-repeat="option in record.options | filter:{text: record.searchCondition} | orderBy:'-text':true">
+                          <div layout="row" layout-align="space-between center" class="displayAvatarInChip">
+                            <md-chip-template class="member-chip" ng-if="option.hasAvatar">
+                              <div class="avatar-circle">
+                                <span class="initials">{{vm.defaultAvatar(option.text)}}</span>
+                              </div>
+                            </md-chip-template>
+                            {{ option.text }}
+                          </div>
+                        </md-option>
+                      </md-optgroup>
+                      <div class="sticky-buttons-part" ng-if="record.isOpen()">
+                        <button class="md-button md-default-theme md-ink-ripple btn-cmt-box active" type="button"
+                                ng-click="vm.saveSearchPresetState(); vm.callAdvancedSearch(false);"
+                                aria-label="DropDown Update">update
+                        </button>
+                        <button class="md-button md-default-theme md-ink-ripple btn-cmt-box" type="button"
+                                ng-click="vm.closeDropDownChip()"
+                                aria-label="DropDown Close">close
+                        </button>
+                      </div>
+                    </md-select>
+                    <md-menu md-offset="0 25" md-position-mode="target-left target">
+                      <md-icon class="chips-close" ng-click="$mdOpenMenu(); $event.stopPropagation()">
+                        &times;
+                      </md-icon>
+                      <md-menu-content width="2">
+                        <md-menu-item>
+                          <md-button ng-click="vm.resetAdvancedSearchChip(record); vm.saveSearchPresetState(); $event.stopPropagation()">
+                            Reset Value
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="vm.handleCriterionRemoval(record); vm.saveSearchPresetState(); $event.stopPropagation(); record.close()">
+                            Remove Search Criteria
+                          </md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                    <md-tooltip class="md-tooltip">{{record.displayName}} : {{record.getViewValue()}}</md-tooltip>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Chips -->
+
+      <!-- <md-progress-circular class="circular-center circular-center1" id="create-progress" md-mode="indeterminate" ng-if="vm.progress" flex layout="row" layout-align="center">
+      </md-progress-circular>
+      <span ng-if="vm.progress" class="loading-products">Loading Documents...</span> -->
+
+      <div id="advance-search" layout="row" layout-align="start start">
+        <div class="search search-width" layout="row" layout-align="end center">
+          <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
+          <div>
+            <input ng-model="vm.keyword" ng-change="vm.saveSearchPresetState()"
+                   class="search-input search-padding" type="text"
+                   placeholder="Search Database"
+                   flex ng-keypress="vm.changesearchtext($event)">
+            <md-icon ng-click="vm.clearSearch()" ng-show="vm.keyword" class="icon-close white-text close-search-icon">
+              <md-tooltip class="md-tooltip">clear search</md-tooltip>
+            </md-icon>
+
+            <div class="advanced-search-container set-margin">
+              <div>
+                <md-select ng-model="vm.selectedValue" md-selected-text="vm.text" class="advanced-select"
+                           md-on-close="vm.search = '';"
+                           data-md-container-class="selectdemoSelectHeader"
+                           multiple
+                           md-on-open="vm.toggleChipDetails()"
+                           aria-label="Advanced Search">
+                  <md-select-header id="advanced-search-header" class="demo-select-header sticky-search-document">
+                    <input ng-model="vm.search" type="search" force-auto-focus ng-keydown="$event.stopPropagation()"
+                           placeholder="Search for attributes.." class="demo-header-searchbox md-text">
+                  </md-select-header>
+                  <div ng-repeat="section in vm.advancedSearchSections" ng-if="vm.isSectionEmpty(section.records, vm.search)">
+                    <md-select-header id="advanced-search-section-header" class="demo-select-header sticky-section-document" ng-show="section.records.length > 0">
+                      <span><b><font size="+0">{{section.displayName}}</font></b></span>
+                    </md-select-header>
+                    <md-optgroup>
+                      <md-option ng-repeat="record in section.records | filter:{displayName: vm.search}"
+                                 ng-click="vm.toggleAdvancedSearch(record); record.toggle(); record.clean(); vm.saveSearchPresetState(); "
+                                 ng-value="record.id">
+                        {{record.displayName}}
+                      </md-option>
+                    </md-optgroup>
+                  </div>
+                </md-select>
+                <md-tooltip class="md-tooltip multiline-tooltip-templates">
+                  <div>User can search objects from the entire database using one or more search criteria.</div>
+                  <div>When defining multiple search criteria, AND operator is used between the criteria.</div>
+                </md-tooltip>
+              </div>
+              <mf-search-preset class="search-preset-icon"
+                                ng-click="vm.toggleChipDetails()"
+                                on-preset-applied="vm.initApplyPreset(preset, true)"
+                                get-preset-data="vm.getSearchState()"
+                                tab-name="vm.objectPageEnum.documentsPage"
+                                object-type="vm.fuseType.documents"
+                                sections="vm.advancedSearchSections"></mf-search-preset>
+            </div>
+          </div>
+        </div>
+        <div>
+          <md-button class="white-fg" ng-click="vm.openDocumentDialog($event)" ng-disabled="vm.readonly">Create New
+          </md-button>
+          <md-button class="white-fg" ui-sref="app.objects.documents.import({id:'documents'})"
+                     ng-disabled="vm.readonly">
+            Import
+          </md-button>
+        </div>
+      </div>
+    </div>
+    <!-- / CONTENT HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card" layout="column" flex>
+
+      <!-- CONTENT -->
+
+      <div class="toolbar toolbar-container">
+
+        <div class="buttons-switch" layout-align="column" flex="30">
+
+          <md-switch class="latest-version-switch latest-version-switch-doc" ng-true-value="true" ng-false-value="false"
+                     ng-model="vm.isLatest"
+                     ng-change="vm.onChangeLatest()" aria-label="latest switch">
+          </md-switch>
+
+          <span class="latest-version-text latest-version-text-doc">Show only latest revision</span>
+
+        </div>
+
+        <div class="clear-filter-text align-left clear-filter-part" ng-if="vm.clearSearchButton">
+          <md-button id="clear-filters" class="clear-filter-button" aria-label="clear-filerts-documents"
+                     ng-click="vm.fuseUtils.clearFilters(vm.documentsTableUiGrid)">
+            <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+          </md-button>
+          <label for="clear-filters" class="clear-filter-label">
+            <span>Clear current sorts, filters and pins</span>
+          </label>
+        </div>
+        <div class="downloadProgressBox" ng-class="{'downloadAllWithSort': !vm.clearSearchButton}" layout="row" ng-if="vm.downloadAllProgress" layout-align="space-between">
+          <md-progress-circular id="download-circular" md-mode="indeterminate" class="md-accent md-raised" md-diameter="30">
+          </md-progress-circular>
+          <span class="downloadProgressText">Download All in progress...</span>
+        </div>
+
+        <div class="toolbar-buttons" layout-align="column" flex="70">
+
+          <clipboard-floating-icon is-card="false" is-config-enabled="vm.configurationSettings"></clipboard-floating-icon>
+
+          <md-button class="button-table-edit" ng-click="vm.editTable($event, vm.objectPageEnum.documentsPage)">
+            <md-icon class="icon-table-edit"></md-icon>
+            <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+          </md-button>
+
+          <md-menu md-position-mode="left bottom">
+
+            <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+              <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+              <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+            </md-button>
+
+            <md-menu-content>
+              <md-menu-item>
+                <md-menu class="menu-item-documents-download">
+                  <md-button class="menu-item-documents-download-button" ng-click="$mdMenu.open()">
+                    <span>Current page</span>
+                    <md-icon md-font-icon="icon-chevron-right s30"></md-icon>
+                  </md-button>
+                  <md-menu-content>
+                    <md-menu-item>
+                      <md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.documentsTableUiGrid)">
+                        CSV
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button
+                        ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.documentsTableUiGrid.grid, vm.documentsTableOptions)">
+                        PDF
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+              <md-menu-item>
+                <md-menu class="menu-item-documents-download">
+                    <md-button class="menu-item-documents-download-button" ng-click="$mdMenu.open()">
+                      <span>All Pages</span>
+                      <md-icon md-font-icon="icon-chevron-right s30"></md-icon>
+                    </md-button>
+                  <md-menu-content>
+                    <md-menu-item>
+                      <md-button ng-click="vm.downloadAll('csv')">
+                        CSV
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="vm.downloadAll('pdf')">
+                        PDF
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+            </md-menu-content>
+
+          </md-menu>
+
+          <md-button class="button-print"
+                     ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.documentsTableUiGrid.grid, vm.documentsTableOptions)">
+            <md-icon class="icon-printer"></md-icon>
+            <md-tooltip class="md-tooltip">Print table</md-tooltip>
+          </md-button>
+
+          <md-menu>
+            <md-button class="md-icon-button btn-hvr" ng-click="$mdOpenMenu()">
+              <md-icon md-font-icon="icon-dots-horizontal" class="s34"></md-icon>
+              <md-tooltip class="md-tooltip">More Actions</md-tooltip>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-disabled="!vm.getSelectedrows().length" ng-click="vm.addToClipBoard()">
+                  Add Selected to Clipboard
+                </md-button>
+              </md-menu-item>
+              <md-menu-item ng-show="!vm.promoteDemote && vm.manualRelease">
+                <md-button ng-disabled="!vm.getSelectedrows().length" ng-click="vm.releaseItemsBulky('Released')">
+                  Release Selected Items
+                </md-button>
+              </md-menu-item>
+              <md-menu-item ng-show="vm.promoteDemote">
+                <md-menu style="margin: 0;">
+                  <md-button style="margin: 0; padding: 0 16px 0 16px; font-weight: 400; font-size: 15px; text-align: center; width: 100%; height: 100%; text-transform: none;"  ng-click="!vm.getSelectedrows().length && $mdMenu.open()" ng-disabled="!vm.getSelectedrows().length"
+                             id="step2">Change Status of Selected Items
+                  </md-button>
+                  <md-menu-content width="2" >
+                    <md-menu-item>
+                      <md-button ng-click="vm.releaseItemsBulky('InDevelopment')">
+                        InDevelopment
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-hide="!vm.manualRelease">
+                      <md-button ng-click="vm.releaseItemsBulky('Released')">
+                        Released
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="vm.releaseItemsBulky('Obsolete')">
+                        Obsolete
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+              <md-menu-item>
+                <div
+                     ng-style="{'padding': '0', 'margin': '0', 'width': '100%', 'height': '100%'}">
+                  <md-button ng-disabled="!vm.isCompareEnable()"
+                             ng-click="vm.compareItems()"
+                             ng-style="{'text-transform' : 'none', 'font-weight' : '400', 'font-size': '15px', 'padding': '0', 'margin': '0' , 'width': '100%', 'height': '100%'}">
+                    &nbsp &nbsp Compare Selected Items
+
+                  </md-button>
+                </div>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-disabled="!vm.getSelectedrows().length" ng-click="vm.deleteItems()">
+                  Delete Selected Items
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+
+        </div>
+
+      </div>
+
+      <!-- / CONTENT -->
+
+
+      <div class="content fullpage-datatable">
+        <!-- <div class="progress-bar" layout="row" layout-sm="column" layout-align="space-around" ng-if="!vm.progress">
+          <md-progress-circular md-mode="indeterminate" class="md-accent md-raised"></md-progress-circular>
+          <span class="loading-products">Loading Documents...</span>
+        </div> -->
+        <div class="ps-rel" id="grid-documents" ui-grid="vm.documentsTableOptions" ui-grid-move-columns
+             ui-grid-save-state ui-grid-tree-view ui-grid-pinning
+             ui-grid-resize-columns
+             ui-grid-selection
+             ui-grid-exporter
+             ui-grid-pagination
+             ui-grid-auto-resize
+             class="grid">
+
+
+          <div class="watermark" ng-show="!vm.documentsTableOptions.data.length && !vm.progress">No data available</div>
+          <div class="progress-bar loader-circle-text" layout="row" layout-sm="column" layout-align="space-around"
+               ng-if="vm.progress">
+            <md-progress-circular md-mode="indeterminate" class="md-accent md-raised"></md-progress-circular>
+            <span class="loading-products">Loading Documents...</span>
+          </div>
+          <no-results-found grid-api="vm.documentsTableUiGrid"
+                            grid-options="vm.documentsTableOptions"></no-results-found>
+
+        </div>
+
+      </div>
+      <div ng-if="vm.downloadOptions.data" style="display: none;" class="content fullpage-datatable">
+        <div class="ps-rel" id="grid-parts" ui-grid="vm.downloadOptions"
+             ui-grid-move-columns ui-grid-save-state
+             ui-grid-tree-view ui-grid-pinning
+             ui-grid-selection
+             ui-grid-resize-columns
+             ui-grid-exporter
+             ui-grid-pagination
+             ui-grid-auto-resize
+             class="grid">
+
+
+          <div class="watermark" ng-show="!vm.downloadOptions.data.length && !vm.progress">No data available</div>
+          <div class="progress-bar loader-circle-text" layout="row" layout-sm="column" layout-align="space-around"
+               ng-if="vm.progress">
+            <md-progress-circular md-mode="indeterminate" class="md-accent md-raised  "></md-progress-circular>
+            <span class="loading-products">Loading Parts...</span>
+          </div>
+          <no-results-found ng-if="vm.downloadOptions.data.length" grid-api="vm.downloadTableGrid" grid-options="vm.downloadOptions"></no-results-found>
+        </div>
+
+      </div>
+
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

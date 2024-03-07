@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "id": "e6f46cabfeb74852b6158ed8a0056fa4",
+            "name": "API.AI Bot",
+            "avatar": "assets/images/avatars/Shauna.jpg",
+            "status": "online",
+            "mood": "I am Intelligent. Artificially.",
+            "unread": null,
+            "lastMessage": {
+                "who": "contact",
+                "message": "Click to ask me anything!",
+                "time": "2016-07-01T09:17:47.931Z"
+            }
+        }
+    ]
+}

@@ -1,0 +1,118 @@
+{
+  "data": {
+    "cardTypes":[
+      {
+        "name": "CR",
+        "id": "c6f3f5aee4974d27862e7dc2c483c3df"
+      },
+      {
+        "name": "CO",
+        "id": "c6f3f5aee4974d27862e7dc2c483c3dg"
+      },
+      {
+        "name": "Standard",
+        "id": "c6f3f5aee4974d27862e7dc2c483c3dh"
+      }
+    ],
+    "visualTypes":[
+      {
+        "id": "fa4c7ee86e994582a6a999fa3c960f62",
+        "name": "Revision change",
+        "color" : "blue"
+      },
+      {
+        "id": "fa4c7ee86e994582a6a999fa3c960f63",
+        "name": "Assembly change",
+        "color" : null
+      }
+    ],
+    "types": [
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f62",
+        "name": "Switch",
+        "color": "red"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f63",
+        "name": "Connector",
+        "color": "blue"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f64",
+        "name": "MOSFET",
+        "color": "orange"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f65",
+        "name": "LED",
+        "color": "green"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f66",
+        "name": "Assembly",
+        "color": "yellow"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f67",
+        "name": "Mechanical",
+        "color": "brown"
+      },
+      {
+        "id": "da4c7ee86e994582a6a999fa3c960f68",
+        "name": "Resistor",
+        "color": "purple"
+      }
+    ],
+    "impactTypes": [
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5c",
+        "name": "Rev Change",
+        "color": "#00aaf8",
+        "colorSelected": ""
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5d",
+        "name": "Add",
+        "color": "#50c881"
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5e",
+        "name": "Remove",
+        "color": "#ff7475"
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5f",
+        "name": "Change",
+        "color": "#fff16e"
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5g",
+        "name": "Object name change",
+        "color": "#C8C8C6"
+      },
+      {
+        "id": "572afa0ab1b64add98604e04f0dc8e5h",
+        "name": "Initial Release",
+        "color": "#00aaf8"
+      }
+    ],
+    "stateTypes": [
+      {
+        "id": "bee063c4a226486f84dbc13ad26e9543",
+        "name": "In Design",
+        "color": "red"
+      },
+      {
+        "id": "bee063c4a226486f84dbc13ad26e9544",
+        "name": "Released",
+        "color": "green"
+      },
+      {
+        "id": "bee063c4a226486f84dbc13ad26e9545",
+        "name": "Unreleased",
+        "color": "blue"
+      }
+    ]
+  }
+
+}

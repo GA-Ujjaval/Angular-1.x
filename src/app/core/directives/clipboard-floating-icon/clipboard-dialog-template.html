@@ -1,0 +1,46 @@
+<md-toolbar class="md-accent clipboard-header-toolbar md-tall-height" layout="column" ng-class="vm.params.isCard ? 'md-'+vm.params.color+'-bg' : ''">
+
+  <!-- TOOLBAR TOP -->
+  <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+    <span class="title margin-top-20">Clipboard</span>
+    <md-progress-circular md-mode="indeterminate" ng-if="vm.params.isCard && vm.cardProgress">
+    </md-progress-circular>
+    <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+      <md-icon md-font-icon="icon-close"></md-icon>
+    </md-button>
+  </div>
+
+</md-toolbar>
+
+
+<div id="grid-clipboard" ui-grid="vm.clipboardTableOptions"
+     ui-grid-move-columns
+     ui-grid-save-state
+     ui-grid-pinning
+     ui-grid-resize-columns
+     ui-grid-exporter
+     ui-grid-auto-resize
+     ui-grid-edit
+     class="grid">
+
+  <!--<div class="watermark" ng-show="!vm.partTableOptions.data.length">No data available</div>-->
+
+</div>
+
+<div>
+  <md-button ng-if="!vm.params.isBom" ng-click="vm.removeAllItems()" ng-class="vm.params.isCard ? 'md-'+vm.params.color+'-bg' : ''"
+             class="md-accent md-raised clipboard-cancel-button">CLEAR ALL
+  </md-button>
+  <md-button ng-if="vm.params.isBom" ng-click="vm.closePopup()" class="md-accent md-raised clipboard-cancel-button">
+    CANCEL
+  </md-button>
+  <md-button ng-if="vm.params.isBom" ng-click="vm.addClipboardToBom()"
+             class="md-accent md-raised clipboard-export-button">ADD PARTS TO BILL OF MATERIAL
+  </md-button>
+  <md-button ng-if="vm.params.isCard" ng-click="vm.closePopup()"  ng-class="vm.params.isCard ? 'md-'+vm.params.color+'-bg' : ''" class="md-accent md-raised clipboard-cancel-button">
+    CANCEL
+  </md-button>
+  <md-button ng-if="vm.params.isCard" ng-click="vm.showConfirmIsUsed()"
+             class="md-accent md-raised clipboard-export-button"  ng-class="vm.params.isCard ? 'md-'+vm.params.color+'-bg' : ''" ng-disabled="vm.cardProgress">ADD AS AFFECTED OBJECTS
+  </md-button>
+</div>

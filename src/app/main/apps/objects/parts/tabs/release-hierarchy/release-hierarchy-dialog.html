@@ -1,0 +1,76 @@
+<md-dialog id="hierarchy-release">
+  <form ng-cloak>
+
+    <md-toolbar class="md-accent">
+
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title margin-top-17">{{vm.releaseHierarchyFlag ? 'Hierarchical' : ''}} {{vm.statusText}}</span>
+
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+
+    </md-toolbar>
+
+    <md-dialog-content class="padding-10">
+      <div class="md-dialog-content">
+
+        <span class="secondary-text">{{vm.noteText}}</span><br/>
+
+        <div ng-if="vm.progress" >
+          <md-progress-circular class="download-loader md-accent md-raised"></md-progress-circular>
+        </div>
+
+        <md-list class="margin-top-20">
+<!--          <md-list-item class="margin-bottom-20"  ng-if="!vm.releaseHierarchyFlag">-->
+<!--            <md-checkbox aria-label="checkbox" ng-disabled="vm.releaseHierarchyFlag" ng-click="vm.checkAll()"-->
+<!--                         ng-model="vm.releaseHierarchyFlag" ng-model-options="{ updateOn: 'false' }">-->
+<!--            </md-checkbox>-->
+<!--            <div layout="row" class="secondary-text">Select All (In Development Objects)</div>-->
+<!--          </md-list-item>-->
+
+          <div layout="row" layout-align="start-center" ng-repeat="item in vm.releaseHierarchy"
+               class="margin-left-{{20*item.level}}" ng-show="!vm.checkCollapsed(item.ancestors)">
+
+            <md-icon ng-click="vm.toggleReleaseHierarchy(item)"
+                     ng-show="item.parent && item.collapsed"
+                     class="margin-5 hierarchy-cursor" md-font-icon="icon-plus-box"></md-icon>
+
+            <md-icon ng-click="vm.toggleReleaseHierarchy(item)"
+                     ng-show="item.parent && !item.collapsed"
+                     class="margin-5 hierarchy-cursor" md-font-icon="icon-minus-box"></md-icon>
+
+            <md-list-item class="margin-left-{{!item.parent ? 35 : 0}}">
+
+              <md-checkbox ng-disabled="!vm.releaseEditsHierarchyFlag" ng-change="vm.changeCheckbox(item)" class="no-margin" aria-label="checkbox" ng-model="item.selected">
+              </md-checkbox>
+
+              <md-icon ng-if="item.objectType === 'parts'" class="margin-5" md-font-icon="icon-cog"></md-icon>
+              <md-icon ng-if="item.objectType === 'products'" class="margin-5" md-font-icon="icon-cube-outline"></md-icon>
+              <md-icon ng-if="item.objectType === 'documents'" class="margin-5" md-font-icon="icon-folder"></md-icon>
+              <div layout="row" class="secondary-text" ng-style="item.disabledSelect && {'font-style':'italic'}" >{{item.displayName}}</div>
+
+            </md-list-item>
+          </div>
+
+        </md-list>
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="space-between" class="object-size">
+
+      <md-button class="cancel-release" ng-click="vm.closeDialog()">
+        Cancel
+      </md-button>
+
+      <md-button ng-disabled="vm.progress"
+                 class="md-accent md-raised" ng-click="vm.closeDialog(true)">
+        Change Status
+      </md-button>
+
+    </md-dialog-actions>
+
+  </form>
+</md-dialog>

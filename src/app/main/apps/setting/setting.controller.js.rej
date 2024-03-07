@@ -1,0 +1,26 @@
+diff a/src/app/main/apps/setting/setting.controller.js b/src/app/main/apps/setting/setting.controller.js	(rejected hunks)
+@@ -858,20 +858,22 @@
+     }
+ 
+     function getAttributesList() {
+-
++      vm.progressCustomAttribute = true;
+       if (vm.sessionData.proxy == true) {
+         var params = {
+           customerId: vm.sessionData.customerAdminId
+         };
+       }
++      vm.progress = false;
+ 
+       CustomerService.addNewMember('GET', hostUrlDevelopment.test.getattributeslist, params, '', headers)
+         .then(function(response) {
+           //For Progress Loader
+-          vm.progress = false;
++          vm.progress = true;
+           switch (response.code) {
+             case 0:
+               vm.attribute = response.data;
++              vm.progress = false;
+               break;
+             case 4008:
+               //console.log(vm.error.er4008);

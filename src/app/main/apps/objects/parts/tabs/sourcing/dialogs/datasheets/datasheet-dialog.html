@@ -1,0 +1,163 @@
+<md-dialog class="task-dialog" aria-label="New Task">
+  <md-toolbar class="md-accent md-hue-2">
+    <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+
+      <div class="title">
+        <span>Attachments</span>
+      </div>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+        <md-icon md-svg-src="assets/angular-material-assets/img/icons/ic_close_24px.svg"
+                 aria-label="Close dialog"></md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content ms-scroll>
+    <div class="sections">
+
+      <div class="attachments">
+
+        <div class="section-header" layout="row" layout-align="start center">
+          <i class="icon-attachment s18"></i>
+          <span class="section-title">Attachments</span>
+        </div>
+        <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+        </md-progress-circular>
+        <div class="section-content">
+
+          <div class="attachment" ng-hide="vm.Manufactureattachments.length > 0">
+            <h3>No attachment available.</h3>
+          </div>
+          <div class="attachment" ng-repeat="item in vm.Manufactureattachments" ng-switch="item.type">
+
+            <div ng-switch-when="image" layout="row" class="margin-top-10">
+
+              <div class="attachment-preview md-whiteframe-2dp"
+                   ng-style="{'background-image': 'url({{item.src}})'}">
+              </div>
+
+              <div class="attachment-content margin-left-10" layout="column">
+
+                <div layout="row" layout-align="start center">
+                  <span class="attachment-name"><a ng-href="{{item.src}}" download="{{item.name}}"
+                                                   target="__blank">{{item.name}}</a></span>
+                  <i ng-if="vm.card.idAttachmentCover === item.id"
+                     class="icon-star yellow-700-fg attachment-is-cover s18"></i>
+                </div>
+
+                <span class="attachment-time">{{item.time | date:'medium'}}</span>
+
+                <md-menu>
+
+                  <md-button class="md-raised attachment-actions-button"
+                             ng-click="$mdOpenMenu($event)" aria-label="attachment actions">
+                                            <span layout="row" layout-align="center center">
+                                                <span translate="SB.ACTIONS">Actions</span>
+                                                <i class="icon-chevron-down s20"></i>
+                                            </span>
+                  </md-button>
+
+                  <md-menu-content>
+                    <a ng-href="{{item.src}}" download="{{item.name}}" target="__blank">
+                      <md-menu-item>
+                        <md-button aria-label="Download Attachment" translate translate-attr-aria-label="">
+                          <span translate="">Download Attachment</span>
+                        </md-button>
+                      </md-menu-item>
+                    </a>
+                    <md-menu-item>
+                      <md-button ng-click="vm.removeAttachment(item)"
+                                 aria-label="Remove Attachment"
+                                 translate
+                                 translate-attr-aria-label="SB.REMOVE_ATTACHMENT">
+                        <span translate="SB.REMOVE_ATTACHMENT">Remove Attachment</span>
+                      </md-button>
+                    </md-menu-item>
+
+                  </md-menu-content>
+
+                </md-menu>
+              </div>
+            </div>
+
+            <div ng-switch-when="link" layout="row" class="margin-top-10">
+              <div class="attachment-preview md-whiteframe-2dp width-50 height-50" layout="row"
+                   layout-align="center center">
+                <!--<span translate="SB.LINK">LINK</span>-->
+                <img src="assets/images/scrumboard/button file.png"/>
+              </div>
+              <div class="attachment-content" layout="column">
+                <span class="attachment-url"><a ng-href="{{item.src}}" download="{{item.name}}"
+                                                target="__blank">{{item.name}}</a></span>
+                <span class="attachment-time">{{item.time | date:'medium'}}</span>
+
+                <md-menu>
+
+                  <md-button class="md-raised attachment-actions-button"
+                             ng-click="$mdOpenMenu($event)" aria-label="attachment actions">
+                                            <span layout="row" layout-align="center center">
+                                                <span translate="SB.ACTIONS">Actions</span>
+                                                <i class="icon-chevron-down s20"></i>
+                                            </span>
+                  </md-button>
+
+                  <md-menu-content>
+                    <a ng-href="{{item.src}}" download="{{item.name}}" target="__blank">
+                      <md-menu-item>
+                        <md-button aria-label="Download Attachment" translate translate-attr-aria-label=""
+                                   ng-click="vm.downloadAttacFunction(item.src)">
+                          <span translate="">Download Attachment</span>
+                        </md-button>
+                      </md-menu-item>
+                    </a>
+                    <md-menu-item>
+                      <md-button ng-click="vm.removeAttachment(item)"
+                                 aria-label="Remove Attachment"
+                                 translate
+                                 translate-attr-aria-label="SB.REMOVE_ATTACHMENT">
+                        <span translate="SB.REMOVE_ATTACHMENT">Remove Attachment</span>
+                      </md-button>
+                    </md-menu-item>
+
+                  </md-menu-content>
+
+                </md-menu>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div id="product-image-uploader"
+                 flow-init="vm.ngFlowOptions"
+                 flow-name="vm.ngFlow.flow"
+                 flow-files-submitted="vm.upload($files)"
+                 flow-file-added="vm.fileAdded($file)"
+                 flow-file-success="vm.fileSuccess($file, $message)"
+                 flow-complete="vm.uploadComplete()"
+                 flow-drop
+                 flow-drag-enter="vm.dropping=true"
+                 flow-drag-leave="vm.dropping=false"
+                 ng-class="{'dropping':vm.dropping}">
+
+              <div class="drop-text hint-text" layout="row" layout-align="center center">
+                <span>Drop to upload</span>
+              </div>
+
+              <div class="upload-button" layout="column" layout-align="center center">
+                <md-button class="md-accent md-raised" flow-btn>
+                  Upload
+                </md-button>
+                <span class="secondary-text mt-8">You can also drop yours files here to upload.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </md-dialog-content>
+
+  <!--</form> -->
+</md-dialog>

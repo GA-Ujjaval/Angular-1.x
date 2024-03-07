@@ -1,0 +1,24 @@
+
+.download-container {
+  display: inline-block;
+}
+
+.download-menu-content {
+  .ng-hide.ng-hide-animate {
+    display: none !important;
+  }
+
+  .no-templates-found {
+    font-weight: 500;
+  }
+}
+
+.download-as-is {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.table-download-align-center {
+  text-align: center !important;
+}
+

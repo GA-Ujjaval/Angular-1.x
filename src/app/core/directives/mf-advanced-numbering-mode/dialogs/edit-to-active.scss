@@ -1,0 +1,25 @@
+
+.change-mode-popup-container {
+  padding: 20px;
+  padding-top: 10px;
+
+  .mode-change-button {
+    width: 150px;
+    white-space: normal;
+    line-height: 1.1;
+    height: 30px;
+    margin: 0;
+    float: right;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  .save-mode-header {
+    margin-bottom: 10px;
+  }
+
+  .save-mode-note {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,202 @@
+.ml-30{
+    margin-left: 30px;
+}
+.mt-22{
+    margin-top: 22px;
+}
+.m-0{
+    margin: 0!important;
+}
+.pl-0{
+    padding-left: 0!important;
+}
+.mt-0{
+    margin-top: 0;
+}
+.set-radio-all{
+    margin-bottom: 0;
+    padding: 10px 0;
+}
+#scrumboard {
+    .lable-bg{
+        background-color: #F5F5F5 !important;
+    }
+
+    .settings-sidenav {
+        z-index: 51;
+        box-shadow: $whiteframe-shadow-8dp;
+        overflow-x: hidden;
+
+
+        .md-toolbar-tools {
+
+            .menu-title {
+                font-size: 16px;
+                text-align: center;
+
+            }
+            .question-icon {
+                cursor: pointer;
+                font-size:13px;
+                color: rgb(0,0,0);
+                font-weight: bold;
+                border: 1px solid rgb(100,255,63);
+                background: rgb(100,255,63);
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                position: relative;
+                top: -15px;
+                left: 70%;
+            }
+
+        }
+
+        md-content {
+            overflow-x: hidden;
+            position: absolute;
+            top: 64px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            &.settings {
+                padding-top: 12px;
+
+                md-list {
+
+                    md-list-item {
+
+                        &.item{
+                            height: auto;
+                        }
+
+                        md-icon {
+                            margin-top: auto;
+                            margin-bottom: auto;
+                        }
+                    }
+
+                }
+
+            }
+
+            md-divider {
+                margin: 16px 0;
+            }
+        }
+    }
+}
+.introjs-helperlayer-right{
+    @media only screen and (min-width:360px){
+        left: 37% !important;
+    }
+    @media only screen and (min-width:410px){
+        left: 42% !important;
+    }
+    @media only screen and (min-width:460px){
+        left: 43% !important;
+    }
+    @media only screen and (min-width:510px){
+        left: 44% !important;
+    }
+    @media only screen and (min-width:560px){
+        left: 45% !important;
+    }
+    @media only screen and (min-width:610px){
+        left: 51% !important;
+    }
+    @media only screen and (min-width:660px){
+        left: 54% !important;
+    }
+    @media only screen and (min-width:710px){
+        left: 58% !important;
+    }
+    @media only screen and (min-width:760px){
+        left: 61% !important;
+    }
+    @media only screen and (min-width:810px){
+        left: 63% !important;
+    }
+    @media only screen and (min-width:860px){
+        left: 66% !important;
+    }
+    @media only screen and (min-width:910px){
+        left: 67% !important;
+    }
+    @media only screen and (min-width:960px){
+        left: 69% !important;
+    }
+    @media only screen and (min-width:1010px){
+        left: 70% !important;
+    }
+    @media only screen and (min-width:1060px){
+        left: 71% !important;
+    }
+    @media only screen and (min-width:1110px){
+        left: 73% !important;
+    }
+    @media only screen and (min-width:1160px){
+        left: 73% !important;
+    }
+    @media only screen and (min-width:1210px){
+        left: 75% !important;
+    }
+    @media only screen and (min-width:1260px){
+        left: 76% !important;
+    }
+    @media only screen and (min-width:1310px){
+        left: 77% !important;
+    }
+    @media only screen and (min-width:1360px){
+        left: 78% !important;
+    }
+    @media only screen and (min-width:1410px){
+        left: 79% !important;
+    }
+    @media only screen and (min-width:1510px){
+        left: 80% !important;
+    }
+    @media only screen and (min-width:1560px){
+        left: 81% !important;
+    }
+    @media only screen and (min-width:1660px){
+        left: 82% !important;
+    }
+    @media only screen and (min-width:1810px){
+        left: 83% !important;
+    }
+    @media only screen and (min-width:1910px){
+        left: 84% !important;
+    }
+    @media only screen and (min-width:2010px){
+        left: 85% !important;
+    }
+}
+.settings-sidenav-transform{
+    z-index:auto !important;
+    transform:none !important;
+    left:calc(100% - 320px) !important;
+}
+.introjs-hint-dot-settings {
+    box-sizing: content-box;
+    border: 10px solid rgb(100,255,63);
+    background: rgb(100,255,63);
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+    height: 50px;
+    width: 50px;
+    -webkit-animation: introjspulse 3s ease-out;
+    -moz-animation: introjspulse 3s ease-out;
+    animation: introjspulse 3s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    z-index: 1;
+    opacity: 0;
+}

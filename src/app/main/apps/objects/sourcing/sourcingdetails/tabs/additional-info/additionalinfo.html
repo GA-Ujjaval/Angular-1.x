@@ -1,0 +1,47 @@
+<div layout="row" layout-align="center center">
+  <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+    <!-- CONTENT -->
+    <form name="additionalinfoForm" novalidate>
+      <div layout-gt-sm="row" layout-align="start center" ng-repeat="additionalInfoList in vm.sourceObjectData.additionalInfoList">
+        <md-input-container class="md-block" flex-gt-sm="100" ng-show="additionalInfoList.attributeType == 'Link'">
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <input type="text" ng-model="additionalInfoList.attributeValue" ng-disabled="vm.readonly;vm.SaveDisabled" flex>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Link'">
+          <md-button class="grey-fg" ng-click="vm.OpenLinkFunction(additionalInfoList.attributeValue)" ng-disabled="vm.readonly" flex>OpenLink</md-button>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Text'">
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <input type="text" ng-model="additionalInfoList.attributeValue" ng-disabled="vm.readonly;vm.SaveDisabled">
+        </md-input-container>
+
+        <div class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'richText'">
+          <label class="fs-form-label">{{additionalInfoList.attributeKey}}</label>
+          <text-angular class="set-textarea-height" ng-model="additionalInfoList.attributeValue" ng-disabled="vm.readonly;vm.SaveDisabled"></text-angular>
+        </div>
+
+        <md-input-container class="md-block" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Number/Integer'">
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <input type="text" ng-model="additionalInfoList.attributeValue" ng-disabled="vm.readonly;vm.SaveDisabled" name="numberinteger" ng-pattern="/^[0-9]*$/">
+          <span class="help-block" style="color:red" ng-if="additionalInfoList.attributeValue == abcdefgjijklmnopqrstuvwxyz">
+                        only Number/Integer allow.
+                    </span>
+        </md-input-container>
+
+        <md-input-container class="md-block bdr-input" flex-gt-sm ng-show="additionalInfoList.attributeType == 'Dropdown'">
+          <label>{{additionalInfoList.attributeKey}}</label>
+          <md-select class=" bdr-input " ng-model="additionalInfoList.attributeValue" ng-disabled="vm.readonly;vm.SaveDisabled">
+            <md-option ng-repeat="dropdownlist in additionalInfoList.dropDownList" value="{{dropdownlist}}">
+              {{dropdownlist}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <div ng-if="!vm.sourceObjectData.additionalInfoList.length" class="md-tab additionalInfoListEmpty">
+        <p>No custom attribute exists in "Settings" for this Source type</p>
+      </div>
+    </form>
+  </div>
+</div>
+

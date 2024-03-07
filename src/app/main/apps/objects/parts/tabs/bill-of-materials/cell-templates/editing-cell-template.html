@@ -1,0 +1,21 @@
+<div ng-if="row.entity.objectId" class="ui-grid-cell-contents"
+     title="{{grid.validate.getTitleFormattedErrors(row.entity,col.colDef)}}">
+  <form name="inputForm">
+    <select class="{{'dropdown-edit-cost' + ' colt' + col.uid}}"
+            ng-class="{'error' : row.entity.fuseCost === grid.appScope.vm.error.noAvailableCurrency}"
+            ui-grid-edit-dropdown
+            ng-model="row.entity.costType"
+            ng-change="grid.appScope.vm.calculateAfterChangingCostType(row.entity.costType, row.entity.availableBreakCosts, row.entity, grid.options.isFlatTable, '{{row.entity.costType}}')">
+      <option ng-repeat="field in row.entity.availableBreakCosts" value="{{field.id}}">{{field.costType}}</option>
+    </select>
+    <md-tooltip class="md-tooltip multiline-tooltip-templates"
+                ng-if="row.entity.fuseCost === grid.appScope.vm.error.noAvailableCurrency">
+      <div>
+        {{grid.appScope.vm.sourceCostRowTooltipText[0]}}
+      </div>
+      <div>
+        {{grid.appScope.vm.sourceCostRowTooltipText[1]}}
+      </div>
+    </md-tooltip>
+  </form>
+</div>

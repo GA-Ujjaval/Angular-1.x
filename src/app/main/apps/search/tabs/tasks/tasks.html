@@ -1,0 +1,42 @@
+<div ng-if="(vm.searchTab === 'Tasks' || vm.searchTypes.task === true) && vm.count.taskCount === 0" class="result-info" layout="row" layout-align="space-between center" layout-xs="column" layout-align-xs="start start" ng-hide="vm.tasks.length > 0">
+  No Data Available
+</div>
+<div ng-if="(vm.searchTab === 'Tasks' || vm.searchTypes.task === true) && vm.count.taskCount > 0" class="result-info margin-bottom-30" layout="row" layout-align="space-between center" layout-xs="column" layout-align-xs="start start" ng-show="vm.tasks.length > 0">
+
+  <span class="result-count h3 secondary-text">
+        <span>{{vm.count.taskCount}}</span>
+  <span translate="SEARCH.RESULTS">Results</span>
+  </span>
+
+  <div class="pager">
+    <span class="secondary-text">
+            <span translate="SEARCH.RESULTS">Results</span>
+    <span>:</span>
+    </span>
+
+    <span class="page-info">
+            <span>{{startIndexForTasks + 1}}</span>
+    <span>-</span>
+    <span>{{endIndexForTasks}} </span>
+    <span translate="SEARCH.OF">of</span>
+    <span>{{(vm.tasks | filter: { objectType: 'task' }).length}}</span>
+    </span>
+
+    <md-button class="md-icon-button" aria-label="previous page" translate translate-attr-aria-label="SEARCH.PREVIOUS_PAGE" ng-disabled="currentPageForTasks == 0" ng-click="vm.countprevousFortasks()">
+      <md-icon md-font-icon="icon-chevron-left"></md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button" aria-label="next page" translate translate-attr-aria-label="SEARCH.NEXT_PAGE" ng-disabled="currentPageForTasks >= ((vm.tasks | filter: { objectType: 'task' }).length/pageSizeForTasks) - 1" ng-click="vm.countFunctionForTasks()">
+      <md-icon md-font-icon="icon-chevron-right"></md-icon>
+    </md-button>
+  </div>
+</div>
+
+
+<div ng-if="vm.searchTab === 'Tasks' || vm.searchTypes.task === true" class="results" ng-show="vm.tasks.length > 0">
+  <div class="result-item" ng-repeat="item in vm.tasks | filter: { objectType: 'task' } | startFrom:currentPageForTasks*pageSizeForTasks | limitTo:pageSizeForTasks">
+    <div class="title" ng-click="vm.openTaskDialog($event, item.taskId, item.boardId, item.cardListId, false );">{{item.taskTitle}}</div>
+    <div class="url">{{item.description}}</div>
+    <div class="excerpt" layout="row"> <span ng-if="item.memberList.length != 0">Assigned to </span> <span ng-repeat="member in item.memberList" ng-if="item.memberList.length != 0"> {{member}}<span ng-if="!$last">,</span></span><span ng-if="item.memberList.length != 0">;</span> <span ng-if="item.dueDate">Due by {{item.dueDate | date:'mediumDate'}}</span></div>
+  </div>
+</div>

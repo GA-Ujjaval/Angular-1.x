@@ -1,0 +1,8 @@
+<div id="configuration-matrix-description">
+  <div class="padding-5">
+    <a ng-if="col.name === 'objectNumber'" ui-sref="app.objects.part.parts({id:row.entity.id, bom:undefined})">
+      {{row.entity[col.name]}}
+    </a>
+    <div ng-if="col.name !== 'objectNumber'" class="padding-5">{{row.entity[col.name]}}</div>
+  </div>
+</div>

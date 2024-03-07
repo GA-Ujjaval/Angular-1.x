@@ -1,0 +1,24 @@
+<div layout="row" layout-align="space-between">
+  <span class="title margin-top-15 margin-bottom-15 f-text font-size-20">
+    <b>Edit Parts (Level 2 and below) in BOM</b>
+  </span>
+</div>
+<div layout-align="center center" class="margin-bottom-25 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-switch class="margin-0" ng-model="vm.editSubLevelPartsSetting" ng-change="vm.changeEditSubLevelParts($event, 'editSubLevelParts', vm.editSubLevelPartsSetting)"
+               aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow Edit Parts (Level 2 and below) in BOM</span>
+  </div>
+  <div layout="row" class="margin-10" flex>
+      <span class="h3">
+        NOTE: When DISABLED (default state), system will allow users to edit ONLY 'BOM Notes' attribute value for
+        Parts that are at level 2 or below. Also, those parts cannot be replaced/removed from the BOM.
+      </span>
+  </div>
+  <div layout="row" class="margin-10" flex>
+      <span class="h3">
+        When ENABLED, system will allow users to edit any BOM-level attribute (Quantity, Reference Designator, Location, BOM Notes)
+        for Parts that are at level 2 or below. Users can also replace/remove these parts.
+      </span>
+  </div>
+</div>

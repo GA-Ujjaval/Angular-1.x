@@ -1,0 +1,162 @@
+<md-dialog class="task-dialog" aria-label="New Task">
+  <md-toolbar class="md-accent md-hue-2">
+    <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+
+      <div class="title">
+        <span>{{vm.title}}</span>
+      </div>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="vm.cancel()">
+        <md-icon md-svg-src="assets/angular-material-assets/img/icons/ic_close_24px.svg"
+                 aria-label="Close dialog"></md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content ms-scroll>
+    <div class="sections">
+
+      <form name="createMemberForm" class="md-inline-form" novalidate>
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container flex>
+            <md-radio-group ng-model="vm.createMemberForm.isActive"
+                            ng-change="vm.changeMemberStatus($event, vm.createMemberForm.isActive)">
+              <div layout="row">
+                <div flex style="max-width:200px;">
+                  Status
+                </div>
+                <md-radio-button ng-if="vm.createMemberForm.status === true || vm.createMemberForm.status === undefined"
+                                 flex ng-value="true"> Active
+                </md-radio-button>
+                <md-radio-button ng-if="vm.createMemberForm.status === false" flex ng-value="true"> Active (Pending)
+                </md-radio-button>
+                <md-radio-button flex ng-value="false"> Inactive</md-radio-button>
+              </div>
+              <span class="note-span">Note: Every Active user consumes a FusePLM License <br>
+                                Inactive users will not consume a FusePLM License and will be unable to login.</span>
+            </md-radio-group>
+          </md-input-container>
+        </div>
+        <div layout="column" layout-gt-sm="row" class="mt-10">
+          <md-input-container flex class="mb-0">
+            <input type="email" name="userEmail" ng-model="vm.createMemberForm.userEmail"
+                   placeholder="Member Email"
+                   required maxlength="64">
+
+            <div ng-messages="createMemberForm.userEmail.$error"
+                 role="alert">
+              <div ng-message="required">
+                <span>Member email field is required.</span>
+              </div>
+              <div ng-message="email">
+                <span>Member Email field is not Email Format.</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container flex>
+            <input type="text" name="firstName" ng-model="vm.createMemberForm.firstName"
+                   placeholder="Member First Name"
+                   maxlength="20" required>
+
+            <div ng-messages="createMemberForm.firstName.$error"
+                 role="alert">
+              <div ng-message="required">
+                <span>First name field is required.</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container flex>
+            <input type="text" name="lastName" ng-model="vm.createMemberForm.lastName"
+                   placeholder="Member Last Name"
+                   maxlength="20" required>
+
+            <div ng-messages="createMemberForm.lastName.$error"
+                 role="alert">
+              <div ng-message="required">
+                <span>Last name field is required.</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container flex>
+            <md-radio-group ng-model="vm.data.group1">
+              <div layout="row">
+                <div flex style="max-width:200px;">
+                  Customer Admin
+                </div>
+                <md-radio-button flex value="Yes" ng-click="vm.customerAdmin()"> Yes</md-radio-button>
+                <md-radio-button flex value="No" ng-click="vm.optionFunction()"> No</md-radio-button>
+              </div>
+            </md-radio-group>
+          </md-input-container>
+        </div>
+
+        <div layout="column" layout-gt-xs="row">
+          <md-input-container flex>
+            <label>Member Role</label>
+            <md-select ng-model="vm.selectRole" name="role" ng-change="vm.addRoleChipsFunction(vm.selectRole)"
+                       ng-disabled="vm.memberRoledisabled">
+              <md-option ng-repeat="role in vm.roleSet" value="{{role.val}}">
+                {{role.disp}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <br/>
+
+        <div layout="column" layout-gt-xs="row" ng-hide="vm.memberRoledisabled">
+
+          <md-chips ng-model="vm.createMemberForm.userRoleSet" md-transform-chip="vm.addChip($chip)"
+                    md-on-remove="vm.createMemberForm.userRoleSet.length == 0 ? vm.roleSubmitButton = false : vm.roleSubmitButton = true; vm.disableSlider($chip)"
+                    required flex>
+
+          </md-chips>
+          <div ng-messages="createMemberForm.userRoleSet.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Member role(s) required.</span>
+            </div>
+          </div>
+        </div>
+        <div flex layout="row" class="margin-top-10" ng-if="vm.EnableAllowForTaskApproval">
+          <md-switch class="margin-0" ng-model="vm.createMemberForm.allowForTaskApproval"
+                     aria-label="Task approval for read only users">
+            Allow READ-ONLY users to mark Approval tasks as complete
+          </md-switch>
+        </div>
+        <div flex layout="row" class="margin-top-10" ng-if="vm.EnableAllowForCommentsCardTask">
+          <md-switch class="margin-0" ng-model="vm.createMemberForm.allowForCommentsCardTask"
+                     aria-label="Allow comments for Cards and Tasks">
+            Allow READ-ONLY users to comment on any Cards/Approval Tasks
+          </md-switch>
+        </div>
+        <br/>
+        <div layout="column" layout-gt-xs="row">
+          <md-button type="submit" class="md-raised md-accent" aria-label="Submit"
+                     ng-disabled="vm.check(createMemberForm)"
+                     ng-click="vm.submit()">
+            Submit
+          </md-button>
+          <md-button type="button" class="md-raised md-accent" aria-label="Reset"
+                     ng-click="vm.Reset()">
+            Reset
+          </md-button>
+          <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+          </md-progress-circular>
+        </div>
+      </form>
+
+    </div>
+
+  </md-dialog-content>
+
+  <!--</form> -->
+</md-dialog>

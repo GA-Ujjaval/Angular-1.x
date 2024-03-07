@@ -1,0 +1,32 @@
+#grid-manufacturer-parts {
+
+  .ui-grid-header-viewport {
+    height: 70px !important;
+  }
+  .ui-grid-header-canvas {
+    height: 70px !important;
+  }
+  .custom-column-header-container{
+    padding-left: 10px;
+    box-sizing: border-box;
+    padding-top: 6px;
+  }
+
+  .ui-grid-filter-container {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .cell-height-70 {
+    height: 70px !important;
+  }
+
+  .cell-height-50 {
+    height: 50px !important;
+  }
+
+  .content-wrapper{
+    padding: 5px;
+  }
+}
+

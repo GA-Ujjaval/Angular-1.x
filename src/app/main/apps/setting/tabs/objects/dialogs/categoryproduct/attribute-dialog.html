@@ -1,0 +1,249 @@
+<!-- DIALOG -->
+<md-dialog class="contact-dialogs-attribute" aria-label="New Task">
+
+  <form name="contactForm" class="md-inline-form" novalidate>
+
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar class="md-accent md-tall-height" layout="column">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title margin-top-20">{{vm.title}}</span>
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+          <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <!-- DIALOG CONTENT -->
+    <md-dialog-content ms-scroll>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Attribute Name (Required)</label>
+        <md-icon></md-icon>
+        <input ng-model="vm.attribute.attribute" type="text" required>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Attribute Type (Required)</label>
+        <md-icon></md-icon>
+        <md-select ng-model="vm.attribute.attributeType">
+          <md-option value="Link">Link</md-option>
+          <md-option value="Text">Text</md-option>
+          <md-option value="richText">Rich Text Box</md-option>
+          <!-- <md-option value="Number/Integer">Number/Integer</md-option>
+          <md-option value="Dropdown">Dropdown</md-option> -->
+        </md-select>
+      </md-input-container>
+
+      <!-- <md-input-container class="md-icon-float md-block" ng-if="!vm.newAttribute">
+        <label>Attribute Type (Required)</label>
+        <md-icon></md-icon>
+        <md-select ng-model="vm.attribute.attributeType" ng-change="vm.attributeTypeFunction()">
+          <md-option value="Link">Link</md-option>
+          <md-option value="Text">Text</md-option>
+          <md-option value="richText">Rich Text</md-option>
+          <!-- <md-option value="Number/Integer">Number/Integer</md-option>
+          <md-option value="Dropdown">Dropdown</md-option> 
+        </md-select>
+      </md-input-container> -->
+
+
+      <div flex class="margin-left-40 margin-top-20 margin-bottom-20">
+        <md-chips ng-model="vm.dropdown" md-on-remove="vm.closedropdownChips($index)" placeholder="Dropdown" ng-if="vm.attribute.attributeType=='Dropdown'"
+          md-transform-chip="vm.addChip($chip)">
+        </md-chips>
+      </div>
+      <!--<md-input-container class="md-icon-float md-block">-->
+      <!--<label>Tab Name</label>-->
+      <!--<md-icon></md-icon>-->
+      <!--<input ng-model="vm.attribute.tabName" type="text" placeholder="Additional Info" readonly value="Additional Info">-->
+      <!--</md-input-container>-->
+      <md-input-container class="md-icon-float md-block margin-top-30">
+        <label>Object Type (Required)</label>
+        <md-icon></md-icon>
+        <md-select ng-model="vm.attribute.objectType" ng-change="vm.getCategoryList()" required>
+          <md-option value="parts">Parts</md-option>
+          <md-option ng-if="$root.enableProducts" value="products">Products</md-option>
+          <md-option value="documents">Documents</md-option>
+          <md-option value="boards">Boards</md-option>
+          <md-option value="sourcing">Sourcing Type</md-option>
+          <md-option value="sourcingObject">Sourcing Parts</md-option>
+        </md-select>
+      </md-input-container>
+
+      <br/>
+      <md-input-container class="md-icon-float md-block">
+        <md-radio-group ng-model="vm.attribute.isAllCategory" ng-hide="vm.attribute.objectType=='boards' || vm.attribute.objectType=='sourcing' || vm.attribute.objectType=='sourcingObject'">
+          <div layout="row">
+            <div flex="50" style="max-width:200px;" class="margin-left-40">
+              Do you want to add this attribute for every category under the selected object type?
+            </div>
+            <div flex="50" class="margin-left-40" style="max-width:200px;">
+              <md-radio-button flex value="true" ng-click="vm.allCategoryYesOption()"> Yes</md-radio-button>
+              <md-radio-button flex value="false" ng-click="vm.optionFunction(vm.attribute.objectType)"> No</md-radio-button>
+            </div>
+          </div>
+        </md-radio-group>
+
+        <md-radio-group ng-model="vm.attribute.isAllCategory" ng-if="vm.attribute.objectType=='boards'">
+          <div layout="row">
+            <div flex="50" style="max-width:200px;" class="margin-left-40">
+              Do you want to add this attribute for every board under the selected object type?</div>
+            <div flex="50" class="margin-left-40" style="max-width:200px;">
+              <md-radio-button flex value="true" ng-click="vm.allCategoryYesOption()"> Yes</md-radio-button>
+              <md-radio-button flex value="false" ng-click="vm.optionFunction('boards')"> No</md-radio-button>
+            </div>
+          </div>
+        </md-radio-group>
+
+        <md-radio-group ng-model="vm.attribute.isAllCategory" ng-if="vm.attribute.objectType=='sourcing'">
+          <div layout="row">
+            <div flex="50" style="max-width:200px;" class="margin-left-40">
+              Do you want to add this attribute for every 'sourcing' object type (Manufacturer, Supplier)?</div>
+            <div flex="50" class="margin-left-40" style="max-width:200px;">
+              <md-radio-button flex value="true" ng-click="vm.allCategoryYesOption()"> Yes</md-radio-button>
+              <md-radio-button flex value="false" ng-click="vm.optionFunction('sourcing')"> No</md-radio-button>
+            </div>
+          </div>
+        </md-radio-group>
+
+        <md-radio-group ng-model="vm.attribute.isAllCategory" ng-if="vm.attribute.objectType=='sourcingObject'">
+          <div layout="row">
+            <div flex="50" style="max-width:200px;" class="margin-left-40">
+              Do you want to add this attribute for every Sourcing Object Type (Manufacturer Part, Supplier Part)?</div>
+            <div flex="50" class="margin-left-40" style="max-width:200px;">
+              <md-radio-button flex value="true" ng-click="vm.allCategoryYesOption()"> Yes</md-radio-button>
+              <md-radio-button flex value="false" ng-click="vm.optionFunction('sourcingObject')"> No</md-radio-button>
+            </div>
+          </div>
+        </md-radio-group>
+      </md-input-container>
+
+      <br/>
+      <md-input-container class="md-icon-float md-block" ng-hide="vm.attribute.objectType=='boards' || vm.attribute.objectType=='sourcing' || vm.attribute.objectType=='sourcingObject'">
+        <label>Category</label>
+        <md-icon></md-icon>
+        <md-select ng-model="vm.selectparentcategory" name="role" ng-change="vm.parentCategoryFunction(vm.parent)" ng-disabled="vm.allCategoryYes">
+          <md-option ng-repeat="parent in vm.parent | orderBy:'-categoryHierarchy':true" value="{{parent.categoryId}}">
+            {{parent.categoryHierarchy}}
+          </md-option>
+        </md-select>
+        <md-input-container class="md-icon-float md-block">
+          <!-- Category -->
+          <md-chips ng-model="vm.attribute.categoryHierarchy" md-on-remove="" flex md-autocomplete-snap md-require-match="true" md-transform-chip="$chip">
+            <md-autocomplete md-selected-item="vm.selectedChangeItem" md-search-text="vm.searchChangeItemText" md-selected-item-change="vm.searchCategoryFunction(itemId, vm.parent)"
+              md-items="itemId in vm.parentIDQuerySearch(vm.searchChangeItemText)" md-item-text="itemId.categoryHierarchy"
+              ng-disabled="vm.searchDisabled">
+              <span md-highlight-text="vm.searchChangeItemText">{{itemId}}</span>
+            </md-autocomplete>
+            <button md-chip-remove class="md-primary">
+              <md-icon md-font-icon="icon-close" class="s18" ng-click="vm.closeCategoryChips($index)"></md-icon>
+            </button>
+          </md-chips>
+          <!-- Category -->
+        </md-input-container>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block" ng-if="vm.attribute.objectType=='boards'">
+        <label>Board</label>
+        <md-icon></md-icon>
+        <md-select ng-model="vm.selectboard" name="role" ng-change="vm.BoardFunction(vm.boardData)" ng-disabled="vm.allCategoryYes">
+          <md-option ng-repeat="board in vm.boardData" value="{{board.boardId}}">
+            {{board.boardTitle}}
+          </md-option>
+        </md-select>
+        <md-input-container class="md-icon-float md-block">
+          <!-- Board -->
+          <md-chips ng-model="vm.attribute.board" md-on-remove="" flex md-autocomplete-snap md-require-match="true" md-transform-chip="$chip">
+            <md-autocomplete md-selected-item="vm.selectedChangeItem" md-search-text="vm.searchChangeBoardText" md-selected-item-change="vm.searchBoardFunction(itemId, vm.boardData)"
+              md-items="itemId in vm.boardIDQuerySearch(vm.searchChangeBoardText)" md-item-text="itemId.boardTitle" ng-disabled="vm.searchDisabled">
+              <span md-highlight-text="vm.searchChangeBoardText">{{itemId}}</span>
+            </md-autocomplete>
+            <button md-chip-remove class="md-primary">
+              <md-icon md-font-icon="icon-close" class="s18" ng-click="vm.closeCategoryChips($index)"></md-icon>
+            </button>
+          </md-chips>
+          <!-- Board -->
+        </md-input-container>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block" ng-if="vm.attribute.objectType=='sourcing'">
+        <label>Sourcing Type</label>
+        <md-icon></md-icon>
+        <md-select ng-model="vm.selectsourcing" name="role" ng-change="vm.SourcingFunction(vm.sourcingData)" ng-disabled="vm.allCategoryYes">
+          <md-option ng-repeat="sourcingData in vm.sourcingData | orderBy:'toString()'" value="{{sourcingData}}">
+            {{sourcingData | capitalizes}}
+          </md-option>
+        </md-select>
+        <md-input-container class="md-icon-float md-block">
+          <!-- Sourcing -->
+          <md-chips ng-model="vm.attribute.sourcing" md-on-remove="" flex md-autocomplete-snap md-require-match="true" md-transform-chip="$chip">
+            <md-autocomplete md-selected-item="vm.selectedChangeItem" md-search-text="vm.searchChangeBoardText" md-selected-item-change="vm.searchSourcingFunction(itemId, vm.sourcingData)"
+              md-items="itemId in vm.sourcingIDQuerySearch(vm.searchChangeBoardText)" md-item-text="itemId" ng-disabled="vm.searchDisabled">
+              <span md-highlight-text="vm.searchChangeBoardText">{{itemId}}</span>
+            </md-autocomplete>
+            <button md-chip-remove class="md-primary">
+              <md-icon md-font-icon="icon-close" class="s18" ng-click="vm.closeCategoryChips($index)"></md-icon>
+            </button>
+          </md-chips>
+          <!-- Sourcing -->
+        </md-input-container>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block" ng-if="vm.attribute.objectType=='sourcingObject'">
+        <label>Sourcing Part</label>
+        <md-icon></md-icon>
+        <md-select ng-model="vm.sourcingpart" name="role" ng-change="vm.SourcingPartFunction(vm.sourcingpartsData)" ng-disabled="vm.allCategoryYes">
+          <md-option ng-repeat="sourcingpartsData in vm.sourcingpartsData" value="{{sourcingpartsData}}">
+            {{sourcingpartsData}}
+          </md-option>
+        </md-select>
+        <md-input-container class="md-icon-float md-block">
+          <!-- Sourcing Part-->
+          <md-chips ng-model="vm.attribute.sourcingpart" md-on-remove="" flex md-autocomplete-snap md-require-match="true" md-transform-chip="$chip">
+            <md-autocomplete md-selected-item="vm.selectedChangeItem" md-search-text="vm.searchChangeBoardText" md-selected-item-change="vm.searchSourcingpartFunction(itemId, vm.sourcingpartsData)"
+              md-items="itemId in vm.sourcingpartIDQuerySearch(vm.searchChangeBoardText)" md-item-text="itemId" ng-disabled="vm.searchDisabled">
+              <span md-highlight-text="vm.searchChangeBoardText">{{itemId}}</span>
+            </md-autocomplete>
+            <button md-chip-remove class="md-primary">
+              <md-icon md-font-icon="icon-close" class="s18" ng-click="vm.closeCategoryChips($index)"></md-icon>
+            </button>
+          </md-chips>
+          <!-- Sourcing Part-->
+        </md-input-container>
+      </md-input-container>
+    </md-dialog-content>
+    <!-- / DIALOG CONTENT -->
+
+    <!-- DIALOG ACTIONS -->
+    <md-dialog-actions layout="row" layout-align="space-between center">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-if="!vm.newAttribute" ng-click="vm.saveAttribute()" class="send-button md-accent md-raised" ng-disabled="contactForm.$invalid  || vm.attributes"
+        aria-label="SAVE">
+          SAVE
+        </md-button>
+        <md-button type="submit" ng-if="vm.newAttribute" ng-click="vm.addNewAttribute()" class="send-button md-accent md-raised"
+          ng-disabled="contactForm.$invalid || vm.attributes" aria-label="Add Task">
+          Create Attribute
+        </md-button>
+        <md-progress-circular md-mode="indeterminate" ng-if="vm.progress" md-diameter="25"></md-progress-circular>
+      </div>
+
+      <div layout="row">
+        <md-button class="md-icon-button" ng-click="vm.deleteContactConfirm($event)" aria-label="Delete" ng-if="!vm.newAttribute">
+          <md-icon md-font-icon="icon-delete"></md-icon>
+          <md-tooltip class="md-tooltip">
+            <span>DELETE</span>
+          </md-tooltip>
+        </md-button>
+      </div>
+    </md-dialog-actions>
+    <!-- / DIALOG ACTIONS -->
+
+  </form>
+
+</md-dialog>
+<!-- / DIALOG -->

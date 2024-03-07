@@ -1,0 +1,80 @@
+<!-- DIALOG -->
+<md-dialog class="contact-dialog-supplier" aria-label="New Task">
+
+    <form name="contactForm" class="md-inline-form" novalidate>
+
+      <!-- DIALOG TOOLBAR -->
+      <md-toolbar class="md-accent dialog-mg-accent-bg-custom md-tall-height" layout="column">
+
+        <!-- TOOLBAR TOP -->
+        <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+          <span class="title margin-top-20">{{vm.title}}</span>
+          <md-progress-circular class="progress-add-bom" id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+          </md-progress-circular>
+          <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+            <md-icon md-font-icon="icon-close"></md-icon>
+          </md-button>
+        </div>
+        <!-- / TOOLBAR TOP -->
+
+
+      </md-toolbar>
+      <!-- / DIALOG TOOLBAR -->
+
+      <!-- DIALOG CONTENT -->
+      <md-dialog-content ms-scroll>
+
+        <md-input-container class="md-icon-float md-block mt0" flex>
+          <label>Supplier Part (Required)</label>
+          <md-chips class="mt--6 md-chips-label" ng-model="vm.changeitem" md-on-remove="" flex md-autocomplete-snap md-require-match="true"
+            md-transform-chip="$chip">
+            <md-autocomplete style="width: 28em;" class="md-auto-input" md-search-text="vm.searchName" md-selected-item-change="vm.searchCategoryFunction(item.objectId, vm.supplierData)"
+              md-items="item in vm.parentIDQuerySearch(vm.searchName)" md-item-text="item.objectName" placeholder="{{vm.search}}">
+              <span md-highlight-text="vm.searchName">{{vm.parseString(item)}}</span>
+            </md-autocomplete>
+            <button md-chip-remove class="md-primary">
+              <md-icon md-font-icon="icon-close" class="s18" ng-click="vm.closeCategoryChips($index)"></md-icon>
+            </button>
+          </md-chips>
+        </md-input-container>
+        <span style="margin-top:10em;">Note: You can search for supplier part number or supplier</span>
+
+        <br/><br/><br/>
+        <md-input-container class="md-icon-float md-block">
+          <label>Notes</label>
+          <input ng-model="vm.supplier.notes" type="text">
+        </md-input-container>
+        <br/>
+      </md-dialog-content>
+      <!-- / DIALOG CONTENT -->
+      <br/>
+      <!-- DIALOG ACTIONS -->
+      <md-dialog-actions layout="row" layout-align="space-between center">
+        <div layout="row" layout-align="start center">
+          <md-button type="submit" ng-if="!vm.newContact" ng-click="vm.saveSupplier()" class="send-button md-accent mg-accent-bg-custom-btn md-raised" ng-disabled="contactForm.$invalid || vm.attributes"
+            aria-label="SAVE">
+            SAVE
+          </md-button>
+
+          <md-button type="submit" ng-if="vm.newContact" ng-click="vm.addSupplier()" class="send-button md-accent mg-accent-bg-custom-btn md-raised" ng-disabled="contactForm.$invalid || vm.attributes"
+            aria-label="Add Supplier">
+            Associate Supplier Part
+          </md-button>
+
+        </div>
+
+        <div layout="row">
+          <md-button class="md-icon-button" ng-click="vm.deleteContactConfirm($event)" aria-label="Delete" ng-if="!vm.newContact">
+            <md-icon md-font-icon="icon-delete"></md-icon>
+            <md-tooltip class="md-tooltip">
+              <span>DELETE</span>
+            </md-tooltip>
+          </md-button>
+        </div>
+      </md-dialog-actions>
+      <!-- / DIALOG ACTIONS -->
+
+    </form>
+
+  </md-dialog>
+  <!-- / DIALOG -->

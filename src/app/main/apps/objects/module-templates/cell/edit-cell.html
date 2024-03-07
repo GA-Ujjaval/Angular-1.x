@@ -1,0 +1,10 @@
+<div
+  class="ui-grid-cell-contents"
+  title="TOOLTIP">
+  <md-button class="edit-button md-icon-button"
+             ng-click="$event.stopPropagation();grid.appScope.vm.openSupplierDialog($event, row.entity, grid.appScope.vm.supplierPartsTableOptions.data)"
+             ng-disabled="grid.appScope.vm.readonly">
+    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+  </md-button>
+
+</div>

@@ -1,0 +1,13 @@
+<div class="ui-grid-cell-contents" id="{{row.entity.id}}" ng-click="grid.appScope.vm.editCostValue(row.entity.id)"
+     title="{{grid.validate.getTitleFormattedErrors(row.entity,col.colDef)}}">
+  <div
+    ng-if="row.entity.id != 'R' && ((!grid.appScope.vm.readonly && !grid.appScope.vm.SaveDisabled) || !grid.appScope.vm.changeReleasedCost)"
+    class="form-editor">
+    <input ng-class="{'ng-invalid' : grid.validate.isInvalid(row.entity,col.colDef)}"
+           value="{{row.entity.cost}}" class="width-cost-value" readonly="readonly"/>
+  </div>
+  <div
+    ng-if="row.entity.id == 'R' || ((grid.appScope.vm.readonly || grid.appScope.vm.SaveDisabled) && grid.appScope.vm.changeReleasedCost)">
+    <span>{{row.entity.cost}}</span>
+  </div>
+</div>

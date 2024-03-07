@@ -1,0 +1,542 @@
+<!-- CHAT APP -->
+<div id="plm-chat-app" class="page-layout carded fullwidth">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg md-accent-bg"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- CONTENT CARD -->
+    <div class="content-card" layout="row" flex>
+
+
+      <!-- START -->
+      <div class="start-point" ng-if="!vm.chat" flex layout="column" flex layout-align="center center">
+
+        <div class="big-circle md-whiteframe-4dp">
+
+          <md-icon class="s128 md-accent" md-font-icon="icon-hangouts"></md-icon>
+
+        </div>
+
+        <span class="app-title" translate="CHAT.APP_TITLE">Chat App</span>
+
+        <span class="hide show-gt-md secondary-text" translate="CHAT.START_MESSAGE">Select contact to start the
+                    chat!..</span>
+        <md-button class="md-raised hide-gt-md" ng-click="vm.toggleSidenav('left-sidenav')"
+                   translate="CHAT.START_MESSAGE">
+          Select contact to start the chat!..
+        </md-button>
+
+      </div>
+      <!-- / START -->
+
+      <!-- CHAT -->
+      <div ng-if="vm.chat" class="chat" layout="column" flex>
+
+        <!-- CHAT TOOLBAR -->
+        <md-toolbar class="chat-toolbar">
+
+          <div class="md-toolbar-tools">
+
+            <!-- CHAT CONTACT-->
+            <div class="chat-contact" layout="row" layout-align="start center"
+                 ng-click="vm.toggleSidenav('right-sidenav')">
+
+              <div class="avatar-wrapper">
+                <div data-hint="{{vm.plmDataDataHint}}" ng-if="$root.introGlobalHelp != false" data-position="bottom"
+                     href="javascript:void(0);"></div>
+
+                <img ng-src="assets/images/avatars/fuseplmapp.png"
+                     class="avatar"/>
+
+              </div>
+
+              <div class="chat-contact-name">
+                PLMBot
+              </div>
+
+            </div>
+            <!-- / CHAT CONTACT-->
+
+          </div>
+
+        </md-toolbar>
+        <!-- / CHAT TOOLBAR -->
+
+        <!-- CHAT CONTENT -->
+        <md-content id="plm-chat-content" flex ms-scroll ng-init="vm.chat = vm.parsechatResponse()"
+                    ng-if="vm.chatResponses">
+
+          <!-- CHAT MESSAGES -->
+          <div class="chat-messages" ng-if="vm.chat">
+
+            <!-- MESSAGE -->
+            <div ng-repeat="dialog in vm.chat" class="md-padding message-row"
+                 ng-class="dialog.who">
+
+              <div class="message-panel" layout="row" ng-class="dialog.source">
+
+                <img ng-if="dialog.source ==='backend'"
+                     ng-src="assets/images/avatars/fuseplmapp.png"
+                     class="avatar"/>
+
+                <img ng-if="dialog.source ==='agent' || dialog.source ==='domains'" class="avatar"
+                     ng-src="{{$root.userProfileForm.avatar || 'assets/images/avatars/profile.jpg'}}">
+
+                <div class="bubble" ng-if="dialog.actionIncomplete">
+                  <div ng-if="vm.isHtml(dialog.fulfillment.speech)" class="message"
+                       ng-bind-html="dialog.fulfillment.speech"></div>
+                  <div ng-if="!vm.isHtml(dialog.fulfillment.speech)" class="message">{{dialog.fulfillment.speech || 'Something went wrong. Please try again'}}</div>
+                  <div class="time secondary-text">{{dialog.timestamp | altDate}}</div>
+                </div>
+
+                <div class="bubble" ng-if="!dialog.actionIncomplete && dialog.resolvedQuery">
+                  <div ng-if="vm.isHtml(dialog.resolvedQuery)" class="message"
+                       ng-bind-html="dialog.resolvedQuery"></div>
+                  <div ng-if="!vm.isHtml(dialog.resolvedQuery)" class="message">{{dialog.resolvedQuery}}</div>
+                  <div class="time secondary-text">{{dialog.timestamp | altDate}}</div>
+                </div>
+
+                <div class="bubble" ng-if="!dialog.actionIncomplete && dialog.backendOuput.information.text">
+                  <div ng-if="vm.isHtml(dialog.backendOuput.information.text)" class="message"
+                       compile-template="dialog.backendOuput.information.text"></div>
+                  <div ng-if="!vm.isHtml(dialog.backendOuput.information.text)"
+                       class="message">{{dialog.backendOuput.information.text}}</div>
+                  <div class="time secondary-text">{{dialog.timestamp | altDate}}</div>
+                </div>
+
+
+              </div>
+
+
+              <!-- SEARCH TASK CONTENT -->
+              <div class="content" flex="100" ng-if="dialog.source === 'backend' && dialog.action === 'searchTasks'">
+
+                <!-- Todo list pane -->
+                <md-content class="todo-list-pane show-my-tasks" flex="100"
+                            ng-if="dialog.source === 'backend' && dialog.action === 'searchTasks'">
+
+                  <!-- TODO LIST ITEMS
+                  <div  class="todo-items" ng-init="chatTasks = vm.assignedTasks(dialog.result.ids)">-->
+                  <div class="todo-items" ng-init="chatTasks = dialog.backendOuput.taskList">
+
+                    <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
+                         ng-repeat="task in chatTasks | orderBy:vm.taskOrder:vm.taskOrderDescending | filter:vm.filterByStartDate"
+                         ng-class="{'starred': task.starred, 'selected': task.selected, 'completed': task.completed}"
+                         ng-click="vm.openExistingTask( $event, task, chatTasks )">
+
+
+                      <md-checkbox class="no-label" ng-checked="task.completed"
+                                   ng-click="vm.preventDefault($event);vm.toggleCompleted(task, $event)"
+                                   aria-label="{{task.completed ? 'Not completed' : 'Completed'}}">
+                      </md-checkbox>
+
+                      <div layout="row" layout-align="start center" flex>
+
+                        <div class="info" flex>
+                          <div class="title">
+                            {{task.title}}
+                          </div>
+
+                          <div class="notes" ng-bind-html="task.notes">
+                          </div>
+
+                          <div class="todo-item-footer" layout="row" layout-align="start center" layout-wrap>
+
+                            <!-- MEMBER -->
+                            <div ng-if="task.idMembers.length > 0" class="task-list-members"
+                                 layout="row">
+
+                              <div class="task-list-member"
+                                   ng-repeat="memberId in task.idMembers">
+
+                                <md-chip-template class="member-chip">
+                                  <img ng-show="vm.isAvatarAvailable(vm.members.getById(memberId).avatar)"
+                                       class="task-list-avatar-circle" ng-src="{{vm.members.getById(memberId).avatar}}">
+                                  <div ng-hide="vm.members.getById(memberId).avatar" class="task-list-avatar-circle">
+                                    <span class="initials">{{vm.defaultAvatar
+                                      (vm.members.getById(memberId).name)}}</span>
+                                  </div>
+
+                                </md-chip-template>
+
+                                <md-tooltip class="md-tooltip">
+                                  <div class="name">{{ vm.members.getById(memberId).name}}</div>
+                                </md-tooltip>
+                              </div>
+
+                            </div>
+                            <!-- / MEMBERS -->
+
+                            <!-- DUEDATE -->
+                            <div ng-if="task.dueDate.length > 0" class="task-list-dueDate">
+                              <md-icon md-svg-icon="md-calendar"
+                                       class="task-list-icon-calendar md-font material-icons icon-calendar"></md-icon>
+                              <div>{{vm.formatDueDate(task.dueDate)||''}}</div>
+                            </div>
+                            <!-- /DUEDATE -->
+
+                          </div>
+
+
+                        </div>
+
+                        <div class="buttons" layout="row" layout-align="start center">
+                          <div class="button-important">
+                            <md-icon md-font-icon="icon-alert-circle" class="is-important red-600-fg"
+                                     ng-if="task.important"></md-icon>
+                          </div>
+
+
+                          <div ng-switch="task.starred" class="button-subscribe"
+                               ng-click="vm.toggleStarred(task, $event)">
+                            <md-icon ng-switch-when="true" md-font-icon="icon-star"
+                                     class="is-starred amber-600-fg"></md-icon>
+                            <md-icon ng-switch-when="false" md-font-icon="icon-star-outline"
+                                     class="is-starred gray-600-fg"></md-icon>
+                          </div>
+
+
+                          <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" translate
+                                       translate-attr-aria-label="TODO.MORE">
+                              <md-icon md-font-icon="icon-dots-vertical"
+                                       ng-click="vm.preventDefault($event);$mdOpenMenu($event)"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+                              <md-menu-item>
+                                <md-button ng-click="vm.toggleCompleted(task, $event)" aria-label="Toggle done"
+                                           translate-attr-aria-label="TODO.TOGGLE_DONE">
+                                  <md-icon ng-class="task.completed === false ? 'grey-fg' : 'blue-fg'"
+                                           md-font-icon="icon-checkbox-marked-circle" class="s18"></md-icon>
+                                  <span ng-show="!task.completed" translate="TODO.MARK_AS_DONE">Mark as done</span>
+                                  <span ng-show="task.completed" translate="TODO.MARK_AS_UNDONE">Mark as undone</span>
+                                </md-button>
+                              </md-menu-item>
+
+                              <md-menu-item>
+                                <md-button ng-click="vm.toggleImportant(task, $event)" aria-label="Toggle important"
+                                           translate-attr-aria-label="TODO.TOGGLE_IMPORTANT">
+                                  <md-icon ng-class="task.important === false ? 'grey-fg' : 'red-600-fg'"
+                                           md-font-icon="icon-alert-circle" class="s18"></md-icon>
+                                  <span ng-show="!task.important" translate="TODO.MARK_AS_IMPORTANT"> Mark as
+                                        important</span>
+                                  <span ng-show="task.important" translate="TODO.REMOVE_IMPORTANT">Remove
+                                        important</span>
+                                </md-button>
+                              </md-menu-item>
+                            </md-menu-content>
+                          </md-menu>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <!-- / TODO LIST ITEMS -->
+                </md-content>
+                <!-- / Todo list pane -->
+
+              </div>
+              <!-- / SEARCH TASK CONTENT -->
+
+              <!-- CARD CONTENT -->
+
+              <div class="list-content" layout="column">
+
+                <div class="list-cards" ng-if="dialog.source === 'backend' && dialog.action === 'searchCards'"
+                     ng-repeat="cardList in dialog.backendOuput.cardList">
+
+                  <!-- CARD -->
+                  <div ng-if="dialog.backendOuput.cardList" class="list-card md-whiteframe-2dp"
+                       ng-repeat="card in cardList.cards"
+                       ng-class="{'completed':  vm.parseValue(card.checkItemsChecked) === card.checklists[0].checkItems.length}"
+                       ng-click="vm.openCard( $event, card.id )">
+
+                    <div class="bread-crumb">
+                      <div class="bread-crumb-panel" layout="row" layout-align="space-between">
+
+                        <div class="board-title">
+                          <span>{{cardList.name}}</span>
+                          <i class="icon icon-menu-right s20"></i>
+                        </div>
+
+                        <div class="card-type">
+
+                          <div>{{vm.getNameOftheBoard(cardList, card.id)}}</div>
+
+                          <md-menu md-offset="0 48px" class="options list-header-option-button">
+
+                            <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Options"
+                                       translate translate-attr-aria-label="SB.OPTIONS">
+                              <md-icon md-menu-origin md-font-icon="icon-dots-vertical"></md-icon>
+                            </md-button>
+
+                            <md-menu-content class="options-menu-content" width="4">
+                              <md-menu-item>
+                                <md-button ng-click="vm.removeCard( $event, card )" aria-label="Remove List"
+                                           translate translate-attr-aria-label="PLM.REMOVE_CARD">
+                                  <md-icon md-font-icon="icon-delete" md-menu-align-target></md-icon>
+                                  <span translate="PLM.REMOVE_CARD">Remove Card</span>
+                                </md-button>
+                              </md-menu-item>
+                            </md-menu-content>
+
+                          </md-menu>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- CARD COVER -->
+                    <div ng-if="vm.board.settings.cardCoverImages && vm.board.cards.getById(card.id).idAttachmentCover"
+                         class="list-card-cover">
+                      <img ng-src="{{vm.board.cards.getById
+                        (card.id).attachments.getById(vm.board.cards.getById(card.id).idAttachmentCover).src}}">
+                    </div>
+                    <!-- / CARD COVER -->
+
+                    <!-- CARD DETAILS -->
+                    <div class="list-card-details">
+
+                      <!-- CARD SORT HANDLE -->
+                      <div class="list-card-sort-handle">
+                        <md-icon md-font-icon="icon-cursor-move" class="icon s16"></md-icon>
+                      </div>
+                      <!-- /CARD SORT HANDLE -->
+
+                      <!-- CARD LABELS -->
+                      <div ng-if="card.idLabels.length > 0" class="list-card-labels"
+                           layout="row" layout-wrap>
+                              <span class="list-card-label"
+                                    ng-class="'md-'+(vm.getLabelsByCardId(label, cardList.labels).color||'')+'-bg'"
+                                    ng-repeat="label in card.idLabels">
+                                  <md-tooltip class="md-tooltip">
+                                    {{vm.getLabelsByCardId(label, cardList.labels).name||''}}
+                                  </md-tooltip>
+                              </span>
+                      </div>
+                      <!-- / CARD LABELS -->
+
+                      <!-- CARD NAME -->
+                      <div class="list-card-name">{{card.name}}</div>
+                      <!-- / CARD NAME -->
+
+                      <div ng-if="card.due || card.checkItems"
+                           class="list-card-badges" layout="row" layout-align="start center">
+
+                        <!-- CARD DUE -->
+                        <span class="badge due-date"
+                              ng-class="{'overdue': vm.isOverdue(card.due)}"
+                              ng-if="card.due" layout="row"
+                              layout-align="start center">
+                                  <i class="icon-clock s16"></i>
+                                  <span>{{vm.formatDate(card.due)||''}}</span>
+                              </span>
+                        <!-- / CARD DUE -->
+
+                        <!-- CARD CHECK ITEMS STATUS -->
+                        <span ng-if="card.checklists && vm.hasSatisfyCheckListRules(card.checklists)"
+                              class="badge check-items"
+                              ng-class="{'completed': card.checklists[0].checkItems.length === vm.parseValue(card.checkItemsChecked)}"
+                              layout="row" layout-align="start center">
+                                  <i class="icon-checkbox-marked-circle s16"></i>
+                                  <span>{{ vm.parseValue(card.checkItemsChecked)}}</span>
+                                  <span>/</span>
+                                  <span>{{card.checklists[0].checkItems.length}}</span>
+                              </span>
+                        <!-- / CARD CHECK ITEMS STATUS -->
+
+                      </div>
+
+                    </div>
+                    <!-- / CARD DETAILS -->
+
+                    <!-- CARD FOOTER -->
+                    <div class="list-card-footer" layout="row" layout-align="space-between center">
+
+                      <div layout="row" layout-align="start center">
+
+                        <!-- CARD MEMBERS -->
+                        <div ng-if="card.idMembers.length > 0" class="list-card-members"
+                             layout="row">
+
+                          <div class="list-card-member"
+                               ng-repeat="memberId in card.idMembers">
+
+                            <md-chip-template class="member-chip">
+                              <img ng-show="vm.isAvatarAvailable(vm.members.getById(memberId).avatar)"
+                                   class="list-card-avatar-circle" ng-src="{{vm.members.getById(memberId).avatar}}">
+                              <div ng-hide="vm.members.getById(memberId).avatar" class="list-card-avatar-circle">
+                                <span class="initials">{{vm.defaultAvatar(vm.members.getById(memberId).name)}}</span>
+                              </div>
+                            </md-chip-template>
+
+                            <md-tooltip class="md-tooltip">
+                              <div class="name">{{ vm.board.members.getById(memberId).name}}</div>
+                            </md-tooltip>
+                          </div>
+
+                        </div>
+                        <!-- / CARD MEMBERS -->
+
+                        <!-- CARD SUBSCRIBE -->
+                        <span ng-if="card.subscribed" class="list-card-footer-item"
+                              layout="row" layout-align="start center">
+                                    <i class="icon-eye s18"></i>
+                                </span>
+                        <!-- / CARD SUBSCRIBE -->
+
+                        <!-- CARD DETAILS -->
+                        <span ng-if="card.description !== ''"
+                              class="list-card-footer-item" layout="row" layout-align="start center">
+                                    <i class="icon-document s18"></i>
+                                </span>
+                        <!-- / CARD DETAILS -->
+
+                        <!-- CARD ATTACHMENT -->
+                        <span class="list-card-footer-item" ng-if="card.attachments"
+                              layout="row" layout-align="start center">
+                                  <i class="icon-attachment s18"></i>
+                                  <span class="value">{{card.attachments.length}}</span>
+                              </span>
+                        <!-- / CARD ATTACHMENT -->
+
+                        <!-- CARD COMMENTS -->
+                        <span class="list-card-footer-item" ng-if="card.comments"
+                              layout="row" layout-align="start center">
+                                  <i class="icon-comment s18"></i>
+                                  <span class="value">{{card.comments.length}}</span>
+                              </span>
+                        <!-- / CARD COMMENTS -->
+
+                      </div>
+
+                      <div layout="row" layout-align="end center">
+
+                        <div class="impact-menu"
+                             ng-click="vm.preventDefault($event);vm.openCard( $event, card.id, true )">
+                          <md-button class="md-icon-button align-left" ng-click="$mdOpenMenu($event)"
+                                     aria-label="Options"
+                                     translate translate-attr-aria-label="SB.OPTIONS">
+                            <md-icon class="align-left" md-menu-origin md-font-icon="icon-impact-visualizer"></md-icon>
+                            <div class="align-left" translate="PLM.WHERE_USED">Visualize Impact</div>
+                          </md-button>
+                        </div>
+
+                        <div class="change-state">
+                          <md-menu md-offset="0 48px" class="options list-header-option-button">
+
+                            <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Options"
+                                       translate translate-attr-aria-label="PLM.OPTIONS">
+                              <md-icon class="align-left" md-menu-origin md-font-icon="icon-flip-to-back"></md-icon>
+                              <div translate="PLM.CHANGE_STATE" class="align-left">Change state</div>
+                            </md-button>
+
+                            <md-menu-content class="options-menu-content" width="4">
+                              <md-menu-item ng-repeat="menu in vm.filterCardNames(cardList.lists,card.id)">
+                                <md-button aria-label="{{vm.displayCardInfo(menu)}}"
+                                           ng-click="vm.toggleCardState($event,cardList.id, card.id, cardList.lists, menu.id, cardList)">
+                                  <span ng-bind="vm.displayCardInfo(menu)"></span>
+                                </md-button>
+                              </md-menu-item>
+
+                            </md-menu-content>
+
+                          </md-menu>
+                          <!--<div class="align-right"  translate="PLM.CHANGE_STATE"></div>-->
+                        </div>
+
+                      </div>
+                    </div>
+                    <!-- CARD FOOTER -->
+
+                  </div>
+                  <!-- / CARD -->
+
+                </div>
+
+              </div>
+
+              <!-- / CARD CONTENT -->
+
+              <!-- BOARD LIST CONTENT -->
+              <div ng-if="dialog.backendOuput.boardList" ng-init="dialog.backendOuput.disableBoard = false"
+                   class="bot-board-selector md-accent-bg board-list md-whiteframe-3dp"
+                   ng-class="'md-'+vm.board.settings.color+'-bg'"
+                   layout="row" layout-align="start center" ms-scroll>
+
+
+                <div class="board-list-item" ng-init="board.selected = false "
+                     ng-repeat="board in dialog.backendOuput.boardList"
+                     layout="column" layout-align="space-between center"
+                     ng-click="!dialog.backendOuput.disableBoard && vm.setSelectedBoard(board, dialog)">
+
+                  <div class="board-icon">
+                    <i class="icon-trello s64"></i>
+                  </div>
+
+                  <div flex class="board-name">{{board.boardTitle}}</div>
+
+                  <div ng-show="board.selected" class="selected-icon green-bg">
+                    <i class="icon-check s24"></i>
+                  </div>
+                </div>
+
+              </div>
+              <!-- / BOARD LIST CONTENT -->
+
+            </div>
+            <!-- / MESSAGE -->
+
+          </div>
+          <!-- CHAT MESSAGES -->
+
+        </md-content>
+        <!-- / CHAT CONTENT -->
+
+        <!-- CHAT FOOTER -->
+        <div class="chat-footer flex-noshrink" layout="row" layout-align="center center" ng-style="vm.checkBoardList(vm.chat) ? {'width': '97.5%'} : {'width': '100%'}">
+
+          <!-- REPLY FORM -->
+          <form ng-submit="vm.reply()" flex class="reply-form" layout="row" layout-align="start center">
+
+            <md-input-container flex md-no-float>
+                            <textarea ng-keyup="vm.reply($event)"
+                                      md-no-autogrow ng-model="vm.replyMessage"
+                                      ng-class="{'grow': vm.textareaGrow}"
+                                      placeholder="Type and hit enter to send message"
+                                      translate
+                                      ng-trim="true"
+
+                                      translate-attr-placeholder="CHAT.REPLY_PLACEHOLDER">
+                            </textarea>
+            </md-input-container>
+
+            <md-button class="md-fab" type="submit" aria-label="Send message" translate
+                       translate-attr-aria-label="CHAT.SEND_MESSAGE">
+              <md-icon md-font-icon="icon-send"></md-icon>
+            </md-button>
+
+          </form>
+          <!-- / REPLY FORM -->
+
+        </div>
+        <!-- / CHAT FOOTER-->
+
+      </div>
+      <!-- / CHAT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>
+<!-- / CHAT APP -->

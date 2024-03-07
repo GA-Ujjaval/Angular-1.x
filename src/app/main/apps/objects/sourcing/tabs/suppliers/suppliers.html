@@ -1,0 +1,84 @@
+<div class="margin-5">
+
+  <div class="clear-filter-text align-left" ng-if="vm.clearButtonSupplier">
+    <md-button class="clear-filter-button" ng-click="vm.fuseUtils.clearFilters(vm.supplierTableUiGrid)">
+      <md-icon md-font-icon="icon-close" class=" s18 clear-filter-icon"></md-icon>
+    </md-button>
+    <span>Clear current sorts, filters and pins</span>
+  </div>
+
+  <div layout="row" layout-align="end center">
+    <md-button class="button-table-edit" ng-click="vm.editTable($event, vm.objectPageEnum.supplierPage)">
+      <md-icon class="icon-table-edit"></md-icon>
+      <md-tooltip class="md-tooltip">Show/Hide Columns</md-tooltip>
+    </md-button>
+
+    <md-menu md-position-mode="left bottom">
+
+      <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+        <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+        <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+      </md-button>
+
+      <md-menu-content>
+
+        <md-menu-item>
+          <md-button ng-click="vm.fuseUtils.downloadTable('csv', '', vm.supplierTableUiGrid)">
+            CSV
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+          <md-button
+            ng-click="vm.fuseUtils.downloadTable('pdf', 'download', vm.supplierTableUiGrid.grid, vm.supplierTableOptions)">
+            PDF
+          </md-button>
+        </md-menu-item>
+
+      </md-menu-content>
+
+    </md-menu>
+
+    <md-button class="button-print"
+               ng-click="vm.fuseUtils.downloadTable('pdf', 'print', vm.supplierTableUiGrid.grid, vm.supplierTableUiGrid)">
+      <md-icon class="icon-printer"></md-icon>
+      <md-tooltip class="md-tooltip">Print table</md-tooltip>
+    </md-button>
+    <md-menu>
+      <md-button class="md-icon-button btn-hvr" ng-click="$mdMenu.open()">
+        <md-icon md-font-icon="icon-dots-horizontal" class="s34"></md-icon>
+        <md-tooltip class="md-tooltip">More Actions</md-tooltip>
+      </md-button>
+      <md-menu-content>
+        <md-menu-item>
+          <md-button ng-disabled="!vm.getSelectedRows().length" ng-click="vm.deleteItems('Suppliers')">
+            Delete Selected Items
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+
+</div>
+
+<div class="ps-rel" id="grid-supplier"
+     ui-grid="vm.supplierTableOptions"
+     ui-grid-move-columns
+     ui-grid-save-state
+     ui-grid-tree-view
+     ui-grid-pinning
+     ui-grid-selection
+     ui-grid-resize-columns
+     ui-grid-exporter
+     ui-grid-pagination
+     ui-grid-auto-resize
+     class="grid">
+
+  <div class="watermark" ng-show="!vm.supplierTableOptions.data.length && !vm.progress">No data available</div>
+  <div class="progress-bar loader-circle-text" layout="row" layout-sm="column" layout-align="space-around" ng-if="vm.progress">
+      <md-progress-circular md-mode="indeterminate" class="md-accent md-raised"></md-progress-circular>
+      <span ng-if="vm.progress" class="loading-products">Loading Suppliers...</span>
+  </div>
+  <no-results-found grid-api="vm.supplierTableUiGrid" grid-options="vm.supplierTableOptions"></no-results-found>
+
+</div>

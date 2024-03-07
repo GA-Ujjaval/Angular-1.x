@@ -1,0 +1,34 @@
+<div layout="row" layout-align="space-between">
+              <span class="title margin-top-15 margin-bottom-15 f-text font-size-20">
+                <b>Price Break</b>
+              </span>
+</div>
+
+<div layout-align="center center" class="margin-bottom-25 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-switch class="margin-0" ng-model="vm.priceBreakSetting" ng-change="vm.changePriceBreakSetting($event, 'costSplitSettings', vm.priceBreakSetting)"
+               aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow multiple costs to show price-breaks for varying quantities.</span>
+  </div>
+  <div layout="row" class="margin-10" flex>
+    <span class="h3">NOTE: When disabled, users can enter only one cost value for the part.
+      When enabled, users can add more than 1 cost value to represent price breaks or volume discounts.
+      At the part level, users can select the cost that should be used for BOM rollup calculations.
+    </span>
+  </div>
+
+</div>
+
+<div layout-align="center center" class="margin-bottom-10 margin-top-10">
+  <md-button class="md-accent md-raised" ng-click="vm.addPriceBreak()">Add Price Break Quantity</md-button>
+</div>
+<div id="grid-price-break" class="price-break"
+     ui-grid="vm.priceBreakOptions"
+     class="grid margin-10"
+     ui-grid-auto-resize
+     ui-grid-edit
+     ng-style="{ 'height': !vm.priceBreakOptions.data.length ? 150 : (vm.priceBreakOptions.data.length * 30 + 65) }">
+
+  <div class="watermark" ng-show="!vm.priceBreakOptions.data.length">No data available</div>
+
+</div>

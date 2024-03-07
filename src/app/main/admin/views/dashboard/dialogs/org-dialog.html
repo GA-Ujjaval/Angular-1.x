@@ -1,0 +1,260 @@
+<md-dialog class="task-dialog" aria-label="New Task">
+  <form>
+    <md-toolbar class="md-accent md-hue-2">
+      <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+        <div class="title">
+          <span>{{vm.title}}</span>
+        </div>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon md-svg-src="assets/angular-material-assets/img/icons/ic_close_24px.svg"
+                   aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content ms-scroll class="set-tabs-custom" id="dialog-tabs">
+      <md-tabs md-dynamic-height md-border-bottom class="pad-0-20">
+
+        <!-- Basic Info -->
+        <md-tab label="Basic Info">
+          <div class="sections">
+            <form name="createCustomerForm" class="md-inline-form" novalidate>
+              <div class="mt-25" layout="column" layout-gt-sm="row">
+                <md-input-container flex class="md-block md-input-invalid">
+                  <input name="organizationName" ng-model="vm.createCustomerForm.organizationName" placeholder="Company Name" md-autofocus
+                    required>
+                  <div ng-messages="createCustomerForm.organizationName.$error" role="alert">
+                    <div ng-message="required">
+                      <span>Company name is required.</span>
+                    </div>
+                  </div>
+                </md-input-container>
+              </div>
+              <div layout="column" layout-gt-sm="row">
+                <md-input-container flex>
+                  <input type="text" name="organizationUrl" ng-model="vm.createCustomerForm.organizationUrl" placeholder="Company URL"
+                    maxlength="50">
+                </md-input-container>
+              </div>
+              <div layout="column" layout-gt-sm="row">
+                <md-input-container flex>
+                  <input type="tel" name="organizationContactNumber" ng-model="vm.createCustomerForm.organizationContactNumber" placeholder="Company Contact Number"
+                    ng-pattern="/\d{10}/" maxlength="10">
+                  <div ng-messages="createCustomerForm.organizationContactNumber.$error" role="alert">
+                    <div ng-message="pattern">
+                      <span>Phone number must be 10 digits.</span>
+                    </div>
+                  </div>
+                </md-input-container>
+              </div>
+              <div layout="column" layout-gt-sm="row">
+                <md-input-container flex>
+                  <textarea name="organizationAddress" ng-model="vm.createCustomerForm.organizationAddress" placeholder="Company Address" md-maxlength="100"
+                    maxlength="100" style="height: 50px;"></textarea>
+                </md-input-container>
+              </div>
+              <div class="form-wrapper form-data-wrapper" flex="40">
+                <div class="board-list-item add-new-board" layout="column" layout-align="center center">
+                  <img src="{{ vm.createCustomerForm.organizationLogo || ''}}" class="icon s64">
+                  <div id="product-image-uploader" flow-init="vm.ngFlowOptions" flow-name="vm.ngFlow.flow" flow-files-submitted="vm.upload($files)"
+                    flow-file-added="vm.fileAdded($file)" flow-file-success="vm.fileSuccess($file, $message)" flow-complete="vm.uploadComplete()">
+                    <div class="upload-button">
+                      <md-button class="md-accent md-raised" flow-btn>
+                        Orgranization Logo
+                      </md-button>
+                    </div>
+                  </div>
+                  <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progressimage">
+                  </md-progress-circular>
+                </div>
+              </div>
+              <hr ng-if="vm.editPermision">
+              <div class="form-title" ng-if="vm.editPermision">Company Admin Information</div>
+              <div layout="column" layout-gt-sm="row" ng-if="vm.editPermision">
+                <md-input-container flex>
+                  <input type="text" name="firstName" ng-model="vm.createCustomerForm.firstName" placeholder="Company Admin First Name"
+                    requiredmaxlength="20">
+                  <div ng-messages="createCustomerForm.firstName.$error" role="alert">
+                    <div ng-message="required">
+                      <span>{{vm.error.required}}</span>
+                    </div>
+                  </div>
+                </md-input-container>
+              </div>
+              <div layout="column" layout-gt-sm="row" ng-if="vm.editPermision">
+                <md-input-container flex>
+                  <input type="text" name="lastName" ng-model="vm.createCustomerForm.lastName" placeholder="Company Admin Last Name"
+                    requiredmaxlength="20">
+                  <div ng-messages="createCustomerForm.lastName.$error" role="alert">
+                    <div ng-message="required">
+                      <span>{{vm.error.required}}</span>
+                    </div>
+                  </div>
+                </md-input-container>
+              </div>
+              <div layout="column" layout-gt-sm="row" ng-if="vm.editPermision">
+                <md-input-container flex>
+                  <input type="email" name="userEmail" ng-model="vm.createCustomerForm.userEmail" placeholder="Company Admin Email"
+                    requiredmaxlength="64">
+                  <div ng-messages="createCustomerForm.userEmail.$error" role="alert">
+                    <div ng-message="required">
+                      <span>{{vm.error.required}}</span>
+                    </div>
+                    <div ng-message="email">
+                      <span>{{vm.error.email}}</span>
+                    </div>
+                  </div>
+                </md-input-container>
+              </div>
+              <div layout="column" layout-gt-sm="row">
+                <md-button type="submit" class="md-raised md-accent" aria-label="Submit" ng-click="vm.submit()" ng-disabled="createCustomerForm.$invalid || createCustomerForm.$pristine || vm.submitButton">
+                  Submit
+                </md-button>
+                <md-button type="cancel" class="md-raised md-accent" aria-label="Reset"
+                           ng-click="vm.createCustomerForm = {}">
+                  Reset
+                </md-button>
+                <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progress">
+                </md-progress-circular>
+              </div>
+            </form>
+          </div>
+        </md-tab>
+        <!-- Basic Info -->
+
+        <!-- Settings Tab -->
+        <md-tab label="Settings" ng-if="vm.settingHide">
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <form name="trialExpireForm" class="md-inline-form" novalidate>
+                <md-switch ng-model="vm.trialExpire" aria-label="Switch 1" ng-change="vm.trialExpireChange()">
+                  <span>Trial</span>
+                  <span ng-if="vm.trialExprieHide">On</span>
+                  <span ng-if="!vm.trialExprieHide">Off</span>
+                </md-switch>
+              </form>
+            </div>
+
+            <div layout="row" layout-align="left center" ng-if="vm.trialExprieHide">
+              <!-- Trial Expire Date -->
+              <span>Trial Expire On : </span>
+              <md-datepicker format="YYYY/MM/DD" min-view="year" max-view="month" start-view="month" ng-model="vm.trialExpireDate" md-placeholder="Enter date"
+                ng-change="vm.trialExpireDateChange()"></md-datepicker>
+              <!-- /Trial Expire Date -->
+            </div>
+          </md-content>
+
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <span>Total records allowed for import : </span>
+              <md-input-container style="min-width: 160px;">
+                <md-select ng-change="vm.callallSettingDialog('', 'total records import')"
+                           ng-model="vm.recordsImportSetting"
+                  aria-label="recordsImportSetting">
+                  <md-option value="1000">1000</md-option>
+                  <md-option value="2000">2000</md-option>
+                  <md-option value="3000">3000</md-option>
+                  <md-option value="4000">4000</md-option>
+                  <md-option value="5000">5000</md-option>
+                  <md-option value="-1">No limit</md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+          </md-content>
+
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <md-switch ng-model="vm.configuration" aria-label="Switch 1"
+                         ng-change="vm.callallSettingDialog('', 'configuration')()">
+                <span>Allow configuration objects : </span>
+                <span ng-if="vm.configuration">On</span>
+                <span ng-if="!vm.configuration">Off</span>
+              </md-switch>
+            </div>
+          </md-content>
+
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <md-switch ng-model="vm.productionModule" aria-label="Switch 1"
+                         ng-change="vm.callallSettingDialog('', 'productionModule')">
+                <span>All products module :</span>
+                <span ng-if="vm.productionModule">On</span>
+                <span ng-if="!vm.productionModule">Off</span>
+              </md-switch>
+            </div>
+          </md-content>
+
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <md-switch ng-model="vm.sourcingCost" aria-label="Switch 1"
+                         ng-change="vm.callallSettingDialog('', 'sourcingCost')">
+                <span>Allow Sourcing Cost Option :</span>
+                <span ng-if="vm.sourcingCost">On</span>
+                <span ng-if="!vm.sourcingCost">Off</span>
+              </md-switch>
+            </div>
+          </md-content>
+
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <form name="activeinactiveCompanyForm" class="md-inline-form" novalidate>
+
+                <md-switch ng-model="vm.activeinactiveCompnay" aria-label="Switch 1" ng-change="vm.statusChange()">
+                  <span>Status : </span>
+                </md-switch>
+
+                <span>&nbsp;{{vm.activeinactiveCompanylabel}}</span>
+              </form>
+            </div>
+            <div layout="row" layout-align="left center" ng-if="vm.activeinactiveCompanylabel === 'Active'">
+              <md-input-container flex>
+                <input type="text" name="licensesUser" ng-model="vm.licensesUser" placeholder="Total Licenses for users" ng-blur="vm.callallSettingDialog('', 'status')">
+              </md-input-container>
+            </div>
+          </md-content>
+
+          <md-content class="md-padding">
+            <div layout="row" layout-align="left center">
+              <md-button class="md-raised md-accent" aria-label="Delete" ng-click="vm.deleteFuseObject()">
+                Delete All Fuse Objects
+              </md-button>
+            </div>
+            <div layout="row" layout-align="left center">
+              <p class="text-center">
+                <strong>Note: </strong>This will delete ALL Parts, Products,Documents and ALL Manufacturer,
+                Manufacturer
+                Parts, Supplier
+                and Supplier Parts.</p>
+            </div>
+          </md-content>
+        </md-tab>
+        <!-- Settings Tab -->
+
+        <!-- Features Tab -->
+        <md-tab label="Features" ng-if="vm.settingHide">
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <md-switch ng-model="vm.configuration" aria-label="Switch 1" ng-change="vm.callallSettingDialog('', 'configuration')">
+                <span>Allow configuration objects : </span>
+                <span ng-if="vm.configuration">On</span>
+                <span ng-if="!vm.configuration">Off</span>
+              </md-switch>
+            </div>
+          </md-content>
+
+          <md-content class="md-padding mb-10">
+            <div layout="row" layout-align="left center">
+              <md-switch ng-model="vm.advancedNumbering" aria-label="Switch 2" ng-change="vm.callallSettingDialog('', 'advanced numbering')">
+                <span>Allow Advanced Numbering : </span>
+                <span ng-if="vm.advancedNumbering">On</span>
+                <span ng-if="!vm.advancedNumbering">Off</span>
+              </md-switch>
+            </div>
+          </md-content>
+        </md-tab>
+        <!-- Features Tab -->
+
+      </md-tabs>
+    </md-dialog-content>
+  </form>
+</md-dialog>

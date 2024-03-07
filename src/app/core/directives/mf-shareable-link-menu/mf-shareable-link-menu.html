@@ -1,0 +1,18 @@
+<md-menu md-position-mode="target bottom">
+  <md-button ng-click="$mdMenu.open()">
+    <md-icon md-font-icon="icon-link shareable-link">
+    </md-icon>
+    <md-tooltip md-direction="bottom" class="md-tooltip">
+      Click here for share options
+    </md-tooltip>
+  </md-button>
+  <md-menu-content>
+    <md-menu-item style="pointer-events: auto" ng-if="!isDocument || ($index < 2 && isDocument)"
+                  ng-repeat="option in vm.shareOptions">
+      <md-button ng-click="vm.executeOption(vm, option)">
+        {{::option.text}}
+      </md-button>
+      <md-tooltip md-direction="left" class="md-tooltip">{{::option.tooltip}}</md-tooltip>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

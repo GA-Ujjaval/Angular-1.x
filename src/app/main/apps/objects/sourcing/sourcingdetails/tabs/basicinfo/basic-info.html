@@ -1,0 +1,170 @@
+<div id="mpn-basic">
+  <div layout="row" layout-align="center center">
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+      <!-- CONTENT -->
+      <div class="content">
+        <form name="basicinfoForm" novalidate>
+
+          <div layout-gt-sm="row" layout-align="start center">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Description</label>
+              <input class="md-input-height" type="text" ng-model="vm.sourceObjectData.description"
+                     ng-disabled="vm.readonly">
+            </md-input-container>
+          </div>
+
+          <div layout-gt-sm="row" layout-align="start center">
+            <md-input-container class="md-block md-icon-float" flex flex="33">
+              <label>Packaging</label>
+              <input class="md-input-height" type="text" ng-model="vm.sourceObjectData.packaging"
+                     ng-disabled="vm.readonly">
+            </md-input-container>
+
+            <md-input-container class="md-block md-icon-float" flex flex="33">
+              <label>Lead Time</label>
+              <input class="md-input-height" type="text" ng-model="vm.sourceObjectData.leadTime"
+                     ng-disabled="vm.readonly">
+            </md-input-container>
+
+            <md-input-container ng-class="{cstsetin: vm.readonly}" class="mt--65 md-icon-float md-block bnone" flex
+                                flex="33">
+              <label>Available</label>
+              <md-select ng-model="vm.sourceObjectData.isAvailable" ng-disabled="vm.readonly">
+                <md-option value="yes">
+                  <em>Yes</em>
+                </md-option>
+                <md-option value="no">
+                  <em>No</em>
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <md-chips class="sourcing-parts-red-des" ng-model="vm.sourceObjectData.tags" flex-gt-sm
+                    placeholder="Type value for 'Tag' and hit 'Enter'" style="margin-bottom: 50px;"
+                    ng-disabled="vm.readonly">
+          </md-chips>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Cost -->
+  <div layout="row" layout-align="center center">
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+      <form class="user-form" name="CostForm" novalidate>
+        <!-- / CONTENT -->
+        <div layout="row" layout-align="space-between center" flex>
+          <div class="h4" layout-align="start start">
+            <md-icon md-font-icon="icon icon-cash"></md-icon> &nbsp;
+            <span class="title">Cost</span>
+          </div>
+          <div class="start right">
+          </div>
+        </div>
+        <div id="grid-cost-sourcing" ui-grid="vm.costSection" class="grid cust-hieght" ui-grid-auto-resize ui-grid-edit
+             ng-style="{ 'height': !vm.costSection.data.length ? 150 : (vm.costSection.data.length * 30 + 65) }">
+          <div class="watermark" ng-show="!vm.costSection.data.length">No data available</div>
+        </div>
+        <!-- / CONTENT -->
+      </form>
+    </div>
+  </div>
+
+  <!-- Cost -->
+
+  <!-- Inventory -->
+  <div layout="row" layout-align="center center">
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+      <form name="InventoryForm" novalidate>
+        <!-- / CONTENT -->
+        <div layout="row" layout-align="space-between center" flex>
+          <div class="h4" layout-align="start start">
+            <md-icon md-font-icon="icon icon-barcode"></md-icon> &nbsp;
+            <span class="title">Inventory</span>
+          </div>
+        </div>
+        <div layout-gt-sm="row" layout-align="start center">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Quantity On Hand</label>
+            <input ng-change="vm.countTotal('#quantityOnhand')" name="qtyOnhand" id="quantityOnhand"
+                   class="md-input-height" ng-model="vm.quantityOnhand" ng-disabled="vm.readonly">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Quantity On Order</label>
+            <input ng-change="vm.countTotal('#quantityOnorder')" name="qtyOnorder" id="quantityOnorder"
+                   class="md-input-height quantity"
+                   ng-model="vm.quantityOnorder" ng-disabled="vm.readonly">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Total Available Quantity</label>
+            <input class="md-input-height" ng-model="vm.totalQuantity" disabled>
+          </md-input-container>
+        </div>
+        <!-- / CONTENT -->
+      </form>
+    </div>
+  </div>
+  <!-- Inventory -->
+
+  <div layout="row" layout-align="center center">
+    <div class="form-wrapper margin-15 md-whiteframe-5dp" flex-lg="100" flex-gt-lg="100" flex-sm="100">
+      <!-- / CONTENT -->
+      <!-- payment -->
+      <div layout="row" layout-align="space-between center" flex>
+        <div class="h4" layout-align="start start">
+          <md-icon md-font-icon="icon icon-history"></md-icon> &nbsp;
+          <span class="title">Object &nbsp;History</span>
+        </div>
+      </div>
+
+      <table class="simple" ms-responsive-table>
+
+        <thead>
+        <tr>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Created By</span>
+            </div>
+          </th>
+
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Created Date</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Modified By</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Modified Date</span>
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <p layout-align="center">{{vm.createdBy}}</p>
+          </td>
+          <td>
+            <p layout-align="center">{{vm.createDate | date:'medium'}}</td>
+          <td>
+            <p layout-align="center">{{vm.modifiedBy}}</p>
+          </td>
+          <td>
+            <p layout-align="center">{{vm.modifiedDate | date:'medium'}}</p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

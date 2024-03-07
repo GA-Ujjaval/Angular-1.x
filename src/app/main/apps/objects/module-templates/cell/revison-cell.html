@@ -1,0 +1,11 @@
+<div
+  class="ui-grid-cell-contents">
+  <div ng-switch="row.entity.fuseObjectNumberSetting.enableMinorRev">
+    <div ng-switch-when="true">
+      {{row.entity.revision}}.{{row.entity.minorRevision}}
+    </div>
+    <div ng-switch-default>
+      {{row.entity.revision}}
+    </div>
+  </div>
+</div>

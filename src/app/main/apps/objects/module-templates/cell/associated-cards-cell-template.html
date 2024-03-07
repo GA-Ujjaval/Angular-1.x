@@ -1,0 +1,25 @@
+<div>
+  <md-menu ng-if="row.entity.associatedCardsList && row.entity.associatedCardsList.length !== 0" md-position-mode="left bottom">
+    <md-button class="button-briefcase-download associated-cards-menu" ng-click="$mdMenu.open(); grid.appScope.vm.getBoards(row)">
+      <i class="icon s16 icon-trello associated-cards-icon" aria-label="Boards"><!----><!----></i>
+      <md-tooltip class="md-tooltip">Object has card(s) associated with it. Click to see card(s) details</md-tooltip>
+    </md-button>
+
+    <md-menu-content>
+      <!--this style attribute is needed to overcome the bug with md-tooltip, when on hover we have not one, but multiple tooltips-->
+      <md-menu-item style="pointer-events: auto" ng-repeat="board in row.entity.cardsInfo">
+        <md-button aria-label="associated-cards-cell" ng-click="grid.appScope.vm.openCard($event, board.chosenCard.id, '', [], '', '', [])" ui-sref="app.customer.scrumboard.boards.board({cardId:board.chosenCard.id})" ui-sref-opts="{reload: false, notify: false}">
+          {{::board.name}} : {{::board.lists[0].name}} : {{::board.chosenCard.companySeqId}} : {{::board.chosenCard.name}}
+          <md-tooltip md-direction="right" md-autohide="true" class="md-tooltip">Board '{{::board.name}}' : List '{{::board.lists[0].name}}' : Card# '{{::board.chosenCard.companySeqId}}' : Card Title '{{::board.chosenCard.name}}'</md-tooltip>
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="!row.entity.cardsDownloaded">
+        <md-button aria-label="associated-cards-cell-progress">
+          <md-progress-circular md-diameter="20" class="md-accent" md-mode="indeterminate"></md-progress-circular>
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+
+  </md-menu>
+</div>
+

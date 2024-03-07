@@ -1,0 +1,73 @@
+<div layout="row" layout-align="space-between">
+    <span class="title margin-top-15 margin-bottom-15 secon f-text font-size-20">
+      <b>&nbsp;Editing Released Objects</b>
+    </span>
+  </div>
+  
+  
+  <div layout-align="center center" class="margin-bottom-10 margin-top-10">
+    <div flex class="margin-left-10" layout="row">
+      <md-switch class="margin-0" ng-model="vm.editReleased" ng-change="vm.changeReleaseSetting($event, 'releaseSettings', vm.editReleased)"
+        aria-label="number switch"></md-switch>
+      <span class="margin-top-5 h3">Allow edits to certain attributes</span>
+    </div>
+    <div layout="row" class="margin-10" flex>
+      <span class="h3"> Note: Enabling this setting will allow users to edit 'Cost', 'Cost Type', 'Quantity on Hand' and 'Quantity on Order'
+        attributes. When editing an object Manually, all 'Released' revisions of the object can be edited. However, when editing
+        these attributes, through the 'Import > Update' process, only the current revision of any object('Released' or 'InDevelopment')
+        will be updated
+      </span>
+    </div>
+  </div>
+  
+  <div layout-align="center center" class="margin-bottom-10 margin-top-10">
+    <div flex class="margin-left-10" layout="row">
+      <md-switch class="margin-0" ng-model="vm.editReleasedBom" ng-change="vm.changeReleaseBomSetting($event, 'releaseBomSettings', vm.editReleasedBom)"
+        aria-label="number switch"></md-switch>
+      <span class="margin-top-5 h3">Allow edits to Bill of Materials</span>
+    </div>
+    <div layout="row" class="margin-10" flex>
+      <span class="h3"> Note: Enabling this setting will allow users to perform edits within a Released Bill-of-Material (eg: Import Bill-of-Material,
+        add part to BOM, delete part from BOM, modify RefDes, BOM Quantity, BOM notes). Also, when an object within a Released
+        BOM is revised, users will be able to update that object's revision within a Released BOM.
+      </span>
+    </div>
+  </div>
+  
+  <div layout-align="center center" class="margin-bottom-10 margin-top-10">
+    <div flex class="margin-left-10" layout="row">
+      <md-switch class="margin-0" ng-model="vm.editReleaseAttachments" ng-change="vm.changeReleaseAttachmentSetting($event, 'releaseAttachmentSettings', vm.editReleaseAttachments)"
+        aria-label="number switch"></md-switch>
+      <span class="margin-top-5 h3">Allow edits to the 'Attachments' tab</span>
+    </div>
+    <div layout="row" class="margin-10" flex>
+      <span class="h3"> Note: Enabling this setting will allow users to upload attachment(s), associate document objects and remove them from
+        a 'Released' object
+      </span>
+    </div>
+  </div>
+  
+  <div layout-align="center center" class="margin-bottom-10 margin-top-10">
+    <div flex class="margin-left-10" layout="row">
+      <md-switch class="margin-0" ng-model="vm.editReleaseSourcing" ng-change="vm.changeReleaseSourcingSetting($event, 'releaseSourcingSettings', vm.editReleaseSourcing)"
+        aria-label="number switch"></md-switch>
+      <span class="margin-top-5 h3">Allow edits to the 'Sourcing' tab</span>
+    </div>
+    <div layout="row" class="margin-10" flex>
+      <span class="h3"> Note: Enabling this setting will allow users to edit the 'Sourcing' tab in a 'Released' object (associate/remove manufacturing/sourcing
+        objects)
+      </span>
+    </div>
+  </div>
+  
+  <div layout-align="center center" class="margin-bottom-10 margin-top-10">
+    <div flex class="margin-left-10" layout="row">
+      <md-switch class="margin-0" ng-model="vm.editReleaseAdditionalInfo" ng-change="vm.changeReleaseAdditionalInfoSetting($event, 'releaseAdditionalInfoSettings', vm.editReleaseAdditionalInfo)"
+        aria-label="number switch"></md-switch>
+      <span class="margin-top-5 h3">Allow edits to 'Additional Info' tab</span>
+    </div>
+    <div layout="row" class="margin-10" flex>
+      <span class="h3"> Note: Enabling this setting will allow users to edit custom attributes in a 'Released' object.
+      </span>
+    </div>
+  </div>

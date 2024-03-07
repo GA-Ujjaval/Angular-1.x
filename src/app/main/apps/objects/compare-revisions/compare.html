@@ -1,0 +1,139 @@
+<div id="parts" class="page-layout simple right-sidenav md-grey-100-bg" layout="row" ng-intro-options="IntroOptions" ng-intro-method="CallMe" ng-intro-onbeforechange="BeforeChangeEvent" ng-intro-autostart="false">
+  <!-- CENTER -->
+  <div class="center" flex id="scroll-check" ms-scroll>
+
+    <!-- CONTENT -->
+    <div class="content content-compare">
+      <md-button ng-mouseover="vm.changeLogo = false" style="position: absolute; top:10px; z-index: 5;" class="goto-products-button md-icon-button" aria-label="Go to products" translate translate-attr-aria-label="EC.GO_TO_PRODUCTS" ng-click="vm.backPartFunction()">
+        <md-icon md-font-icon="icon-arrow-left" style="color: black;"></md-icon>
+      </md-button>
+
+      <div class="tabs-buttons">
+        <md-menu>
+          <md-button class="button-briefcase-download" ng-click="$mdOpenMenu()">
+            <md-icon class="icon-arrow-down-bold-circle-outline"></md-icon>
+            <md-tooltip class="md-tooltip">Download Results</md-tooltip>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="vm.downloadTable(vm.selectedTab, 'csv')">
+                CSV
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="vm.downloadTable(vm.selectedTab, 'xlsx', 'download')">
+                EXCEL
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="vm.downloadTable(vm.selectedTab, 'pdf', 'download')">
+                PDF
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+        <md-button class="button-print"
+                   ng-click="vm.downloadTable(vm.selectedTab, 'pdf', 'print')">
+          <md-icon class="icon-printer"></md-icon>
+          <md-tooltip class="md-tooltip">Print Table. NOTE: Disable any ad-blocker in the browser</md-tooltip>
+        </md-button>
+
+        <md-menu ng-if="vm.selectedTab === 2">
+          <md-button class="md-raised" ng-click="$mdOpenMenu()">
+            {{vm.showAllButtonBom}}
+            <md-icon md-font-icon="icon-chevron-down" style="color: black;"></md-icon>
+            <md-tooltip class="md-tooltip">Show all</md-tooltip>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="vm.showChangesBom(false)">
+                Show All
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="vm.showChangesBom(true)">
+                Show only differences
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+        <md-menu ng-if="vm.selectedTab === 1">
+          <md-button class="md-raised" ng-click="$mdOpenMenu()">
+            {{vm.showAllButtonAttachments}}
+            <md-icon md-font-icon="icon-chevron-down" style="color: black;"></md-icon>
+            <md-tooltip class="md-tooltip">Show all</md-tooltip>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="vm.showChangesAttachments(false)">
+                Show All
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="vm.showChangesAttachments(true)">
+                Show only differences
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+        <md-menu ng-if="vm.selectedTab == 0">
+          <md-button class="md-raised" ng-click="$mdOpenMenu()">
+            {{vm.showAllButtonAttr}}
+            <md-icon md-font-icon="icon-chevron-down" style="color: black;"></md-icon>
+            <md-tooltip class="md-tooltip">Show all</md-tooltip>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button ng-click="vm.showChangesAttr(false)">
+                Show All
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="vm.showChangesAttr(true)">
+                Show only differences
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+      </div>
+
+      <md-tabs md-dynamic-height md-selected="vm.selectedTab" class="compare-tabs">
+
+        <md-tab label="Attributes Compare">
+          <md-content ng-include="'app/main/apps/objects/compare-revisions/tabs/attribute-compare.html'">
+          </md-content>
+        </md-tab>
+
+        <!--<md-tab label="Sourcing Compare" md-on-select="vm.checkScroll()"  ui-sref="{{vm.state}}" ui-sref-opts="{reload: false, notify: false}">-->
+        <!--<md-content ng-include="'app/main/apps/objects/compare-revisions/tabs/sourcing-compare.html'">-->
+        <!--</md-content>-->
+        <!--</md-tab>-->
+
+        <md-tab label="Attachments Compare" ui-sref="app.objects.compare.attachment">
+          <div ui-view="content@app.objects.compare.attachment"></div>
+        </md-tab>
+
+        <md-tab label="BOM Compare" ng-if="vm.isDocument()">
+          <md-content ng-include="'app/main/apps/objects/compare-revisions/tabs/bom-compare/bom-compare.html'">
+          </md-content>
+        </md-tab>
+
+        <!--<md-tab label="Where-Used Compare" ng-if=" vm.isBOM || vm.isBOM == undefined" ui-sref="{{vm.stateBom}}" ui-sref-opts="{reload: false, notify: false}" ng-click="vm.calculateFlatView()">-->
+          <!--<md-content ng-include="'app/main/apps/objects/compare-revisions/tabs/where-used-compare.html'">-->
+          <!--</md-content>-->
+        <!--</md-tab>-->
+
+      </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+
+
+  </div>
+  <!-- / CENTER -->
+</div>

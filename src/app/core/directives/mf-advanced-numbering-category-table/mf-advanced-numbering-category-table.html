@@ -1,0 +1,28 @@
+<div class="advanced-numbering-grid content fullpage-datatable">
+  <div class="title margin-top-15 margin-bottom-15 f-text font-size-20">
+    <b>&nbsp;Category-Based Numbers</b>
+    <div class="adv-number-header-container"
+         ng-class="{'width-fix': vm.advancedNumberingStateService.mode.isEditable()}">
+      <div class="adv-number-header-tooltip" ng-if="!vm.advancedNumberingStateService.mode.isEditable()">
+        Click 'EDIT' button to make Changes
+      </div>
+      <div class="adv-number-header-tooltip" ng-if="vm.advancedNumberingStateService.mode.isEditable()">
+        <div>Changes have not been applied yet!</div>
+        <div>To apply, click on 'APPLY CHANGES'</div>
+      </div>
+    </div>
+  </div>
+  <div ui-grid="vm.tableOptions"
+       class="grid ps-rel"
+       id="grid-advance-numbering"
+       ui-grid-move-columns ui-grid-save-state
+       ui-grid-tree-view
+       ui-grid-pinning
+       ui-grid-resize-columns
+       ui-grid-exporter
+       ui-grid-pagination
+       ui-grid-auto-resize>
+    <div class="watermark" ng-show="!tableOptions.data.length && !vm.progress">No data available</div>
+    <no-results-found grid-api="tableApi" grid-options="tableOptions"></no-results-found>
+  </div>
+</div>

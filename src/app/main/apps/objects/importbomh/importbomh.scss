@@ -1,0 +1,256 @@
+.pr{
+  position: relative;
+}
+.circular-center {
+  position: absolute;
+  left: 50%;
+  margin-left: -30px;
+  top: 13px;
+}
+.pl-5-pr{
+  padding-left: 5%;
+}
+.set-level{
+  width: 26%;
+  margin: 0 auto;
+}
+.set-level-span{
+  float: left;
+  padding-top: 3px;
+  padding-right: 15px;
+}
+#forms {
+
+  .ms-form-wizard .ms-form-wizard-form {
+    padding: 16px 16px !important;
+  }
+
+  .margin-top-4{
+    margin-top:4px
+  }
+
+  .margin-iput{
+    margin: 0px 0 0 !important;
+  }
+
+  .question-icon{
+    cursor: pointer;
+    font-size:13px;
+    color: rgb(0,0,0);
+    font-weight: bold;
+    border: 1px solid rgb(100,255,63);
+    background: rgb(100,255,63);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+    top: 6px;
+  }
+
+  .md-cyan-font{
+    color: #0097A7;
+  }
+
+  .require-icon{
+    color: red;
+    margin-bottom: 7px;
+  }
+
+  .update-width{
+    min-width: 1196px
+  }
+
+
+ .input-bdr {
+    border: solid 1px rgba(0,0,0,0.12);
+  }
+
+  .simple-table-container{
+    .header-box{
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+      border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+      padding: 16px 8px !important;
+    }
+
+    .width-10pertg{
+        width: 10%;
+    }
+    .width-41pertg{
+      width: 41%;
+    }
+
+    .td-plus-minus{
+      position: relative;
+      .plus-sign{
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+    }
+
+    .maintd-brd-bottom{
+    border-top: 0px solid transparent!important;
+      border-bottom: 1px solid #d7d7d7 !important;
+    }
+
+
+    .table-title {
+      font-size: 15px;
+      padding: 0px;
+    }
+
+    table.simple tbody tr td {
+      padding: 12px 0 !important;
+      border-bottom: 0px solid transparent;
+
+    }
+
+     table.simple tbody tr td .document{
+      padding: 12px 5px !important;
+      border-bottom: 0px solid transparent;
+    }
+
+    table.simple tbody{
+      height: 550px;
+      overflow-y: auto;
+    }
+
+    table.simple thead tr th {
+      padding: 16px 8px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.54);
+      border-bottom: 0px solid transparent;
+      white-space: nowrap;
+      min-width: 120px;
+    }
+
+    table.simple1 {
+      width: 100%;
+      border: none;
+      border-spacing: 0;
+      text-align: left;
+    }
+
+    table.simple1 tbody tr td {
+      padding: 16px 8px !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12) ;
+    }
+
+    table.simple1 thead tr th {
+      padding: 16px 8px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.54);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      white-space: nowrap;
+      min-width: 120px;
+    }
+
+  }
+
+
+  .header {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    padding: 24px !important;
+  }
+
+    .content {
+      background: #FFFFFF;
+
+      md-input-container {
+        display: inline-block;
+        position: relative;
+        padding: 0px;
+        vertical-align: middle;
+        margin: 1px 0px !important;
+      }
+
+    .form-wrapper {
+
+    }
+
+
+      md-content {
+        padding: 3px 0px 0 0px;
+        background-color: #F5F5F5 !important;
+      }
+
+    .form-data-wrapper {
+      margin-left: 16px;
+
+      .json-data-wrapper {
+        overflow: hidden;
+
+        pre {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+#simple-table{
+  .content {
+
+    table{
+      .simple tbody tr td {
+
+      }
+    }
+
+  }
+}
+
+.introjs-hint-dot-import {
+  border: 10px solid rgb(100,255,63) !important;
+  background: rgb(100,255,63) !important;
+}
+.ga-note-first {
+  position: relative;
+  margin: 0;
+  &:before {
+    content: 'NOTE: ';
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+.ga-fs-list {
+  list-style: none;
+  padding: 0 0 0 45px;
+  margin: 10px 0 0;
+  > li {
+    position: relative;
+    padding-left: 20px;
+    .ga-fs-no {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .ga-fs-sublist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      > li {
+        position: relative;
+        padding-left: 40px;
+        .ga-fs-subno {
+          position: absolute;
+          left: 20px;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media only screen  and (min-width : 1500px) {
+  #forms .form-wrapper {
+    min-width: 98% !important;
+  }
+}

@@ -1,0 +1,36 @@
+#settings-customer {
+  .top-bg {
+    height: 120px !important;
+  }
+
+  .header {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    padding: 24px !important;
+  }
+
+  .toolbar-text {
+    font-size: 15px;
+  }
+
+  .content {
+    height: 500px;
+    padding: 60px;
+
+  }
+
+  .link-target {
+    align-items: center;
+  }
+
+  .link-target-switch-text {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .note-text {
+    font-size: 15px;
+    color: grey;
+  }
+}

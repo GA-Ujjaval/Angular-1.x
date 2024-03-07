@@ -1,0 +1,39 @@
+<div
+  class="ui-grid-cell-contents attachments-cell"
+  title="TOOLTIP">
+  <div ng-if="row.entity.hasAttachments">
+    <a ui-sref="app.objects.products.details.attachments({id:row.entity.objectId, bom:undefined, attachmentsFlag:true})"
+       ng-if="row.entity.objectType == 'products'"
+       target="{{grid.appScope.vm.linkTarget}}">
+      <md-tooltip class="md-tooltip">Object has attachments. click here to go to 'Attachments' tab.</md-tooltip>
+      <md-icon md-font-icon="icon-attachment" class="gly-rotate-45"></md-icon>
+    </a>
+    <a ui-sref="app.objects.part.parts.attachments({id:row.entity.objectId, bom:undefined, attachmentsFlag:true})"
+       ng-if="row.entity.objectType == 'parts'"
+       target="{{grid.appScope.vm.linkTarget}}">
+      <md-tooltip class="md-tooltip">Object has attachments. click here to go to 'Attachments' tab.</md-tooltip>
+      <md-icon md-font-icon="icon-attachment" class="gly-rotate-45"></md-icon>
+    </a>
+    <a ui-sref="app.objects.documents.details.attachments({id:row.entity.objectId, bom:undefined, attachmentsFlag:true})"
+       ng-if="row.entity.objectType == 'documents'"
+       target="{{grid.appScope.vm.linkTarget}}">
+      <md-tooltip class="md-tooltip">Object has attachments. click here to go to 'Attachments' tab.</md-tooltip>
+      <md-icon md-font-icon="icon-attachment" class="gly-rotate-45"></md-icon>
+    </a>
+    <a
+      ui-sref="app.objects.sourcing.sourcemfgsuppdetails({sourceType: row.entity.sourceType, id:row.entity.objectId, attachmentsFlag:true})"
+      ng-if="row.entity.objectType == 'manufacturer' || row.entity.objectType == 'supplier'"
+      target="{{grid.appScope.vm.linkTarget}}">
+      <md-tooltip class="md-tooltip">Object has attachments. click here to go to 'Attachments' tab.</md-tooltip>
+      <md-icon md-font-icon="icon-attachment" class="gly-rotate-45"></md-icon>
+    </a>
+    <a
+      ui-sref="app.objects.sourcing.sourcingdetails({sourceType: row.entity.sourceType, id:row.entity.objectId, attachmentsFlag:true})"
+      ng-if="row.entity.objectType == 'manufacturerPart' || row.entity.objectType == 'supplierPart'"
+      target="{{grid.appScope.vm.linkTarget}}">
+      <md-tooltip class="md-tooltip">Object has attachments. click here to go to 'Attachments' tab.</md-tooltip>
+      <md-icon md-font-icon="icon-attachment" class="gly-rotate-45"></md-icon>
+    </a>
+  </div>
+
+</div>

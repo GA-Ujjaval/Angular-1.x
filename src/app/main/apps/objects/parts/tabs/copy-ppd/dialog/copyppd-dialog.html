@@ -1,0 +1,55 @@
+<!-- DIALOG -->
+<md-dialog class="contact-dialog-copyppd" aria-label="New Task">
+
+  <form name="contactForm" class="md-inline-form" novalidate>
+
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar class="md-accent md-tall-height" layout="column">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title margin-top-20">Create Copy</span>
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <!-- DIALOG CONTENT -->
+    <md-dialog-content ms-scroll class="copy-all-info-list">
+      Select information that you want to copy :
+      <div flex="33" class="copy-create-parts" ng-repeat="item in vm.objects" ng-if="vm.objectType !== 'documents'">
+        <md-checkbox ng-change="vm.someFunction($index, item.name)" ng-model="vm.itemChecked[$index]" ng-if="item.name === 'Basic Info'" ng-disabled="true">
+          {{ item.name }}
+        </md-checkbox>
+        <md-checkbox ng-change="vm.someFunction($index, item.name)" ng-model="vm.itemChecked[$index]" ng-if="item.name !== 'Basic Info'">
+          {{ item.name }}
+        </md-checkbox>
+      </div>
+      <div flex="33" ng-repeat="item in vm.objectsDocument" ng-if="vm.objectType === 'documents'">
+        <md-checkbox ng-change="vm.someFunction($index, item.name)" ng-model="vm.itemChecked[$index]" ng-if="item.name === 'Basic Info'" ng-disabled="true">
+          {{ item.name }}
+        </md-checkbox>
+        <md-checkbox ng-change="vm.someFunction($index, item.name)" ng-model="vm.itemChecked[$index]" ng-if="item.name !== 'Basic Info'">
+          {{ item.name }}
+        </md-checkbox>
+      </div>
+    </md-dialog-content>
+    <!-- / DIALOG CONTENT -->
+
+    <!-- DIALOG ACTIONS -->
+    <md-dialog-actions layout="row" layout-align="space-between center">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.createCopy()" class="send-button md-accent md-raised" aria-label="SAVE">
+            Create Copy
+        </md-button>
+      </div>
+    </md-dialog-actions>
+    <!-- / DIALOG ACTIONS -->
+
+  </form>
+
+</md-dialog>
+<!-- / DIALOG -->

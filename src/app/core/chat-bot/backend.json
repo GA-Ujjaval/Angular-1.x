@@ -1,0 +1,1653 @@
+{
+  "data":[
+
+    {
+    "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+    "timestamp": "2016-10-18T16:55:50.543Z",
+    "result": {
+      "source": "backend",
+      "resolvedQuery": "",
+      "action": "searchTasks",
+      "actionIncomplete": false,
+      "parameters": {},
+      "contexts": [],
+      "metadata": {
+        "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+        "webhookUsed": "false",
+        "intentName": "search tasks"
+      },
+      "fulfillment": {
+        "speech": "Here are your pending tasks"
+      },
+      "score": 1
+    },
+    "status": {
+      "code": 200,
+      "errorType": "success"
+    },
+    "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+    "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+    "backendOuput": {
+      "information": {
+        "text": "<ul><li>These are the ~~COUNT~~ tasks assigned to you. You can </li><li>a) mark them as complete by checking <i class=\"icon-checkbox-blank-outline s20\"></i></li><li>b) Mark them as important using the icon <i  class=\"icon-dots-vertical s20\"></i></li></ul>"
+      },
+      "tasksList": [
+        {
+          "id": "561551bd7fe2ff461101c192",
+          "title": "Proident tempor est nulla irure ad est",
+          "notes": "Id nulla nulla proident deserunt deserunt proident in quis. Cillum reprehenderit labore id anim laborum.",
+          "startDate": "Wednesday, January 29, 2014 3:17 PM",
+          "dueDate": null,
+          "completed": false,
+          "starred": false,
+          "important": false,
+          "deleted": false,
+          "tags": [
+            {
+              "id": 1,
+              "name": "frontend",
+              "label": "Frontend",
+              "color": "#388E3C"
+            }
+          ],
+          "approvalTask": false,
+          "idMembers": [
+            "56027c1930450d8bf7b10758",
+            "36027j1930450d8bf7b10158"
+          ],
+          "idChangeItems": ["3d41cc8c6be54a49a36ee89616fca449"]
+        },
+        {
+          "id": "561551bd4ac1e7eb77a3a750",
+          "title": "Magna quis irure quis ea pariatur laborum",
+          "notes": "",
+          "startDate": "Sunday, February 1, 2015 1:30 PM",
+          "dueDate": "Friday, December 30, 2016 10:07 AM",
+          "completed": false,
+          "starred": false,
+          "important": true,
+          "deleted": false,
+          "tags": [
+            {
+              "id": 1,
+              "name": "frontend",
+              "label": "Frontend",
+              "color": "#388E3C"
+            },
+            {
+              "id": 4,
+              "name": "issue",
+              "label": "Issue",
+              "color": "#0091EA"
+            }
+          ],
+          "approvalTask": true,
+          "idMembers": [
+            "56027c1930450d8bf7b10758",
+            "76027g1930450d8bf7b10958"
+          ],
+          "idChangeItems": ["3d41cc8c6be54a49a36ee89616fca449"],
+          "comments": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "We should be able to add moment.js without any problems",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "I added a link for a page that might help us deciding the colors",
+              "time": "30 mins. ago"
+            }
+          ],
+          "activities": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "added a comment",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "added a comment",
+              "time": "30 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "attached a link",
+              "time": "45 mins. ago"
+            }
+          ]
+        },
+        {
+          "id": "561551bd917bfec2ddef2d49",
+          "title": "Ullamco duis commodo sint ad aliqua aute",
+          "notes": "Sunt laborum enim nostrud ea fugiat cillum mollit aliqua exercitation ad elit.",
+          "startDate": "Friday, April 11, 2014 3:43 AM",
+          "dueDate": "Wednesday, July 26, 2017 11:14 AM",
+          "completed": false,
+          "starred": true,
+          "important": true,
+          "deleted": false,
+          "tags": [
+            {
+              "id": 3,
+              "name": "API",
+              "label": "API",
+              "color": "#FF9800"
+            }
+          ],
+          "approvalTask": false,
+          "idMembers": [
+            "26027s1930450d8bf7b10828",
+            "36027j1930450d8bf7b10158"
+          ],
+          "idChangeItems": ["3d41cc8c6be54a49a36ee89616fca451"],
+          "comments": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "We should be able to add moment.js without any problems",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "I added a link for a page that might help us deciding the colors",
+              "time": "30 mins. ago"
+            }
+          ],
+          "activities": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "added a comment",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "added a comment",
+              "time": "30 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "attached a link",
+              "time": "45 mins. ago"
+            }
+          ]
+        },
+        {
+          "id": "561551bdeeb2fd6877e18c29",
+          "title": "Eiusmod non occaecat pariatur Lorem in ex",
+          "notes": "Nostrud anim mollit incididunt qui qui sit commodo duis. Anim amet irure aliquip duis nostrud sit quis fugiat ullamco non dolor labore. Lorem sunt voluptate laboris culpa proident. Aute eiusmod aliqua exercitation irure exercitation qui laboris mollit occaecat eu occaecat fugiat.",
+          "startDate": "Wednesday, May 7, 2014 4:14 AM",
+          "dueDate": "Friday, December 15, 2017 4:01 AM",
+          "completed": true,
+          "starred": true,
+          "important": false,
+          "deleted": false,
+          "tags": [
+            {
+              "id": 2,
+              "name": "backend",
+              "label": "Backend",
+              "color": "#F44336"
+            }
+          ],
+          "approvalTask": false,
+          "idMembers": [
+            "56027c1930450d8bf7b10758",
+            "26027s1930450d8bf7b10828"
+          ],
+          "idChangeItems": [],
+          "comments": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "We should be able to add moment.js without any problems",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "I added a link for a page that might help us deciding the colors",
+              "time": "30 mins. ago"
+            }
+          ],
+          "activities": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "added a comment",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "added a comment",
+              "time": "30 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "attached a link",
+              "time": "45 mins. ago"
+            }
+          ]
+        },
+        {
+          "id": "561551bdf38eae0134ae43d4",
+          "title": "Lorem magna cillum consequat consequat mollit",
+          "notes": "Velit ipsum proident ea incididunt et. Consectetur eiusmod laborum voluptate duis occaecat ullamco sint enim proident.",
+          "startDate": "Sunday, August 23, 2015 11:19 PM",
+          "dueDate": "Friday, July 8, 2016 10:49 AM",
+          "completed": false,
+          "starred": false,
+          "important": false,
+          "deleted": false,
+          "tags": [
+            {
+              "id": 5,
+              "name": "mobile",
+              "label": "Mobile",
+              "color": "#9C27B0"
+            },
+            {
+              "id": 4,
+              "name": "issue",
+              "label": "Issue",
+              "color": "#0091EA"
+            }
+          ],
+          "approvalTask": false,
+          "idMembers": [
+            "76027g1930450d8bf7b10958",
+            "36027j1930450d8bf7b10158"
+          ],
+          "idChangeItems": [],
+          "comments": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "We should be able to add moment.js without any problems",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "I added a link for a page that might help us deciding the colors",
+              "time": "30 mins. ago"
+            }
+          ],
+          "activities": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "added a comment",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "added a comment",
+              "time": "30 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "attached a link",
+              "time": "45 mins. ago"
+            }
+          ]
+        },
+        {
+          "id": "561551bd32f1588c814a0ccd",
+          "idChangeItems": ["3d41cc8c6be54a49a36ee89616fca450"],
+          "title": "Quis irure cupidatat ad consequat reprehenderit excepteur",
+          "notes": "Esse nisi mollit aliquip mollit aute consequat adipisicing. Do excepteur dolore proident cupidatat pariatur irure consequat incididunt.",
+          "startDate": "Sunday, June 7, 2015 10:49 AM",
+          "dueDate": "Monday, January 9, 2017 8:34 AM",
+          "completed": false,
+          "starred": true,
+          "important": false,
+          "deleted": false,
+          "tags": [
+            {
+              "id": 2,
+              "name": "backend",
+              "label": "Backend",
+              "color": "#F44336"
+            },
+            {
+              "id": 3,
+              "name": "API",
+              "label": "API",
+              "color": "#FF9800"
+            }
+          ],
+          "approvalTask": true,
+          "idMembers": [
+            "56027c1930450d8bf7b10758",
+            "36027j1930450d8bf7b10158"
+          ],
+          "comments": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "We should be able to add moment.js without any problems",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "I added a link for a page that might help us deciding the colors",
+              "time": "30 mins. ago"
+            }
+          ],
+          "activities": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "added a comment",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "added a comment",
+              "time": "30 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "attached a link",
+              "time": "45 mins. ago"
+            }
+          ]
+        },
+        {
+          "id": "561551bd0bb4b08ca77038ef",
+          "title": "Officia voluptate tempor ut mollit ea cillum",
+          "notes": "Deserunt veniam reprehenderit do elit magna ut.",
+          "startDate": "Saturday, October 18, 2014 4:25 AM",
+          "dueDate": "Sunday, August 21, 2016 10:48 PM",
+          "completed": true,
+          "starred": false,
+          "important": false,
+          "deleted": false,
+          "tags": [
+            {
+              "id": 2,
+              "name": "backend",
+              "label": "Backend",
+              "color": "#F44336"
+            },
+            {
+              "id": 4,
+              "name": "issue",
+              "label": "Issue",
+              "color": "#0091EA"
+            }
+          ],
+          "approvalTask": false,
+          "comments": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "We should be able to add moment.js without any problems",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "I added a link for a page that might help us deciding the colors",
+              "time": "30 mins. ago"
+            }
+          ],
+          "activities": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "added a comment",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "added a comment",
+              "time": "30 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "attached a link",
+              "time": "45 mins. ago"
+            }
+          ],
+          "idChangeItems": ["3d41cc8c6be54a49a36ee89616fca449"]
+        }]
+      }
+    },
+
+    {
+    "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+    "timestamp": "2016-10-15T03:43:23.111Z",
+    "result": {
+      "source": "backend",
+      "resolvedQuery": "create a new task",
+      "action": "newTask",
+      "actionIncomplete": true,
+      "parameters": {
+        "taskTitle": ""
+      },
+      "contexts": [
+        {
+          "name": "create_task_dialog_params_tasktitle",
+          "parameters": {
+            "taskTitle.original": "",
+            "taskTitle": ""
+          },
+          "lifespan": 1
+        },
+        {
+          "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+          "parameters": {
+            "taskTitle.original": "",
+            "taskTitle": ""
+          },
+          "lifespan": 2
+        },
+        {
+          "name": "create_task_dialog_context",
+          "parameters": {
+            "taskTitle.original": "",
+            "taskTitle": ""
+          },
+          "lifespan": 2
+        }
+      ],
+      "metadata": {
+        "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+        "webhookUsed": "false",
+        "intentName": "create task"
+      },
+      "fulfillment": {
+        "speech": "What do you want to call it ?"
+      },
+      "score": 1
+    },
+    "status": {
+      "code": 200,
+      "errorType": "success"
+    },
+    "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "0be643f8-0d56-4cf8-8d5b-fcc6ca0434fb",
+      "timestamp": "2016-10-15T03:46:17.614Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "newTaskTitle",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "create task"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "link": {
+            "hrefId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+            "linkType": "task"
+          },
+          "text": "OK, I have created a task titled <a ng-click=\"vm.openTask($event,'~~TASK ID~~',false)\" compile-template>~~Task Title~~</a> for you. Click to link to add more details to it."
+        }
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "searchCards",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "create_task_dialog_params_tasktitle",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "create_task_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "search cards"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "<ul><li>Here are the ECR cards pending your approval for the next 3 days. </li><li>a) You can view impact of the ECRs change by clicking on the <i class=\"icon-texture s20\"></i> button above</li><li>b) The ECRs state can be changed using the <i  class=\"icon-flip-to-back s20\"></i> above</li></ul>"
+        },
+        "cardList" : [
+          {
+            "id": "2837273da9b93dd84243s0f9",
+            "name": "Update Generators",
+            "description": "",
+            "idAttachmentCover": "",
+            "idMembers": [
+              "26027s1930450d8bf7b10828"
+            ],
+            "idLabels": [
+              "26022e4129ad3a5sc28b36cd"
+            ],
+            "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+            "idChangeItems": [
+              "3d41cc8c6be54a49a36ee89616fca449",
+              "3d41cc8c6be54a49a36ee89616fca450"
+            ],
+            "attachments": [],
+            "subscribed": false,
+            "checklists": [],
+            "checkItems": 0,
+            "checkItemsChecked": 0,
+            "comments": [],
+            "activities": [],
+            "due": null
+          },
+          {
+            "id": "5603a2a3cab0c8300f6096b3",
+            "name": "Change Background Color",
+            "description": "",
+            "idAttachmentCover": "56027cfcbe1b72ecf1fc452a",
+            "idMembers": [
+              "76027g1930450d8bf7b10958"
+            ],
+            "idLabels": [
+              "56027e4119ad3a5dc28b36cd"
+            ],
+            "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+            "idChangeItems": [
+              "3d41cc8c6be54a49a36ee89616fca451",
+              "3d41cc8c6be54a49a36ee89616fca452",
+              "3d41cc8c6be54a49a36ee89616fca453"
+            ],
+            "idTasks": [
+              "561551bd7fe2ff461101c192",
+              "561551bd4ac1e7eb77a3a750",
+              "561551bd917bfec2ddef2d49",
+              "561551bdeeb2fd6877e18c29",
+              "561551bdf38eae0134ae43d4"
+            ],
+            "attachments": [
+              {
+                "id": "56027cfcbe1b72ecf1fc452a",
+                "name": "calendar-app-design.jpg",
+                "src": "assets/images/scrumboard/calendar-app-design.jpg",
+                "time": "Added Nov 1 at 12:34PM",
+                "type": "image"
+              },
+              {
+                "id": "67027cahbe3b52ecf2dc631c",
+                "url": "assets/images/scrumboard/calendar-app-design.jpg",
+                "time": "Added Nov 3 at 15:22AM",
+                "type": "link"
+              }
+            ],
+            "subscribed": true,
+            "checklists": [
+              {
+                "id": "63021cfdbe1x72wcf1fc451v",
+                "name": "Approvals",
+                "checkItemsChecked": 1,
+                "checkItems": [
+                  "561551bd7fe2ff461101c192",
+                  "561551bd4ac1e7eb77a3a750",
+                  "561551bd917bfec2ddef2d49",
+                  "561551bdeeb2fd6877e18c29",
+                  "561551bdf38eae0134ae43d4"
+                ]
+              }
+            ],
+            "checkItems": 5,
+            "checkItemsChecked": 1,
+            "comments": [
+              {
+                "idMember": "56027c1930450d8bf7b10758",
+                "message": "We should be able to add moment.js without any problems",
+                "time": "12 mins. ago"
+              },
+              {
+                "idMember": "36027j1930450d8bf7b10158",
+                "message": "I added a link for a page that might help us deciding the colors",
+                "time": "30 mins. ago"
+              }
+            ],
+            "activities": [
+              {
+                "idMember": "56027c1930450d8bf7b10758",
+                "message": "added a comment",
+                "time": "12 mins. ago"
+              },
+              {
+                "idMember": "36027j1930450d8bf7b10158",
+                "message": "added a comment",
+                "time": "30 mins. ago"
+              },
+              {
+                "idMember": "36027j1930450d8bf7b10158",
+                "message": "attached a link",
+                "time": "45 mins. ago"
+              }
+            ],
+            "due": 1452229200000
+          },
+          {
+            "id": "5637273da9b93bb84743a0f9",
+            "name": "Fix Splash Screen bugs",
+            "description": "",
+            "idAttachmentCover": "",
+            "idMembers": [
+              "56027c1930450d8bf7b10758"
+            ],
+            "idLabels": [
+              "5640635e19ad3a5dc21416b2"
+            ],
+            "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+            "idChangeItems": [],
+            "attachments": [],
+            "subscribed": true,
+            "checklists": [
+              {
+                "id": "63021cfdbe1x72wcf1fc451w",
+                "name": "Approvals",
+                "checkItemsChecked": 0,
+                "checkItems": [
+                  "561551bdf38eae0134ae43d4",
+                  "561551bd32f1588c814a0ccd"
+                ]
+              }
+            ],
+            "checkItems": 2,
+            "checkItemsChecked": 0,
+            "comments": [],
+            "activities": [],
+            "due": null
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "create a new card",
+        "action": "newCard",
+        "actionIncomplete": true,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [
+          {
+            "name": "create_task_dialog_params_tasktitle",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 1
+          },
+          {
+            "name": "49cbf56c-fd80-4668-a8f4-599dc61c3343_id_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          },
+          {
+            "name": "create_task_dialog_context",
+            "parameters": {
+              "taskTitle.original": "",
+              "taskTitle": ""
+            },
+            "lifespan": 2
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "create task"
+        },
+        "fulfillment": {
+          "speech": "What do you want to call it ?"
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac"
+    },
+
+    {
+      "id": "0be643f8-0d56-4cf8-8d5b-fcc6ca0434fb",
+      "timestamp": "2016-10-15T03:46:17.614Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "newCardTitle",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "create card"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "You have access to 3 boards. Click on the board name for which you want to create this card."
+        },
+        "boardList" : [
+          {
+            "name": "ECR",
+            "uri": "acme-ecr-application",
+            "id": "32gfhaf2"
+          },
+          {
+            "name": "ECO",
+            "uri": "acme-eco-application",
+            "id": "27cfcbe1"
+          },
+          {
+            "name": "Standard",
+            "uri": "acme-standard-application",
+            "id": "27cfcbe2"
+          }
+        ],
+        "boardId" : null,
+        "disableBoard" : false
+      }
+    },
+
+    {
+      "id": "0be643f8-0d56-4cf8-8d5b-fcc6ca0434fb",
+      "timestamp": "2016-10-15T03:46:17.614Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "newCardCreated",
+        "actionIncomplete": false,
+        "parameters": {
+          "taskTitle": ""
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "new card created"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "link": {
+            "hrefId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+            "linkType": "card-created"
+          },
+          "text": "OK. I have created a card titled Change the ~~Card Title~~ in Board ~~Board Name~~. <a ng-click=\"vm.openCard($event,'~~Card Id~~')\" compile-template> Click here </a> to add more details to the card.5h"
+        }
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "taskComplete",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_complete",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task complete"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Task ~~Task Title~~ has been marked as complete"
+        }
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "taskInComplete",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_incomplete",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task InComplete"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Task ~~Task Title~~ has been marked as in complete"
+        }
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "taskImportant",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_important",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task important"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Task ~~Task Title~~ has been marked as important"
+        }
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "taskRemoveImportant",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_removed_important",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task removed important"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Task ~~Task Title~~ has been removed important"
+        }
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "taskStarred",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_starred",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task starred"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Task ~~Task Title~~ has been marked as Starred"
+        }
+      }
+    },
+
+    {
+      "id": "b917c280-2112-4524-8cc7-dd27a6f1f3b0",
+      "timestamp": "2016-10-15T03:43:23.111Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "taskRemoveStarred",
+        "actionIncomplete": false,
+        "parameters": {
+          "task": ""
+        },
+        "contexts": [
+          {
+            "name": "task_remove_starred",
+            "parameters": {
+              "task" : {}
+            },
+            "lifespan": 1
+          }
+        ],
+        "metadata": {
+          "intentId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+          "webhookUsed": "false",
+          "intentName": "task remove starred"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "c030f19f-078a-44ec-bfb5-ed927f7920ac",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Task ~~Task Title~~ has been removed star"
+        }
+      }
+    },
+
+    {
+      "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+      "timestamp": "2016-10-18T16:55:50.543Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "promoteCards",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "promote tasks list"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "<ul><li>You have 1 or more ECR(s) with all tasks completed that are ready to be moved to the next state.</li><li>Would you like to promote these ECR(s) one by one?</li></ul>"
+        },
+        "promtionCardsList": [
+          {
+            "id": "2837273da9b93dd84243s0f9",
+            "name": "Update Generators",
+            "description": "",
+            "idAttachmentCover": "",
+            "idMembers": [
+              "26027s1930450d8bf7b10828"
+            ],
+            "idLabels": [
+              "26022e4129ad3a5sc28b36cd"
+            ],
+            "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+            "idChangeItems": [
+              "3d41cc8c6be54a49a36ee89616fca449",
+              "3d41cc8c6be54a49a36ee89616fca450"
+            ],
+            "attachments": [],
+            "subscribed": false,
+            "checklists": [],
+            "checkItems": 0,
+            "checkItemsChecked": 0,
+            "comments": [],
+            "activities": [],
+            "due": null
+          },
+          {
+            "id": "5603a2a3cab0c8300f6096b3",
+            "name": "Change Background Color",
+            "description": "",
+            "idAttachmentCover": "56027cfcbe1b72ecf1fc452a",
+            "idMembers": [
+              "76027g1930450d8bf7b10958"
+            ],
+            "idLabels": [
+              "56027e4119ad3a5dc28b36cd"
+            ],
+            "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+            "idChangeItems": [
+              "3d41cc8c6be54a49a36ee89616fca451",
+              "3d41cc8c6be54a49a36ee89616fca452",
+              "3d41cc8c6be54a49a36ee89616fca453"
+            ],
+            "idTasks": [
+              "561551bd7fe2ff461101c192",
+              "561551bd4ac1e7eb77a3a750",
+              "561551bd917bfec2ddef2d49",
+              "561551bdeeb2fd6877e18c29",
+              "561551bdf38eae0134ae43d4"
+            ],
+            "attachments": [
+              {
+                "id": "56027cfcbe1b72ecf1fc452a",
+                "name": "calendar-app-design.jpg",
+                "src": "assets/images/scrumboard/calendar-app-design.jpg",
+                "time": "Added Nov 1 at 12:34PM",
+                "type": "image"
+              },
+              {
+                "id": "67027cahbe3b52ecf2dc631c",
+                "url": "assets/images/scrumboard/calendar-app-design.jpg",
+                "time": "Added Nov 3 at 15:22AM",
+                "type": "link"
+              }
+            ],
+            "subscribed": true,
+            "checklists": [
+              {
+                "id": "63021cfdbe1x72wcf1fc451v",
+                "name": "Approvals",
+                "checkItemsChecked": 1,
+                "checkItems": [
+                  "561551bd7fe2ff461101c192",
+                  "561551bd4ac1e7eb77a3a750",
+                  "561551bd917bfec2ddef2d49",
+                  "561551bdeeb2fd6877e18c29",
+                  "561551bdf38eae0134ae43d4"
+                ]
+              }
+            ],
+            "checkItems": 5,
+            "checkItemsChecked": 1,
+            "comments": [
+              {
+                "idMember": "56027c1930450d8bf7b10758",
+                "message": "We should be able to add moment.js without any problems",
+                "time": "12 mins. ago"
+              },
+              {
+                "idMember": "36027j1930450d8bf7b10158",
+                "message": "I added a link for a page that might help us deciding the colors",
+                "time": "30 mins. ago"
+              }
+            ],
+            "activities": [
+              {
+                "idMember": "56027c1930450d8bf7b10758",
+                "message": "added a comment",
+                "time": "12 mins. ago"
+              },
+              {
+                "idMember": "36027j1930450d8bf7b10158",
+                "message": "added a comment",
+                "time": "30 mins. ago"
+              },
+              {
+                "idMember": "36027j1930450d8bf7b10158",
+                "message": "attached a link",
+                "time": "45 mins. ago"
+              }
+            ],
+            "due": 1452229200000
+          },
+          {
+            "id": "5637273da9b93bb84743a0f9",
+            "name": "Fix Splash Screen bugs",
+            "description": "",
+            "idAttachmentCover": "",
+            "idMembers": [
+              "56027c1930450d8bf7b10758"
+            ],
+            "idLabels": [
+              "5640635e19ad3a5dc21416b2"
+            ],
+            "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+            "idChangeItems": [],
+            "attachments": [],
+            "subscribed": true,
+            "checklists": [
+              {
+                "id": "63021cfdbe1x72wcf1fc451w",
+                "name": "Approvals",
+                "checkItemsChecked": 0,
+                "checkItems": [
+                  "561551bdf38eae0134ae43d4",
+                  "561551bd32f1588c814a0ccd"
+                ]
+              }
+            ],
+            "checkItems": 2,
+            "checkItemsChecked": 0,
+            "comments": [],
+            "activities": [],
+            "due": null
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+      "timestamp": "2016-10-18T16:55:50.543Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "promoteYes",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "promote card list"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Do you want to promote <b>~~CARD TITLE~~</b> from <b>~~FROM_STATE~~</b> to <b>~~NEXT_STATE~~</b>?"
+        },
+        "promtionCard": {
+            "id": "2837273da9b93dd84243s0f9",
+            "name": "Update Generators",
+            "description": "",
+            "idAttachmentCover": "",
+            "idMembers": [
+              "26027s1930450d8bf7b10828"
+            ],
+            "idLabels": [
+              "26022e4129ad3a5sc28b36cd"
+            ],
+            "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+            "idChangeItems": [
+              "3d41cc8c6be54a49a36ee89616fca449",
+              "3d41cc8c6be54a49a36ee89616fca450"
+            ],
+            "attachments": [],
+            "subscribed": false,
+            "checklists": [],
+            "checkItems": 0,
+            "checkItemsChecked": 0,
+            "comments": [],
+            "activities": [],
+            "due": null,
+            "stateId" : "27423073ff0944838cf174a0d9d4c580"
+          }
+      }
+    },
+    {
+      "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+      "timestamp": "2016-10-18T16:55:50.543Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "promoteYes",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "promote card list"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Do you want to promote <b>~~CARD TITLE~~</b> from <b>~~FROM_STATE~~</b> to <b>~~NEXT_STATE~~</b>?"
+        },
+        "promtionCard": {
+          "id": "5637273da9b93bb84743a0f9",
+          "name": "Fix Splash Screen bugs",
+          "description": "",
+          "idAttachmentCover": "",
+          "idMembers": [
+            "56027c1930450d8bf7b10758"
+          ],
+          "idLabels": [
+            "5640635e19ad3a5dc21416b2"
+          ],
+          "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+          "idChangeItems": [],
+          "attachments": [],
+          "subscribed": true,
+          "checklists": [
+            {
+              "id": "63021cfdbe1x72wcf1fc451w",
+              "name": "Approvals",
+              "checkItemsChecked": 0,
+              "checkItems": [
+                "561551bdf38eae0134ae43d4",
+                "561551bd32f1588c814a0ccd"
+              ]
+            }
+          ],
+          "checkItems": 2,
+          "checkItemsChecked": 0,
+          "comments": [],
+          "activities": [],
+          "due": null,
+          "stateId" : "27423073ff0944838cf174a0d9d4c580"
+        }
+      }
+    },
+    {
+      "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+      "timestamp": "2016-10-18T16:55:50.543Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "promoteYes",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "promote card list"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "Do you want to promote <b>~~CARD TITLE~~</b> from <b>~~FROM_STATE~~</b> to <b>~~NEXT_STATE~~</b>?"
+        },
+        "promtionCard": {
+          "id": "5603a2a3cab0c8300f6096b3",
+          "name": "Change Background Color",
+          "description": "",
+          "idAttachmentCover": "56027cfcbe1b72ecf1fc452a",
+          "idMembers": [
+            "76027g1930450d8bf7b10958"
+          ],
+          "idLabels": [
+            "56027e4119ad3a5dc28b36cd"
+          ],
+          "cardTypeId" : "c6f3f5aee4974d27862e7dc2c483c3df",
+          "idChangeItems": [
+            "3d41cc8c6be54a49a36ee89616fca451",
+            "3d41cc8c6be54a49a36ee89616fca452",
+            "3d41cc8c6be54a49a36ee89616fca453"
+          ],
+          "idTasks": [
+            "561551bd7fe2ff461101c192",
+            "561551bd4ac1e7eb77a3a750",
+            "561551bd917bfec2ddef2d49",
+            "561551bdeeb2fd6877e18c29",
+            "561551bdf38eae0134ae43d4"
+          ],
+          "attachments": [
+            {
+              "id": "56027cfcbe1b72ecf1fc452a",
+              "name": "calendar-app-design.jpg",
+              "src": "assets/images/scrumboard/calendar-app-design.jpg",
+              "time": "Added Nov 1 at 12:34PM",
+              "type": "image"
+            },
+            {
+              "id": "67027cahbe3b52ecf2dc631c",
+              "url": "assets/images/scrumboard/calendar-app-design.jpg",
+              "time": "Added Nov 3 at 15:22AM",
+              "type": "link"
+            }
+          ],
+          "subscribed": true,
+          "checklists": [
+            {
+              "id": "63021cfdbe1x72wcf1fc451v",
+              "name": "Approvals",
+              "checkItemsChecked": 1,
+              "checkItems": [
+                "561551bd7fe2ff461101c192",
+                "561551bd4ac1e7eb77a3a750",
+                "561551bd917bfec2ddef2d49",
+                "561551bdeeb2fd6877e18c29",
+                "561551bdf38eae0134ae43d4"
+              ]
+            }
+          ],
+          "checkItems": 5,
+          "checkItemsChecked": 1,
+          "comments": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "We should be able to add moment.js without any problems",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "I added a link for a page that might help us deciding the colors",
+              "time": "30 mins. ago"
+            }
+          ],
+          "activities": [
+            {
+              "idMember": "56027c1930450d8bf7b10758",
+              "message": "added a comment",
+              "time": "12 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "added a comment",
+              "time": "30 mins. ago"
+            },
+            {
+              "idMember": "36027j1930450d8bf7b10158",
+              "message": "attached a link",
+              "time": "45 mins. ago"
+            }
+          ],
+          "due": 1452229200000,
+          "stateId" : "27423073ff0944838cf174a0d9d4c580"
+        }
+      }
+    },
+    {
+      "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+      "timestamp": "2016-10-18T16:55:50.543Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "promoteNo",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "promote no"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "link": {
+            "hrefId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+            "linkType": "task"
+          },
+          "text": "OK, that’s fine. You can use the <ul><li><div  class='change-state card-confirm'  compile-template><md-menu md-offset='0 48px' class='options align-left  list-header-option-button'><md-button class='md-icon-button' translate-attr-aria-label='PLM.OPTIONS'><md-icon md-menu-origin md-font-icon='icon-flip-to-back'></md-icon></md-button></md-menu><div class='align-right'  translate='PLM.CHANGE_STATE'>Change state</div></div></li></ul>  button to move different state."
+        }
+      }
+    },
+
+    {
+      "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+      "timestamp": "2016-10-18T16:55:50.543Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "promoteConfirmYes",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "promote Confirm Yes"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "text": "OK. <b>~~CARD TITLE~~</b> has been promoted  <b>~~FROM_STATE~~</b> to <b>~~NEXT_STATE~~</b>?"
+        }
+      }
+    },
+    {
+      "id": "d72f16fa-e982-45a7-9370-6f34b258de1a",
+      "timestamp": "2016-10-18T16:55:50.543Z",
+      "result": {
+        "source": "backend",
+        "resolvedQuery": "",
+        "action": "promoteConfirmNo",
+        "actionIncomplete": false,
+        "parameters": {
+          "userId": "76027g1930450d8bf7b10958"
+        },
+        "contexts": [],
+        "metadata": {
+          "intentId": "5649effb-9dc7-471e-8223-ac2d985a57c5",
+          "webhookUsed": "false",
+          "intentName": "promote Confirm No"
+        },
+        "fulfillment": {
+          "speech": ""
+        },
+        "score": 1
+      },
+      "status": {
+        "code": 200,
+        "errorType": "success"
+      },
+      "sessionId": "f23dcc2c-a11e-4bfb-818c-64ef8d6e173a",
+      "userAuthToken": "2370f7d4-8ec4-4037-80fe-874f0514eddb",
+      "backendOuput": {
+        "information": {
+          "link": {
+            "hrefId": "49cbf56c-fd80-4668-a8f4-599dc61c3343",
+            "linkType": "task"
+          },
+          "text": "OK, that’s fine. You can use the <ul><li><div  class='change-state card-confirm'  compile-template><md-menu md-offset='0 48px' class='options align-left  list-header-option-button'><md-button class='md-icon-button' translate-attr-aria-label='PLM.OPTIONS'><md-icon md-menu-origin md-font-icon='icon-flip-to-back'></md-icon></md-button></md-menu><div class='align-right'  translate='PLM.CHANGE_STATE'>Change state</div></div></li></ul>  button to move <b>~~CARD TITLE~~</b> to different state."
+        }
+      }
+    }
+  ]
+}

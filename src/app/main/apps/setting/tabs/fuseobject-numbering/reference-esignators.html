@@ -1,0 +1,20 @@
+<div layout="row" layout-align="space-between">
+  <span class="title margin-top-15 margin-bottom-15 f-text font-size-20">
+    <b>DNI (Do Not Include) objects in BOM</b>
+  </span>
+</div>
+<div layout-align="center center" class="margin-bottom-25 margin-top-10">
+  <div flex class="margin-left-10" layout="row">
+    <md-switch class="margin-0" ng-model="vm.referenceDesignatorsSetting" ng-change="vm.changereferenceDesignatorsSetting($event, 'refDesBOMSettings', vm.referenceDesignatorsSetting)"
+      aria-label="number switch"></md-switch>
+    <span class="margin-top-5 h3">Allow DNI objects in BOM</span>
+  </div>
+  <div layout="row" class="margin-10" flex>
+      <span class="h3">NOTE: When this setting is ENABLED, the system will allow more than one line item in the BOM to have the same Part
+        Number, as long as the Reference Designators are different (eg: P100 (Ref Des = R1), P100 (Ref Des = R2)). This allows
+        users to insert DNI (Do Not Include) or Non-Fitted parts in the BOM.<br>
+        <br>
+        When DISABLED, the system will not allow users to have multiple line items with the same Part Number in a BOM.
+      </span>
+    </div>
+</div>

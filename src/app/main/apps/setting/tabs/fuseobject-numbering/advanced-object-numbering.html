@@ -1,0 +1,20 @@
+<div id="advanced-numbering-header">
+  <span class="title margin-top-15 margin-bottom-15 f-text font-size-20">
+    <b>Number Scheme</b> <mf-advanced-numbering-description></mf-advanced-numbering-description>
+  </span>
+  <div class="adv-number-header-tooltip" ng-if="!vm.advancedNumberingStateService.mode.isEditable()">Click 'EDIT' button to make Changes</div>
+  <div class="adv-number-header-tooltip" ng-if="vm.advancedNumberingStateService.mode.isEditable()">
+    <div>Changes have not been applied yet!</div>
+    <div>To apply, click on 'APPLY CHANGES'</div>
+  </div>
+  <mf-advanced-numbering-mode></mf-advanced-numbering-mode>
+</div>
+<md-tabs class="advanced-numbering-tabs"
+         md-selected="vm.selectedAdvancedNumberingTab">
+  <md-tab ng-repeat="tab in vm.tabNames">
+    <md-tab-label>{{tab}}</md-tab-label>
+    <md-tab-body>
+      <mf-advanced-numbering input-schemes="vm.defaultSchemes" object-type="tab"></mf-advanced-numbering>
+    </md-tab-body>
+  </md-tab>
+</md-tabs>

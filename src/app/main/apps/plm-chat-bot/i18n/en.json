@@ -1,0 +1,11 @@
+{
+  "PLM": {
+    "REMOVE_CARD" : "Remove Card",
+    "SUBMITTED" : "Submitted",
+    "REJECTED" : "Rejected",
+    "COMPLETED" : "Completed",
+    "OPTIONS" : "Options",
+    "WHERE_USED" : "Visualize Impact",
+    "CHANGE_STATE" : "Change state"
+  }
+}

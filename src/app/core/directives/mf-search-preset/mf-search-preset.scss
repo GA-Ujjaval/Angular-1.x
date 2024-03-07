@@ -1,0 +1,46 @@
+.mf-search-preset-content {
+  .default-mark {
+    font-style: italic;
+    font-weight: bold;
+    text-transform: lowercase;
+  }
+  .create-new {
+    font-style: italic !important;
+    color: #0398e2;
+  }
+  .preset-button {
+    width: 100%;
+    padding: 0 16px;
+    margin: 0;
+    height: 100%;
+    border-radius: 0;
+    text-transform: capitalize;
+  }
+  .preset-item-menu {
+    margin: 0;
+  }
+  .create-preset-button {
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
+.preset-item {
+  .filter-label {
+    margin-left: 15px;
+    max-width: 90% !important;
+  }
+  .preset-button {
+    display: flex;
+    max-width: 240px;
+  }
+  .template-name {
+    margin-left: 20px;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.item-content {
+}

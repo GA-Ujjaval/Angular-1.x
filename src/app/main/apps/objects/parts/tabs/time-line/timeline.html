@@ -1,0 +1,65 @@
+<div layout="row" layout-align="center center">
+
+  <div id="timeline" class="timeline-left" ms-timeline="vm.timelineOptions" ms-timeline-load-more="vm.loadNextPage()"
+       ng-if="vm.timelineClicked">
+
+    <!-- TIMELINE ITEM -->
+    <div ms-timeline-item layout="column" layout-align="center center" layout-gt-md="row"
+         layout-align-gt-md="center start" ng-repeat="timelineItem in vm.timeline | orderBy : '-time'">
+
+      <div class="timeline-point md-accent-bg md-whiteframe-2dp">
+        <md-icon md-font-icon="{{timelineItem.icon}}"></md-icon>
+      </div>
+
+      <div class="timeline-detail" flex="50">
+        <div class="time">
+          {{timelineItem.time | date:'medium'}}
+        </div>
+        <div class="event" ng-if="timelineItem.name != 'IMPORT' || timelineItem.name != 'IMPORT UPDATE'">
+          <span ng-if="timelineItem.name !== 'Create Configuration'">{{timelineItem.event}}</span>
+          <span ng-if="timelineItem.name === 'Create Configuration'">
+            {{timelineItem.action}}
+          </span>
+          <span ng-if="timelineItem.name === 'COPY OBJECT' || timelineItem.name === 'Create Configuration'">
+            <a ng-if="vm.timelineObjectType[0] === 'parts'"
+               ui-sref="app.objects.part.parts.basicInfo({id:timelineItem.objectId})">{{timelineItem.objectNumber}}<span
+              ng-if="vm.isConfigName">-Config-{{vm.isConfigName}}</span>-Revision-{{timelineItem.revision}}<span
+              ng-if="vm.isMinorRevision">-{{timelineItem.minorRevision}}</span></a>
+            <a ng-if="vm.timelineObjectType[0] === 'products'"
+               ui-sref="app.objects.products.details.basicInfo({id:timelineItem.objectId})">{{timelineItem.objectNumber}}<span
+              ng-if="vm.isConfigName">-Config-{{vm.isConfigName}}</span>-Revision-{{timelineItem.revision}}<span
+              ng-if="vm.isMinorRevision">-{{timelineItem.minorRevision}}</span></a>
+            <a ng-if="vm.timelineObjectType[0] === 'documents'"
+               ui-sref="app.objects.documents.details.basicInfo({id:timelineItem.objectId})">{{timelineItem.objectNumber}}<span
+              ng-if="vm.isConfigName">-Config-{{vm.isConfigName}}</span>-Revision-{{timelineItem.revision}}<span
+              ng-if="vm.isMinorRevision">-{{timelineItem.minorRevision}}</span></a>
+          </span>
+          by {{timelineItem.member}}
+          <p ng-if="timelineItem.name == 'ADD' || timelineItem.name == 'REMOVE'">{{timelineItem.action}}
+            <span ng-if="timelineItem.name === 'ADD'">
+              <a ui-sref="app.objects.products.details({id:timelineItem.objectId})">{{timelineItem.objectNumber}}
+                -{{timelineItem.revision}}-{{timelineItem.minorRevision}}</a>
+            </span> by {{timelineItem.member}}</p>
+        </div>
+        <div class="event" ng-if="timelineItem.name === 'IMPORT'">
+          <p>{{timelineItem.action[0]}} {{timelineItem.member}}</p>
+          <p>{{timelineItem.action[1]}}</p>
+          <p>{{timelineItem.action[2]}}</p>
+          <p>{{timelineItem.action[3]}}</p>
+        </div>
+
+        <div class="event" ng-if="timelineItem.name === 'IMPORT UPDATE' || timelineItem.name === 'MANUAL UPDATE'">
+          <p ng-repeat="act in timelineItem.action track by $index">{{act}}</P>
+        </div>
+      </div>
+
+      <div class="timeline-card" layout="row" flex="50">
+        <!-- MS-CARD -->
+        <ms-card template="timelineItem.card.template" ng-model="timelineItem.card"></ms-card>
+        <!-- / MS-CARD -->
+      </div>
+    </div>
+    <!-- / TIMELINE ITEM -->
+
+  </div>
+</div>

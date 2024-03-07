@@ -1,0 +1,6 @@
+<div
+  ng-if="row.entity.objectId"
+  class="ui-grid-cell-contents"
+  title="TOOLTIP" style="text-align: end">
+  {{row.entity[col.field].split(' ')[0] + ' ' + grid.appScope.vm.parseFloatToFixed(row.entity[col.field].split(' ')[1])}}
+</div>

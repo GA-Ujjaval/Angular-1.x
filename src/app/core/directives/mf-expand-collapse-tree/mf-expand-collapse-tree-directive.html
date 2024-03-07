@@ -1,0 +1,29 @@
+<md-menu md-position-mode="left bottom">
+  <md-button class="expand-collapse-all"
+             ng-click="$mdMenu.open(); setLevels()">
+    <span class="icon-circle-custom">+</span>
+    <md-tooltip class="md-tooltip">Expand / Collapse</md-tooltip>
+  </md-button>
+  <md-menu-content class="expand-collapse-tree-directive">
+    <md-menu-item>
+      <md-button class="expansion-level" capture-click="toggleAll()">
+        <md-checkbox aria-label="expanded-level"
+                     class="level-expanded-tick-mark"
+                     ng-if="currentLevel === levels[levels.length - 1]"
+                     disabled="true"
+                     ng-checked="true"></md-checkbox>
+        All
+      </md-button>
+    </md-menu-item>
+    <md-menu-item ng-repeat="level in levels">
+      <md-button class="expansion-level" capture-click="setExpansionLevel(level)">
+        <md-checkbox aria-label="expanded-level"
+                     class="level-expanded-tick-mark"
+                     ng-if="level <= currentLevel"
+                     disabled="true"
+                     ng-checked="true"></md-checkbox>
+        Level {{level}}
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

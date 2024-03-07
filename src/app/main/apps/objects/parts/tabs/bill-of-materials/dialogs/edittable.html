@@ -1,0 +1,165 @@
+<md-dialog aria-label="New Task" style="overflow:unset">
+
+  <form name="contactForm" class="md-inline-form" novalidate>
+
+    <md-toolbar class="md-accent md-tall-height" layout="column">
+
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title margin-top-20">Add more attributes</span>
+        <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+
+    </md-toolbar>
+
+    <md-dialog-content>
+      <md-input-container>
+        <span class="attributes-list">Basic Info</span>
+      </md-input-container>
+      <br>
+      <div layout="row" layout-wrap flex>
+        <div ng-show="vm.isBillOfMaterialPage()" flex="33" ng-repeat="item in vm.basicInfoBOM">
+          <md-checkbox
+            ng-hide="vm.pageType != vm.objectPageEnum.flatPage &&
+             (item.value == 'requiredQty' ||item.value == 'shortage' ||item.value == 'totalCost') ||
+             (vm.pageType != vm.objectPageEnum.hierarchicalCompare &&
+             item.value == 'modification')
+              "
+            ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+            {{ item.name }}
+          </md-checkbox>
+        </div>
+
+        <div ng-hide="vm.isBillOfMaterialPage()" flex="33" ng-repeat="item in vm.basicInfo">
+          <md-checkbox ng-hide="(vm.pageType == 'documents' && item.value == 'hasBOM') ||
+                                      (vm.pageType != vm.objectPageEnum.flatPage &&
+                                      (item.value == 'requiredQty' ||
+                                      item.value == 'shortage' ||
+                                      item.value == 'totalCost') || (vm.pageType != vm.objectPageEnum.hierarchicalCompare &&
+             item.value == 'modification'))"
+                       ng-checked="item.displayed"
+                       ng-click="item.displayed = !item.displayed">
+            {{ item.name }}
+          </md-checkbox>
+        </div>
+      </div>
+      <br>
+
+      <div ng-if="vm.isSourcingPartsPage()">
+        <div class="attributes-list"></div>
+        <md-input-container>
+          <span class="attributes-list">Cost</span>
+        </md-input-container>
+        <br>
+        <div layout="row" layout-wrap flex>
+          <div flex="33" ng-repeat="item in vm.cost">
+            <md-checkbox ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+              {{ item.name }}
+            </md-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="vm.showInventoryAttr()">
+        <div class="attributes-list"></div>
+        <md-input-container>
+          <span class="attributes-list">Inventory</span>
+        </md-input-container>
+        <br>
+        <div layout="row" layout-wrap flex>
+          <div flex="33" ng-repeat="item in vm.inventory">
+            <md-checkbox ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+              {{ item.name }}
+            </md-checkbox>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <div class="attributes-list"></div>
+      <md-input-container>
+        <span class="attributes-list">Additional Info</span>
+      </md-input-container>
+      <br>
+      <div layout="row" layout-wrap flex>
+        <md-progress-circular id="create-progress" class="additional-progress" md-mode="indeterminate"
+                              ng-if="vm.progressAttr">
+        </md-progress-circular>
+        <div flex="33" ng-repeat="item in vm.additionalInfo | filter: vm.filerAdditionalAttributes">
+          <md-checkbox ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+            {{ item.name }}
+          </md-checkbox>
+        </div>
+      </div>
+      <br>
+
+      <div ng-if="vm.showManufacturerAttr()">
+        <div class="attributes-list"></div>
+        <md-input-container>
+          <span class="attributes-list">Manufacturer Parts</span>
+        </md-input-container>
+        <br>
+        <div layout="row" layout-wrap flex>
+          <div flex="33" ng-repeat="item in vm.mfrParts">
+            <md-checkbox ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+              {{ item.name }}
+            </md-checkbox>
+          </div>
+        </div>
+
+        <div class="attributes-list"></div>
+        <md-input-container>
+          <span class="attributes-list">Supplier Parts</span>
+        </md-input-container>
+        <br>
+        <div layout="row" layout-wrap flex>
+          <div flex="33" ng-repeat="item in vm.suppParts">
+            <md-checkbox ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+              {{ item.name }}
+            </md-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="vm.isSourcingObjectPage()">
+        <div class="attributes-list"></div>
+        <md-input-container>
+          <span class="attributes-list">Contacts</span>
+        </md-input-container>
+        <br>
+        <div layout="row" layout-wrap flex>
+          <div flex="33" ng-repeat="item in vm.contacts">
+            <md-checkbox ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+              {{ item.name }}
+            </md-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="attributes-list"></div>
+        <md-input-container>
+          <span class="attributes-list" ng-if="!vm.isRevisionsPage()">Object History</span>
+          <span class="attributes-list" ng-if="vm.isRevisionsPage()">History</span>
+        </md-input-container>
+        <br>
+        <div layout="row" layout-wrap flex>
+          <div flex="33" ng-repeat="item in vm.objectHistory">
+            <md-checkbox ng-checked="item.displayed" ng-click="item.displayed = !item.displayed">
+              {{ item.name }}
+            </md-checkbox>
+          </div>
+        </div>
+        <br>
+      </div>
+
+
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button ng-click="vm.setAllAttributesSelections(true);">Select All</md-button>
+      <md-button ng-click="vm.setAllAttributesSelections(false);">Clear All</md-button>
+      <md-button ng-click="vm.applyChanges();" class="button-edit-apply">Apply</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

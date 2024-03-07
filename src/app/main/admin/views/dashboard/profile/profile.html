@@ -1,0 +1,136 @@
+<div id="profile-admin" class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header">
+            <span class="h2 white-fg">Your Profile</span>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar" layout="row" layout-align="start center">
+                <span>Hi, {{vm.customerProfileForm.firstName}} {{vm.customerProfileForm.lastName}} edit your profile.</span>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <md-content class="content" ms-scroll>
+
+                <div layout="row" class="md-white-bg" layout-align="center center">
+
+                    <!-- CUSTOMER FORM -->
+                    <div class="form-wrapper margin-15" flex="40">
+
+                        <form name="customerProfileForm" class="md-inline-form" novalidate>
+
+                            <div class="form-title">Your Profile</div>
+                            <div layout="column" layout-gt-sm="row">
+                                <md-input-container flex>
+                                    <input type="email" name="userEmail" ng-model="vm.customerProfileForm.userEmail"
+                                           placeholder="Email"
+                                            maxlength="64" required>
+                                    <div ng-messages="customerProfileForm.userEmail.$error"
+                                         role="alert">
+                                        <div ng-message="required">
+                                            <span>{{vm.error.email}}</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+
+                            <div layout="column" layout-gt-sm="row">
+                                <md-input-container flex>
+                                    <input type="text" name="firstName" ng-model="vm.customerProfileForm.firstName"
+                                           placeholder="First Name"
+                                            maxlength="20"required>
+
+                                    <div ng-messages="customerProfileForm.firstName.$error"
+                                         role="alert">
+                                        <div ng-message="required">
+                                            <span>{{vm.error.require}}</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+
+                            </div>
+
+
+                            <div layout="column" layout-gt-xs="row">
+                                <md-input-container flex>
+                                    <input type="text" name="lastName" ng-model="vm.customerProfileForm.lastName"
+                                           placeholder="Last Name"
+                                            maxlength="20" required>
+
+                                    <div ng-messages="customerProfileForm.lastName.$error"
+                                         role="alert">
+                                        <div ng-message="required">
+                                            <span>{{vm.error.require}}</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+
+                            <md-button type="submit" class="md-raised md-accent" aria-label="Submit"
+                                       ng-disabled="customerProfileForm.$invalid"
+                                       ng-click="vm.customerProfileFunction()">
+                                Submit
+                            </md-button>
+                            <md-button type="cancel" class="md-raised md-accent" aria-label="Cancel"
+                                       ng-click="vm.customerProfileForm = {}">
+                                Reset
+                            </md-button>
+
+                        </form>
+
+                    </div>
+                    <!-- / CUSTOMER FORM -->
+
+                    <!-- BASIC FORM DATA -->
+
+                    <div class="form-wrapper form-data-wrapper" flex="20">
+
+                        <div id="product-image-uploader"
+                             flow-init="vm.ngFlowOptions"
+                             flow-name="vm.ngFlow.flow"
+                             flow-files-submitted="vm.upload($files)"
+                             flow-file-added="vm.fileAdded($file)"
+                             flow-file-success="vm.fileSuccess($file, $message)"
+                             flow-complete="vm.uploadComplete()">
+
+                            <div class="board-list-item add-new-board" layout="column"
+                                 layout-align="center center" flow-btn>
+                                <img ng-src="{{ vm.customerProfileForm.avatar || 'assets/images/avatars/profile.jpg'}}" class="icon s64">
+
+                                <div class="board-name">
+                                    {{vm.customerProfileForm.avatar == '' || vm.customerProfileForm.avatar == null ? 'Add AVATAR' : 'Replace AVATAR'}}
+                                </div>
+                                <md-progress-circular id="create-progress" md-mode="indeterminate" ng-if="vm.progressimage">
+                                </md-progress-circular>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- / BASIC FORM DATA -->
+
+                </div>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>
